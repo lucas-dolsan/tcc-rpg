@@ -1,2 +1,2 @@
-Trabalho de conclusão de curso
-Instituto Federal Catarinense
+- Trabalho de conclusão de curso
+- Instituto Federal Catarinense
