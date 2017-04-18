@@ -72,6 +72,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         botaoEntrar.setBounds(315, 470, 180, 40);
 
         campoConfirmarSenha.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        campoConfirmarSenha.setForeground(new java.awt.Color(51, 51, 51));
         campoConfirmarSenha.setMaximumSize(new java.awt.Dimension(380, 40));
         campoConfirmarSenha.setMinimumSize(new java.awt.Dimension(380, 40));
         campoConfirmarSenha.setPreferredSize(new java.awt.Dimension(380, 40));
@@ -84,6 +85,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         campoConfirmarSenha.setBounds(115, 390, 380, 40);
 
         campoSenha.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        campoSenha.setForeground(new java.awt.Color(51, 51, 51));
         campoSenha.setMaximumSize(new java.awt.Dimension(380, 40));
         campoSenha.setMinimumSize(new java.awt.Dimension(380, 40));
         campoSenha.setPreferredSize(new java.awt.Dimension(380, 40));
@@ -96,6 +98,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         campoSenha.setBounds(115, 300, 380, 40);
 
         campoEmail.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        campoEmail.setForeground(new java.awt.Color(51, 51, 51));
         campoEmail.setMaximumSize(new java.awt.Dimension(380, 40));
         campoEmail.setMinimumSize(new java.awt.Dimension(380, 40));
         campoEmail.setPreferredSize(new java.awt.Dimension(380, 40));
@@ -108,6 +111,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         campoEmail.setBounds(115, 180, 380, 40);
 
         campoUsername.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        campoUsername.setForeground(new java.awt.Color(51, 51, 51));
         campoUsername.setMaximumSize(new java.awt.Dimension(380, 40));
         campoUsername.setMinimumSize(new java.awt.Dimension(380, 40));
         campoUsername.setPreferredSize(new java.awt.Dimension(380, 40));
@@ -121,6 +125,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("NOME DE USUÁRIO:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(115, 50, 380, 20);
@@ -142,11 +147,13 @@ public class TelaRegistrar extends javax.swing.JDialog {
         erroEmail.setBounds(115, 220, 380, 30);
 
         jLabel5.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("SENHA:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(115, 280, 380, 20);
 
         jLabel6.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("CONFIRMAR SENHA:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(115, 370, 380, 20);
@@ -159,6 +166,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         erroSenhas.setBounds(115, 430, 380, 30);
 
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("EMAIL:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(115, 160, 380, 20);
