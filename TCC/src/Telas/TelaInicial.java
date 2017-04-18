@@ -31,20 +31,21 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SEJA BEM-VINDO");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(425, 30, 440, 110);
 
         jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText(JogadorDAO.nickName);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(350, 110, 580, 80);
 
         botaoCriarSala.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
+        botaoCriarSala.setForeground(new java.awt.Color(51, 51, 51));
         botaoCriarSala.setText("CRIAR NOVA SALA");
         botaoCriarSala.setName(""); // NOI18N
         botaoCriarSala.addActionListener(new java.awt.event.ActionListener() {
@@ -61,6 +62,7 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoCriarSala.setBounds(430, 240, 450, 60);
 
         botaoEntrarEmSala.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
+        botaoEntrarEmSala.setForeground(new java.awt.Color(51, 51, 51));
         botaoEntrarEmSala.setText("ENTRAR EM UMA SALA");
         botaoEntrarEmSala.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -85,6 +87,7 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(botaoDeslogar);
         botaoDeslogar.setBounds(1190, 650, 80, 40);
 
+        planoDeFundoTelaInicial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         planoDeFundoTelaInicial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N
         planoDeFundoTelaInicial.setAlignmentY(0.0F);
         planoDeFundoTelaInicial.setMaximumSize(new java.awt.Dimension(1280, 720));

@@ -5,9 +5,11 @@
  */
 package Telas;
 
+import ConexaoBanco.JogadorDAO;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
 import java.net.URL;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,10 +36,19 @@ public class TelaJogo extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        botaoFecharSala = new javax.swing.JButton();
+        botaoSairDaSala = new javax.swing.JButton();
+        campoEnviarTexto = new javax.swing.JTextField();
+        botaoEnviar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        areaDeChat = new javax.swing.JTextArea();
+        dadoD4 = new javax.swing.JButton();
+        dadoD6 = new javax.swing.JButton();
+        dadoD8 = new javax.swing.JButton();
+        dadoD10 = new javax.swing.JButton();
+        dadoD12 = new javax.swing.JButton();
+        dadoD20 = new javax.swing.JButton();
+        dadoD100 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RPG - TCC - Sala: "+ TelaConfigurarSala.nomeSala
@@ -53,61 +64,146 @@ public class TelaJogo extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTree1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 10, 170, 570);
+        jScrollPane1.setBounds(10, 10, 190, 570);
 
-        jButton1.setText("clica ai parseria haha");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoFecharSala.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        botaoFecharSala.setForeground(new java.awt.Color(51, 51, 51));
+        botaoFecharSala.setText("Fechar sala");
+        botaoFecharSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoFecharSalaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(890, 10, 210, 50);
-
-        jButton2.setText("aqi tbm");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(680, 10, 210, 50);
-
-        jButton3.setText("Fechar sala");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+        botaoFecharSala.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton3KeyPressed(evt);
+                botaoFecharSalaKeyPressed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(30, 580, 130, 32);
+        getContentPane().add(botaoFecharSala);
+        botaoFecharSala.setBounds(20, 590, 150, 40);
 
-        jButton4.setText("Sair da sala");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(30, 610, 130, 30);
+        botaoSairDaSala.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        botaoSairDaSala.setForeground(new java.awt.Color(51, 51, 51));
+        botaoSairDaSala.setText("Sair da sala");
+        botaoSairDaSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSairDaSalaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoSairDaSala);
+        botaoSairDaSala.setBounds(20, 630, 150, 40);
+
+        campoEnviarTexto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        campoEnviarTexto.setForeground(new java.awt.Color(51, 51, 51));
+        campoEnviarTexto.setMaximumSize(new java.awt.Dimension(630, 50));
+        campoEnviarTexto.setMinimumSize(new java.awt.Dimension(630, 50));
+        campoEnviarTexto.setPreferredSize(new java.awt.Dimension(630, 50));
+        getContentPane().add(campoEnviarTexto);
+        campoEnviarTexto.setBounds(210, 590, 630, 50);
+
+        botaoEnviar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
+        botaoEnviar.setForeground(new java.awt.Color(51, 51, 51));
+        botaoEnviar.setText("Enviar");
+        botaoEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoEnviarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoEnviar);
+        botaoEnviar.setBounds(730, 640, 110, 40);
+
+        areaDeChat.setEditable(false);
+        areaDeChat.setColumns(20);
+        areaDeChat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        areaDeChat.setRows(5);
+        areaDeChat.setToolTipText("");
+        areaDeChat.setWrapStyleWord(true);
+        areaDeChat.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane2.setViewportView(areaDeChat);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(210, 10, 630, 490);
+
+        dadoD4.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        dadoD4.setForeground(new java.awt.Color(51, 51, 51));
+        dadoD4.setText("D4");
+        dadoD4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dadoD4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dadoD4);
+        dadoD4.setBounds(210, 510, 60, 60);
+
+        dadoD6.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        dadoD6.setForeground(new java.awt.Color(51, 51, 51));
+        dadoD6.setText("D6");
+        dadoD6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dadoD6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dadoD6);
+        dadoD6.setBounds(270, 510, 60, 60);
+
+        dadoD8.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        dadoD8.setForeground(new java.awt.Color(51, 51, 51));
+        dadoD8.setText("D8");
+        dadoD8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dadoD8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dadoD8);
+        dadoD8.setBounds(330, 510, 60, 60);
+
+        dadoD10.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        dadoD10.setForeground(new java.awt.Color(51, 51, 51));
+        dadoD10.setText("D10");
+        dadoD10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dadoD10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dadoD10);
+        dadoD10.setBounds(390, 510, 60, 60);
+
+        dadoD12.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        dadoD12.setForeground(new java.awt.Color(51, 51, 51));
+        dadoD12.setText("D12");
+        dadoD12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dadoD12ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dadoD12);
+        dadoD12.setBounds(450, 510, 60, 60);
+
+        dadoD20.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        dadoD20.setForeground(new java.awt.Color(51, 51, 51));
+        dadoD20.setText("D20");
+        dadoD20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dadoD20ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dadoD20);
+        dadoD20.setBounds(510, 510, 60, 60);
+
+        dadoD100.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        dadoD100.setForeground(new java.awt.Color(51, 51, 51));
+        dadoD100.setText("D100");
+        dadoD100.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dadoD100ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dadoD100);
+        dadoD100.setBounds(570, 510, 70, 60);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            Desktop.getDesktop().browse(new URL("http://lemonparty.org/").toURI());
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            Desktop.getDesktop().browse(new URL("https://plus.google.com/u/0/photos/photo/108455980315816248227/6327177504318252514?icm=false").toURI());
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
@@ -115,18 +211,60 @@ public class TelaJogo extends javax.swing.JFrame {
             TelaLogin.abrirTela();
         }
     }
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botaoFecharSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharSalaActionPerformed
         popupFecharSala();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botaoFecharSalaActionPerformed
 
-    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
+    private void botaoFecharSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoFecharSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             popupFecharSala();
         }
-    }//GEN-LAST:event_jButton3KeyPressed
+    }//GEN-LAST:event_botaoFecharSalaKeyPressed
 
-    public static void Start(TelaConfigurarSala tela) {
-        tela.dispose();
+    private void botaoSairDaSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairDaSalaActionPerformed
+        int sair = JOptionPane.showConfirmDialog(null, "Deseja sair da sala?", "Sair da sala", JOptionPane.YES_NO_OPTION);
+        if (sair == JOptionPane.YES_OPTION) {
+            this.dispose();
+            TelaInicial.Start();
+        }
+    }//GEN-LAST:event_botaoSairDaSalaActionPerformed
+
+    private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
+        String texto = campoEnviarTexto.getText();
+        areaDeChat.append("[" + JogadorDAO.nickName + "]: " + texto + "\n");
+        campoEnviarTexto.setText("");
+    }//GEN-LAST:event_botaoEnviarActionPerformed
+
+    private void dadoD4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD4ActionPerformed
+        TelaRolarDado.Start(4);
+    }//GEN-LAST:event_dadoD4ActionPerformed
+
+    private void dadoD6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD6ActionPerformed
+        TelaRolarDado.Start(6);
+    }//GEN-LAST:event_dadoD6ActionPerformed
+
+    private void dadoD8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD8ActionPerformed
+        TelaRolarDado.Start(8);
+    }//GEN-LAST:event_dadoD8ActionPerformed
+
+    private void dadoD10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD10ActionPerformed
+        TelaRolarDado.Start(10);
+    }//GEN-LAST:event_dadoD10ActionPerformed
+
+    private void dadoD12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD12ActionPerformed
+        TelaRolarDado.Start(12);
+    }//GEN-LAST:event_dadoD12ActionPerformed
+
+    private void dadoD20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD20ActionPerformed
+        TelaRolarDado.Start(20);
+    }//GEN-LAST:event_dadoD20ActionPerformed
+
+    private void dadoD100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD100ActionPerformed
+        TelaRolarDado.Start(100);
+    }//GEN-LAST:event_dadoD100ActionPerformed
+
+    public static void Start(TelaConfigurarSala telaConfigurar) {
+        telaConfigurar.dispose();
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -164,11 +302,20 @@ public class TelaJogo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    public static javax.swing.JTextArea areaDeChat;
+    private javax.swing.JButton botaoEnviar;
+    private javax.swing.JButton botaoFecharSala;
+    private javax.swing.JButton botaoSairDaSala;
+    private javax.swing.JTextField campoEnviarTexto;
+    private javax.swing.JButton dadoD10;
+    private javax.swing.JButton dadoD100;
+    private javax.swing.JButton dadoD12;
+    private javax.swing.JButton dadoD20;
+    private javax.swing.JButton dadoD4;
+    private javax.swing.JButton dadoD6;
+    private javax.swing.JButton dadoD8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }

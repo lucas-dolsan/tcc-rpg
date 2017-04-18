@@ -19,6 +19,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         campoSenhaSala = new javax.swing.JPasswordField();
         botaoCriar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        erroSalaSemNome = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -29,12 +30,13 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Nome da sala:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 50, 340, 30);
 
         campoNomeSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
+        campoNomeSala.setForeground(new java.awt.Color(51, 51, 51));
         campoNomeSala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoNomeSala.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -45,12 +47,13 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         campoNomeSala.setBounds(30, 80, 340, 40);
 
         jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Senha da sala (Opcional):");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 130, 340, 30);
+        jLabel3.setBounds(30, 150, 340, 30);
 
         campoSenhaSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
+        campoSenhaSala.setForeground(new java.awt.Color(51, 51, 51));
         campoSenhaSala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoSenhaSala.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -58,9 +61,10 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoSenhaSala);
-        campoSenhaSala.setBounds(30, 160, 340, 40);
+        campoSenhaSala.setBounds(30, 180, 340, 40);
 
         botaoCriar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
+        botaoCriar.setForeground(new java.awt.Color(51, 51, 51));
         botaoCriar.setText("Criar");
         botaoCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +80,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         botaoCriar.setBounds(230, 320, 140, 40);
 
         jButton2.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +94,12 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         });
         getContentPane().add(jButton2);
         jButton2.setBounds(30, 320, 140, 40);
+
+        erroSalaSemNome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        erroSalaSemNome.setForeground(new java.awt.Color(204, 0, 0));
+        erroSalaSemNome.setText("Aviso: sala sem nome!");
+        getContentPane().add(erroSalaSemNome);
+        erroSalaSemNome.setBounds(30, 120, 160, 20);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N
@@ -106,10 +117,14 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
 
     private void criarSala() {
         nomeSala = campoNomeSala.getText();
-        char[] senha = campoSenhaSala.getPassword();
-        String senhaAuxiliar = String.valueOf(senha);
+        if (nomeSala.isEmpty()) {
+            erroSalaSemNome.setVisible(true);
+       } else {
+            char[] senha = campoSenhaSala.getPassword();
+            String senhaAuxiliar = String.valueOf(senha);
+            TelaJogo.Start(this);
+        }
 
-        TelaJogo.Start(this);
     }
     private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed
         criarSala();
@@ -148,8 +163,8 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_botaoCriarKeyPressed
-
     public static void Start() {
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 TelaConfigurarSala dialog = new TelaConfigurarSala(new javax.swing.JFrame(), true);
@@ -160,6 +175,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
                     }
                 });
                 dialog.setVisible(true);
+                
             }
         });
     }
@@ -168,6 +184,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
     private javax.swing.JButton botaoCriar;
     private javax.swing.JTextField campoNomeSala;
     private javax.swing.JPasswordField campoSenhaSala;
+    public static javax.swing.JLabel erroSalaSemNome;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

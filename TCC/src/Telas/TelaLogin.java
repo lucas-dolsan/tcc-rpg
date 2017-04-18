@@ -37,6 +37,7 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         campoLogin.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
+        campoLogin.setForeground(new java.awt.Color(51, 51, 51));
         campoLogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -48,6 +49,7 @@ public class TelaLogin extends javax.swing.JFrame {
         campoLogin.getAccessibleContext().setAccessibleName("");
 
         campoSenha.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
+        campoSenha.setForeground(new java.awt.Color(51, 51, 51));
         campoSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -73,6 +75,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2.setBounds(415, 470, 445, 40);
 
         botaoEntrar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
+        botaoEntrar.setForeground(new java.awt.Color(51, 51, 51));
         botaoEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoEntrar.png"))); // NOI18N
         botaoEntrar.setText("ENTRAR");
         botaoEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +92,7 @@ public class TelaLogin extends javax.swing.JFrame {
         botaoEntrar.setBounds(415, 605, 210, 50);
 
         botaoRegistrarSe.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
+        botaoRegistrarSe.setForeground(new java.awt.Color(51, 51, 51));
         botaoRegistrarSe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoRegistrar.png"))); // NOI18N
         botaoRegistrarSe.setText("REGISTRAR-SE");
         botaoRegistrarSe.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +144,8 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoRegistrarSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRegistrarSeActionPerformed
+        campoLogin.setText("");
+        campoSenha.setText("");
         JDialog tela = new TelaRegistrar(this, true);
         erros();
         tela.setVisible(true);
