@@ -90,6 +90,11 @@ public class TelaJogo extends javax.swing.JFrame {
                 botaoSairDaSalaActionPerformed(evt);
             }
         });
+        botaoSairDaSala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoSairDaSalaKeyPressed(evt);
+            }
+        });
         getContentPane().add(botaoSairDaSala);
         botaoSairDaSala.setBounds(20, 630, 150, 40);
 
@@ -98,6 +103,11 @@ public class TelaJogo extends javax.swing.JFrame {
         campoEnviarTexto.setMaximumSize(new java.awt.Dimension(630, 50));
         campoEnviarTexto.setMinimumSize(new java.awt.Dimension(630, 50));
         campoEnviarTexto.setPreferredSize(new java.awt.Dimension(630, 50));
+        campoEnviarTexto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoEnviarTextoKeyPressed(evt);
+            }
+        });
         getContentPane().add(campoEnviarTexto);
         campoEnviarTexto.setBounds(210, 590, 630, 50);
 
@@ -107,6 +117,11 @@ public class TelaJogo extends javax.swing.JFrame {
         botaoEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEnviarActionPerformed(evt);
+            }
+        });
+        botaoEnviar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoEnviarKeyPressed(evt);
             }
         });
         getContentPane().add(botaoEnviar);
@@ -208,7 +223,7 @@ public class TelaJogo extends javax.swing.JFrame {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
             this.dispose();
-            TelaLogin.abrirTela();
+            TelaInicial.Start();
         }
     }
     private void botaoFecharSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharSalaActionPerformed
@@ -228,11 +243,13 @@ public class TelaJogo extends javax.swing.JFrame {
             TelaInicial.Start();
         }
     }//GEN-LAST:event_botaoSairDaSalaActionPerformed
-
-    private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
+    public void enviarTexto() {
         String texto = campoEnviarTexto.getText();
         areaDeChat.append("[" + JogadorDAO.nickName + "]: " + texto + "\n");
         campoEnviarTexto.setText("");
+    }
+    private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
+        enviarTexto();
     }//GEN-LAST:event_botaoEnviarActionPerformed
 
     private void dadoD4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD4ActionPerformed
@@ -262,6 +279,22 @@ public class TelaJogo extends javax.swing.JFrame {
     private void dadoD100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD100ActionPerformed
         TelaRolarDado.Start(100);
     }//GEN-LAST:event_dadoD100ActionPerformed
+
+    private void botaoSairDaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoSairDaSalaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_botaoSairDaSalaKeyPressed
+
+    private void botaoEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEnviarKeyPressed
+        enviarTexto();
+    }//GEN-LAST:event_botaoEnviarKeyPressed
+
+    private void campoEnviarTextoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEnviarTextoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            enviarTexto();
+        }
+    }//GEN-LAST:event_campoEnviarTextoKeyPressed
 
     public static void Start(TelaConfigurarSala telaConfigurar) {
         telaConfigurar.dispose();
