@@ -6,6 +6,7 @@
 package Telas;
 
 import ConexaoBanco.JogadorDAO;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class TelaRolarDado extends javax.swing.JDialog {
@@ -43,8 +44,13 @@ public class TelaRolarDado extends javax.swing.JDialog {
                 botaoRolarActionPerformed(evt);
             }
         });
+        botaoRolar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoRolarKeyPressed(evt);
+            }
+        });
         getContentPane().add(botaoRolar);
-        botaoRolar.setBounds(180, 110, 92, 35);
+        botaoRolar.setBounds(180, 110, 81, 40);
 
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -57,13 +63,23 @@ public class TelaRolarDado extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Modificadores:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 40, 120, 12);
+        jLabel2.setBounds(10, 40, 120, 16);
 
         campoModificadorMais.setText("0");
+        campoModificadorMais.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoModificadorMaisKeyPressed(evt);
+            }
+        });
         getContentPane().add(campoModificadorMais);
         campoModificadorMais.setBounds(60, 60, 120, 24);
 
         campoModificadorMenos.setText("0");
+        campoModificadorMenos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoModificadorMenosKeyPressed(evt);
+            }
+        });
         getContentPane().add(campoModificadorMenos);
         campoModificadorMenos.setBounds(60, 90, 120, 24);
 
@@ -82,8 +98,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botaoRolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRolarActionPerformed
+public void rolarDado() {
         Random random = new Random();
         String modificadorMais = campoModificadorMais.getText();
         int modificadorMaisInt = Integer.parseInt(modificadorMais);
@@ -104,7 +119,28 @@ public class TelaRolarDado extends javax.swing.JDialog {
             TelaJogo.areaDeChat.append("[" + JogadorDAO.nickName + " rolou D" + dado + "]=" + numero + "\n");
             this.dispose();
         }
+    }
+    private void botaoRolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRolarActionPerformed
+        rolarDado();
     }//GEN-LAST:event_botaoRolarActionPerformed
+
+    private void botaoRolarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoRolarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            rolarDado();
+        }
+    }//GEN-LAST:event_botaoRolarKeyPressed
+
+    private void campoModificadorMaisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoModificadorMaisKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            rolarDado();
+        }
+    }//GEN-LAST:event_campoModificadorMaisKeyPressed
+
+    private void campoModificadorMenosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoModificadorMenosKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            rolarDado();
+        }
+    }//GEN-LAST:event_campoModificadorMenosKeyPressed
 
     public static int dado;
 
