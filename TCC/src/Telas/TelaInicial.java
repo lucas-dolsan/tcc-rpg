@@ -112,13 +112,13 @@ private void deslogar() {
     }//GEN-LAST:event_botaoDeslogarActionPerformed
 
     private void botaoCriarSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarSalaActionPerformed
-        JDialog tela = new TelaConfigurarSala(this, true);
+        JDialog tela = new TelaConfigurarSala(this, true, this);
         tela.setVisible(true);
     }//GEN-LAST:event_botaoCriarSalaActionPerformed
 
     private void botaoCriarSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoCriarSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            JDialog tela = new TelaConfigurarSala(this, true);
+            JDialog tela = new TelaConfigurarSala(this, true, this);
             tela.setVisible(true);
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             deslogar();
