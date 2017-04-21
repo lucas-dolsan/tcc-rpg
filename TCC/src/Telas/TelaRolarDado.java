@@ -7,13 +7,26 @@ package Telas;
 
 import ConexaoBanco.JogadorDAO;
 import java.awt.event.KeyEvent;
+import java.text.NumberFormat;
 import java.util.Random;
+import javax.swing.text.NumberFormatter;
 
 public class TelaRolarDado extends javax.swing.JDialog {
 
-    public TelaRolarDado(java.awt.Frame parent, boolean modal) {
+    private static NumberFormat format = NumberFormat.getInstance();
+    private static NumberFormatter formatter = new NumberFormatter(format);
+     private int dado;
+
+    public TelaRolarDado(java.awt.Frame parent, boolean modal, int dado) {
         super(parent, modal);
         initComponents();
+        formatter.setValueClass(Integer.class);
+        formatter.setMinimum(0);
+        formatter.setMaximum(Integer.MAX_VALUE);
+        formatter.setAllowsInvalid(false);
+        formatter.setCommitsOnValidEdit(true);
+        this.dado = dado;
+        jLabel1.setText("Rolar dado D" + this.dado);
     }
 
     @SuppressWarnings("unchecked")
@@ -23,16 +36,15 @@ public class TelaRolarDado extends javax.swing.JDialog {
         botaoRolar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        campoModificadorMais = new javax.swing.JTextField();
-        campoModificadorMenos = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        campoFormatadoMais = new javax.swing.JFormattedTextField(formatter);
+        campoFormatadoMenos = new javax.swing.JFormattedTextField(formatter);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RPG - TCC - Rolar dado");
-        setMaximumSize(new java.awt.Dimension(280, 180));
-        setMinimumSize(new java.awt.Dimension(280, 180));
-        setPreferredSize(new java.awt.Dimension(280, 180));
+        setMaximumSize(new java.awt.Dimension(280, 200));
+        setMinimumSize(new java.awt.Dimension(280, 200));
+        setPreferredSize(new java.awt.Dimension(280, 200));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -50,7 +62,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoRolar);
-        botaoRolar.setBounds(180, 110, 81, 40);
+        botaoRolar.setBounds(180, 130, 83, 33);
 
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -65,24 +77,6 @@ public class TelaRolarDado extends javax.swing.JDialog {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(10, 40, 120, 16);
 
-        campoModificadorMais.setText("0");
-        campoModificadorMais.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                campoModificadorMaisKeyPressed(evt);
-            }
-        });
-        getContentPane().add(campoModificadorMais);
-        campoModificadorMais.setBounds(60, 60, 120, 24);
-
-        campoModificadorMenos.setText("0");
-        campoModificadorMenos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                campoModificadorMenosKeyPressed(evt);
-            }
-        });
-        getContentPane().add(campoModificadorMenos);
-        campoModificadorMenos.setBounds(60, 90, 120, 24);
-
         jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("+");
@@ -93,30 +87,46 @@ public class TelaRolarDado extends javax.swing.JDialog {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("-");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 90, 20, 30);
+        jLabel4.setBounds(30, 100, 20, 30);
+
+        campoFormatadoMais.setText("0");
+        campoFormatadoMais.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoFormatadoMaisKeyPressed(evt);
+            }
+        });
+        getContentPane().add(campoFormatadoMais);
+        campoFormatadoMais.setBounds(50, 60, 110, 30);
+
+        campoFormatadoMenos.setText("0");
+        campoFormatadoMenos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoFormatadoMenosKeyPressed(evt);
+            }
+        });
+        getContentPane().add(campoFormatadoMenos);
+        campoFormatadoMenos.setBounds(50, 100, 110, 30);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 public void rolarDado() {
         Random random = new Random();
-        String modificadorMais = campoModificadorMais.getText();
-        int modificadorMaisInt = Integer.parseInt(modificadorMais);
-        String modificadorMenos = campoModificadorMenos.getText();
-        int modificadorMenosInt = Integer.parseInt(modificadorMenos);
-        if (modificadorMaisInt > 0) {
+        int modificadorMais = (int) campoFormatadoMais.getValue();
+        int modificadorMenos = (int) campoFormatadoMenos.getValue();
+        if (modificadorMais > 0) {
             int numero = random.nextInt(dado);
-            int numeroModificado = numero + modificadorMaisInt;
-            TelaJogo.areaDeChat.append("[" + JogadorDAO.nickName + " rolou D" + dado + "]=" + numeroModificado + " {[" + numero + "+" + modificadorMaisInt + "]}\n");
+            int numeroModificado = numero + modificadorMais;
+            TelaJogo.areaDeChat.append("[" + JogadorDAO.nickName + " rolou D" + this.dado + "]=" + numeroModificado + " {[" + numero + "+" + modificadorMais + "]}\n");
             this.dispose();
-        } else if (modificadorMenosInt > 0) {
+        } else if (modificadorMenos > 0) {
             int numero = random.nextInt(dado);
-            int numeroModificado = numero - modificadorMenosInt;
-            TelaJogo.areaDeChat.append("[" + JogadorDAO.nickName + " rolou D" + dado + "]=" + numeroModificado + " {[" + numero + "-" + modificadorMenosInt + "]}\n");
+            int numeroModificado = numero - modificadorMenos;
+            TelaJogo.areaDeChat.append("[" + JogadorDAO.nickName + " rolou D" + this.dado + "]=" + numeroModificado + " {[" + numero + "-" + modificadorMenos + "]}\n");
             this.dispose();
         } else {
             int numero = random.nextInt(dado);
-            TelaJogo.areaDeChat.append("[" + JogadorDAO.nickName + " rolou D" + dado + "]=" + numero + "\n");
+            TelaJogo.areaDeChat.append("[" + JogadorDAO.nickName + " rolou D" + this.dado + "]=" + numero + "\n");
             this.dispose();
         }
     }
@@ -130,63 +140,27 @@ public void rolarDado() {
         }
     }//GEN-LAST:event_botaoRolarKeyPressed
 
-    private void campoModificadorMaisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoModificadorMaisKeyPressed
+    private void campoFormatadoMenosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoFormatadoMenosKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             rolarDado();
         }
-    }//GEN-LAST:event_campoModificadorMaisKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            campoFormatadoMenos.setValue(0);
 
-    private void campoModificadorMenosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoModificadorMenosKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            rolarDado();
         }
-    }//GEN-LAST:event_campoModificadorMenosKeyPressed
+    }//GEN-LAST:event_campoFormatadoMenosKeyPressed
 
-    public static int dado;
-
-    public static void Start(int dadoNumero) {
-        dado = dadoNumero;
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaRolarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaRolarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaRolarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaRolarDado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void campoFormatadoMaisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoFormatadoMaisKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            campoFormatadoMais.setValue(0);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_campoFormatadoMaisKeyPressed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                TelaRolarDado dialog = new TelaRolarDado(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoRolar;
-    private javax.swing.JTextField campoModificadorMais;
-    private javax.swing.JTextField campoModificadorMenos;
+    private javax.swing.JFormattedTextField campoFormatadoMais;
+    private javax.swing.JFormattedTextField campoFormatadoMenos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

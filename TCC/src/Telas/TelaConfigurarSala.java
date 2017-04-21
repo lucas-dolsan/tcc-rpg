@@ -3,10 +3,11 @@ package Telas;
 import com.sun.glass.events.KeyEvent;
 
 public class TelaConfigurarSala extends javax.swing.JDialog {
-
-    public TelaConfigurarSala(java.awt.Frame parent, boolean modal) {
+private TelaInicial tela;
+    public TelaConfigurarSala(java.awt.Frame parent, boolean modal,TelaInicial telaInicial) {
         super(parent, modal);
         initComponents();
+        tela = telaInicial;
     }
 
     @SuppressWarnings("unchecked")
@@ -77,7 +78,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoCriar);
-        botaoCriar.setBounds(230, 320, 140, 40);
+        botaoCriar.setBounds(30, 300, 140, 40);
 
         jButton2.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
@@ -93,7 +94,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(30, 320, 140, 40);
+        jButton2.setBounds(230, 300, 140, 40);
 
         erroSalaSemNome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroSalaSemNome.setForeground(new java.awt.Color(204, 0, 0));
@@ -122,6 +123,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
        } else {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
+            tela.dispose();
             TelaJogo.Start(this);
         }
 
@@ -158,27 +160,11 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
 
     private void botaoCriarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoCriarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
+            criarSala();
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             this.dispose();
         }
     }//GEN-LAST:event_botaoCriarKeyPressed
-    public static void Start() {
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                TelaConfigurarSala dialog = new TelaConfigurarSala(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-                
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
