@@ -11,14 +11,14 @@ public class JogadorDAO {
     public static String nickName = "";
 
     public static void criarJogador(Jogador jogador, TelaRegistrar tela) {
-        String sql = "insert into jogador(nome_jog, email_jog, senha_jog) values(?,?,md5(?))";
+        String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(?),now(),now())";
         try {
             Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, jogador.getNome_jog());
             stmt.setString(2, jogador.getEmail_jog());
             stmt.setString(3, jogador.getSenha_jog());
-            stmt.execute();
+            stmt.execute(); 
             tela.labelRegistrado.setVisible(true);
             tela.dispose();
         } catch (Exception e) {
@@ -86,7 +86,6 @@ public class JogadorDAO {
                 if (email.equals(emailAux)) {
                     return true;
                 }
-
             }
             stmt.close();
             c.close();
@@ -105,7 +104,6 @@ public class JogadorDAO {
             while (rs.next()) {
                 String nomeAux = rs.getString("nome_jog");
                 if (nome.equals(nomeAux)) {
-
                     return true;
                 }
             }
@@ -118,4 +116,19 @@ public class JogadorDAO {
         }
         return false;
     }
+
+    public static void modificarUltimoLogin(String login) {
+        String sql = "insert into jogador(dt_ultimoLogin) values(now()) where email_jog = '?'";
+        String email = login;
+        try {
+            Connection c = FabricaDeConexao.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
 }

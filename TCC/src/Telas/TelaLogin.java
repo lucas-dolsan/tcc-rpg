@@ -156,6 +156,7 @@ public class TelaLogin extends javax.swing.JFrame {
         char[] senha = campoSenha.getPassword();
         String senhaAuxiliar = String.valueOf(senha);
         jogador.logar(login, senhaAuxiliar, this);
+        jogador.modificarUltimoLogin(login);
     }
 
     private void campoLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoLoginKeyPressed
