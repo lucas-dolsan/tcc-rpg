@@ -18,7 +18,7 @@ public class JogadorDAO {
             stmt.setString(1, jogador.getNome_jog());
             stmt.setString(2, jogador.getEmail_jog());
             stmt.setString(3, jogador.getSenha_jog());
-            stmt.execute(); 
+            stmt.execute();
             tela.labelRegistrado.setVisible(true);
             tela.dispose();
         } catch (Exception e) {
@@ -118,7 +118,7 @@ public class JogadorDAO {
     }
 
     public static void modificarUltimoLogin(String login) {
-        String sql = "insert into jogador(dt_ultimoLogin) values(now()) where email_jog = '?'";
+        String sql = "UPDATE jogador SET dt_ultimoLogin = now() WHERE email_jog = ?";
         String email = login;
         try {
             Connection c = FabricaDeConexao.getConnection();
