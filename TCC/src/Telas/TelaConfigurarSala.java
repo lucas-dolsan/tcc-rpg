@@ -25,7 +25,6 @@ private TelaInicial tela;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RPG - TCC - Configurar sala");
-        setMaximumSize(new java.awt.Dimension(400, 500));
         setMinimumSize(new java.awt.Dimension(400, 500));
         setResizable(false);
         getContentPane().setLayout(null);

@@ -8,6 +8,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
     public TelaJogo() {
         initComponents();
+        campoEnviarTexto.requestFocus();
     }
 
     @SuppressWarnings("unchecked")
