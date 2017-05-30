@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaConfigurarSala.java</file>
-            <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaRolarDado.java</file>
-            <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaJogo.java</file>
-            <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaPersonagem.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/Telas/TelaInicial.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/Telas/TelaPersonagem.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/Telas/TelaConfigurarSala.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/Telas/TelaJogo.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/Telas/TelaRolarDado.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/ConexaoBanco/FabricaDeConexao.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/Telas/TelaRegistrar.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/Telas/TelaLogin.java</file>
+            <file>file:/C:/Users/aluno/Documents/NetBeansProjects/TCC/src/ConexaoBanco/JogadorDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -17,6 +17,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        botaoConfigurarConta = new javax.swing.JButton();
         botaoCriarSala = new javax.swing.JButton();
         botaoEntrarEmSala = new javax.swing.JButton();
         botaoDeslogar = new javax.swing.JButton();
@@ -44,6 +45,11 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(350, 110, 580, 80);
 
+        botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        botaoConfigurarConta.setText("CONFIGURAR CONTA");
+        getContentPane().add(botaoConfigurarConta);
+        botaoConfigurarConta.setBounds(430, 430, 450, 60);
+
         botaoCriarSala.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         botaoCriarSala.setForeground(new java.awt.Color(51, 51, 51));
         botaoCriarSala.setText("CRIAR NOVA SALA");
@@ -59,7 +65,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarSala);
-        botaoCriarSala.setBounds(430, 240, 450, 60);
+        botaoCriarSala.setBounds(430, 230, 450, 60);
 
         botaoEntrarEmSala.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         botaoEntrarEmSala.setForeground(new java.awt.Color(51, 51, 51));
@@ -147,6 +153,7 @@ private void deslogar() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoConfigurarConta;
     private javax.swing.JButton botaoCriarSala;
     private javax.swing.JButton botaoDeslogar;
     private javax.swing.JButton botaoEntrarEmSala;
