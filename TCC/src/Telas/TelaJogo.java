@@ -110,7 +110,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         areaDeChat.setEditable(false);
         areaDeChat.setColumns(20);
-        areaDeChat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        areaDeChat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         areaDeChat.setRows(5);
         areaDeChat.setToolTipText("");
         areaDeChat.setWrapStyleWord(true);
