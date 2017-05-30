@@ -7,24 +7,15 @@ package Telas;
 
 import ConexaoBanco.JogadorDAO;
 import java.awt.event.KeyEvent;
-import java.text.NumberFormat;
 import java.util.Random;
-import javax.swing.text.NumberFormatter;
 
 public class TelaRolarDado extends javax.swing.JDialog {
 
-    private static NumberFormat format = NumberFormat.getInstance();
-    private static NumberFormatter formatter = new NumberFormatter(format);
     private int dado;
 
     public TelaRolarDado(java.awt.Frame parent, boolean modal, int dado) {
         super(parent, modal);
         initComponents();
-        formatter.setValueClass(Integer.class);
-        formatter.setMinimum(0);
-        formatter.setMaximum(Integer.MAX_VALUE);
-        formatter.setAllowsInvalid(false);
-        formatter.setCommitsOnValidEdit(true);
         this.dado = dado;
         jLabel1.setText("Rolar dado D" + this.dado);
     }
@@ -62,7 +53,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoRolar);
-        botaoRolar.setBounds(180, 130, 92, 35);
+        botaoRolar.setBounds(180, 130, 83, 33);
 
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -75,7 +66,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Modificadores:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 40, 120, 12);
+        jLabel2.setBounds(10, 40, 120, 16);
 
         jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -123,7 +114,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
         Random random = new Random();
         int numero = 0;
         do {
-            numero = random.nextInt(dado+1);
+            numero = random.nextInt(dado + 1);
         } while (numero == 0);
         return numero;
     }
