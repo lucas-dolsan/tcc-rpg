@@ -3,10 +3,13 @@ package Telas;
 import com.sun.glass.events.KeyEvent;
 
 public class TelaConfigurarSala extends javax.swing.JDialog {
-private TelaInicial tela;
-    public TelaConfigurarSala(java.awt.Frame parent, boolean modal,TelaInicial telaInicial) {
+
+    private final TelaInicial tela;
+
+    public TelaConfigurarSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
         super(parent, modal);
         initComponents();
+        erroSalaSemNome.setVisible(false);
         tela = telaInicial;
     }
 
@@ -119,7 +122,7 @@ private TelaInicial tela;
         nomeSala = campoNomeSala.getText();
         if (nomeSala.isEmpty()) {
             erroSalaSemNome.setVisible(true);
-       } else {
+        } else {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
             tela.dispose();
