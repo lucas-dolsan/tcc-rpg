@@ -1,5 +1,6 @@
 package Telas;
 
+import ConexaoBanco.JogadorDAO;
 import com.sun.glass.events.KeyEvent;
 
 public class TelaConfigurarSala extends javax.swing.JDialog {
@@ -125,8 +126,9 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         } else {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
-            tela.dispose();
+            JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar);
             TelaJogo.Start(this);
+            tela.dispose();
         }
 
     }

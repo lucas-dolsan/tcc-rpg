@@ -1,5 +1,6 @@
 package ConexaoBanco;
 
+import Telas.TelaConfigurarSala;
 import Telas.TelaLogin;
 import Telas.TelaRegistrar;
 import java.sql.Connection;
@@ -9,7 +10,9 @@ import java.sql.ResultSet;
 public class JogadorDAO {
 
     public static String nickName = "";
-
+    
+    
+    
     public static void criarJogador(Jogador jogador, TelaRegistrar tela) {
         String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(?),now(),now())";
         try {
@@ -48,6 +51,21 @@ public class JogadorDAO {
 
     }
 
+    public static void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala){
+        String sql = "insert into sala(nome_sala, senha_sala) values(?,?)"; 
+        try {
+            Connection c = FabricaDeConexao.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomeSala);
+            stmt.setString(2, senhaSala);
+            stmt.execute();
+            tela.dispose();
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+    
     public void logar(String email, String senha, TelaLogin tela) {
         tela.labelLogando.setVisible(true);
         try {
