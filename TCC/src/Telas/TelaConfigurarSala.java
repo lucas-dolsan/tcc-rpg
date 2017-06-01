@@ -110,7 +110,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         jLabel1.setAlignmentY(0.0F);
         jLabel1.setMaximumSize(new java.awt.Dimension(400, 500));
         jLabel1.setMinimumSize(new java.awt.Dimension(400, 500));
-        jLabel1.setPreferredSize(new java.awt.Dimension(400, 500));
+        jLabel1.setPreferredSize(new java.awt.Dimension(400, 490));
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 400, 490);
 
@@ -127,8 +127,9 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
             JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar);
-            TelaJogo.Start(this);
+            TelaJogo.Start();
             tela.dispose();
+            this.dispose();
         }
 
     }
