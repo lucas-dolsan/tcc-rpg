@@ -23,8 +23,6 @@ public class TelaLogin extends javax.swing.JFrame {
         botaoEntrar = new javax.swing.JButton();
         botaoRegistrarSe = new javax.swing.JButton();
         erroLogin = new javax.swing.JLabel();
-        labelLogando = new javax.swing.JLabel();
-        labelFalha = new javax.swing.JLabel();
         planoDeFundoTelaLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,20 +113,6 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(erroLogin);
         erroLogin.setBounds(415, 582, 210, 20);
 
-        labelLogando.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        labelLogando.setForeground(new java.awt.Color(153, 153, 153));
-        labelLogando.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelLogando.setText("logando...");
-        getContentPane().add(labelLogando);
-        labelLogando.setBounds(420, 641, 440, 40);
-
-        labelFalha.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
-        labelFalha.setForeground(new java.awt.Color(255, 0, 0));
-        labelFalha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelFalha.setText("Erro de conexão.");
-        getContentPane().add(labelFalha);
-        labelFalha.setBounds(420, 642, 440, 40);
-
         planoDeFundoTelaLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         planoDeFundoTelaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N
         planoDeFundoTelaLogin.setAlignmentY(0.0F);
@@ -194,8 +178,6 @@ public class TelaLogin extends javax.swing.JFrame {
             public void run() {
                 new TelaLogin().setVisible(true);
                 erroLogin.setVisible(false);
-                labelFalha.setVisible(false);
-                labelLogando.setVisible(false);
             }
         });
     }
@@ -226,8 +208,6 @@ public class TelaLogin extends javax.swing.JFrame {
             public void run() {
                 new TelaLogin().setVisible(true);
                 erroLogin.setVisible(false);
-                labelFalha.setVisible(false);
-                labelLogando.setVisible(false);
             }
         });
     }
@@ -240,8 +220,6 @@ public class TelaLogin extends javax.swing.JFrame {
     public static javax.swing.JLabel erroLogin;
     public javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    public static javax.swing.JLabel labelFalha;
-    public static javax.swing.JLabel labelLogando;
     private javax.swing.JLabel planoDeFundoTelaLogin;
     // End of variables declaration//GEN-END:variables
 }
