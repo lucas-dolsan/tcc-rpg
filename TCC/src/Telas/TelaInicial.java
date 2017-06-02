@@ -45,7 +45,8 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(350, 110, 580, 80);
 
-        botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        botaoConfigurarConta.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
+        botaoConfigurarConta.setForeground(new java.awt.Color(51, 51, 51));
         botaoConfigurarConta.setText("CONFIGURAR CONTA");
         getContentPane().add(botaoConfigurarConta);
         botaoConfigurarConta.setBounds(430, 430, 450, 60);
@@ -70,6 +71,11 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoEntrarEmSala.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         botaoEntrarEmSala.setForeground(new java.awt.Color(51, 51, 51));
         botaoEntrarEmSala.setText("ENTRAR EM UMA SALA");
+        botaoEntrarEmSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoEntrarEmSalaActionPerformed(evt);
+            }
+        });
         botaoEntrarEmSala.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 botaoEntrarEmSalaKeyPressed(evt);
@@ -142,6 +148,11 @@ private void deslogar() {
             deslogar();
         }
     }//GEN-LAST:event_botaoDeslogarKeyPressed
+
+    private void botaoEntrarEmSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaActionPerformed
+        JDialog tela = new TelaEntrarEmSala(this, true, this);
+        tela.setVisible(true);
+    }//GEN-LAST:event_botaoEntrarEmSalaActionPerformed
 
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {

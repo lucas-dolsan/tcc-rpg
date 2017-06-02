@@ -10,9 +10,7 @@ import java.sql.ResultSet;
 public class JogadorDAO {
 
     public static String nickName = "";
-    
-    
-    
+
     public static void criarJogador(Jogador jogador, TelaRegistrar tela) {
         String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(?),now(),now())";
         try {
@@ -51,8 +49,8 @@ public class JogadorDAO {
 
     }
 
-    public static void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala){
-        String sql = "insert into sala(nome_sala, senha_sala) values(?,?)"; 
+    public static void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
+        String sql = "insert into sala(nome_sala, senha_sala) values(?,?)";
         try {
             Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
@@ -65,9 +63,44 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
-    
+
+    public static void fecharSala(Telas.TelaJogo telaJogo, String nomeSala) {
+        String sql = ("delete from sala where nome_sala = ?");
+        try {
+            Connection c = FabricaDeConexao.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomeSala);
+            stmt.execute();
+            telaJogo.dispose();
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+
+    }
+
+    public static boolean entrarEmSala(String nomeSala, String senhaSala) {
+        try {
+            Connection c = FabricaDeConexao.getConnection();
+            PreparedStatement stmt = c.prepareStatement("select * from sala where nome_sala =? and senha_sala =?");
+            stmt.setString(1, nomeSala);
+            stmt.setString(2, senhaSala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                TelaConfigurarSala.nomeSala = nomeSala;
+                return true;
+            }
+            stmt.close();
+            c.close();
+            return false;
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void logar(String email, String senha, TelaLogin tela) {
-        tela.labelLogando.setVisible(true);
         try {
             Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement("select * from jogador where email_jog =? and senha_jog = md5(?)");
@@ -75,19 +108,13 @@ public class JogadorDAO {
             stmt.setString(2, senha);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                tela.labelLogando.setVisible(false);
                 nickName = rs.getString("nome_jog");
                 Telas.TelaInicial.Start();
                 tela.setVisible(false);
-            } else {
-                tela.labelLogando.setVisible(false);
-                tela.erroLogin.setVisible(true);
             }
             stmt.close();
             c.close();
         } catch (Exception e) {
-            tela.labelLogando.setVisible(false);
-            tela.labelFalha.setVisible(true);
             System.out.println(e);
             e.printStackTrace();
         }

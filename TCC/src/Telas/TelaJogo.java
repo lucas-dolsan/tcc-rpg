@@ -5,12 +5,12 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class TelaJogo extends javax.swing.JFrame {
-
+    
     public TelaJogo() {
         initComponents();
         campoEnviarTexto.requestFocus();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -204,6 +204,7 @@ public class TelaJogo extends javax.swing.JFrame {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
             this.dispose();
+            JogadorDAO.fecharSala(this, TelaConfigurarSala.nomeSala);
             TelaInicial.Start();
         }
     }
@@ -230,7 +231,7 @@ public class TelaJogo extends javax.swing.JFrame {
             areaDeChat.append("[" + JogadorDAO.nickName + "]: " + texto + "\n");
             campoEnviarTexto.setText("");
         }
-
+        
     }
     private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
         enviarTexto();
@@ -286,9 +287,8 @@ public class TelaJogo extends javax.swing.JFrame {
             enviarTexto();
         }
     }//GEN-LAST:event_campoEnviarTextoKeyPressed
-
-    public static void Start(TelaConfigurarSala telaConfigurar) {
-        telaConfigurar.dispose();
+    
+    public static void Start() {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -298,21 +298,21 @@ public class TelaJogo extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TelaJogo.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(TelaJogo.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(TelaJogo.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaJogo.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
