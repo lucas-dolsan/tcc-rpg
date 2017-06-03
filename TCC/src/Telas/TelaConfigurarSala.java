@@ -126,7 +126,10 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         } else {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
-            JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar);
+            JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar, JogadorDAO.nickName);
+            if(JogadorDAO.verificarDono(nomeSala, JogadorDAO.nickName)){
+                TelaJogo.donoSala = true;
+            }
             TelaJogo.Start();
             tela.dispose();
             this.dispose();
