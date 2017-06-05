@@ -53,7 +53,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoRolar);
-        botaoRolar.setBounds(180, 130, 83, 33);
+        botaoRolar.setBounds(150, 140, 110, 30);
 
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -62,11 +62,11 @@ public class TelaRolarDado extends javax.swing.JDialog {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 10, 260, 20);
 
-        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Modificadores:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 40, 120, 16);
+        jLabel2.setBounds(50, 40, 130, 20);
 
         jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -170,7 +170,6 @@ public class TelaRolarDado extends javax.swing.JDialog {
             rolarDado();
         }
     }//GEN-LAST:event_campoRolarMenosKeyPressed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoRolar;

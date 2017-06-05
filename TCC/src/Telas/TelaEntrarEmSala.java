@@ -1,6 +1,7 @@
 package Telas;
 
 import ConexaoBanco.JogadorDAO;
+import com.sun.glass.events.KeyEvent;
 
 public class TelaEntrarEmSala extends javax.swing.JDialog {
 
@@ -45,12 +46,22 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         campoNomeSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         campoNomeSala.setForeground(new java.awt.Color(51, 51, 51));
         campoNomeSala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        campoNomeSala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoNomeSalaKeyPressed(evt);
+            }
+        });
         getContentPane().add(campoNomeSala);
         campoNomeSala.setBounds(30, 80, 340, 40);
 
         campoSenhaSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         campoSenhaSala.setForeground(new java.awt.Color(51, 51, 51));
         campoSenhaSala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        campoSenhaSala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoSenhaSalaKeyPressed(evt);
+            }
+        });
         getContentPane().add(campoSenhaSala);
         campoSenhaSala.setBounds(30, 180, 340, 40);
 
@@ -111,17 +122,36 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
-    private void botaoEntrarEmSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaActionPerformed
+    private void entrarEmSala() {
         String nomeSala = campoNomeSala.getText();
         String senhaSala = campoSenhaSala.getText();
         if (JogadorDAO.entrarEmSala(nomeSala, senhaSala)) {
-            TelaJogo.Start();
+            TelaJogo.Start(JogadorDAO.verificarDono());
             tela.dispose();
             this.dispose();
         } else {
             erroEntrarEmSala.setVisible(true);
         }
+    }
+    private void botaoEntrarEmSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaActionPerformed
+        entrarEmSala();
     }//GEN-LAST:event_botaoEntrarEmSalaActionPerformed
+
+    private void campoNomeSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNomeSalaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_campoNomeSalaKeyPressed
+
+    private void campoSenhaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaSalaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_campoSenhaSalaKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
