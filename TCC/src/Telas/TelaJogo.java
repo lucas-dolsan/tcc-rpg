@@ -6,8 +6,6 @@ import javax.swing.JOptionPane;
 
 public class TelaJogo extends javax.swing.JFrame {
 
-    public static boolean donoSala = false;
-
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(false);
@@ -291,10 +289,7 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoEnviarTextoKeyPressed
 
-    public static void Start() {
-        if (donoSala) {
-            botaoFecharSala.setVisible(true);
-        }
+    public static void Start(boolean dono) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -327,6 +322,9 @@ public class TelaJogo extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
+                if(dono){
+                    botaoFecharSala.setVisible(true);
+                }
             }
         });
     }

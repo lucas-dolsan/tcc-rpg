@@ -11,6 +11,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         erroSalaSemNome.setVisible(false);
+        erroSalaExistente.setVisible(false);
         tela = telaInicial;
     }
 
@@ -21,9 +22,10 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         campoNomeSala = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        erroSalaExistente = new javax.swing.JLabel();
         campoSenhaSala = new javax.swing.JPasswordField();
         botaoCriar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botaoCancelar = new javax.swing.JButton();
         erroSalaSemNome = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -56,6 +58,12 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(30, 150, 340, 30);
 
+        erroSalaExistente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        erroSalaExistente.setForeground(new java.awt.Color(204, 0, 0));
+        erroSalaExistente.setText("Sala com esse nome já existente!");
+        getContentPane().add(erroSalaExistente);
+        erroSalaExistente.setBounds(30, 230, 340, 20);
+
         campoSenhaSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         campoSenhaSala.setForeground(new java.awt.Color(51, 51, 51));
         campoSenhaSala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -83,21 +91,21 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         getContentPane().add(botaoCriar);
         botaoCriar.setBounds(30, 300, 140, 40);
 
-        jButton2.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoCancelar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
+        botaoCancelar.setForeground(new java.awt.Color(51, 51, 51));
+        botaoCancelar.setText("Cancelar");
+        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoCancelarActionPerformed(evt);
             }
         });
-        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+        botaoCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton2KeyPressed(evt);
+                botaoCancelarKeyPressed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(230, 300, 140, 40);
+        getContentPane().add(botaoCancelar);
+        botaoCancelar.setBounds(230, 300, 140, 40);
 
         erroSalaSemNome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroSalaSemNome.setForeground(new java.awt.Color(204, 0, 0));
@@ -121,34 +129,32 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
 
     private void criarSala() {
         nomeSala = campoNomeSala.getText();
-        if (nomeSala.isEmpty()) {
+        if (JogadorDAO.salaExiste(nomeSala)) {
+            erroSalaExistente.setVisible(true);
+        } else if (nomeSala.isEmpty()) {
             erroSalaSemNome.setVisible(true);
         } else {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
-            JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar, JogadorDAO.nickName);
-            if(JogadorDAO.verificarDono(nomeSala, JogadorDAO.nickName)){
-                TelaJogo.donoSala = true;
-            }
-            TelaJogo.Start();
+            JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar);
+            TelaJogo.Start(JogadorDAO.verificarDono());
             tela.dispose();
             this.dispose();
         }
-
     }
     private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed
         criarSala();
     }//GEN-LAST:event_botaoCriarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botaoCancelarActionPerformed
 
-    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+    private void botaoCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoCancelarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             this.dispose();
         }
-    }//GEN-LAST:event_jButton2KeyPressed
+    }//GEN-LAST:event_botaoCancelarKeyPressed
 
     private void campoNomeSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNomeSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -175,11 +181,12 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoCriarKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoCriar;
     private javax.swing.JTextField campoNomeSala;
     private javax.swing.JPasswordField campoSenhaSala;
+    private javax.swing.JLabel erroSalaExistente;
     public static javax.swing.JLabel erroSalaSemNome;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

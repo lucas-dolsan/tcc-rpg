@@ -1,6 +1,7 @@
 package Telas;
 
 import ConexaoBanco.JogadorDAO;
+import com.sun.glass.events.KeyEvent;
 
 public class TelaEntrarEmSala extends javax.swing.JDialog {
 
@@ -120,14 +121,12 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
-    private void entrarEmSala(){
+
+    private void entrarEmSala() {
         String nomeSala = campoNomeSala.getText();
         String senhaSala = campoSenhaSala.getText();
         if (JogadorDAO.entrarEmSala(nomeSala, senhaSala)) {
-            if(JogadorDAO.verificarDono(nomeSala, JogadorDAO.nickName)){
-                TelaJogo.donoSala = true;
-            }
-            TelaJogo.Start();
+            TelaJogo.Start(JogadorDAO.verificarDono());
             tela.dispose();
             this.dispose();
         } else {
@@ -139,11 +138,19 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoEntrarEmSalaActionPerformed
 
     private void campoNomeSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNomeSalaKeyPressed
-       entrarEmSala();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
     }//GEN-LAST:event_campoNomeSalaKeyPressed
 
     private void campoSenhaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaSalaKeyPressed
-        entrarEmSala();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
     }//GEN-LAST:event_campoSenhaSalaKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,7 +5,7 @@
             <url>src/Telas/TelaJogo.java</url>
             <bookmark id="1">
                 <name/>
-                <line>282</line>
+                <line>280</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,9 +14,9 @@
         <group>
             <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaEntrarEmSala.java</file>
             <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/ConexaoBanco/JogadorDAO.java</file>
-            <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Objetos/Jogador.java</file>
             <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaConfigurarSala.java</file>
             <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaJogo.java</file>
+            <file>file:/C:/Users/Schork/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaRegistrar.java</file>
         </group>
     </open-files>
 </project-private>
