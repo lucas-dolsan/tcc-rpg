@@ -4,6 +4,9 @@ import Objetos.Sala;
 import Telas.TelaConfigurarSala;
 import Telas.TelaLogin;
 import Telas.TelaRegistrar;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,14 +19,29 @@ public class JogadorDAO {
     public static ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
     public static ArrayList<Sala> salas = new ArrayList<Sala>();
 
+    public static String SaltedPassword(String unecryptedPassword) {
+        
+        String salt = "(NioU&y%%OguyF=d%6S)(L.~mnHXR6#@3jn0*FX7HD(iSHuvTdkfsC5$¨865709giVFTcf76)VB9";
+
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("SHA");
+            messageDigest.update((unecryptedPassword + salt).getBytes());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        String encryptedPassword = (new BigInteger(messageDigest.digest())).toString(16);
+        return encryptedPassword;
+    }
+
     public static void criarJogador(Jogador jogador, TelaRegistrar tela) {
-        String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(?),now(),now())";
+        String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(sha1(md5(sha1(md5(?))))),now(),now())";
         try {
             Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, jogador.getNome_jog());
             stmt.setString(2, jogador.getEmail_jog());
-            stmt.setString(3, jogador.getSenha_jog());
+            stmt.setString(3, SaltedPassword(jogador.getSenha_jog()));
             stmt.execute();
             tela.labelRegistrado.setVisible(true);
             tela.dispose();
@@ -54,14 +72,14 @@ public class JogadorDAO {
 
     }
 
-   public static boolean salaExiste(String nomeSala){
+    public static boolean salaExiste(String nomeSala) {
         String sql = "SELECT nome_sala FROM sala WHERE nome_sala = ?";
         try {
             Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, nomeSala);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return true;
             }
         } catch (Exception e) {
@@ -72,15 +90,15 @@ public class JogadorDAO {
 
     public static boolean verificarDono() {
         String sql = ("SELECT * FROM sala WHERE dono_sala = ?");
-        try{
+        try {
             Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, player.getPk_jogador());
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return true;
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -188,7 +206,8 @@ public class JogadorDAO {
     }
 
     public void logar(String email, String senha, TelaLogin tela) {
-        final String sql = ("select * from jogador where email_jog =? and senha_jog = md5(?);");
+        
+        final String sql = ("select * from jogador where email_jog =? and senha_jog = md5(sha1(md5(sha1(md5(?)))));");
         try {
             Connection c = FabricaDeConexao.getConnection();
             pegarJogadoresDoBanco();
@@ -201,7 +220,7 @@ public class JogadorDAO {
             }
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, email);
-            stmt.setString(2, senha);
+            stmt.setString(2, SaltedPassword(senha));
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 nickName = rs.getString("nome_jog");
