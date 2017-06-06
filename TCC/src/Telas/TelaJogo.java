@@ -2,6 +2,8 @@ package Telas;
 
 import ConexaoBanco.JogadorDAO;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class TelaJogo extends javax.swing.JFrame {
@@ -229,7 +231,8 @@ public class TelaJogo extends javax.swing.JFrame {
     public void enviarTexto() {
         String texto = campoEnviarTexto.getText();
         if (!texto.isEmpty()) {
-            areaDeChat.append("[" + JogadorDAO.nickName + "]: " + texto + "\n");
+            JogadorDAO.enviarChatBanco(texto);
+            //areaDeChat.append("[" + JogadorDAO.nickName + "]: " + texto + "\n");
             campoEnviarTexto.setText("");
         }
 
@@ -322,9 +325,23 @@ public class TelaJogo extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
-                if(dono){
+                if (dono) {
                     botaoFecharSala.setVisible(true);
                 }
+                new Thread() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            JogadorDAO.lerChat();
+                            try {
+                                Thread.sleep(150);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(TelaJogo.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                        }
+                    }
+                }.start();
             }
         });
     }
