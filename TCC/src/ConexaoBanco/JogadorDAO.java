@@ -1,7 +1,9 @@
 package ConexaoBanco;
 
+import Objetos.Jogador;
 import Objetos.Sala;
 import Telas.TelaConfigurarSala;
+import Telas.TelaJogo;
 import Telas.TelaLogin;
 import Telas.TelaRegistrar;
 import java.math.BigInteger;
@@ -15,12 +17,13 @@ import java.util.ArrayList;
 public class JogadorDAO {
 
     public static Jogador player = null;
+    public static Sala salaAtual = null;
     public static String nickName = "";
     public static ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
     public static ArrayList<Sala> salas = new ArrayList<Sala>();
 
     public static String SaltedPassword(String unecryptedPassword) {
-        
+
         String salt = "(NioU&y%%OguyF=d%6S)(L.~mnHXR6#@3jn0*FX7HD(iSHuvTdkfsC5$¨865709giVFTcf76)VB9";
 
         MessageDigest messageDigest = null;
@@ -105,7 +108,12 @@ public class JogadorDAO {
     }
 
     public static void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
-        String sql = "insert into sala(nome_sala, senha_sala, dono_sala) values(?,?,?)";
+        String sql = "insert into sala(nome_sala, senha_sala, dono_sala, chat_sala) values(?,?,?,?)";
+        for (Sala sala : salas) {
+            if (sala.getNome_sala().equalsIgnoreCase(nomeSala)) {
+                salaAtual = sala;
+            }
+        }
         for (Jogador jogador : jogadores) {
             if (jogador.getNome_jog().equalsIgnoreCase(player.getNome_jog())) {
                 int pk_dono = jogador.getPk_jogador();
@@ -115,6 +123,7 @@ public class JogadorDAO {
                     stmt.setString(1, nomeSala);
                     stmt.setString(2, senhaSala);
                     stmt.setInt(3, pk_dono);
+                    stmt.setString(4, " ");
                     stmt.execute();
                     tela.dispose();
                     break;
@@ -126,6 +135,21 @@ public class JogadorDAO {
 
     }
 
+    public static void enviarChatBanco(String texto) {
+        final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
+        String mensagem = ("[" + JogadorDAO.nickName + "]: " + texto + "\n");
+        try {
+            Connection c = FabricaDeConexao.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, mensagem);
+            stmt.setString(2, TelaConfigurarSala.nomeSala);
+            stmt.execute();
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void fecharSala(Telas.TelaJogo telaJogo, String nomeSala) {
         String sql = ("delete from sala where nome_sala = ?;");
         try {
@@ -135,14 +159,36 @@ public class JogadorDAO {
             stmt.execute();
             telaJogo.dispose();
         } catch (Exception e) {
-            System.out.println(e);
             e.printStackTrace();
         }
 
     }
 
+    public static void lerChat() {
+        final String sql = ("select chat_sala from sala where nome_sala=?");
+        try {
+            Connection c = FabricaDeConexao.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, TelaConfigurarSala.nomeSala);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                TelaJogo.areaDeChat.setText(rs.getString("chat_sala"));
+            }
+            stmt.close();
+            rs.close();
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean entrarEmSala(String nomeSala, String senhaSala) {
         final String sql = ("select * from sala where nome_sala =? and senha_sala =?;");
+        for (Sala sala : salas) {
+            if (sala.getNome_sala().equalsIgnoreCase(nomeSala)) {
+                salaAtual = sala;
+            }
+        }
         try {
             Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
@@ -206,14 +252,14 @@ public class JogadorDAO {
     }
 
     public void logar(String email, String senha, TelaLogin tela) {
-        
+
         final String sql = ("select * from jogador where email_jog =? and senha_jog = md5(sha1(md5(sha1(md5(?)))));");
         try {
             Connection c = FabricaDeConexao.getConnection();
             pegarJogadoresDoBanco();
             pegarSalasDoBanco();
             for (Jogador jog : jogadores) {
-                if (jog.getEmail_jog().equalsIgnoreCase(email)) {
+                if (jog.getEmail_jog().equals(email)) {
                     player = jog;
                     break;
                 }

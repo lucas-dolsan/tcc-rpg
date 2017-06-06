@@ -1,6 +1,5 @@
 package Telas;
-
-import ConexaoBanco.Jogador;
+import Objetos.*;
 import ConexaoBanco.JogadorDAO;
 import java.awt.event.KeyEvent;
 
