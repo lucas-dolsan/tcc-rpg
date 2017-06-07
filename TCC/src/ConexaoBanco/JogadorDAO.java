@@ -1,17 +1,11 @@
 package ConexaoBanco;
 
-import Objetos.Jogador;
-import Objetos.Sala;
-import Telas.TelaConfigurarSala;
-import Telas.TelaJogo;
-import Telas.TelaLogin;
-import Telas.TelaRegistrar;
+import Objetos.*;
+import Telas.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class JogadorDAO {
@@ -135,9 +129,53 @@ public class JogadorDAO {
 
     }
 
+    public static String pegarTempoServer() {
+        final String sql = ("SELECT CURTIME();");
+        try {
+            Connection c = FabricaDeConexao.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void enviarDadoBanco(int dado, int numeroModificado, int numero, int modificadorMais, int modificadorMenos, int tipo) {
+        final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
+        String mensagem = "";
+        switch (tipo) {
+            case 1: {
+                mensagem = ("[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " rolou um dado D" + dado + "] = " + numeroModificado + " {[" + numero + "+" + modificadorMais + "]}\n");
+                break;
+            }
+            case 2: {
+                mensagem = ("[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " rolou um dado D" + dado + "] = " + numeroModificado + " {[" + numero + "-" + modificadorMenos + "]}\n");
+                break;
+            }
+            case 3: {
+                mensagem = ("[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " rolou um dado D" + dado + "] = " + numero + "\n");
+                break;
+            }
+        }
+        try {
+            Connection c = FabricaDeConexao.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, mensagem);
+            stmt.setString(2, TelaConfigurarSala.nomeSala);
+            stmt.execute();
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void enviarChatBanco(String texto) {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
-        String mensagem = ("[" + JogadorDAO.nickName + "]: " + texto + "\n");
+        String mensagem = ("[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + texto + "\n");
         try {
             Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
