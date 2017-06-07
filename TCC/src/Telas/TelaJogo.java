@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
 
@@ -111,6 +112,8 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(botaoEnviar);
         botaoEnviar.setBounds(730, 640, 110, 40);
 
+        DefaultCaret caret = (DefaultCaret)areaDeChat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         areaDeChat.setEditable(false);
         areaDeChat.setColumns(20);
         areaDeChat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -232,7 +235,6 @@ public class TelaJogo extends javax.swing.JFrame {
         String texto = campoEnviarTexto.getText();
         if (!texto.isEmpty()) {
             JogadorDAO.enviarChatBanco(texto);
-            //areaDeChat.append("[" + JogadorDAO.nickName + "]: " + texto + "\n");
             campoEnviarTexto.setText("");
         }
 
@@ -334,7 +336,7 @@ public class TelaJogo extends javax.swing.JFrame {
                         while (true) {
                             JogadorDAO.lerChat();
                             try {
-                                Thread.sleep(150);
+                                Thread.sleep(5);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(TelaJogo.class.getName()).log(Level.SEVERE, null, ex);
                             }

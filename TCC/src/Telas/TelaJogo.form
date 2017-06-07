@@ -177,6 +177,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultCaret caret = (DefaultCaret)areaDeChat.getCaret();&#xa;caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
