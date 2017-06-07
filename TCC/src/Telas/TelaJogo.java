@@ -336,7 +336,7 @@ public class TelaJogo extends javax.swing.JFrame {
                         while (true) {
                             JogadorDAO.lerChat();
                             try {
-                                Thread.sleep(5);
+                                Thread.sleep(1);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(TelaJogo.class.getName()).log(Level.SEVERE, null, ex);
                             }

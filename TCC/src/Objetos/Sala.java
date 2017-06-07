@@ -5,13 +5,13 @@ public class Sala {
     private int pk_sala;
     private String nome_sala;
     private String senha_sala;
-    private String dono_sala;
+    private int fk_jogador;
 
-    public Sala(int pk_sala, String nome_sala, String senha_sala, String dono_sala) {
+    public Sala(int pk_sala, String nome_sala, String senha_sala, int fk_jogador) {
         this.pk_sala = pk_sala;
         this.nome_sala = nome_sala;
         this.senha_sala = senha_sala;
-        this.dono_sala = dono_sala;
+        this.fk_jogador = fk_jogador;
     }
 
     public Sala() {
@@ -19,7 +19,7 @@ public class Sala {
 
     @Override
     public String toString() {
-        return "Sala{" + "pk_sala=" + pk_sala + ", nome_sala=" + nome_sala + ", senha_sala=" + senha_sala + ", dono_sala=" + dono_sala + '}';
+        return "Sala{" + "pk_sala=" + pk_sala + ", nome_sala=" + nome_sala + ", senha_sala=" + senha_sala + ", fk_jogador=" + fk_jogador + '}';
     }
 
     public int getPk_sala() {
@@ -46,12 +46,12 @@ public class Sala {
         this.senha_sala = senha_sala;
     }
 
-    public String getDono_sala() {
-        return dono_sala;
+    public int getFk_jogador() {
+        return fk_jogador;
     }
 
-    public void setDono_sala(String dono_sala) {
-        this.dono_sala = dono_sala;
+    public void setFk_jogador(int fk_jogador) {
+        this.fk_jogador = fk_jogador;
     }
 
 }
