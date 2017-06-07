@@ -1,5 +1,6 @@
 package ConexaoBanco;
 
+import static ConexaoBanco.ConexaoMySql.connection;
 import Objetos.*;
 import Telas.*;
 import java.math.BigInteger;
@@ -15,6 +16,7 @@ public class JogadorDAO {
     public static String nickName = "";
     public static ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
     public static ArrayList<Sala> salas = new ArrayList<Sala>();
+    public static Connection c = connection.getConnection();
 
     public static String SaltedPassword(String unecryptedPassword) {
 
@@ -34,7 +36,6 @@ public class JogadorDAO {
     public static void criarJogador(Jogador jogador, TelaRegistrar tela) {
         String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(sha1(md5(sha1(md5(?))))),now(),now())";
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, jogador.getNome_jog());
             stmt.setString(2, jogador.getEmail_jog());
@@ -51,7 +52,6 @@ public class JogadorDAO {
     public static void listarJogadores(Jogador jogador) {
         final String sql = ("select * from jogador;");
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -62,7 +62,6 @@ public class JogadorDAO {
                 stmt.execute();
             }
             stmt.close();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,7 +71,6 @@ public class JogadorDAO {
     public static boolean salaExiste(String nomeSala) {
         String sql = "SELECT nome_sala FROM sala WHERE nome_sala = ?";
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, nomeSala);
             ResultSet rs = stmt.executeQuery();
@@ -86,9 +84,8 @@ public class JogadorDAO {
     }
 
     public static boolean verificarDono() {
-        String sql = ("SELECT * FROM sala WHERE dono_sala = ?");
+        String sql = ("SELECT * FROM sala WHERE fk_jogador =?");
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, player.getPk_jogador());
             ResultSet rs = stmt.executeQuery();
@@ -102,41 +99,91 @@ public class JogadorDAO {
     }
 
     public static void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
-        String sql = "insert into sala(nome_sala, senha_sala, dono_sala, chat_sala) values(?,?,?,?)";
+        String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala) values(?,?,?,?)";
         for (Sala sala : salas) {
             if (sala.getNome_sala().equalsIgnoreCase(nomeSala)) {
                 salaAtual = sala;
             }
         }
-        for (Jogador jogador : jogadores) {
-            if (jogador.getNome_jog().equalsIgnoreCase(player.getNome_jog())) {
-                int pk_dono = jogador.getPk_jogador();
-                try {
-                    Connection c = FabricaDeConexao.getConnection();
-                    PreparedStatement stmt = c.prepareStatement(sql);
-                    stmt.setString(1, nomeSala);
-                    stmt.setString(2, senhaSala);
-                    stmt.setInt(3, pk_dono);
-                    stmt.setString(4, " ");
-                    stmt.execute();
-                    tela.dispose();
-                    break;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+        int pk_dono = player.getPk_jogador();
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pk_dono);
+            stmt.setString(2, nomeSala);
+            stmt.setString(3, senhaSala);
+            stmt.setString(4, " ");
+            stmt.execute();
+            tela.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
 
     public static String pegarTempoServer() {
         final String sql = ("SELECT CURTIME();");
+
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String comando(String texto) {
+        switch (texto) {
+            case "/help": {
+                String help = "\n     /ping: retorna o tempo de resposta do servidor \n     /time: retorna o tempo do servidor \n     /owner: retorna o nome do dono da sala \n     /clear: limpa a sua janela de chat \n";
+                return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + help + "\n";
+            }
+            case "/ping": {
+                return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + ping() + "\n";
+            }
+            case "/time": {
+                return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: Server time:" + pegarTempoServer() + "\n \n";
+            }
+            case "/owner": {
+                String aux = dono();
+                if (aux.isEmpty()) {
+                    break;
+                } else {
+                    return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + aux + "\n";
+                }
+            }
+            default: {
+                return "[" + pegarTempoServer() + "][" + JogadorDAO.nickName + "]:" + texto + "\n";
+            }
+        }
+        return "";
+    }
+
+    public static String dono() {
+        final String sql = ("SELECT * FROM jogador jog JOIN sala sala ON jog.pk_jogador = sala.fk_jogador WHERE nome_sala =?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, salaAtual.getNome_sala());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return "Owner: " + rs.getString("nome_jog") + "\n";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String ping() {
+        final String sql = ("/* ping */ SELECT 1");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return "PING: " + rs.getString(1) + "ms \n";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -162,12 +209,10 @@ public class JogadorDAO {
             }
         }
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, mensagem);
             stmt.setString(2, TelaConfigurarSala.nomeSala);
             stmt.execute();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -175,14 +220,12 @@ public class JogadorDAO {
 
     public static void enviarChatBanco(String texto) {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
-        String mensagem = ("[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + texto + "\n");
+        String mensagem = comando(texto);
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, mensagem);
             stmt.setString(2, TelaConfigurarSala.nomeSala);
             stmt.execute();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,7 +234,6 @@ public class JogadorDAO {
     public static void fecharSala(Telas.TelaJogo telaJogo, String nomeSala) {
         String sql = ("delete from sala where nome_sala = ?;");
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, nomeSala);
             stmt.execute();
@@ -205,7 +247,6 @@ public class JogadorDAO {
     public static void lerChat() {
         final String sql = ("select chat_sala from sala where nome_sala=?");
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, TelaConfigurarSala.nomeSala);
             ResultSet rs = stmt.executeQuery();
@@ -214,7 +255,6 @@ public class JogadorDAO {
             }
             stmt.close();
             rs.close();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -228,7 +268,6 @@ public class JogadorDAO {
             }
         }
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, nomeSala);
             stmt.setString(2, senhaSala);
@@ -238,7 +277,6 @@ public class JogadorDAO {
                 return true;
             }
             stmt.close();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -248,19 +286,17 @@ public class JogadorDAO {
     private void pegarSalasDoBanco() {
         final String sql = ("select * from sala");
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Sala sala = new Sala();
                 sala.setPk_sala(rs.getInt("pk_sala"));
+                sala.setFk_jogador(rs.getInt("fk_jogador"));
                 sala.setNome_sala(rs.getString("nome_sala"));
                 sala.setSenha_sala(rs.getString("senha_sala"));
-                sala.setDono_sala(rs.getString("dono_sala"));
                 salas.add(sala);
             }
             stmt.close();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -269,7 +305,6 @@ public class JogadorDAO {
     private void pegarJogadoresDoBanco() {
         final String sql = ("select * from jogador");
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -283,17 +318,14 @@ public class JogadorDAO {
                 jogadores.add(jogador);
             }
             stmt.close();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void logar(String email, String senha, TelaLogin tela) {
-
         final String sql = ("select * from jogador where email_jog =? and senha_jog = md5(sha1(md5(sha1(md5(?)))));");
         try {
-            Connection c = FabricaDeConexao.getConnection();
             pegarJogadoresDoBanco();
             pegarSalasDoBanco();
             for (Jogador jog : jogadores) {
@@ -314,7 +346,6 @@ public class JogadorDAO {
                 tela.erroLogin.setVisible(true);
             }
             stmt.close();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -324,7 +355,6 @@ public class JogadorDAO {
     public static boolean verificarEmail(String email) {
         final String sql = ("select * from jogador");
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -334,7 +364,6 @@ public class JogadorDAO {
                 }
             }
             stmt.close();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -344,7 +373,6 @@ public class JogadorDAO {
     public static boolean verificarNomeDeUsuario(String nick) {
         final String sql = "select * from jogador";
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -354,7 +382,6 @@ public class JogadorDAO {
                 }
             }
             stmt.close();
-            c.close();
 
         } catch (Exception erro) {
             erro.printStackTrace();
@@ -365,7 +392,6 @@ public class JogadorDAO {
     public static void modificarUltimoLogin(String login) {
         final String sql = "UPDATE jogador SET dt_ultimoLogin = now() WHERE email_jog = ?";
         try {
-            Connection c = FabricaDeConexao.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, login);
             stmt.execute();
