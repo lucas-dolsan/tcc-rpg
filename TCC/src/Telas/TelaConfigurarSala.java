@@ -137,9 +137,11 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
             JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar);
-            TelaJogo.Start(JogadorDAO.verificarDono());
-            tela.dispose();
-            this.dispose();
+            if (JogadorDAO.entrarEmSala(nomeSala, senhaAuxiliar)) {
+                TelaJogo.Start(JogadorDAO.verificarDono());
+                tela.dispose();
+                this.dispose();
+            }
         }
     }
     private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed

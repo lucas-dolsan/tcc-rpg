@@ -4,6 +4,7 @@ import ConexaoBanco.JogadorDAO;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
@@ -12,6 +13,7 @@ public class TelaJogo extends javax.swing.JFrame {
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(false);
+        botaoLimparChat.setVisible(false);
         campoEnviarTexto.requestFocus();
     }
 
@@ -34,6 +36,7 @@ public class TelaJogo extends javax.swing.JFrame {
         dadoD12 = new javax.swing.JButton();
         dadoD20 = new javax.swing.JButton();
         dadoD100 = new javax.swing.JButton();
+        botaoLimparChat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RPG - TCC - Sala: "+ TelaConfigurarSala.nomeSala
@@ -94,7 +97,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(campoEnviarTexto);
-        campoEnviarTexto.setBounds(210, 590, 630, 50);
+        campoEnviarTexto.setBounds(210, 590, 630, 40);
 
         botaoEnviar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
         botaoEnviar.setForeground(new java.awt.Color(51, 51, 51));
@@ -110,7 +113,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoEnviar);
-        botaoEnviar.setBounds(730, 640, 110, 40);
+        botaoEnviar.setBounds(730, 630, 110, 40);
 
         DefaultCaret caret = (DefaultCaret)areaDeChat.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -203,6 +206,16 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(dadoD100);
         dadoD100.setBounds(570, 510, 70, 60);
 
+        botaoLimparChat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoLimparChat.setText("Limpar chat da sala");
+        botaoLimparChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoLimparChatActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoLimparChat);
+        botaoLimparChat.setBounds(210, 630, 170, 40);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -212,6 +225,13 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             JogadorDAO.fecharSala(this, TelaConfigurarSala.nomeSala);
             TelaInicial.Start();
+        }
+    }
+
+    private void popupLimparChat() {
+        int sair = JOptionPane.showConfirmDialog(null, "Deseja limpar o chat?", "Limpar chat", JOptionPane.YES_NO_OPTION);
+        if (sair == JOptionPane.YES_OPTION) {
+            JogadorDAO.limparChat();
         }
     }
     private void botaoFecharSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharSalaActionPerformed
@@ -294,6 +314,10 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoEnviarTextoKeyPressed
 
+    private void botaoLimparChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimparChatActionPerformed
+        popupLimparChat();
+    }//GEN-LAST:event_botaoLimparChatActionPerformed
+
     public static void Start(boolean dono) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -329,6 +353,7 @@ public class TelaJogo extends javax.swing.JFrame {
                 new TelaJogo().setVisible(true);
                 if (dono) {
                     botaoFecharSala.setVisible(true);
+                    botaoLimparChat.setVisible(true);
                 }
                 new Thread() {
                     @Override
@@ -352,6 +377,7 @@ public class TelaJogo extends javax.swing.JFrame {
     public static javax.swing.JTextArea areaDeChat;
     private javax.swing.JButton botaoEnviar;
     public static javax.swing.JButton botaoFecharSala;
+    public static javax.swing.JButton botaoLimparChat;
     private javax.swing.JButton botaoSairDaSala;
     private javax.swing.JTextField campoEnviarTexto;
     private javax.swing.JButton dadoD10;
