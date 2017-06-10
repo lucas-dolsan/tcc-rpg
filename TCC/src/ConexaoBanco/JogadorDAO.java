@@ -33,7 +33,30 @@ public class JogadorDAO {
         String encryptedPassword = (new BigInteger(messageDigest.digest())).toString(16);
         return encryptedPassword;
     }
-
+    public static void mensagemSairDaSala(){
+        final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
+        String mensagem = "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " Saiu da Sala]\n";
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, mensagem);
+            stmt.setString(2, TelaConfigurarSala.nomeSala);
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     public static void mensagemEntrarNaSala(){
+        final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
+        String mensagem = "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " Entrou na Sala]\n";
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, mensagem);
+            stmt.setString(2, TelaConfigurarSala.nomeSala);
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void listarSalas() {
         final String sql = ("select * from sala");
         try {
