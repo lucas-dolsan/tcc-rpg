@@ -40,11 +40,7 @@ public class JogadorDAO {
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                if (rs.getString("senha_sala").isEmpty()) {
-                    TelaComSalas.model.addRow(new Object[]{"sim", rs.getString("nome_sala")});
-                } else {
-                    TelaComSalas.model.addRow(new Object[]{"não", rs.getString("nome_sala")});
-                }
+                TelaEntrarEmSala.caixaDeSalas.addItem(rs.getString("nome_sala"));
             }
             stmt.close();
             rs.close();
@@ -52,6 +48,7 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
+
     public static void banir(int pk_jogador, String motivo_ban) {
         final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban, motivo_ban) VALUES(?,?,?,?)");
         try {
@@ -63,6 +60,7 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
+
     public static void banir(int pk_jogador) {
         final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban) VALUES(?,?,?)");
         try {
@@ -208,7 +206,7 @@ public class JogadorDAO {
                 }
             }
             default: {
-                return "[" + pegarTempoServer() + "][" + JogadorDAO.nickName + "]:" + texto + "\n";
+                return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]:" + texto + "\n";
             }
         }
         return "";
@@ -374,8 +372,9 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
-private void pegarJogadoresDaSala(){
-      final String sql = ("SELECT * FROM jogador jog JOIN sala sala ON jog.pk_jogador = sala.fk_jogador WHERE sala.pk_sala =?");
+
+    private void pegarJogadoresDaSala() {
+        final String sql = ("SELECT * FROM jogador jog JOIN sala sala ON jog.pk_jogador = sala.fk_jogador WHERE sala.pk_sala =?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, salaAtual.getPk_sala());
@@ -395,6 +394,7 @@ private void pegarJogadoresDaSala(){
             e.printStackTrace();
         }
     }
+
     public void logar(String email, String senha, TelaLogin tela) {
         final String sql = ("select * from jogador where email_jog =? and senha_jog = sha1(md5(sha1(md5(sha1(md5(?))))));");
         try {

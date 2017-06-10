@@ -9,7 +9,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     public TelaLogin() {
         initComponents();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -34,8 +34,9 @@ public class TelaLogin extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        campoLogin.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
-        campoLogin.setForeground(new java.awt.Color(51, 51, 51));
+        campoLogin.setBackground(new java.awt.Color(255, 255, 255));
+        campoLogin.setFont(new java.awt.Font("Coneria Script Demo", 0, 30)); // NOI18N
+        campoLogin.setForeground(new java.awt.Color(0, 0, 0));
         campoLogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -46,8 +47,9 @@ public class TelaLogin extends javax.swing.JFrame {
         campoLogin.setBounds(415, 405, 445, 55);
         campoLogin.getAccessibleContext().setAccessibleName("");
 
+        campoSenha.setBackground(new java.awt.Color(255, 255, 255));
         campoSenha.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
-        campoSenha.setForeground(new java.awt.Color(51, 51, 51));
+        campoSenha.setForeground(new java.awt.Color(0, 0, 0));
         campoSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -57,25 +59,26 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(campoSenha);
         campoSenha.setBounds(415, 520, 445, 55);
 
-        jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 30)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Coneria Script Demo", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("EMAIL:");
+        jLabel1.setText("Email:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(415, 360, 440, 40);
 
-        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 30)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Coneria Script Demo", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("SENHA:");
+        jLabel2.setText("Senha:");
         jLabel2.setToolTipText("");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(415, 470, 445, 40);
 
-        botaoEntrar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        botaoEntrar.setForeground(new java.awt.Color(51, 51, 51));
+        botaoEntrar.setBackground(new java.awt.Color(255, 255, 255));
+        botaoEntrar.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoEntrar.setForeground(new java.awt.Color(0, 0, 0));
         botaoEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoEntrar.png"))); // NOI18N
-        botaoEntrar.setText("ENTRAR");
+        botaoEntrar.setText("Entrar");
         botaoEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEntrarActionPerformed(evt);
@@ -89,10 +92,11 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(botaoEntrar);
         botaoEntrar.setBounds(415, 605, 210, 50);
 
-        botaoRegistrarSe.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        botaoRegistrarSe.setForeground(new java.awt.Color(51, 51, 51));
+        botaoRegistrarSe.setBackground(new java.awt.Color(255, 255, 255));
+        botaoRegistrarSe.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoRegistrarSe.setForeground(new java.awt.Color(0, 0, 0));
         botaoRegistrarSe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoRegistrar.png"))); // NOI18N
-        botaoRegistrarSe.setText("REGISTRAR-SE");
+        botaoRegistrarSe.setText("Registar");
         botaoRegistrarSe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoRegistrarSeActionPerformed(evt);
@@ -142,7 +146,6 @@ public class TelaLogin extends javax.swing.JFrame {
         jogador.logar(login, senhaAuxiliar, this);
         jogador.modificarUltimoLogin(login);
     }
-
     private void campoLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoLoginKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             entrarComEnter();
@@ -172,8 +175,8 @@ public class TelaLogin extends javax.swing.JFrame {
             entrarComEnter();
         }
     }//GEN-LAST:event_botaoEntrarKeyPressed
-    
-    public static void abrirTela(){
+
+    public static void abrirTela() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaLogin().setVisible(true);
@@ -181,7 +184,7 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

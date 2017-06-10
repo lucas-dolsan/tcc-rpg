@@ -10,6 +10,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     public TelaEntrarEmSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
         super(parent, modal);
         initComponents();
+        JogadorDAO.listarSalas();
         erroEntrarEmSala.setVisible(false);
         tela = telaInicial;
     }
@@ -21,7 +22,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        campoNomeSala = new javax.swing.JTextField();
+        caixaDeSalas = new javax.swing.JComboBox<>();
         campoSenhaSala = new javax.swing.JTextField();
         botaoEntrarEmSala = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
@@ -37,16 +38,10 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        campoNomeSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
-        campoNomeSala.setForeground(new java.awt.Color(51, 51, 51));
-        campoNomeSala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        campoNomeSala.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                campoNomeSalaKeyPressed(evt);
-            }
-        });
-        getContentPane().add(campoNomeSala);
-        campoNomeSala.setBounds(30, 80, 340, 40);
+        caixaDeSalas.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
+        caixaDeSalas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        getContentPane().add(caixaDeSalas);
+        caixaDeSalas.setBounds(30, 80, 340, 40);
 
         campoSenhaSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         campoSenhaSala.setForeground(new java.awt.Color(51, 51, 51));
@@ -83,13 +78,13 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
 
         erroEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroEntrarEmSala.setForeground(new java.awt.Color(204, 0, 0));
-        erroEntrarEmSala.setText("Erro: nome ou senha da sala incorreto!");
+        erroEntrarEmSala.setText("Erro: senha da sala incorreta!");
         getContentPane().add(erroEntrarEmSala);
         erroEntrarEmSala.setBounds(30, 230, 270, 17);
 
         jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Nome da Sala");
+        jLabel3.setText("Nome da Sala:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(30, 50, 340, 30);
 
@@ -117,7 +112,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     private void entrarEmSala() {
-        String nomeSala = campoNomeSala.getText();
+        String nomeSala = (caixaDeSalas.getSelectedItem().toString());
         String senhaSala = campoSenhaSala.getText();
         if (JogadorDAO.entrarEmSala(nomeSala, senhaSala)) {
             TelaJogo.Start(JogadorDAO.verificarDono());
@@ -131,14 +126,6 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         entrarEmSala();
     }//GEN-LAST:event_botaoEntrarEmSalaActionPerformed
 
-    private void campoNomeSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNomeSalaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            entrarEmSala();
-        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            this.dispose();
-        }
-    }//GEN-LAST:event_campoNomeSalaKeyPressed
-
     private void campoSenhaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             entrarEmSala();
@@ -150,7 +137,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoEntrarEmSala;
-    private javax.swing.JTextField campoNomeSala;
+    public static javax.swing.JComboBox<String> caixaDeSalas;
     private javax.swing.JTextField campoSenhaSala;
     private javax.swing.JLabel erroEntrarEmSala;
     private javax.swing.JLabel jLabel1;
