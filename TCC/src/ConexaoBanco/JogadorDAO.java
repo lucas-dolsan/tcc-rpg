@@ -33,8 +33,27 @@ public class JogadorDAO {
         return encryptedPassword;
     }
 
+    public static void listarSalas() {
+        final String sql = ("select * from sala");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("senha_sala").isEmpty()) {
+                    TelaComSalas.model.addRow(new Object[]{"sim", rs.getString("nome_sala")});
+                } else {
+                    TelaComSalas.model.addRow(new Object[]{"não", rs.getString("nome_sala")});
+                }
+            }
+            stmt.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void criarJogador(Jogador jogador, TelaRegistrar tela) {
-        String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(sha1(md5(sha1(md5(?))))),now(),now())";
+        final String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(sha1(md5(sha1(md5(?))))),now(),now())";
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, jogador.getNome_jog());
@@ -44,7 +63,18 @@ public class JogadorDAO {
             tela.labelRegistrado.setVisible(true);
             tela.dispose();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    public static void limparChat() {
+        final String sql = ("UPDATE sala SET chat_sala = '' WHERE pk_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, salaAtual.getPk_sala());
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -111,7 +141,7 @@ public class JogadorDAO {
             stmt.setInt(1, pk_dono);
             stmt.setString(2, nomeSala);
             stmt.setString(3, senhaSala);
-            stmt.setString(4, " ");
+            stmt.setString(4, "");
             stmt.execute();
             tela.dispose();
         } catch (Exception e) {

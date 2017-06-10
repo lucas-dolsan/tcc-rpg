@@ -150,8 +150,12 @@ private void deslogar() {
     }//GEN-LAST:event_botaoDeslogarKeyPressed
 
     private void botaoEntrarEmSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaActionPerformed
-        JDialog tela = new TelaEntrarEmSala(this, true, this);
-        tela.setVisible(true);
+        //JDialog tela = new TelaEntrarEmSala(this, true, this);
+        //tela.setVisible(true);
+        JDialog telaComSalas = new TelaComSalas(this, true);
+        JogadorDAO.listarSalas();
+        telaComSalas.setVisible(true);
+
     }//GEN-LAST:event_botaoEntrarEmSalaActionPerformed
 
     public static void Start() {
