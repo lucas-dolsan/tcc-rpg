@@ -25,9 +25,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RPG - TCC - " + JogadorDAO.nickName);
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -45,9 +43,10 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(350, 110, 580, 80);
 
-        botaoConfigurarConta.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        botaoConfigurarConta.setForeground(new java.awt.Color(51, 51, 51));
-        botaoConfigurarConta.setText("CONFIGURAR CONTA");
+        botaoConfigurarConta.setBackground(new java.awt.Color(255, 255, 255));
+        botaoConfigurarConta.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoConfigurarConta.setForeground(new java.awt.Color(0, 0, 0));
+        botaoConfigurarConta.setText("Configurar Conta");
         botaoConfigurarConta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 botaoConfigurarContaKeyPressed(evt);
@@ -56,9 +55,10 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(botaoConfigurarConta);
         botaoConfigurarConta.setBounds(430, 430, 450, 60);
 
-        botaoCriarSala.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        botaoCriarSala.setForeground(new java.awt.Color(51, 51, 51));
-        botaoCriarSala.setText("CRIAR NOVA SALA");
+        botaoCriarSala.setBackground(new java.awt.Color(255, 255, 255));
+        botaoCriarSala.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoCriarSala.setForeground(new java.awt.Color(0, 0, 0));
+        botaoCriarSala.setText("Criar Nova Sala");
         botaoCriarSala.setName(""); // NOI18N
         botaoCriarSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,9 +73,10 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(botaoCriarSala);
         botaoCriarSala.setBounds(430, 230, 450, 60);
 
-        botaoEntrarEmSala.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        botaoEntrarEmSala.setForeground(new java.awt.Color(51, 51, 51));
-        botaoEntrarEmSala.setText("ENTRAR EM UMA SALA");
+        botaoEntrarEmSala.setBackground(new java.awt.Color(255, 255, 255));
+        botaoEntrarEmSala.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoEntrarEmSala.setForeground(new java.awt.Color(0, 0, 0));
+        botaoEntrarEmSala.setText("Entrar em uma Sala");
         botaoEntrarEmSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEntrarEmSalaActionPerformed(evt);
@@ -141,17 +142,12 @@ private void deslogar() {
             deslogar();
         }
     }//GEN-LAST:event_botaoCriarSalaKeyPressed
-
     private void botaoEntrarEmSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             deslogar();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-         //são as mesmas linhas do botaoEntrarEmSalaActionPerformed, não sei, se quiser transforma isso num método
-         //JDialog tela = new TelaEntrarEmSala(this, true, this);
-        //tela.setVisible(true);
-        JDialog telaComSalas = new TelaComSalas(this, true);
-        JogadorDAO.listarSalas();
-        telaComSalas.setVisible(true);
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            JDialog tela = new TelaEntrarEmSala(this, true, this);
+            tela.setVisible(true);
         }
     }//GEN-LAST:event_botaoEntrarEmSalaKeyPressed
 
@@ -162,18 +158,14 @@ private void deslogar() {
     }//GEN-LAST:event_botaoDeslogarKeyPressed
 
     private void botaoEntrarEmSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaActionPerformed
-        //JDialog tela = new TelaEntrarEmSala(this, true, this);
-        //tela.setVisible(true);
-        JDialog telaComSalas = new TelaComSalas(this, true);
-        JogadorDAO.listarSalas();
-        telaComSalas.setVisible(true);
-
+        JDialog tela = new TelaEntrarEmSala(this, true, this);
+        tela.setVisible(true);
     }//GEN-LAST:event_botaoEntrarEmSalaActionPerformed
 
     private void botaoConfigurarContaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoConfigurarContaKeyPressed
-       if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
-           deslogar();
-       }
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            deslogar();
+        }
     }//GEN-LAST:event_botaoConfigurarContaKeyPressed
 
     public static void Start() {
