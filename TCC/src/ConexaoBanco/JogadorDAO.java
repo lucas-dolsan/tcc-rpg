@@ -53,7 +53,7 @@ public class JogadorDAO {
     }
 
     public static void criarJogador(Jogador jogador, TelaRegistrar tela) {
-        final String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,md5(sha1(md5(sha1(md5(?))))),now(),now())";
+        final String sql = "insert into jogador(nome_jog, email_jog, senha_jog, dt_registro, dt_ultimoLogin) values(?,?,sha1(md5(sha1(md5(sha1(md5(?)))))),now(),now())";
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, jogador.getNome_jog());
@@ -354,7 +354,7 @@ public class JogadorDAO {
     }
 
     public void logar(String email, String senha, TelaLogin tela) {
-        final String sql = ("select * from jogador where email_jog =? and senha_jog = md5(sha1(md5(sha1(md5(?)))));");
+        final String sql = ("select * from jogador where email_jog =? and senha_jog = sha1(md5(sha1(md5(sha1(md5(?))))));");
         try {
             pegarJogadoresDoBanco();
             pegarSalasDoBanco();
