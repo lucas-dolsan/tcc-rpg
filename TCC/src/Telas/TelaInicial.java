@@ -48,6 +48,11 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoConfigurarConta.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         botaoConfigurarConta.setForeground(new java.awt.Color(51, 51, 51));
         botaoConfigurarConta.setText("CONFIGURAR CONTA");
+        botaoConfigurarConta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoConfigurarContaKeyPressed(evt);
+            }
+        });
         getContentPane().add(botaoConfigurarConta);
         botaoConfigurarConta.setBounds(430, 430, 450, 60);
 
@@ -140,6 +145,13 @@ private void deslogar() {
     private void botaoEntrarEmSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             deslogar();
+        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+         //são as mesmas linhas do botaoEntrarEmSalaActionPerformed, não sei, se quiser transforma isso num método
+         //JDialog tela = new TelaEntrarEmSala(this, true, this);
+        //tela.setVisible(true);
+        JDialog telaComSalas = new TelaComSalas(this, true);
+        JogadorDAO.listarSalas();
+        telaComSalas.setVisible(true);
         }
     }//GEN-LAST:event_botaoEntrarEmSalaKeyPressed
 
@@ -157,6 +169,12 @@ private void deslogar() {
         telaComSalas.setVisible(true);
 
     }//GEN-LAST:event_botaoEntrarEmSalaActionPerformed
+
+    private void botaoConfigurarContaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoConfigurarContaKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
+           deslogar();
+       }
+    }//GEN-LAST:event_botaoConfigurarContaKeyPressed
 
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {

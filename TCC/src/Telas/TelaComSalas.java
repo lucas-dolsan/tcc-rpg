@@ -32,7 +32,7 @@ public class TelaComSalas extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tabelaSalas);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 80, 380, 402);
+        jScrollPane1.setBounds(10, 80, 380, 403);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N

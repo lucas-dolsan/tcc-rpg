@@ -157,18 +157,24 @@ public class TelaRolarDado extends javax.swing.JDialog {
     private void botaoRolarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoRolarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             rolarDado();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
         }
     }//GEN-LAST:event_botaoRolarKeyPressed
 
     private void campoRolarMaisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoRolarMaisKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             rolarDado();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
         }
     }//GEN-LAST:event_campoRolarMaisKeyPressed
 
     private void campoRolarMenosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoRolarMenosKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             rolarDado();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
         }
     }//GEN-LAST:event_campoRolarMenosKeyPressed
 
