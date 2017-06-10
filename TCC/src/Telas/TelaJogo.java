@@ -49,6 +49,11 @@ public class TelaJogo extends javax.swing.JFrame {
         jTree1.setAlignmentX(0.0F);
         jTree1.setAlignmentY(0.0F);
         jTree1.setPreferredSize(new java.awt.Dimension(75, 75));
+        jTree1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTree1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTree1);
 
         getContentPane().add(jScrollPane1);
@@ -124,6 +129,11 @@ public class TelaJogo extends javax.swing.JFrame {
         areaDeChat.setToolTipText("");
         areaDeChat.setWrapStyleWord(true);
         areaDeChat.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        areaDeChat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                areaDeChatKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(areaDeChat);
 
         getContentPane().add(jScrollPane2);
@@ -137,6 +147,11 @@ public class TelaJogo extends javax.swing.JFrame {
                 dadoD4ActionPerformed(evt);
             }
         });
+        dadoD4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dadoD4KeyPressed(evt);
+            }
+        });
         getContentPane().add(dadoD4);
         dadoD4.setBounds(210, 510, 60, 60);
 
@@ -146,6 +161,11 @@ public class TelaJogo extends javax.swing.JFrame {
         dadoD6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD6ActionPerformed(evt);
+            }
+        });
+        dadoD6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dadoD6KeyPressed(evt);
             }
         });
         getContentPane().add(dadoD6);
@@ -159,6 +179,11 @@ public class TelaJogo extends javax.swing.JFrame {
                 dadoD8ActionPerformed(evt);
             }
         });
+        dadoD8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dadoD8KeyPressed(evt);
+            }
+        });
         getContentPane().add(dadoD8);
         dadoD8.setBounds(330, 510, 60, 60);
 
@@ -168,6 +193,11 @@ public class TelaJogo extends javax.swing.JFrame {
         dadoD10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD10ActionPerformed(evt);
+            }
+        });
+        dadoD10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dadoD10KeyPressed(evt);
             }
         });
         getContentPane().add(dadoD10);
@@ -181,6 +211,11 @@ public class TelaJogo extends javax.swing.JFrame {
                 dadoD12ActionPerformed(evt);
             }
         });
+        dadoD12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dadoD12KeyPressed(evt);
+            }
+        });
         getContentPane().add(dadoD12);
         dadoD12.setBounds(450, 510, 60, 60);
 
@@ -190,6 +225,11 @@ public class TelaJogo extends javax.swing.JFrame {
         dadoD20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD20ActionPerformed(evt);
+            }
+        });
+        dadoD20.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dadoD20KeyPressed(evt);
             }
         });
         getContentPane().add(dadoD20);
@@ -203,6 +243,11 @@ public class TelaJogo extends javax.swing.JFrame {
                 dadoD100ActionPerformed(evt);
             }
         });
+        dadoD100.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dadoD100KeyPressed(evt);
+            }
+        });
         getContentPane().add(dadoD100);
         dadoD100.setBounds(570, 510, 70, 60);
 
@@ -211,6 +256,11 @@ public class TelaJogo extends javax.swing.JFrame {
         botaoLimparChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoLimparChatActionPerformed(evt);
+            }
+        });
+        botaoLimparChat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoLimparChatKeyPressed(evt);
             }
         });
         getContentPane().add(botaoLimparChat);
@@ -317,6 +367,66 @@ public class TelaJogo extends javax.swing.JFrame {
     private void botaoLimparChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimparChatActionPerformed
         popupLimparChat();
     }//GEN-LAST:event_botaoLimparChatActionPerformed
+
+    private void areaDeChatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaDeChatKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            enviarTexto();
+        }
+    }//GEN-LAST:event_areaDeChatKeyPressed
+
+    private void botaoLimparChatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoLimparChatKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            popupLimparChat();
+        }
+    }//GEN-LAST:event_botaoLimparChatKeyPressed
+
+    private void dadoD4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD4KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_dadoD4KeyPressed
+
+    private void dadoD6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD6KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_dadoD6KeyPressed
+
+    private void dadoD8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD8KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_dadoD8KeyPressed
+
+    private void dadoD10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD10KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_dadoD10KeyPressed
+
+    private void dadoD12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD12KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_dadoD12KeyPressed
+
+    private void dadoD20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD20KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_dadoD20KeyPressed
+
+    private void dadoD100KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD100KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_dadoD100KeyPressed
+
+    private void jTree1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTree1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_jTree1KeyPressed
 
     public static void Start(boolean dono) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
