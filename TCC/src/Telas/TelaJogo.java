@@ -299,6 +299,7 @@ public class TelaJogo extends javax.swing.JFrame {
         if (sair == JOptionPane.YES_OPTION) {
             this.dispose();
             TelaInicial.Start();
+            
         }
     }//GEN-LAST:event_botaoSairDaSalaActionPerformed
     public void enviarTexto() {
