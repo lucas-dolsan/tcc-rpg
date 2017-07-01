@@ -35,7 +35,7 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         campoLogin.setBackground(new java.awt.Color(255, 255, 255));
-        campoLogin.setFont(new java.awt.Font("Coneria Script Demo", 0, 30)); // NOI18N
+        campoLogin.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         campoLogin.setForeground(new java.awt.Color(0, 0, 0));
         campoLogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoLogin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -48,7 +48,7 @@ public class TelaLogin extends javax.swing.JFrame {
         campoLogin.getAccessibleContext().setAccessibleName("");
 
         campoSenha.setBackground(new java.awt.Color(255, 255, 255));
-        campoSenha.setFont(new java.awt.Font("SansSerif", 0, 30)); // NOI18N
+        campoSenha.setFont(new java.awt.Font("SansSerif", 0, 28)); // NOI18N
         campoSenha.setForeground(new java.awt.Color(0, 0, 0));
         campoSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoSenha.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -59,15 +59,15 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(campoSenha);
         campoSenha.setBounds(415, 520, 445, 55);
 
-        jLabel1.setFont(new java.awt.Font("Coneria Script Demo", 1, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Email:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(415, 360, 440, 40);
 
-        jLabel2.setFont(new java.awt.Font("Coneria Script Demo", 1, 30)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Senha:");
         jLabel2.setToolTipText("");
@@ -75,7 +75,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2.setBounds(415, 470, 445, 40);
 
         botaoEntrar.setBackground(new java.awt.Color(255, 255, 255));
-        botaoEntrar.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoEntrar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         botaoEntrar.setForeground(new java.awt.Color(0, 0, 0));
         botaoEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoEntrar.png"))); // NOI18N
         botaoEntrar.setText("Entrar");
@@ -93,10 +93,10 @@ public class TelaLogin extends javax.swing.JFrame {
         botaoEntrar.setBounds(415, 605, 210, 50);
 
         botaoRegistrarSe.setBackground(new java.awt.Color(255, 255, 255));
-        botaoRegistrarSe.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoRegistrarSe.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         botaoRegistrarSe.setForeground(new java.awt.Color(0, 0, 0));
         botaoRegistrarSe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoRegistrar.png"))); // NOI18N
-        botaoRegistrarSe.setText("Registar");
+        botaoRegistrarSe.setText("Registrar");
         botaoRegistrarSe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoRegistrarSeActionPerformed(evt);
@@ -118,7 +118,7 @@ public class TelaLogin extends javax.swing.JFrame {
         erroLogin.setBounds(415, 582, 210, 20);
 
         planoDeFundoTelaLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        planoDeFundoTelaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N
+        planoDeFundoTelaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/tcc-fundo-inicial.jpg"))); // NOI18N
         planoDeFundoTelaLogin.setAlignmentY(0.0F);
         planoDeFundoTelaLogin.setAutoscrolls(true);
         planoDeFundoTelaLogin.setMaximumSize(new java.awt.Dimension(1280, 720));

@@ -15,8 +15,6 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         botaoConfigurarConta = new javax.swing.JButton();
         botaoCriarSala = new javax.swing.JButton();
         botaoEntrarEmSala = new javax.swing.JButton();
@@ -29,24 +27,8 @@ public class TelaInicial extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Coneria Script Demo", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Seja Bem-Vindo");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(425, 30, 440, 110);
-
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Coneria Script Demo", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText(JogadorDAO.nickName);
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(350, 110, 580, 80);
-
         botaoConfigurarConta.setBackground(new java.awt.Color(255, 255, 255));
-        botaoConfigurarConta.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         botaoConfigurarConta.setForeground(new java.awt.Color(0, 0, 0));
         botaoConfigurarConta.setText("Configurar Conta");
         botaoConfigurarConta.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -55,10 +37,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoConfigurarConta);
-        botaoConfigurarConta.setBounds(430, 430, 450, 60);
+        botaoConfigurarConta.setBounds(430, 540, 450, 60);
 
         botaoCriarSala.setBackground(new java.awt.Color(255, 255, 255));
-        botaoCriarSala.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoCriarSala.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         botaoCriarSala.setForeground(new java.awt.Color(0, 0, 0));
         botaoCriarSala.setText("Criar Nova Sala");
         botaoCriarSala.setName(""); // NOI18N
@@ -73,10 +55,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarSala);
-        botaoCriarSala.setBounds(430, 230, 450, 60);
+        botaoCriarSala.setBounds(430, 360, 450, 60);
 
         botaoEntrarEmSala.setBackground(new java.awt.Color(255, 255, 255));
-        botaoEntrarEmSala.setFont(new java.awt.Font("Coneria Script Demo", 1, 24)); // NOI18N
+        botaoEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         botaoEntrarEmSala.setForeground(new java.awt.Color(0, 0, 0));
         botaoEntrarEmSala.setText("Entrar em uma Sala");
         botaoEntrarEmSala.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +72,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoEntrarEmSala);
-        botaoEntrarEmSala.setBounds(430, 330, 450, 60);
+        botaoEntrarEmSala.setBounds(430, 450, 450, 60);
 
         botaoDeslogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/deslogar.png"))); // NOI18N
         botaoDeslogar.setToolTipText("Desconectar.");
@@ -108,7 +90,7 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoDeslogar.setBounds(1190, 650, 80, 40);
 
         planoDeFundoTelaInicial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        planoDeFundoTelaInicial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N
+        planoDeFundoTelaInicial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/tcc-fundo-inicial.jpg"))); // NOI18N
         planoDeFundoTelaInicial.setAlignmentY(0.0F);
         planoDeFundoTelaInicial.setMaximumSize(new java.awt.Dimension(1280, 720));
         planoDeFundoTelaInicial.setMinimumSize(new java.awt.Dimension(1280, 720));
@@ -184,8 +166,6 @@ private void deslogar() {
     private javax.swing.JButton botaoCriarSala;
     private javax.swing.JButton botaoDeslogar;
     private javax.swing.JButton botaoEntrarEmSala;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel planoDeFundoTelaInicial;
     // End of variables declaration//GEN-END:variables
 }
