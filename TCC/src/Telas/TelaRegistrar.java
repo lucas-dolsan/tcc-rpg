@@ -28,7 +28,6 @@ public class TelaRegistrar extends javax.swing.JDialog {
         erroSenhas = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         labelRegistrado = new javax.swing.JLabel();
-        planoDeFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RPG - TCC - Registrar");
@@ -177,14 +176,6 @@ public class TelaRegistrar extends javax.swing.JDialog {
         getContentPane().add(labelRegistrado);
         labelRegistrado.setBounds(120, 500, 370, 50);
 
-        planoDeFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        planoDeFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N
-        planoDeFundo.setMaximumSize(new java.awt.Dimension(600, 650));
-        planoDeFundo.setMinimumSize(new java.awt.Dimension(600, 650));
-        planoDeFundo.setPreferredSize(new java.awt.Dimension(600, 650));
-        getContentPane().add(planoDeFundo);
-        planoDeFundo.setBounds(0, 0, 610, 650);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -328,6 +319,5 @@ public class TelaRegistrar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     public static javax.swing.JLabel labelRegistrado;
-    private javax.swing.JLabel planoDeFundo;
     // End of variables declaration//GEN-END:variables
 }

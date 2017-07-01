@@ -27,7 +27,6 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         botaoCriar = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
         erroSalaSemNome = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RPG - TCC - Configurar sala");
@@ -113,15 +112,6 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         getContentPane().add(erroSalaSemNome);
         erroSalaSemNome.setBounds(30, 120, 160, 20);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N
-        jLabel1.setAlignmentY(0.0F);
-        jLabel1.setMaximumSize(new java.awt.Dimension(400, 500));
-        jLabel1.setMinimumSize(new java.awt.Dimension(400, 500));
-        jLabel1.setPreferredSize(new java.awt.Dimension(400, 490));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 400, 490);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -189,7 +179,6 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
     private javax.swing.JPasswordField campoSenhaSala;
     private javax.swing.JLabel erroSalaExistente;
     public static javax.swing.JLabel erroSalaSemNome;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
