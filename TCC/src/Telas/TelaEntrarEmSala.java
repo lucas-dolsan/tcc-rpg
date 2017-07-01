@@ -29,7 +29,6 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         erroEntrarEmSala = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RPG - TCC - Entrar em Sala");
@@ -94,15 +93,6 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 150, 340, 30);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/telaLogin.jpg"))); // NOI18N
-        jLabel1.setToolTipText("");
-        jLabel1.setMaximumSize(new java.awt.Dimension(400, 490));
-        jLabel1.setMinimumSize(new java.awt.Dimension(400, 490));
-        jLabel1.setPreferredSize(new java.awt.Dimension(400, 490));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 400, 490);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -141,7 +131,6 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     public static javax.swing.JComboBox<String> caixaDeSalas;
     private javax.swing.JTextField campoSenhaSala;
     private javax.swing.JLabel erroEntrarEmSala;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
