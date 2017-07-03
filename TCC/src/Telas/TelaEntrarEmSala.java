@@ -31,7 +31,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("RPG - TCC - Entrar em Sala");
+        setTitle("Double Damage - Entrar em Sala");
         setMaximumSize(new java.awt.Dimension(400, 490));
         setMinimumSize(new java.awt.Dimension(400, 490));
         setResizable(false);

@@ -30,7 +30,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         labelRegistrado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("RPG - TCC - Registrar");
+        setTitle("Double Damage - Registrar");
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(600, 650));
         setResizable(false);

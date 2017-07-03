@@ -23,20 +23,20 @@ public class TelaLogin extends javax.swing.JFrame {
         botaoEntrar = new javax.swing.JButton();
         botaoRegistrarSe = new javax.swing.JButton();
         erroLogin = new javax.swing.JLabel();
-        planoDeFundoTelaLogin = new javax.swing.JLabel();
+        planoFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("RPG - TCC");
+        setTitle("Double Damage");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setName("Frame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        campoLogin.setBackground(new java.awt.Color(255, 255, 255));
         campoLogin.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        campoLogin.setForeground(new java.awt.Color(0, 0, 0));
         campoLogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -44,12 +44,10 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(campoLogin);
-        campoLogin.setBounds(415, 405, 445, 55);
+        campoLogin.setBounds(410, 420, 445, 55);
         campoLogin.getAccessibleContext().setAccessibleName("");
 
-        campoSenha.setBackground(new java.awt.Color(255, 255, 255));
         campoSenha.setFont(new java.awt.Font("SansSerif", 0, 28)); // NOI18N
-        campoSenha.setForeground(new java.awt.Color(0, 0, 0));
         campoSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -60,23 +58,20 @@ public class TelaLogin extends javax.swing.JFrame {
         campoSenha.setBounds(415, 520, 445, 55);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Email:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(415, 360, 440, 40);
+        jLabel1.setBounds(420, 380, 440, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Senha:");
         jLabel2.setToolTipText("");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(415, 470, 445, 40);
+        jLabel2.setBounds(420, 480, 445, 40);
 
         botaoEntrar.setBackground(new java.awt.Color(255, 255, 255));
         botaoEntrar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoEntrar.setForeground(new java.awt.Color(0, 0, 0));
         botaoEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoEntrar.png"))); // NOI18N
         botaoEntrar.setText("Entrar");
         botaoEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +89,6 @@ public class TelaLogin extends javax.swing.JFrame {
 
         botaoRegistrarSe.setBackground(new java.awt.Color(255, 255, 255));
         botaoRegistrarSe.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoRegistrarSe.setForeground(new java.awt.Color(0, 0, 0));
         botaoRegistrarSe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoRegistrar.png"))); // NOI18N
         botaoRegistrarSe.setText("Registrar");
         botaoRegistrarSe.addActionListener(new java.awt.event.ActionListener() {
@@ -117,15 +111,10 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(erroLogin);
         erroLogin.setBounds(415, 582, 210, 20);
 
-        planoDeFundoTelaLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        planoDeFundoTelaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/tcc-fundo-inicial.jpg"))); // NOI18N
-        planoDeFundoTelaLogin.setAlignmentY(0.0F);
-        planoDeFundoTelaLogin.setAutoscrolls(true);
-        planoDeFundoTelaLogin.setMaximumSize(new java.awt.Dimension(1280, 720));
-        planoDeFundoTelaLogin.setMinimumSize(new java.awt.Dimension(1280, 720));
-        planoDeFundoTelaLogin.setPreferredSize(new java.awt.Dimension(1280, 720));
-        getContentPane().add(planoDeFundoTelaLogin);
-        planoDeFundoTelaLogin.setBounds(0, 0, 1280, 720);
+        planoFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        planoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/logo.png"))); // NOI18N
+        getContentPane().add(planoFundo);
+        planoFundo.setBounds(80, 0, 1050, 380);
 
         pack();
         setLocationRelativeTo(null);
@@ -144,7 +133,7 @@ public class TelaLogin extends javax.swing.JFrame {
         char[] senha = campoSenha.getPassword();
         String senhaAuxiliar = String.valueOf(senha);
         jogador.logar(login, senhaAuxiliar, this);
-        jogador.modificarUltimoLogin(login);
+        JogadorDAO.modificarUltimoLogin(login);
     }
     private void campoLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoLoginKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -223,6 +212,6 @@ public class TelaLogin extends javax.swing.JFrame {
     public static javax.swing.JLabel erroLogin;
     public javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel planoDeFundoTelaLogin;
+    private javax.swing.JLabel planoFundo;
     // End of variables declaration//GEN-END:variables
 }

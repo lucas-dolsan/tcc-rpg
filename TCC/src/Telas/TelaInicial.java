@@ -19,17 +19,16 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoCriarSala = new javax.swing.JButton();
         botaoEntrarEmSala = new javax.swing.JButton();
         botaoDeslogar = new javax.swing.JButton();
-        planoDeFundoTelaInicial = new javax.swing.JLabel();
+        planoFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("RPG - TCC - " + JogadorDAO.nickName);
+        setTitle("Double Damage");
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
         botaoConfigurarConta.setBackground(new java.awt.Color(255, 255, 255));
         botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoConfigurarConta.setForeground(new java.awt.Color(0, 0, 0));
         botaoConfigurarConta.setText("Configurar Conta");
         botaoConfigurarConta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -41,7 +40,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
         botaoCriarSala.setBackground(new java.awt.Color(255, 255, 255));
         botaoCriarSala.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoCriarSala.setForeground(new java.awt.Color(0, 0, 0));
         botaoCriarSala.setText("Criar Nova Sala");
         botaoCriarSala.setName(""); // NOI18N
         botaoCriarSala.addActionListener(new java.awt.event.ActionListener() {
@@ -55,11 +53,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarSala);
-        botaoCriarSala.setBounds(430, 360, 450, 60);
+        botaoCriarSala.setBounds(430, 400, 450, 60);
 
         botaoEntrarEmSala.setBackground(new java.awt.Color(255, 255, 255));
         botaoEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoEntrarEmSala.setForeground(new java.awt.Color(0, 0, 0));
         botaoEntrarEmSala.setText("Entrar em uma Sala");
         botaoEntrarEmSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +69,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoEntrarEmSala);
-        botaoEntrarEmSala.setBounds(430, 450, 450, 60);
+        botaoEntrarEmSala.setBounds(430, 470, 450, 60);
 
         botaoDeslogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/deslogar.png"))); // NOI18N
         botaoDeslogar.setToolTipText("Desconectar.");
@@ -87,17 +84,12 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoDeslogar);
-        botaoDeslogar.setBounds(1190, 650, 80, 40);
+        botaoDeslogar.setBounds(1180, 630, 80, 40);
 
-        planoDeFundoTelaInicial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        planoDeFundoTelaInicial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/tcc-fundo-inicial.jpg"))); // NOI18N
-        planoDeFundoTelaInicial.setAlignmentY(0.0F);
-        planoDeFundoTelaInicial.setMaximumSize(new java.awt.Dimension(1280, 720));
-        planoDeFundoTelaInicial.setMinimumSize(new java.awt.Dimension(1280, 720));
-        planoDeFundoTelaInicial.setPreferredSize(new java.awt.Dimension(1280, 720));
-        getContentPane().add(planoDeFundoTelaInicial);
-        planoDeFundoTelaInicial.setBounds(0, 0, 1280, 720);
-        planoDeFundoTelaInicial.getAccessibleContext().setAccessibleDescription("");
+        planoFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        planoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/logo.png"))); // NOI18N
+        getContentPane().add(planoFundo);
+        planoFundo.setBounds(210, 0, 800, 400);
 
         pack();
         setLocationRelativeTo(null);
@@ -166,6 +158,6 @@ private void deslogar() {
     private javax.swing.JButton botaoCriarSala;
     private javax.swing.JButton botaoDeslogar;
     private javax.swing.JButton botaoEntrarEmSala;
-    private javax.swing.JLabel planoDeFundoTelaInicial;
+    private javax.swing.JLabel planoFundo;
     // End of variables declaration//GEN-END:variables
 }

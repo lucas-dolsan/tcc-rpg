@@ -29,7 +29,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         erroSalaSemNome = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("RPG - TCC - Configurar sala");
+        setTitle("Double Damage - Configurar sala");
         setMinimumSize(new java.awt.Dimension(400, 500));
         setResizable(false);
         getContentPane().setLayout(null);
