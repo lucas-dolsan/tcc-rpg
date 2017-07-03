@@ -1,6 +1,5 @@
 package ConexaoBanco;
 
-import static ConexaoBanco.ConexaoMySql.connection;
 import Objetos.*;
 import Telas.*;
 import java.math.BigInteger;
@@ -17,7 +16,7 @@ public class JogadorDAO {
     public static ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
     public static ArrayList<Sala> salas = new ArrayList<Sala>();
     public static ArrayList<Jogador> jogadoresAtuais = new ArrayList<Jogador>();
-    public static Connection c = connection.getConnection();
+    public static Connection c = ConexaoMySql.getConnection();
 
     public static String SaltedPassword(String unecryptedPassword) {
 
@@ -33,7 +32,8 @@ public class JogadorDAO {
         String encryptedPassword = (new BigInteger(messageDigest.digest())).toString(16);
         return encryptedPassword;
     }
-    public static void mensagemSairDaSala(){
+
+    public static void mensagemSairDaSala() {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
         String mensagem = "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " Saiu da Sala]\n";
         try {
@@ -45,7 +45,8 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
-     public static void mensagemEntrarNaSala(){
+
+    public static void mensagemEntrarNaSala() {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
         String mensagem = "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " Entrou na Sala]\n";
         try {
@@ -57,6 +58,7 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
+
     public static void listarSalas() {
         final String sql = ("select * from sala");
         try {
@@ -494,5 +496,4 @@ public class JogadorDAO {
             erro.printStackTrace();
         }
     }
-
 }

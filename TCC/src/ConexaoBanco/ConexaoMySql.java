@@ -22,7 +22,6 @@ public final class ConexaoMySql {
         }else{
             dbPath = "C:\\TCC-RPG\\TCC-RPG-DB.txt";
         }
-        
         String[] linhas = new String[4];
         try {
 

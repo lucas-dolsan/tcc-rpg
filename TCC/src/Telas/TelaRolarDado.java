@@ -32,7 +32,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
         campoRolarMenos = new javax.swing.JTextField();
         campoRolarMais = new javax.swing.JTextField();
 
-        setTitle("RPG - TCC - Rolar dado");
+        setTitle("Double Damage - Rolar dado");
         setMaximumSize(new java.awt.Dimension(280, 200));
         setMinimumSize(new java.awt.Dimension(280, 200));
         setPreferredSize(new java.awt.Dimension(280, 200));

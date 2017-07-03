@@ -4,7 +4,6 @@ import ConexaoBanco.JogadorDAO;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
@@ -13,7 +12,6 @@ public class TelaJogo extends javax.swing.JFrame {
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(false);
-        botaoLimparChat.setVisible(false);
         campoEnviarTexto.requestFocus();
     }
 
@@ -36,14 +34,19 @@ public class TelaJogo extends javax.swing.JFrame {
         dadoD12 = new javax.swing.JButton();
         dadoD20 = new javax.swing.JButton();
         dadoD100 = new javax.swing.JButton();
-        botaoLimparChat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("RPG - TCC - Sala: "+ TelaConfigurarSala.nomeSala
+        setTitle("Double Damage - Sala: "+ TelaConfigurarSala.nomeSala
         );
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jTree1.setAlignmentX(0.0F);
@@ -251,37 +254,16 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(dadoD100);
         dadoD100.setBounds(570, 510, 70, 60);
 
-        botaoLimparChat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        botaoLimparChat.setText("Limpar chat da sala");
-        botaoLimparChat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoLimparChatActionPerformed(evt);
-            }
-        });
-        botaoLimparChat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                botaoLimparChatKeyPressed(evt);
-            }
-        });
-        getContentPane().add(botaoLimparChat);
-        botaoLimparChat.setBounds(210, 630, 170, 40);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
+            painel.setVisible(false);
             this.dispose();
             JogadorDAO.fecharSala(this, TelaConfigurarSala.nomeSala);
             TelaInicial.Start();
-        }
-    }
-
-    private void popupLimparChat() {
-        int sair = JOptionPane.showConfirmDialog(null, "Deseja limpar o chat?", "Limpar chat", JOptionPane.YES_NO_OPTION);
-        if (sair == JOptionPane.YES_OPTION) {
-            JogadorDAO.limparChat();
         }
     }
     private void botaoFecharSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharSalaActionPerformed
@@ -297,6 +279,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private void botaoSairDaSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairDaSalaActionPerformed
         int sair = JOptionPane.showConfirmDialog(null, "Deseja sair da sala?", "Sair da sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
+            painel.setVisible(false);
             this.dispose();
             TelaInicial.Start();
             JogadorDAO.mensagemSairDaSala();
@@ -365,21 +348,11 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoEnviarTextoKeyPressed
 
-    private void botaoLimparChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimparChatActionPerformed
-        popupLimparChat();
-    }//GEN-LAST:event_botaoLimparChatActionPerformed
-
     private void areaDeChatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaDeChatKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             enviarTexto();
         }
     }//GEN-LAST:event_areaDeChatKeyPressed
-
-    private void botaoLimparChatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoLimparChatKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            popupLimparChat();
-        }
-    }//GEN-LAST:event_botaoLimparChatKeyPressed
 
     private void dadoD4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD4KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -429,42 +402,18 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTree1KeyPressed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        JogadorDAO.mensagemSairDaSala();
+    }//GEN-LAST:event_formWindowClosing
+    public static PainelDeControle painel = new PainelDeControle();
+
     public static void Start(boolean dono) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaJogo.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaJogo.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaJogo.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaJogo.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
                 if (dono) {
                     botaoFecharSala.setVisible(true);
-                    botaoLimparChat.setVisible(true);
+                    painel.setVisible(true);
                 }
                 new Thread() {
                     @Override
@@ -488,7 +437,6 @@ public class TelaJogo extends javax.swing.JFrame {
     public static javax.swing.JTextArea areaDeChat;
     private javax.swing.JButton botaoEnviar;
     public static javax.swing.JButton botaoFecharSala;
-    public static javax.swing.JButton botaoLimparChat;
     private javax.swing.JButton botaoSairDaSala;
     private javax.swing.JTextField campoEnviarTexto;
     private javax.swing.JButton dadoD10;

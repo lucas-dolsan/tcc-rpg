@@ -28,15 +28,12 @@ public class TelaPersonagem extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(720, 720));
+        setMinimumSize(new java.awt.Dimension(720, 720));
+        setPreferredSize(new java.awt.Dimension(720, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Upload da imagem");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 11, 170, 280);
 
         pack();
         setLocationRelativeTo(null);
@@ -85,6 +82,5 @@ public class TelaPersonagem extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
