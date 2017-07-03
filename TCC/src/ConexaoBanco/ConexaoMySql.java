@@ -12,13 +12,21 @@ public final class ConexaoMySql {
     public static Connection c;
     private Statement statement;
     public static ConexaoMySql connection;
-
+    private String dbPath = null;
+    
     private ConexaoMySql() {
-
+        
+        String OS = System.getProperty("os.name");
+        if(OS.equalsIgnoreCase("Linux")){
+            dbPath = "/home/dolsan/Documentos/TCC-RPG-DB/TCC-RPG/TCC-RPG-DB.txt";
+        }else{
+            dbPath = "C:\\TCC-RPG\\TCC-RPG-DB.txt";
+        }
+        
         String[] linhas = new String[4];
         try {
 
-            FileReader reader = new FileReader("C:\\TCC-RPG\\TCC-RPG-DB.txt");
+            FileReader reader = new FileReader(dbPath);
             BufferedReader bf = new BufferedReader(reader);
             String line;
             int i = 0;
