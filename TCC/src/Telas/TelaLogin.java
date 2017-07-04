@@ -109,7 +109,7 @@ public class TelaLogin extends javax.swing.JFrame {
         erroLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/erroSenhas.png"))); // NOI18N
         erroLogin.setText("Credenciais incorretas.");
         getContentPane().add(erroLogin);
-        erroLogin.setBounds(415, 582, 210, 20);
+        erroLogin.setBounds(415, 582, 450, 20);
 
         planoFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         planoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/logo.png"))); // NOI18N

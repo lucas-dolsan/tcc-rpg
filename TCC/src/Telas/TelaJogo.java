@@ -1,9 +1,11 @@
 package Telas;
 
+import Cliente.Client;
 import ConexaoBanco.JogadorDAO;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
@@ -34,6 +36,7 @@ public class TelaJogo extends javax.swing.JFrame {
         dadoD12 = new javax.swing.JButton();
         dadoD20 = new javax.swing.JButton();
         dadoD100 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Double Damage - Sala: "+ TelaConfigurarSala.nomeSala
@@ -254,6 +257,16 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(dadoD100);
         dadoD100.setBounds(570, 510, 70, 60);
 
+        jButton1.setText("juntar-se a conversa");
+        jButton1.setToolTipText("AVISO: Você só poderá se comunicar com jogadores na sua rede local .");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(660, 520, 180, 40);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -405,6 +418,12 @@ public class TelaJogo extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         JogadorDAO.mensagemSairDaSala();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFrame telaSom = new TelaConfigurarSom();
+        telaSom.setVisible(true);
+        jButton1.setEnabled(false); 
+    }//GEN-LAST:event_jButton1ActionPerformed
     public static PainelDeControle painel = new PainelDeControle();
 
     public static void Start(boolean dono) {
@@ -446,6 +465,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JButton dadoD4;
     private javax.swing.JButton dadoD6;
     private javax.swing.JButton dadoD8;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;
