@@ -7,7 +7,10 @@ package Telas;
 
 import ConexaoBanco.JogadorDAO;
 import static ConexaoBanco.JogadorDAO.salaAtual;
+import Dependencias.Utils;
 import Objetos.Jogador;
+import Servidor.Log;
+import Servidor.Server;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +24,7 @@ public class PainelDeControle extends javax.swing.JFrame {
      */
     public PainelDeControle() {
         initComponents();
+         this.setLocationRelativeTo(null);
     }
 
     /**
@@ -37,6 +41,7 @@ public class PainelDeControle extends javax.swing.JFrame {
         botaoLimparChat = new javax.swing.JButton();
         caixaJogadores = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Painel de Controle de Sala");
@@ -67,6 +72,14 @@ public class PainelDeControle extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Banir!");
 
+        jButton2.setText("Iniciar voIP (desligado)");
+        jButton2.setToolTipText("AVISO: Esta funcão só está disponível para jogadores conectados em LAN.");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,15 +87,15 @@ public class PainelDeControle extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botaoLimparChat, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(nomeSala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botaoLimparChat, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                    .addComponent(nomeSala, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(senhaSala, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addComponent(caixaJogadores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(senhaSala, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(caixaJogadores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,8 +109,10 @@ public class PainelDeControle extends javax.swing.JFrame {
                     .addComponent(botaoLimparChat, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(caixaJogadores))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,6 +128,21 @@ public class PainelDeControle extends javax.swing.JFrame {
     private void caixaJogadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caixaJogadoresActionPerformed
         listarJogadoresAtuais();
     }//GEN-LAST:event_caixaJogadoresActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+           new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    new Server(1049,true);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(rootPane,ex,getTitle(),JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }.start();
+           jButton2.setText("Iniciar voIP (ligado)");
+    }//GEN-LAST:event_jButton2ActionPerformed
     public static void listarJogadoresAtuais() {
         for (Jogador jogador : JogadorDAO.jogadoresAtuais) {
             caixaJogadores.addItem(jogador.getNome_jog());
@@ -131,6 +161,7 @@ public class PainelDeControle extends javax.swing.JFrame {
     private javax.swing.JButton botaoLimparChat;
     public static javax.swing.JComboBox<String> caixaJogadores;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel nomeSala;
     private javax.swing.JLabel senhaSala;
     // End of variables declaration//GEN-END:variables
