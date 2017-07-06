@@ -1,7 +1,7 @@
 package Telas;
 
-import Cliente.Client;
 import ConexaoBanco.JogadorDAO;
+import static ConexaoBanco.JogadorDAO.isVOIPAtivado;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +48,11 @@ public class TelaJogo extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
             }
         });
         getContentPane().setLayout(null);
@@ -265,6 +270,11 @@ public class TelaJogo extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(650, 520, 190, 40);
 
@@ -347,7 +357,7 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_dadoD100ActionPerformed
 
     private void botaoSairDaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoSairDaSalaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             popupFecharSala();
         }
     }//GEN-LAST:event_botaoSairDaSalaKeyPressed
@@ -359,12 +369,16 @@ public class TelaJogo extends javax.swing.JFrame {
     private void campoEnviarTextoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEnviarTextoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             enviarTexto();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
         }
     }//GEN-LAST:event_campoEnviarTextoKeyPressed
 
     private void areaDeChatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaDeChatKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             enviarTexto();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
         }
     }//GEN-LAST:event_areaDeChatKeyPressed
 
@@ -423,11 +437,27 @@ public class TelaJogo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JFrame telaSom = new TelaConfigurarSom();
         telaSom.setVisible(true);
-        jButton1.setEnabled(false); 
+        jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
-    public static PainelDeControle painel = new PainelDeControle();
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            JFrame telaSom = new TelaConfigurarSom();
+            telaSom.setVisible(true);
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            popupFecharSala();
+        }
+    }//GEN-LAST:event_jButton1KeyPressed
+    public static PainelDeControle painel = null;
 
     public static void Start(boolean dono) {
+        painel = new PainelDeControle();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
@@ -435,11 +465,21 @@ public class TelaJogo extends javax.swing.JFrame {
                     botaoFecharSala.setVisible(true);
                     painel.setVisible(true);
                 }
+                if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
+                    jButton1.setEnabled(false);
+                } else if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
+                    jButton1.setEnabled(true);
+                }
                 new Thread() {
                     @Override
                     public void run() {
                         while (true) {
                             JogadorDAO.lerChat();
+                            if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
+                                jButton1.setEnabled(false);
+                            } else if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
+                                jButton1.setEnabled(true);
+                            }
                             try {
                                 Thread.sleep(1);
                             } catch (InterruptedException ex) {
@@ -466,7 +506,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JButton dadoD4;
     private javax.swing.JButton dadoD6;
     private javax.swing.JButton dadoD8;
-    private javax.swing.JButton jButton1;
+    public static javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;

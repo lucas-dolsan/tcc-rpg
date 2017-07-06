@@ -17,17 +17,6 @@ import org.teleal.cling.UpnpServiceImpl;
 import org.teleal.cling.support.igd.PortMappingListener;
 import org.teleal.cling.support.model.PortMapping;
 
-/*
- * To change this template, choose Tools | Templates and open the template in
- * the editor.
- */
-/**
- * opens a socket, listens for incoming connections, and creates a
- * ClientConnection for each client. also creates a BroadcastThread that passes
- * messages from the broadcastQueue to all the instances of ClientConnection
- *
- * @author dosse
- */
 public class Server {
     
     private ArrayList<Message> broadCastQueue = new ArrayList<Message>();    

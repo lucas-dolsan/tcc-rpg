@@ -7,17 +7,6 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 
-
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * contains some static methods used here and there in the code
- * @author dosse
- */
 public class Utils {
     public static void sleep(int ms){
         try {Thread.sleep(ms);} catch (InterruptedException ex) {}

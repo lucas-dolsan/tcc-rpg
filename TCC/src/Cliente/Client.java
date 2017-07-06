@@ -10,16 +10,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-/*
- * To change this template, choose Tools | Templates and open the template in
- * the editor.
- */
-/**
- * Connects to the server, then starts receiving messages. Creates
- * a MicThread that sends microphone data to the server, and creates an instance
- * of AudioThread for each user.
- * @author dosse
- */
 public class Client extends Thread {
 
     private Socket s;

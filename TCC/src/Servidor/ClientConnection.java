@@ -11,18 +11,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
-/*
- * To change this template, choose Tools | Templates and open the template in
- * the editor.
- */
-/**
- * this thread manages a connection with a client. it does a lot of stuff: -read
- * messages from client -add said messages to the server's broadcast queue
- * -receive messages from the server thread -add said messages to a send queue
- * -send messages from said queue to the client (or throw them away if too old)
- *
- * @author dosse
- */
 public class ClientConnection extends Thread {
 
     private Server serv; //instance of server, needed to put messages in the server's broadcast queue
