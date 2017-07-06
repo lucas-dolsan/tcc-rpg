@@ -74,6 +74,42 @@ public class JogadorDAO {
         }
     }
 
+    public static boolean isVOIPAtivado(String nomeSala) {
+        final String sql = ("SELECT limpar_chat_daily FROM sala WHERE nome_sala = ?;");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomeSala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int limpar_chat_daily = rs.getInt(1);
+                if (limpar_chat_daily == 1) {
+                    stmt.close();
+                    rs.close();
+                    return true;
+                } else {
+                    stmt.close();
+                    rs.close();
+                    return false;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void alterarVOIP(int estado) {
+        final String sql = ("UPDATE sala SET voip = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, estado);
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void banir(int pk_jogador, String motivo_ban) {
         final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban, motivo_ban) VALUES(?,?,?,?)");
         try {
@@ -174,7 +210,7 @@ public class JogadorDAO {
     }
 
     public static void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
-        String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala) values(?,?,?,?)";
+        String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala, ip_dono, limpar_chat_daily) values(?,?,?,?,?,?)";
         for (Sala sala : salas) {
             if (sala.getNome_sala().equalsIgnoreCase(nomeSala)) {
                 salaAtual = sala;
@@ -187,6 +223,8 @@ public class JogadorDAO {
             stmt.setString(2, nomeSala);
             stmt.setString(3, senhaSala);
             stmt.setString(4, "");
+            stmt.setString(5, "0");//depois colocar o ip do cara
+            stmt.setInt(6, 0);
             stmt.execute();
             tela.dispose();
         } catch (Exception e) {

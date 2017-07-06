@@ -41,7 +41,8 @@ public class TelaConfigurarSom extends javax.swing.JFrame {
                 mic.open(af);
                 mic.start();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(rootPane, "Microphone not detected.\nPress OK to close this program", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Microfone não detectado.\nOk para fechar", "Error", JOptionPane.ERROR_MESSAGE);
+                
                 System.exit(0);
             }
             for (;;) {

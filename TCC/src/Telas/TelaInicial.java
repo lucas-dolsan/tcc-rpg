@@ -1,6 +1,5 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
 import java.awt.event.KeyEvent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -25,6 +24,11 @@ public class TelaInicial extends javax.swing.JFrame {
         setTitle("Double Damage");
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         botaoConfigurarConta.setBackground(new java.awt.Color(255, 255, 255));
@@ -84,7 +88,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoDeslogar);
-        botaoDeslogar.setBounds(1190, 670, 80, 40);
+        botaoDeslogar.setBounds(1192, 650, 80, 40);
 
         planoFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         planoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/logo.png"))); // NOI18N
@@ -97,8 +101,7 @@ public class TelaInicial extends javax.swing.JFrame {
 private void deslogar() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja sair?", "Desconectar.", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
-            this.dispose();
-            TelaLogin.abrirTela();
+            System.exit(1);
         }
     }
     private void botaoDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeslogarActionPerformed
@@ -143,6 +146,12 @@ private void deslogar() {
             deslogar();
         }
     }//GEN-LAST:event_botaoConfigurarContaKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            deslogar();
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {

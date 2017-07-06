@@ -14,15 +14,6 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- * reads data from microphone and sends it to the server
- *
- * @author dosse
- */
 public class MicThread extends Thread {
 
     public static double amplification = 1.0;

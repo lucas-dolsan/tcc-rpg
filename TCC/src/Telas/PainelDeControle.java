@@ -36,23 +36,26 @@ public class PainelDeControle extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nomeSala = new javax.swing.JLabel();
         senhaSala = new javax.swing.JLabel();
         botaoLimparChat = new javax.swing.JButton();
         caixaJogadores = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        checkboxChat = new javax.swing.JRadioButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Painel de Controle de Sala");
+        setMaximumSize(new java.awt.Dimension(440, 470));
+        setMinimumSize(new java.awt.Dimension(440, 470));
+        setPreferredSize(new java.awt.Dimension(440, 470));
         setResizable(false);
+        getContentPane().setLayout(null);
 
-        nomeSala.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        nomeSala.setText("Sala: " + salaAtual.getNome_sala());
-
-        senhaSala.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        senhaSala.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         senhaSala.setText("Jogadores:");
+        getContentPane().add(senhaSala);
+        senhaSala.setBounds(220, 11, 200, 32);
 
         botaoLimparChat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoLimparChat.setText("Limpar Chat da Sala");
@@ -61,18 +64,25 @@ public class PainelDeControle extends javax.swing.JFrame {
                 botaoLimparChatActionPerformed(evt);
             }
         });
+        getContentPane().add(botaoLimparChat);
+        botaoLimparChat.setBounds(10, 11, 200, 32);
 
-        caixaJogadores.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        caixaJogadores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         caixaJogadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         caixaJogadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 caixaJogadoresActionPerformed(evt);
             }
         });
+        getContentPane().add(caixaJogadores);
+        caixaJogadores.setBounds(220, 49, 200, 32);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Banir!");
+        getContentPane().add(jButton1);
+        jButton1.setBounds(220, 90, 100, 30);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Iniciar voIP (desligado)");
         jButton2.setToolTipText("AVISO: Esta funcão só está disponível para jogadores conectados em LAN.");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -80,52 +90,19 @@ public class PainelDeControle extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(10, 50, 200, 32);
 
-        jRadioButton1.setText("limpar chat diariamente");
-        jRadioButton1.setToolTipText("limpa o chat automaticamente todos os dias  as 00:00 horas.");
+        checkboxChat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        checkboxChat.setText("limpar chat diariamente");
+        checkboxChat.setToolTipText("limpa o chat automaticamente todos os dias  as 00:00 horas.");
+        getContentPane().add(checkboxChat);
+        checkboxChat.setBounds(10, 410, 170, 24);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botaoLimparChat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                            .addComponent(nomeSala, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(senhaSala, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(caixaJogadores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeSala, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(senhaSala, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botaoLimparChat, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(caixaJogadores))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addComponent(jRadioButton1)
-                .addGap(122, 122, 122))
-        );
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setText("Desbanir!");
+        getContentPane().add(jButton3);
+        jButton3.setBounds(320, 90, 100, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,10 +149,10 @@ public class PainelDeControle extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoLimparChat;
     public static javax.swing.JComboBox<String> caixaJogadores;
+    private javax.swing.JRadioButton checkboxChat;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JLabel nomeSala;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel senhaSala;
     // End of variables declaration//GEN-END:variables
 }
