@@ -8,4 +8,5 @@ _An application made for playing Online Role Playing Games_
 - Informática 2015
 
 Autores: Eduardo Schork e Lucas Dolsan
+
 2017
