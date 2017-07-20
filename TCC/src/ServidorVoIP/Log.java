@@ -1,4 +1,4 @@
-package Servidor;
+package ServidorVoIP;
 
 public class Log {
     private static String log="";

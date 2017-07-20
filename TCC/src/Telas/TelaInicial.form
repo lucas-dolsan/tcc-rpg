@@ -96,7 +96,7 @@
     <Component class="javax.swing.JButton" name="botaoDeslogar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icones/logout.png"/>
+          <Image iconType="3" name="/Icones/botaoLogout.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Desconectar."/>
       </Properties>

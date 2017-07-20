@@ -9,8 +9,8 @@ import ConexaoBanco.JogadorDAO;
 import static ConexaoBanco.JogadorDAO.salaAtual;
 import Dependencias.Utils;
 import Objetos.Jogador;
-import Servidor.Log;
-import Servidor.Server;
+import ServidorVoIP.Log;
+import ServidorVoIP.Server;
 import javax.swing.JOptionPane;
 
 /**

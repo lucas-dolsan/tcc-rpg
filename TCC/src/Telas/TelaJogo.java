@@ -152,7 +152,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         dadoD4.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD4.setForeground(new java.awt.Color(51, 51, 51));
-        dadoD4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-d4.png"))); // NOI18N
+        dadoD4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoDice-d4.png"))); // NOI18N
         dadoD4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD4ActionPerformed(evt);
@@ -168,7 +168,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         dadoD6.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD6.setForeground(new java.awt.Color(51, 51, 51));
-        dadoD6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-d6.png"))); // NOI18N
+        dadoD6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoDice-d6.png"))); // NOI18N
         dadoD6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD6ActionPerformed(evt);
@@ -184,7 +184,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         dadoD8.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD8.setForeground(new java.awt.Color(51, 51, 51));
-        dadoD8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-d8.png"))); // NOI18N
+        dadoD8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoDice-d8.png"))); // NOI18N
         dadoD8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD8ActionPerformed(evt);
@@ -200,7 +200,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         dadoD10.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD10.setForeground(new java.awt.Color(51, 51, 51));
-        dadoD10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-d10.png"))); // NOI18N
+        dadoD10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoDice-d10.png"))); // NOI18N
         dadoD10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD10ActionPerformed(evt);
@@ -232,7 +232,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         dadoD20.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD20.setForeground(new java.awt.Color(51, 51, 51));
-        dadoD20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-d20.png"))); // NOI18N
+        dadoD20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoDice-d20.png"))); // NOI18N
         dadoD20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD20ActionPerformed(evt);
@@ -262,7 +262,7 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(dadoD100);
         dadoD100.setBounds(570, 510, 70, 60);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/mic.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoMic.png"))); // NOI18N
         jButton1.setText("Juntar-se a conversa");
         jButton1.setToolTipText("AVISO: Você só poderá se comunicar com jogadores na sua rede local .");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

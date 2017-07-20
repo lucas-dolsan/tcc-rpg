@@ -203,7 +203,7 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icones/dice-d4.png"/>
+          <Image iconType="3" name="/Icones/botaoDice-d4.png"/>
         </Property>
       </Properties>
       <Events>
@@ -225,7 +225,7 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icones/dice-d6.png"/>
+          <Image iconType="3" name="/Icones/botaoDice-d6.png"/>
         </Property>
       </Properties>
       <Events>
@@ -247,7 +247,7 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icones/dice-d8.png"/>
+          <Image iconType="3" name="/Icones/botaoDice-d8.png"/>
         </Property>
       </Properties>
       <Events>
@@ -269,7 +269,7 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icones/dice-d10.png"/>
+          <Image iconType="3" name="/Icones/botaoDice-d10.png"/>
         </Property>
       </Properties>
       <Events>
@@ -311,7 +311,7 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icones/dice-d20.png"/>
+          <Image iconType="3" name="/Icones/botaoDice-d20.png"/>
         </Property>
       </Properties>
       <Events>
@@ -347,7 +347,7 @@
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icones/mic.png"/>
+          <Image iconType="3" name="/Icones/botaoMic.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Juntar-se a conversa"/>
         <Property name="toolTipText" type="java.lang.String" value="AVISO: Voc&#xea; s&#xf3; poder&#xe1; se comunicar com jogadores na sua rede local ."/>

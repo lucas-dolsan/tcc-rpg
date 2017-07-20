@@ -1,7 +1,7 @@
 package Telas;
 
-import Cliente.Client;
-import Cliente.MicThread;
+import ClienteVoIP.Client;
+import ClienteVoIP.MicThread;
 import Dependencias.SoundPacket;
 import Dependencias.Utils;
 import javax.sound.sampled.AudioFormat;
