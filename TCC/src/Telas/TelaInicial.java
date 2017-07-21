@@ -75,7 +75,7 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(botaoEntrarEmSala);
         botaoEntrarEmSala.setBounds(430, 470, 450, 60);
 
-        botaoDeslogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/logout.png"))); // NOI18N
+        botaoDeslogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoLogout.png"))); // NOI18N
         botaoDeslogar.setToolTipText("Desconectar.");
         botaoDeslogar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -1,4 +1,4 @@
-package Cliente;
+package ClienteVoIP;
 
 import Dependencias.Message;
 import Dependencias.SoundPacket;
