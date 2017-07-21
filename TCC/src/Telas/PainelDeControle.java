@@ -97,7 +97,7 @@ public class PainelDeControle extends javax.swing.JFrame {
         checkboxChat.setText("limpar chat diariamente");
         checkboxChat.setToolTipText("limpa o chat automaticamente todos os dias  as 00:00 horas.");
         getContentPane().add(checkboxChat);
-        checkboxChat.setBounds(10, 410, 170, 24);
+        checkboxChat.setBounds(10, 410, 170, 25);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Desbanir!");

@@ -464,6 +464,8 @@ public class TelaJogo extends javax.swing.JFrame {
                 if (dono) {
                     botaoFecharSala.setVisible(true);
                     painel.setVisible(true);
+                }else{
+                    painel.dispose();
                 }
                 if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
                     jButton1.setEnabled(false);
