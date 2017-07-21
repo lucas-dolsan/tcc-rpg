@@ -21,8 +21,6 @@ public class TelaJogo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
         botaoFecharSala = new javax.swing.JButton();
         botaoSairDaSala = new javax.swing.JButton();
         campoEnviarTexto = new javax.swing.JTextField();
@@ -33,10 +31,10 @@ public class TelaJogo extends javax.swing.JFrame {
         dadoD6 = new javax.swing.JButton();
         dadoD8 = new javax.swing.JButton();
         dadoD10 = new javax.swing.JButton();
-        dadoD12 = new javax.swing.JButton();
         dadoD20 = new javax.swing.JButton();
         dadoD100 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        botaoDadoPersonalizado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Double Damage - Sala: "+ TelaConfigurarSala.nomeSala
@@ -56,19 +54,6 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(null);
-
-        jTree1.setAlignmentX(0.0F);
-        jTree1.setAlignmentY(0.0F);
-        jTree1.setPreferredSize(new java.awt.Dimension(75, 75));
-        jTree1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTree1KeyPressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTree1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 10, 190, 570);
 
         botaoFecharSala.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         botaoFecharSala.setForeground(new java.awt.Color(51, 51, 51));
@@ -214,22 +199,6 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(dadoD10);
         dadoD10.setBounds(390, 510, 60, 60);
 
-        dadoD12.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        dadoD12.setForeground(new java.awt.Color(51, 51, 51));
-        dadoD12.setText("D12");
-        dadoD12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dadoD12ActionPerformed(evt);
-            }
-        });
-        dadoD12.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                dadoD12KeyPressed(evt);
-            }
-        });
-        getContentPane().add(dadoD12);
-        dadoD12.setBounds(450, 510, 60, 60);
-
         dadoD20.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD20.setForeground(new java.awt.Color(51, 51, 51));
         dadoD20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoDice-d20.png"))); // NOI18N
@@ -244,11 +213,11 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD20);
-        dadoD20.setBounds(510, 510, 60, 60);
+        dadoD20.setBounds(450, 510, 60, 60);
 
         dadoD100.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD100.setForeground(new java.awt.Color(51, 51, 51));
-        dadoD100.setText("D100");
+        dadoD100.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoDice-d100.png"))); // NOI18N
         dadoD100.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoD100ActionPerformed(evt);
@@ -260,7 +229,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD100);
-        dadoD100.setBounds(570, 510, 70, 60);
+        dadoD100.setBounds(510, 510, 60, 60);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoMic.png"))); // NOI18N
         jButton1.setText("Juntar-se a conversa");
@@ -276,7 +245,16 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(650, 520, 190, 40);
+        jButton1.setBounds(640, 520, 190, 40);
+
+        botaoDadoPersonalizado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-multiple.png"))); // NOI18N
+        botaoDadoPersonalizado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoDadoPersonalizadoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoDadoPersonalizado);
+        botaoDadoPersonalizado.setBounds(570, 510, 60, 60);
 
         pack();
         setLocationRelativeTo(null);
@@ -341,11 +319,6 @@ public class TelaJogo extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_dadoD10ActionPerformed
 
-    private void dadoD12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD12ActionPerformed
-        TelaRolarDado tela = new TelaRolarDado(this, true, 12);
-        tela.setVisible(true);
-    }//GEN-LAST:event_dadoD12ActionPerformed
-
     private void dadoD20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD20ActionPerformed
         TelaRolarDado tela = new TelaRolarDado(this, true, 20);
         tela.setVisible(true);
@@ -406,12 +379,6 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dadoD10KeyPressed
 
-    private void dadoD12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD12KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
-        }
-    }//GEN-LAST:event_dadoD12KeyPressed
-
     private void dadoD20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD20KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             popupFecharSala();
@@ -423,12 +390,6 @@ public class TelaJogo extends javax.swing.JFrame {
             popupFecharSala();
         }
     }//GEN-LAST:event_dadoD100KeyPressed
-
-    private void jTree1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTree1KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
-        }
-    }//GEN-LAST:event_jTree1KeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         JogadorDAO.mensagemSairDaSala();
@@ -454,6 +415,11 @@ public class TelaJogo extends javax.swing.JFrame {
             popupFecharSala();
         }
     }//GEN-LAST:event_jButton1KeyPressed
+
+    private void botaoDadoPersonalizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDadoPersonalizadoActionPerformed
+        TelaRolarCustomizado tela = new TelaRolarCustomizado(this, true);
+        tela.setVisible(true);
+    }//GEN-LAST:event_botaoDadoPersonalizadoActionPerformed
     public static PainelDeControle painel = null;
 
     public static void Start(boolean dono) {
@@ -497,20 +463,18 @@ public class TelaJogo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextArea areaDeChat;
+    private javax.swing.JButton botaoDadoPersonalizado;
     private javax.swing.JButton botaoEnviar;
     public static javax.swing.JButton botaoFecharSala;
     private javax.swing.JButton botaoSairDaSala;
     private javax.swing.JTextField campoEnviarTexto;
     private javax.swing.JButton dadoD10;
     private javax.swing.JButton dadoD100;
-    private javax.swing.JButton dadoD12;
     private javax.swing.JButton dadoD20;
     private javax.swing.JButton dadoD4;
     private javax.swing.JButton dadoD6;
     private javax.swing.JButton dadoD8;
     public static javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }

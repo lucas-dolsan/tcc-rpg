@@ -52,12 +52,12 @@ public class PainelDeControle extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        senhaSala.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        senhaSala.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
         senhaSala.setText("Jogadores:");
         getContentPane().add(senhaSala);
         senhaSala.setBounds(220, 11, 200, 32);
 
-        botaoLimparChat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoLimparChat.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         botaoLimparChat.setText("Limpar Chat da Sala");
         botaoLimparChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +67,7 @@ public class PainelDeControle extends javax.swing.JFrame {
         getContentPane().add(botaoLimparChat);
         botaoLimparChat.setBounds(10, 11, 200, 32);
 
-        caixaJogadores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        caixaJogadores.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         caixaJogadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         caixaJogadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,12 +77,12 @@ public class PainelDeControle extends javax.swing.JFrame {
         getContentPane().add(caixaJogadores);
         caixaJogadores.setBounds(220, 49, 200, 32);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jButton1.setText("Banir!");
         getContentPane().add(jButton1);
         jButton1.setBounds(220, 90, 100, 30);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jButton2.setText("Iniciar voIP (desligado)");
         jButton2.setToolTipText("AVISO: Esta funcão só está disponível para jogadores conectados em LAN.");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -93,13 +93,13 @@ public class PainelDeControle extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(10, 50, 200, 32);
 
-        checkboxChat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        checkboxChat.setFont(new java.awt.Font("The Bold Font", 0, 14)); // NOI18N
         checkboxChat.setText("limpar chat diariamente");
         checkboxChat.setToolTipText("limpa o chat automaticamente todos os dias  as 00:00 horas.");
         getContentPane().add(checkboxChat);
-        checkboxChat.setBounds(10, 410, 170, 25);
+        checkboxChat.setBounds(10, 410, 200, 23);
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jButton3.setText("Desbanir!");
         getContentPane().add(jButton3);
         jButton3.setBounds(320, 90, 100, 30);
