@@ -1,10 +1,20 @@
 package Telas;
 
+import ServidorVoIP.Log;
 import java.awt.event.KeyEvent;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class TelaInicial extends javax.swing.JFrame {
+
+    public static String ipAddress = null;
 
     public TelaInicial() {
         initComponents();
@@ -156,6 +166,37 @@ private void deslogar() {
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
+                // <pegar o ip
+                Enumeration<NetworkInterface> net = null;
+                try {
+                    net = NetworkInterface.getNetworkInterfaces();
+                } catch (SocketException e) {
+                    Log.add("Not connected to any network");
+                    try {
+                        throw new Exception("Network error");
+                    } catch (Exception ex) {
+                        Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                while (net.hasMoreElements()) {
+                    NetworkInterface element = net.nextElement();
+                    Enumeration<InetAddress> addresses = element.getInetAddresses();
+                    while (addresses.hasMoreElements()) {
+                        InetAddress ip = addresses.nextElement();
+                        if (ip instanceof Inet4Address) {
+                            if (ip.isSiteLocalAddress()) {
+                                ipAddress = ip.getHostAddress();
+                                break;
+                            }
+                        }
+                    }
+                    if (ipAddress != null) {
+                        break;
+                    }
+                }
+                //pegar ip />
                 new TelaInicial().setVisible(true);
             }
         }

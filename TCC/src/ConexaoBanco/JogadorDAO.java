@@ -1,6 +1,7 @@
 package ConexaoBanco;
 
 import Objetos.*;
+import ServidorVoIP.Server;
 import Telas.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -92,6 +93,8 @@ public class JogadorDAO {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, pk_jogador);
             stmt.setInt(2, salaAtual.getPk_sala());
+            stmt.execute();
+            stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -172,7 +175,21 @@ public class JogadorDAO {
         }
         return false;
     }
-
+    
+      public static void alterarIP(String nome_sala) {
+        String ip = TelaInicial.ipAddress;
+        final String sql = ("UPDATE sala SET ip_dono = ? WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, ip);
+            stmt.setString(2, nome_sala);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static boolean isVOIPAtivado(String nomeSala) {
         final String sql = ("SELECT voip_sala FROM sala WHERE nome_sala = ?;");
         try {
@@ -199,10 +216,12 @@ public class JogadorDAO {
     }
 
     public static void alterarVOIP(int estado) {
-        final String sql = ("UPDATE sala SET voip_sala = ?");
+        final String sql = ("UPDATE sala SET voip_sala = ? WHERE nome_sala = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, estado);
+            stmt.setString(2, salaAtual.getNome_sala());
+            stmt.execute();
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -223,7 +242,7 @@ public class JogadorDAO {
             stmt.setString(2, nomeSala);
             stmt.setString(3, senhaSala);
             stmt.setString(4, "");
-            stmt.setString(5, "0");//depois colocar o ip do cara
+            stmt.setString(5, TelaInicial.ipAddress);
             stmt.setInt(6, 0);
             stmt.setBoolean(7, false);
             stmt.execute();

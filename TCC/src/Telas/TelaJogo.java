@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
+    
+private boolean naConversa = false;
 
     public TelaJogo() {
         initComponents();
@@ -281,13 +283,16 @@ public class TelaJogo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
             painel.setVisible(false);
             this.dispose();
             JogadorDAO.fecharSala(this, TelaConfigurarSala.nomeSala);
+            JogadorDAO.alterarVOIP(0);
             TelaInicial.Start();
+            painel.estadoVoip = false;
         }
     }
     private void botaoFecharSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharSalaActionPerformed
@@ -307,6 +312,11 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
             JogadorDAO.mensagemSairDaSala();
+
+            if (JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador()) {
+                painel.estadoVoip = false;
+                painel.server = null;
+            }
         }
     }//GEN-LAST:event_botaoSairDaSalaActionPerformed
     public void enviarTexto() {
@@ -438,6 +448,7 @@ public class TelaJogo extends javax.swing.JFrame {
         JFrame telaSom = new TelaConfigurarSom();
         telaSom.setVisible(true);
         jButton1.setEnabled(false);
+        naConversa = true;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -456,15 +467,23 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1KeyPressed
     public static PainelDeControle painel = null;
 
-    public static void Start(boolean dono) {
+    public static void Start(boolean dono) throws Exception {
         painel = new PainelDeControle();
+
+        if (JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador()) {
+
+            String nomeSala = JogadorDAO.salaAtual.getNome_sala();
+            JogadorDAO.alterarIP(nomeSala);
+
+        }
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
                 if (dono) {
                     botaoFecharSala.setVisible(true);
                     painel.setVisible(true);
-                }else{
+                } else {
                     painel.dispose();
                 }
                 if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
@@ -476,6 +495,7 @@ public class TelaJogo extends javax.swing.JFrame {
                     @Override
                     public void run() {
                         while (true) {
+                            System.out.println(PainelDeControle.estadoVoip);
                             JogadorDAO.lerChat();
                             if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
                                 jButton1.setEnabled(false);

@@ -6,7 +6,7 @@ import com.sun.glass.events.KeyEvent;
 import javax.swing.JDialog;
 
 public class TelaLogin extends javax.swing.JFrame {
-
+    public boolean teuCu = false;
     public TelaLogin() {
         initComponents();
 

@@ -2,6 +2,8 @@ package Telas;
 
 import ConexaoBanco.JogadorDAO;
 import com.sun.glass.events.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TelaConfigurarSala extends javax.swing.JDialog {
 
@@ -117,7 +119,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     public static String nomeSala = "";
 
-    private void criarSala() {
+    private void criarSala() throws Exception {
         nomeSala = campoNomeSala.getText();
         if (JogadorDAO.salaExiste(nomeSala)) {
             erroSalaExistente.setVisible(true);
@@ -135,7 +137,11 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         }
     }
     private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed
-        criarSala();
+        try {
+            criarSala();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaConfigurarSala.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botaoCriarActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
@@ -150,7 +156,11 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
 
     private void campoNomeSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNomeSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            criarSala();
+            try {
+                criarSala();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaConfigurarSala.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             this.dispose();
         }
@@ -158,7 +168,11 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
 
     private void campoSenhaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            criarSala();
+            try {
+                criarSala();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaConfigurarSala.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             this.dispose();
         }
@@ -166,7 +180,11 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
 
     private void botaoCriarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoCriarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            criarSala();
+            try {
+                criarSala();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaConfigurarSala.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             this.dispose();
         }

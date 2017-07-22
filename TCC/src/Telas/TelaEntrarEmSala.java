@@ -2,6 +2,8 @@ package Telas;
 
 import ConexaoBanco.JogadorDAO;
 import com.sun.glass.events.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TelaEntrarEmSala extends javax.swing.JDialog {
 
@@ -18,6 +20,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     TelaEntrarEmSala(TelaInicial aThis) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,7 +104,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
-    private void entrarEmSala() {
+    private void entrarEmSala() throws Exception {
         String nomeSala = (caixaDeSalas.getSelectedItem().toString());
         String senhaSala = campoSenhaSala.getText();
         if (JogadorDAO.entrarEmSala(nomeSala, senhaSala)) {
@@ -114,12 +117,20 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         }
     }
     private void botaoEntrarEmSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaActionPerformed
-        entrarEmSala();
+        try {
+            entrarEmSala();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaEntrarEmSala.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botaoEntrarEmSalaActionPerformed
 
     private void campoSenhaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            entrarEmSala();
+            try {
+                entrarEmSala();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaEntrarEmSala.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             this.dispose();
         }
