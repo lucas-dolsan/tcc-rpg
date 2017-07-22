@@ -28,7 +28,11 @@ public class TelaPersonagem extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(720, 720));
@@ -36,11 +40,22 @@ public class TelaPersonagem extends javax.swing.JDialog {
         setPreferredSize(new java.awt.Dimension(720, 720));
         setResizable(false);
         getContentPane().setLayout(null);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(10, 240, 490, 100);
 
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 48)); // NOI18N
-        jLabel1.setText("VÁRIOS NADA");
+        jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 12)); // NOI18N
+        jLabel1.setText("Nome Personagem");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(190, 260, 350, 180);
+        jLabel1.setBounds(10, 10, 130, 20);
+        getContentPane().add(jTextField2);
+        jTextField2.setBounds(10, 90, 180, 30);
+
+        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 12)); // NOI18N
+        jLabel2.setText("Nome Jogador");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 70, 100, 12);
+        getContentPane().add(jTextField3);
+        jTextField3.setBounds(10, 30, 180, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -90,5 +105,9 @@ public class TelaPersonagem extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

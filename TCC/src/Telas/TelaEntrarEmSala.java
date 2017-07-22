@@ -32,8 +32,9 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Entrar em Sala");
-        setMaximumSize(new java.awt.Dimension(400, 490));
-        setMinimumSize(new java.awt.Dimension(400, 490));
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setMaximumSize(new java.awt.Dimension(400, 355));
+        setMinimumSize(new java.awt.Dimension(400, 355));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -62,7 +63,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoEntrarEmSala);
-        botaoEntrarEmSala.setBounds(30, 300, 140, 40);
+        botaoEntrarEmSala.setBounds(30, 260, 140, 40);
 
         botaoCancelar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
         botaoCancelar.setForeground(new java.awt.Color(51, 51, 51));
@@ -73,7 +74,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoCancelar);
-        botaoCancelar.setBounds(230, 300, 140, 40);
+        botaoCancelar.setBounds(230, 260, 140, 40);
 
         erroEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroEntrarEmSala.setForeground(new java.awt.Color(204, 0, 0));

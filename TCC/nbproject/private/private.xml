@@ -5,7 +5,7 @@
             <url>src/Telas/TelaJogo.java</url>
             <bookmark id="1">
                 <name/>
-                <line>280</line>
+                <line>260</line>
                 <key/>
             </bookmark>
         </file>
@@ -13,6 +13,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/PainelDeControle.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaRolarCustomizado.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaJogo.java</file>
         </group>
     </open-files>
 </project-private>
