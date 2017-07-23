@@ -134,8 +134,11 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             TelaJogo.Start(JogadorDAO.verificarDono());
             tela.dispose();
             this.dispose();
+            System.out.println("[" + nomeSala + "]");
             JogadorDAO.mensagemEntrarNaSala();
+            System.out.println(JogadorDAO.nickName +" entrou na sala");
         } else {
+            System.out.println("Erro ao entrar na sala " + nomeSala);
             erroEntrarEmSala.setVisible(true);
         }
     }

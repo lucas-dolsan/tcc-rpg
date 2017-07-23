@@ -34,12 +34,12 @@ public class Server {
         this.port = port;
 
         try {
-
+            System.out.println("Iniciando servidor de voIP...");
             s = new ServerSocket();
             s.setReuseAddress(true);
             s.bind(new InetSocketAddress(port));
             s.setSoTimeout(10);
-            System.out.println(": Servidor inciado com sucesso. Porta: "+ port);
+            System.out.println("Servidor inciado com sucesso. Porta: "+ port);
         } catch (IOException ex) {
             System.out.println("Erro no servidor" + ex + "(porta " + port + ")");
             throw new Exception("ERRO: " + ex);
@@ -109,7 +109,14 @@ public class Server {
             } while (TelaJogo.painel.estadoVoip);
             try {
                 s.close();
+                filaDeTransmissao.clear();
+                clientes.clear();
+                conexoesMortas.clear();
+                sleep(15);
+                System.out.println("Servidor parado com sucesso.");
             } catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

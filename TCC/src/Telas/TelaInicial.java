@@ -15,40 +15,41 @@ import javax.swing.JOptionPane;
 public class TelaInicial extends javax.swing.JFrame {
 
     public static String ipAddress = null;
-    
-    private static void pegarIPLocal(){
 
-                Enumeration<NetworkInterface> net = null;
-                try {
-                    net = NetworkInterface.getNetworkInterfaces();
-                } catch (SocketException e) {
-                    Log.add("NÃO ESTÁ CONECTADO EM NENHUMA REDE");
-                    try {
-                        throw new Exception("ERRO DE REDE");
-                    } catch (Exception ex) {
-                        Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+    private static void pegarIPLocal() {
 
-                while (net.hasMoreElements()) {
-                    NetworkInterface element = net.nextElement();
-                    Enumeration<InetAddress> addresses = element.getInetAddresses();
-                    while (addresses.hasMoreElements()) {
-                        InetAddress ip = addresses.nextElement();
-                        if (ip instanceof Inet4Address) {
-                            if (ip.isSiteLocalAddress()) {
-                                ipAddress = ip.getHostAddress();
-                                break;
-                            }
-                        }
-                    }
-                    if (ipAddress != null) {
+        Enumeration<NetworkInterface> net = null;
+        try {
+            net = NetworkInterface.getNetworkInterfaces();
+        } catch (SocketException e) {
+            System.out.println("Sem conexão com a rede local");
+            try {
+                throw new Exception("Erro de rede");
+            } catch (Exception ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        while (net.hasMoreElements()) {
+            NetworkInterface element = net.nextElement();
+            Enumeration<InetAddress> addresses = element.getInetAddresses();
+            while (addresses.hasMoreElements()) {
+                InetAddress ip = addresses.nextElement();
+                if (ip instanceof Inet4Address) {
+                    if (ip.isSiteLocalAddress()) {
+                        ipAddress = ip.getHostAddress();
+                        System.out.println("Conexão com rede local está ativa: \nEndereço de IP local: " + ipAddress);
                         break;
                     }
                 }
+            }
+            if (ipAddress != null) {
+                break;
+            }
+        }
 
-        
     }
+
     public TelaInicial() {
         initComponents();
     }
@@ -199,7 +200,11 @@ private void deslogar() {
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                pegarIPLocal();
+                if (ipAddress == null) {
+                    System.out.println("Login realizado. @" + TelaLogin.campoLogin.getText());
+                    pegarIPLocal();
+                    System.out.println("--------------------------------------------------------------------------------");
+                }
                 new TelaInicial().setVisible(true);
             }
         }

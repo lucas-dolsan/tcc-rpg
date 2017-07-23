@@ -45,11 +45,11 @@ public final class ConexaoMySql {
         String senha = linhas[1];
         String driver = linhas[2];
         String enderecoBanco = linhas[3];
+
         try {
             Class.forName(driver).newInstance();
-            this.c = (Connection) DriverManager.getConnection("jdbc:mysql://" + enderecoBanco, usuario, senha);
-        } catch (Exception sqle) {
-            sqle.printStackTrace();
+            ConexaoMySql.c = (Connection) DriverManager.getConnection("jdbc:mysql://" + enderecoBanco, usuario, senha);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
         }
     }
 
