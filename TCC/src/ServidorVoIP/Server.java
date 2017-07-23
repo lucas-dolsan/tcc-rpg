@@ -13,19 +13,18 @@ import java.util.logging.Logger;
 
 public class Server {
 
-    public ArrayList<Message> broadCastQueue = new ArrayList<Message>();
-    public ArrayList<ClientConnection> clients = new ArrayList<ClientConnection>();
-    public ArrayList<ClientConnection> toRemove = new ArrayList<ClientConnection>(); //list of dead connections
+    public ArrayList<Message> filaDeTransmissao = new ArrayList<Message>();
+    public ArrayList<ClientConnection> clientes = new ArrayList<ClientConnection>();
+    public ArrayList<ClientConnection> conexoesMortas = new ArrayList<ClientConnection>(); 
 
     private int port = 0;
 
-    public void addToBroadcastQueue(Message m) { //add a message to the broadcast queue. this method is used by all ClientConnection instances
+    public void addTofilaDeTransmissao(Message m) {
         try {
-            broadCastQueue.add(m);
+            filaDeTransmissao.add(m);
         } catch (Throwable t) {
-            //mutex error, try again
             Utils.sleep(1);
-            addToBroadcastQueue(m);
+            addTofilaDeTransmissao(m);
         }
     }
     public ServerSocket s;
@@ -40,37 +39,33 @@ public class Server {
             s.setReuseAddress(true);
             s.bind(new InetSocketAddress(port));
             s.setSoTimeout(10);
-            System.out.println("Port " + port + ": server started");
+            System.out.println(": Servidor inciado com sucesso. Porta: "+ port);
         } catch (IOException ex) {
-            System.out.println("Server error " + ex + "(port " + port + ")");
-            throw new Exception("Error " + ex);
+            System.out.println("Erro no servidor" + ex + "(porta " + port + ")");
+            throw new Exception("ERRO: " + ex);
         }
-        new BroadcastThread().start(); //create a BroadcastThread and start it
-        for (;;) { //accept all incoming connection
+        new BroadcastThread().start();
+        for (;;) {
             try {
                 Socket c = s.accept();
-                ClientConnection cc = new ClientConnection(this, c); //create a ClientConnection thread
+                ClientConnection cc = new ClientConnection(this, c);
                 cc.start();
-                addToClients(cc);
-                System.out.println("new client " + c.getInetAddress() + ":" + c.getPort() + " on port " + port);
+                addToClientes(cc);
+                System.out.println("Novo cliente " + c.getInetAddress() + ":" + c.getPort() + " conectado na porta: " + port);
             } catch (IOException ex) {
             }
         }
     }
 
-    private void addToClients(ClientConnection cc) {
+    private void addToClientes(ClientConnection cc) {
         try {
-            clients.add(cc); //add the new connection to the list of connections
+            clientes.add(cc);
         } catch (Throwable t) {
-            //mutex error, try again
+
             Utils.sleep(1);
-            addToClients(cc);
+            addToClientes(cc);
         }
     }
-
-    /**
-     * broadcasts messages to each ClientConnection, and removes dead ones
-     */
     private class BroadcastThread extends Thread {
 
         public BroadcastThread() {
@@ -89,30 +84,34 @@ public class Server {
                     }
                 }
                 try {
-                    for (ClientConnection cc : clients) {
-                        if (!cc.isAlive()) { //connection is dead, need to be removed
-                            System.out.println("dead connection closed: " + cc.getInetAddress() + ":" + cc.getPort() + " on port " + port);
-                            toRemove.add(cc);
+                    for (ClientConnection cc : clientes) {
+                        if (!cc.isAlive()) {
+                            System.out.println("conexão morta fechada: " + cc.getInetAddress() + ":" + cc.getPort() + " on port " + port);
+                            conexoesMortas.add(cc);
                         }
                     }
-                    clients.removeAll(toRemove); //delete all dead connections
-                    if (broadCastQueue.isEmpty()) { //nothing to send
-                        Utils.sleep(10); //avoid busy wait
+                    clientes.removeAll(conexoesMortas);
+                    if (filaDeTransmissao.isEmpty()) { 
+                        Utils.sleep(10); 
                         continue;
-                    } else { //we got something to broadcast
-                        Message m = broadCastQueue.get(0);
-                        for (ClientConnection cc : clients) { //broadcast the message
+                    } else {
+                        Message m = filaDeTransmissao.get(0);
+                        for (ClientConnection cc : clientes) { 
                             if (cc.getChId() != m.getChId()) {
                                 cc.addToQueue(m);
                             }
                         }
-                        broadCastQueue.remove(m); //remove it from the broadcast queue
+                        filaDeTransmissao.remove(m);
                     }
                 } catch (Throwable t) {
-                    //mutex error, try again
                 }
 
             } while (TelaJogo.painel.estadoVoip);
+            try {
+                s.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

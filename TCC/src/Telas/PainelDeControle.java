@@ -10,6 +10,7 @@ public class PainelDeControle extends javax.swing.JFrame {
 
     JFrame voipFrame = null;
     public boolean estadoVoip = false;
+    public int port = 1775;
 
     public PainelDeControle() {
         initComponents();
@@ -80,6 +81,11 @@ public class PainelDeControle extends javax.swing.JFrame {
         checkboxChat.setFont(new java.awt.Font("The Bold Font", 0, 14)); // NOI18N
         checkboxChat.setText("limpar chat diariamente");
         checkboxChat.setToolTipText("limpa o chat automaticamente todos os dias  as 00:00 horas.");
+        checkboxChat.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                checkboxChatStateChanged(evt);
+            }
+        });
         getContentPane().add(checkboxChat);
         checkboxChat.setBounds(10, 410, 200, 24);
 
@@ -103,14 +109,23 @@ public class PainelDeControle extends javax.swing.JFrame {
     }//GEN-LAST:event_caixaJogadoresActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.out.println("VOIP CHANGED");
         if (!estadoVoip) {
-            new Thread() {                
+            do {
+                String configPort = JOptionPane.showInputDialog("Escolha em qual porta o servidor de voIP funcionará: ");
+                port = Integer.parseInt(configPort);
+                if (port < 1024 || port > 65535) {
+                    JOptionPane.showMessageDialog(null, "AVISO: Apenas valores maiores que 1024 e menores que 65535!");
+                }
+            } while (port < 1024 || port > 65535);
+            new Thread() {
                 @Override
                 public void run() {
                     try {
-                        voipFrame = new ServerRunner();
-                        voipFrame.setVisible(true);
+                        TelaJogo.jButton1.setEnabled(false);
+                        voipFrame = new ServerRunner(port);
+                        voipFrame.setVisible(false);
+                        JFrame telaSom = new TelaConfigurarSom();
+                        telaSom.setVisible(true);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -120,20 +135,28 @@ public class PainelDeControle extends javax.swing.JFrame {
             jButton2.setText("Desligar voIP (ligado)");
             TelaJogo.jButton1.setEnabled(false);
             JogadorDAO.alterarVOIP(1);
-            System.out.println("server running");
+            System.out.println("Iniciando servidor...");
         } else {
 
             estadoVoip = false;
             voipFrame.setVisible(false);
             voipFrame.dispose();
-            
+
             jButton2.setText("Ligar voIP (desligado)");
             TelaJogo.jButton1.setEnabled(true);
             JogadorDAO.alterarVOIP(0);
-            System.out.println("server stopping");
+            System.out.println("Parando servidor...");
 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void checkboxChatStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkboxChatStateChanged
+        if (checkboxChat.isSelected()) {
+            JogadorDAO.modificarChatDaily(JogadorDAO.salaAtual.getNome_sala(), 1);
+        } else {    
+            JogadorDAO.modificarChatDaily(JogadorDAO.salaAtual.getNome_sala(), 0);
+        }
+    }//GEN-LAST:event_checkboxChatStateChanged
     public static void listarJogadoresAtuais() {
         for (Jogador jogador : JogadorDAO.jogadoresAtuais) {
             caixaJogadores.addItem(jogador.getNome_jog());
@@ -151,7 +174,7 @@ public class PainelDeControle extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoLimparChat;
     public static javax.swing.JComboBox<String> caixaJogadores;
-    private javax.swing.JRadioButton checkboxChat;
+    public javax.swing.JRadioButton checkboxChat;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

@@ -449,10 +449,17 @@ public class TelaJogo extends javax.swing.JFrame {
                     @Override
                     public void run() {
                         while (true) {
-                            if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
-                                jButton1.setEnabled(false);
-                            } else if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
-                                jButton1.setEnabled(true);
+                            if (!(JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador())) {
+                                if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
+                                    jButton1.setEnabled(false);
+                                } else if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
+                                    jButton1.setEnabled(true);
+                                }
+                            }
+                            if(JogadorDAO.verificarChatDaily(JogadorDAO.salaAtual.getNome_sala())){
+                                painel.checkboxChat.setSelected(true);
+                            }else{
+                                painel.checkboxChat.setSelected(false);
                             }
                             JogadorDAO.lerChat();
                             try {

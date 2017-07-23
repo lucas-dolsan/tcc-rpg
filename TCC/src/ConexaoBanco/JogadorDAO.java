@@ -159,7 +159,8 @@ public class JogadorDAO {
     }
 
     /**
-     Não usa que não funciona
+     * Não usa que não funciona
+     *
      * @return
      */
     public static boolean verificarDono() {
@@ -176,7 +177,8 @@ public class JogadorDAO {
         }
         return false;
     }
-     public static void alterarIP(String nome_sala) {
+
+    public static void alterarIP(String nome_sala) {
         String ip = TelaInicial.ipAddress;
         final String sql = ("UPDATE sala SET ip_dono = ? WHERE nome_sala = ?");
         try {
@@ -189,7 +191,22 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
-    
+
+    public static String pegarIPDono(String nome_sala) {
+        final String sql = ("SELECT ip_dono FROM sala WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nome_sala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static boolean isVOIPAtivado(String nomeSala) {
         final String sql = ("SELECT voip_sala FROM sala WHERE nome_sala = ?;");
         try {
@@ -227,6 +244,7 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
+
     public static void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
         String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala, ip_dono, limpar_chat_daily, voip_sala) values(?,?,?,?,?,?,?)";
         for (Sala sala : salas) {
@@ -532,6 +550,7 @@ public class JogadorDAO {
             while (rs.next()) {
                 String nomeBanco = rs.getString("nome_jog");
                 if (nick.equals(nomeBanco)) {
+                    stmt.close();
                     return true;
                 }
             }
@@ -549,8 +568,43 @@ public class JogadorDAO {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, login);
             stmt.execute();
+            stmt.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void modificarChatDaily(String nomeSala, int estado) {
+        final String sql = "UPDATE sala SET limpar_chat_daily = ? WHERE nome_sala = ?";
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, estado);
+            stmt.setString(2, nomeSala);
+            stmt.execute();
+            stmt.close();
         } catch (Exception erro) {
             erro.printStackTrace();
         }
     }
+    public static boolean verificarChatDaily(String nomeSala){
+        final String sql = "SELECT limpar_chat_daily FROM sala WHERE nome_sala = ?";
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomeSala);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                if(rs.getInt(1) == 1){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            stmt.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    return false;
+    }
 }
+
