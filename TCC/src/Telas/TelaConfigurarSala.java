@@ -122,15 +122,19 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
     private void criarSala() {
         nomeSala = campoNomeSala.getText();
         if (JogadorDAO.salaExiste(nomeSala)) {
+            System.out.println("Erro: Esta sala já existe.");
             erroSalaExistente.setVisible(true);
         } else if (nomeSala.isEmpty()) {
+            System.out.println("Erro: Nome da sala deve ser informado.");
             erroSalaSemNome.setVisible(true);
         } else {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
+            System.out.println("Criando sala...");
             JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar);
+            System.out.println("Sala: "+nomeSala+" criada com sucesso.");
             if (JogadorDAO.entrarEmSala(nomeSala, senhaAuxiliar)) {
-                TelaJogo.Start(JogadorDAO.verificarDono());
+                TelaJogo.Start(JogadorDAO.salaAtual.getFk_jogador() == JogadorDAO.player.getPk_jogador());
                 tela.dispose();
                 this.dispose();
             }

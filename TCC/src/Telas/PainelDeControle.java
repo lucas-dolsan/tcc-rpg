@@ -138,9 +138,8 @@ public class PainelDeControle extends javax.swing.JFrame {
             jButton2.setText("Desligar voIP (on)");
             TelaJogo.jButton1.setEnabled(false);
             JogadorDAO.alterarVOIP(1);
-            System.out.println("Iniciando servidor...");
         } else {
-
+            System.out.println("Parando servidor de voIP...");
             estadoVoip = false;
             voipFrame.setVisible(false);
             voipFrame.dispose();
@@ -148,8 +147,6 @@ public class PainelDeControle extends javax.swing.JFrame {
             jButton2.setText("Ligar voIP (off)");
             TelaJogo.jButton1.setEnabled(true);
             JogadorDAO.alterarVOIP(0);
-            System.out.println("Parando servidor...");
-
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

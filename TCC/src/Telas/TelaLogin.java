@@ -3,6 +3,7 @@ package Telas;
 import ConexaoBanco.JogadorDAO;
 import static Telas.TelaRegistrar.erros;
 import com.sun.glass.events.KeyEvent;
+import java.awt.Cursor;
 import javax.swing.JDialog;
 
 public class TelaLogin extends javax.swing.JFrame {
@@ -128,12 +129,25 @@ public class TelaLogin extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_botaoRegistrarSeActionPerformed
     public void entrarComEnter() {
+
         JogadorDAO jogador = new JogadorDAO();
         String login = campoLogin.getText();
         char[] senha = campoSenha.getPassword();
         String senhaAuxiliar = String.valueOf(senha);
-        jogador.logar(login, senhaAuxiliar, this);
-        JogadorDAO.modificarUltimoLogin(login);
+        try {
+
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+            System.out.println("Efetuando login...");
+            jogador.logar(login, senhaAuxiliar, this);
+            JogadorDAO.modificarUltimoLogin(login);
+
+        } finally {
+
+            setCursor(Cursor.getDefaultCursor());
+
+        }
+
     }
     private void campoLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoLoginKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -175,10 +189,6 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -197,9 +207,25 @@ public class TelaLogin extends javax.swing.JFrame {
         }
         //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
+                System.out.println("Iniciando Double Damage (2017)...");
+                System.out.println("'Aplicação Online Para RPG De Mesa Com Uso De VoIP E Chat'");
+                System.out.println("Trabalho de Conclusão do Curso de Informática Integrado ao Ensino Médio");
+                System.out.println("Instituto Federal Catarinense - Campus Ibirama");
+                System.out.println("Turma: Informática 2015");
+                System.out.println("Autores: Eduardo Schork & Lucas Dolsan");
+                System.out.println("Repositório: " + "https://github.com/lucas-dolsan/tcc-rpg");
+                System.out.println("--------------------------------------------------------------------------------");
                 new TelaLogin().setVisible(true);
                 erroLogin.setVisible(false);
+                new Thread() {
+                    public void run() {
+                        while (true) {
+                            JogadorDAO.ping();
+                        }
+                    }
+                }.start();
             }
         });
     }
@@ -207,7 +233,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoEntrar;
     private javax.swing.JButton botaoRegistrarSe;
-    private javax.swing.JTextField campoLogin;
+    public static javax.swing.JTextField campoLogin;
     private javax.swing.JPasswordField campoSenha;
     public static javax.swing.JLabel erroLogin;
     public javax.swing.JLabel jLabel1;

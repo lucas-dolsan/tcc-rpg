@@ -33,9 +33,8 @@ public class TelaConfigurarSom extends javax.swing.JFrame {
                 mic.open(af);
                 mic.start();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(rootPane, "Microfone não detectado.\nOk para fechar", "Error", JOptionPane.ERROR_MESSAGE);
-                
-                System.exit(0);
+                System.out.println("Microfone não detectado.");
+                JOptionPane.showMessageDialog(rootPane, "Microfone não detectado.", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
             }
             for (;;) {
                 Utils.sleep(10);
@@ -148,6 +147,7 @@ public class TelaConfigurarSom extends javax.swing.JFrame {
         try {
             new Client(JogadorDAO.pegarIPDono(JogadorDAO.salaAtual.getNome_sala()),TelaJogo.painel.port).start();
         } catch (Exception ex) {
+            System.out.println("ERRO:" + ex);
             JOptionPane.showMessageDialog(rootPane, ex, "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }

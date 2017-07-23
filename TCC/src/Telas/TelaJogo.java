@@ -333,6 +333,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private void popupSairSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja sair da sala?", "Sair da sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
+            System.out.println(JogadorDAO.player.getNome_jog()+" saiu da sala.");
             painel.setVisible(false);
             this.dispose();
             TelaInicial.Start();
@@ -343,6 +344,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
+            System.out.println("Sala "+JogadorDAO.salaAtual.getNome_sala()+" fechada com sucesso.");
             painel.setVisible(false);
             this.dispose();
             JogadorDAO.fecharSala(this, TelaConfigurarSala.nomeSala);
@@ -540,8 +542,10 @@ public class TelaJogo extends javax.swing.JFrame {
                             if (!(JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador())) {
                                 if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
                                     jButton1.setEnabled(false);
+                                    System.out.println("voIP está desativado");
                                 } else if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
                                     jButton1.setEnabled(true);
+                                    System.out.println("voIP está ativado");
                                 }
                             }
                             if(JogadorDAO.verificarChatDaily(JogadorDAO.salaAtual.getNome_sala())){

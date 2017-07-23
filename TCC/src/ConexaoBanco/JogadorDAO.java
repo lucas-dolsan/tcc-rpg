@@ -668,7 +668,12 @@ public class JogadorDAO {
         final String sql = ("select * from jogador where email_jog =? and senha_jog = sha1(md5(sha1(md5(sha1(md5(?))))));");
         try {
             pegarJogadoresDoBanco();
-            pegarSalasDoBanco();
+            Thread pegarVariaveisLocais = new Thread() {
+                public void run() {
+                    pegarSalasDoBanco();
+                }
+            };
+            pegarVariaveisLocais.start();
             for (Jogador jog : jogadores) {
                 if (jog.getEmail_jog().equals(email)) {
                     player = jog;
@@ -684,6 +689,7 @@ public class JogadorDAO {
                 Telas.TelaInicial.Start();
                 tela.setVisible(false);
             } else {
+                System.out.println("Falha ao efetuar login: Credenciais incorretas");
                 tela.erroLogin.setVisible(true);
             }
             stmt.close();
