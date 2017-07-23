@@ -1,11 +1,54 @@
 package Telas;
 
+import ServidorVoIP.Log;
 import java.awt.event.KeyEvent;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class TelaInicial extends javax.swing.JFrame {
 
+    public static String ipAddress = null;
+    
+    private static void pegarIPLocal(){
+
+                Enumeration<NetworkInterface> net = null;
+                try {
+                    net = NetworkInterface.getNetworkInterfaces();
+                } catch (SocketException e) {
+                    Log.add("NÃO ESTÁ CONECTADO EM NENHUMA REDE");
+                    try {
+                        throw new Exception("ERRO DE REDE");
+                    } catch (Exception ex) {
+                        Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                while (net.hasMoreElements()) {
+                    NetworkInterface element = net.nextElement();
+                    Enumeration<InetAddress> addresses = element.getInetAddresses();
+                    while (addresses.hasMoreElements()) {
+                        InetAddress ip = addresses.nextElement();
+                        if (ip instanceof Inet4Address) {
+                            if (ip.isSiteLocalAddress()) {
+                                ipAddress = ip.getHostAddress();
+                                break;
+                            }
+                        }
+                    }
+                    if (ipAddress != null) {
+                        break;
+                    }
+                }
+
+        
+    }
     public TelaInicial() {
         initComponents();
     }
@@ -156,6 +199,7 @@ private void deslogar() {
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                pegarIPLocal();
                 new TelaInicial().setVisible(true);
             }
         }

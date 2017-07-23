@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class JogadorDAO {
 
+    public static String nomePersonagem = "";
     public static Jogador player = null;
     public static Sala salaAtual = null;
     public static String nickName = "";
@@ -54,6 +55,178 @@ public class JogadorDAO {
             stmt.setString(1, mensagem);
             stmt.setString(2, TelaConfigurarSala.nomeSala);
             stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean personagemExiste(String nomePersonagem) {
+        String sql = "SELECT nomePersonagem_fic FROM personagem WHERE nomePersonagem_fic = ?";
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomePersonagem);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void criarPersonagem(int fk_sala, String nomePersonagem_fic, String nomeJogador_fic, String raca_fic, String classe_fic, int pontosVida_fic, int pontosMana_fic, int nivel_fic, int idade_fic, String divindade_fic, String lore_fic, String outrosAtributos_fic, int pontosForca_fic, int pontosInteligencia_fic, int pontosDefesa_fic, int pontosConstituicao_fic, int pontosSabedoria_fic, int pontosDestreza_fic, int pontosCarisma_fic) {
+        final String sql = ("insert into personagem(fk_sala,outrosAtributos_fic,lore_fic,raca_fic,classe_fic,nomePersonagem_fic,nomeJogador_fic,divindade_fic,nivel_fic,idade_fic,pontosVida_fic,pontosMana_fic,pontosForca_fic,pontosConstituicao_fic,pontosDestreza_fic,pontosInteligencia_fic,pontosSabedoria_fic,pontosCarisma_fic,pontosDefesa_fic) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, fk_sala);
+            stmt.setString(2, outrosAtributos_fic);
+            stmt.setString(3, lore_fic);
+            stmt.setString(4, raca_fic);
+            stmt.setString(5, classe_fic);
+            stmt.setString(6, nomePersonagem_fic);
+            stmt.setString(7, nomeJogador_fic);
+            stmt.setString(8, divindade_fic);
+            stmt.setInt(9, nivel_fic);
+            stmt.setInt(10, idade_fic);
+            stmt.setInt(11, pontosVida_fic);
+            stmt.setInt(12, pontosMana_fic);
+            stmt.setInt(13, pontosForca_fic);
+            stmt.setInt(14, pontosConstituicao_fic);
+            stmt.setInt(15, pontosDestreza_fic);
+            stmt.setInt(16, pontosInteligencia_fic);
+            stmt.setInt(17, pontosSabedoria_fic);
+            stmt.setInt(18, pontosCarisma_fic);
+            stmt.setInt(19, pontosDefesa_fic);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void salvarEdicaoPersonagem(int fk_sala, String nomePersonagem_fic, String nomeJogador_fic, String raca_fic, String classe_fic, int pontosVida_fic, int pontosMana_fic, int nivel_fic, int idade_fic, String divindade_fic, String lore_fic, String outrosAtributos_fic, int pontosForca_fic, int pontosInteligencia_fic, int pontosDefesa_fic, int pontosConstituicao_fic, int pontosSabedoria_fic, int pontosDestreza_fic, int pontosCarisma_fic) {
+        final String sql = ("UPDATE personagem SET fk_sala = ?,outrosAtributos_fic=?,lore_fic=?,raca_fic=?,classe_fic=?,nomePersonagem_fic=?,nomeJogador_fic=?,divindade_fic=?,nivel_fic=?,idade_fic=?,pontosVida_fic=?,pontosMana_fic=?,pontosForca_fic=?,pontosConstituicao_fic=?,pontosDestreza_fic=?,pontosInteligencia_fic=?,pontosSabedoria_fic=?,pontosCarisma_fic=?,pontosDefesa_fic=? WHERE nomePersonagem_fic = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, fk_sala);
+            stmt.setString(2, outrosAtributos_fic);
+            stmt.setString(3, lore_fic);
+            stmt.setString(4, raca_fic);
+            stmt.setString(5, classe_fic);
+            stmt.setString(6, nomePersonagem_fic);
+            stmt.setString(7, nomeJogador_fic);
+            stmt.setString(8, divindade_fic);
+            stmt.setInt(9, nivel_fic);
+            stmt.setInt(10, idade_fic);
+            stmt.setInt(11, pontosVida_fic);
+            stmt.setInt(12, pontosMana_fic);
+            stmt.setInt(13, pontosForca_fic);
+            stmt.setInt(14, pontosConstituicao_fic);
+            stmt.setInt(15, pontosDestreza_fic);
+            stmt.setInt(16, pontosInteligencia_fic);
+            stmt.setInt(17, pontosSabedoria_fic);
+            stmt.setInt(18, pontosCarisma_fic);
+            stmt.setInt(19, pontosDefesa_fic);
+            stmt.setString(20, JogadorDAO.nomePersonagem);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void pegarDadosPersonagem(String nomePersonagem) {
+        JogadorDAO.nomePersonagem = nomePersonagem;
+        final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomePersonagem);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                TelaPersonagem telaPersonagem = new TelaPersonagem(null, true);
+                telaPersonagem.campoOutrosAtributos.setText(rs.getString("outrosAtributos_fic"));
+                telaPersonagem.campoLore.setText(rs.getString("lore_fic"));
+                telaPersonagem.campoRaca.setText(rs.getString("raca_fic"));
+                telaPersonagem.campoClasse.setText(rs.getString("classe_fic"));
+                telaPersonagem.campoNomePersonagem.setText(rs.getString("nomePersonagem_fic"));
+                telaPersonagem.campoNomeJogador.setText(rs.getString("nomeJogador_fic"));
+                telaPersonagem.campoDivindade.setText(rs.getString("divindade_fic"));
+                telaPersonagem.campoNivel.setText(rs.getInt("nivel_fic") + "");
+                telaPersonagem.campoIdade.setText(rs.getInt("idade_fic") + "");
+                telaPersonagem.campoVida.setText(rs.getInt("pontosVida_fic") + "");
+                telaPersonagem.campoMana.setText(rs.getInt("pontosMana_fic") + "");
+                telaPersonagem.campoForca.setText(rs.getInt("pontosForca_fic") + "");
+                telaPersonagem.campoConstituicao.setText(rs.getInt("pontosConstituicao_fic") + "");
+                telaPersonagem.campoDestreza.setText(rs.getInt("pontosDestreza_fic") + "");
+                telaPersonagem.campoInteligencia.setText(rs.getInt("pontosInteligencia_fic") + "");
+                telaPersonagem.campoSabedoria.setText(rs.getInt("pontosSabedoria_fic") + "");
+                telaPersonagem.campoCarisma.setText(rs.getInt("pontosCarisma_fic") + "");
+                telaPersonagem.campoDefesa.setText(rs.getInt("pontosDefesa_fic") + "");
+                if (verificarDono()) {
+                    telaPersonagem.botaoExcluirPersonagem.setEnabled(true);
+                    telaPersonagem.botaoEquipamentos.setEnabled(true);
+                    telaPersonagem.botaoMagias.setEnabled(true);
+                    telaPersonagem.botaoSalvarPersonagem.setVisible(false);
+                    telaPersonagem.salvarEdicao.setEnabled(true);
+                    telaPersonagem.setVisible(true);
+
+                } else {
+                    telaPersonagem.botaoEquipamentos.setEnabled(true);
+                    telaPersonagem.botaoMagias.setEnabled(true);
+                    telaPersonagem.campoCarisma.setEditable(false);
+                    telaPersonagem.campoClasse.setEditable(false);
+                    telaPersonagem.campoConstituicao.setEditable(false);
+                    telaPersonagem.campoDefesa.setEditable(false);
+                    telaPersonagem.campoDestreza.setEditable(false);
+                    telaPersonagem.campoDivindade.setEditable(false);
+                    telaPersonagem.campoForca.setEditable(false);
+                    telaPersonagem.campoIdade.setEditable(false);
+                    telaPersonagem.campoInteligencia.setEditable(false);
+                    telaPersonagem.campoLore.setEditable(false);
+                    telaPersonagem.campoMana.setEditable(false);
+                    telaPersonagem.campoNivel.setEditable(false);
+                    telaPersonagem.campoNomeJogador.setEditable(false);
+                    telaPersonagem.campoNomePersonagem.setEditable(false);
+                    telaPersonagem.campoOutrosAtributos.setEditable(false);
+                    telaPersonagem.campoRaca.setEditable(false);
+                    telaPersonagem.campoSabedoria.setEditable(false);
+                    telaPersonagem.campoVida.setEditable(false);
+                    telaPersonagem.setVisible(true);
+                }
+
+            }
+            stmt.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void excluirPersonagem() {
+        final String sql = ("DELETE FROM personagem WHERE nomePersonagem_fic = ?;");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, JogadorDAO.nomePersonagem);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void listarPersonagens() {
+        final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, salaAtual.getNome_sala());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                TelaJogo.caixaFichaPersonagem.addItem(rs.getString("nomePersonagem_fic"));
+            }
+            stmt.close();
+            rs.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -159,10 +332,11 @@ public class JogadorDAO {
     }
 
     public static boolean verificarDono() {
-        String sql = ("SELECT * FROM sala WHERE fk_jogador =?");
+        String sql = ("SELECT * FROM sala WHERE fk_jogador =? AND nome_sala = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, player.getPk_jogador());
+            stmt.setString(2, salaAtual.getNome_sala());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return true;
@@ -171,6 +345,35 @@ public class JogadorDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void alterarIP(String nome_sala) {
+        String ip = TelaInicial.ipAddress;
+        final String sql = ("UPDATE sala SET ip_dono = ? WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, ip);
+            stmt.setString(2, nome_sala);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String pegarIPDono(String nome_sala) {
+        final String sql = ("SELECT ip_dono FROM sala WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nome_sala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static boolean isVOIPAtivado(String nomeSala) {
@@ -199,10 +402,12 @@ public class JogadorDAO {
     }
 
     public static void alterarVOIP(int estado) {
-        final String sql = ("UPDATE sala SET voip_sala = ?");
+        final String sql = ("UPDATE sala SET voip_sala = ? WHERE nome_sala = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, estado);
+            stmt.setString(2, salaAtual.getNome_sala());
+            stmt.execute();
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -514,6 +719,7 @@ public class JogadorDAO {
             while (rs.next()) {
                 String nomeBanco = rs.getString("nome_jog");
                 if (nick.equals(nomeBanco)) {
+                    stmt.close();
                     return true;
                 }
             }
@@ -531,8 +737,43 @@ public class JogadorDAO {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, login);
             stmt.execute();
+            stmt.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void modificarChatDaily(String nomeSala, int estado) {
+        final String sql = "UPDATE sala SET limpar_chat_daily = ? WHERE nome_sala = ?";
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, estado);
+            stmt.setString(2, nomeSala);
+            stmt.execute();
+            stmt.close();
         } catch (Exception erro) {
             erro.printStackTrace();
         }
+    }
+
+    public static boolean verificarChatDaily(String nomeSala) {
+        final String sql = "SELECT limpar_chat_daily FROM sala WHERE nome_sala = ?";
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomeSala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            stmt.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 }

@@ -10,7 +10,6 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     public TelaEntrarEmSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
         super(parent, modal);
         initComponents();
-        JogadorDAO.listarSalas();
         erroEntrarEmSala.setVisible(false);
         tela = telaInicial;
     }
@@ -18,6 +17,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     TelaEntrarEmSala(TelaInicial aThis) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,10 +36,25 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         setMaximumSize(new java.awt.Dimension(400, 355));
         setMinimumSize(new java.awt.Dimension(400, 355));
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         caixaDeSalas.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         caixaDeSalas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        caixaDeSalas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                caixaDeSalasFocusGained(evt);
+            }
+        });
+        caixaDeSalas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                caixaDeSalasKeyPressed(evt);
+            }
+        });
         getContentPane().add(caixaDeSalas);
         caixaDeSalas.setBounds(30, 80, 340, 40);
 
@@ -62,6 +77,11 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
                 botaoEntrarEmSalaActionPerformed(evt);
             }
         });
+        botaoEntrarEmSala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoEntrarEmSalaKeyPressed(evt);
+            }
+        });
         getContentPane().add(botaoEntrarEmSala);
         botaoEntrarEmSala.setBounds(30, 260, 140, 40);
 
@@ -71,6 +91,11 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCancelarActionPerformed(evt);
+            }
+        });
+        botaoCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoCancelarKeyPressed(evt);
             }
         });
         getContentPane().add(botaoCancelar);
@@ -125,6 +150,41 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_campoSenhaSalaKeyPressed
+
+    private void caixaDeSalasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_caixaDeSalasKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_caixaDeSalasKeyPressed
+
+    private void botaoEntrarEmSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_botaoEntrarEmSalaKeyPressed
+
+    private void botaoCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoCancelarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_botaoCancelarKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void caixaDeSalasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaDeSalasFocusGained
+        caixaDeSalas.removeAllItems();
+        JogadorDAO.listarSalas();
+    }//GEN-LAST:event_caixaDeSalasFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;

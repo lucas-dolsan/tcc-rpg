@@ -1,150 +1,118 @@
 package ServidorVoIP;
 
-
 import Dependencias.Message;
 import Dependencias.Utils;
+import Telas.TelaJogo;
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import org.teleal.cling.UpnpService;
-import org.teleal.cling.UpnpServiceImpl;
-import org.teleal.cling.support.igd.PortMappingListener;
-import org.teleal.cling.support.model.PortMapping;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Server {
-    
-    private ArrayList<Message> broadCastQueue = new ArrayList<Message>();    
-    private ArrayList<ClientConnection> clients = new ArrayList<ClientConnection>();
-    private int port;
-    
-    private UpnpService u; //when upnp is enabled, this points to the upnp service
-    
-    public void addToBroadcastQueue(Message m) { //add a message to the broadcast queue. this method is used by all ClientConnection instances
+
+    public ArrayList<Message> filaDeTransmissao = new ArrayList<Message>();
+    public ArrayList<ClientConnection> clientes = new ArrayList<ClientConnection>();
+    public ArrayList<ClientConnection> conexoesMortas = new ArrayList<ClientConnection>(); 
+
+    private int port = 0;
+
+    public void addTofilaDeTransmissao(Message m) {
         try {
-            broadCastQueue.add(m);
+            filaDeTransmissao.add(m);
         } catch (Throwable t) {
-            //mutex error, try again
             Utils.sleep(1);
-            addToBroadcastQueue(m);
+            addTofilaDeTransmissao(m);
         }
     }
-    private ServerSocket s;
-    
-    public Server(int port, boolean upnp) throws Exception{
-        this.port = port;
-        if(upnp){
-            Log.add("Setting up NAT Port Forwarding...");
-            //first we need the address of this machine on the local network
-            try {
-                Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
-            } catch (SocketException ex) {
-                Log.add("Network error");
-                throw new Exception("Network error");
-            }
-            String ipAddress = null;
-            Enumeration<NetworkInterface> net = null;
-            try {
-                net = NetworkInterface.getNetworkInterfaces();
-            } catch (SocketException e) {
-                Log.add("Not connected to any network");
-                throw new Exception("Network error");
-            }
+    public ServerSocket s;
 
-            while (net.hasMoreElements()) {
-                NetworkInterface element = net.nextElement();
-                Enumeration<InetAddress> addresses = element.getInetAddresses();
-                while (addresses.hasMoreElements()) {
-                    InetAddress ip = addresses.nextElement();
-                    if (ip instanceof Inet4Address) {
-                        if (ip.isSiteLocalAddress()) {
-                            ipAddress = ip.getHostAddress();
-                            break;
-                        }
-                    }
-                }
-                if (ipAddress != null) {
-                    break;
-                }
-            }
-            if (ipAddress == null) {
-                Log.add("Not connected to any IPv4 network");
-                throw new Exception("Network error");
-            }
-            u = new UpnpServiceImpl(new PortMappingListener(new PortMapping(port, ipAddress, PortMapping.Protocol.TCP)));
-            u.getControlPoint().search();
-        }
+    public Server(int port) throws Exception {
+
+        this.port = port;
+
         try {
-            s = new ServerSocket(port); //listen on specified port
-            Log.add("Port " + port + ": server started");
+
+            s = new ServerSocket();
+            s.setReuseAddress(true);
+            s.bind(new InetSocketAddress(port));
+            s.setSoTimeout(10);
+            System.out.println(": Servidor inciado com sucesso. Porta: "+ port);
         } catch (IOException ex) {
-            Log.add("Server error " + ex + "(port " + port + ")");
-            throw new Exception("Error "+ex);
+            System.out.println("Erro no servidor" + ex + "(porta " + port + ")");
+            throw new Exception("ERRO: " + ex);
         }
-        new BroadcastThread().start(); //create a BroadcastThread and start it
-        for (;;) { //accept all incoming connection
+        new BroadcastThread().start();
+        for (;;) {
             try {
                 Socket c = s.accept();
-                ClientConnection cc = new ClientConnection(this, c); //create a ClientConnection thread
+                ClientConnection cc = new ClientConnection(this, c);
                 cc.start();
-                addToClients(cc);
-                Log.add("new client " + c.getInetAddress() + ":" + c.getPort() + " on port " + port);
+                addToClientes(cc);
+                System.out.println("Novo cliente " + c.getInetAddress() + ":" + c.getPort() + " conectado na porta: " + port);
             } catch (IOException ex) {
             }
         }
     }
 
-    private void addToClients(ClientConnection cc) {
+    private void addToClientes(ClientConnection cc) {
         try {
-            clients.add(cc); //add the new connection to the list of connections
+            clientes.add(cc);
         } catch (Throwable t) {
-            //mutex error, try again
+
             Utils.sleep(1);
-            addToClients(cc);
+            addToClientes(cc);
         }
     }
-
-    /**
-     * broadcasts messages to each ClientConnection, and removes dead ones
-     */
     private class BroadcastThread extends Thread {
-        
+
         public BroadcastThread() {
         }
-        
+
         @Override
         public void run() {
-            for (;;) {
+
+            do {
+                if (s != null && TelaJogo.painel.estadoVoip == false) {
+
+                    try {
+                        s.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 try {
-                    ArrayList<ClientConnection> toRemove = new ArrayList<ClientConnection>(); //create a list of dead connections
-                    for (ClientConnection cc : clients) {
-                        if (!cc.isAlive()) { //connection is dead, need to be removed
-                            Log.add("dead connection closed: " + cc.getInetAddress() + ":" + cc.getPort() + " on port " + port);
-                            toRemove.add(cc);
+                    for (ClientConnection cc : clientes) {
+                        if (!cc.isAlive()) {
+                            System.out.println("conexão morta fechada: " + cc.getInetAddress() + ":" + cc.getPort() + " on port " + port);
+                            conexoesMortas.add(cc);
                         }
                     }
-                    clients.removeAll(toRemove); //delete all dead connections
-                    if (broadCastQueue.isEmpty()) { //nothing to send
-                        Utils.sleep(10); //avoid busy wait
+                    clientes.removeAll(conexoesMortas);
+                    if (filaDeTransmissao.isEmpty()) { 
+                        Utils.sleep(10); 
                         continue;
-                    } else { //we got something to broadcast
-                        Message m = broadCastQueue.get(0);
-                        for (ClientConnection cc : clients) { //broadcast the message
+                    } else {
+                        Message m = filaDeTransmissao.get(0);
+                        for (ClientConnection cc : clientes) { 
                             if (cc.getChId() != m.getChId()) {
                                 cc.addToQueue(m);
                             }
                         }
-                        broadCastQueue.remove(m); //remove it from the broadcast queue
+                        filaDeTransmissao.remove(m);
                     }
                 } catch (Throwable t) {
-                    //mutex error, try again
                 }
+
+            } while (TelaJogo.painel.estadoVoip);
+            try {
+                s.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+
 }

@@ -67,7 +67,7 @@ public class ClientConnection extends Thread {
                     if (toBroadcast.getChId() == -1) { //set its chId and timestamp and pass it to the server
                         toBroadcast.setChId(chId);
                         toBroadcast.setTimestamp(System.nanoTime() / 1000000L);
-                        serv.addToBroadcastQueue(toBroadcast);
+                        serv.addTofilaDeTransmissao(toBroadcast);
                     } else {
                         continue; //invalid message
                     }

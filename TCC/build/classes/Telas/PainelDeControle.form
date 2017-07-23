@@ -45,7 +45,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="220" y="11" width="200" height="32"/>
+          <AbsoluteConstraints x="150" y="10" width="260" height="32"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -54,14 +54,14 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="The Bold Font" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Limpar Chat da Sala"/>
+        <Property name="text" type="java.lang.String" value="Limpar chat"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoLimparChatActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="11" width="200" height="32"/>
+          <AbsoluteConstraints x="10" y="120" width="180" height="32"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -83,7 +83,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="220" y="49" width="200" height="32"/>
+          <AbsoluteConstraints x="10" y="40" width="420" height="32"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -92,11 +92,15 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="The Bold Font" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Banir!"/>
+        <Property name="text" type="java.lang.String" value="Banir"/>
+        <Property name="actionCommand" type="java.lang.String" value="Banir"/>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Banir"/>
+      </AccessibilityProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="220" y="90" width="100" height="30"/>
+          <AbsoluteConstraints x="250" y="80" width="180" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -105,7 +109,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="The Bold Font" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Iniciar voIP (desligado)"/>
+        <Property name="text" type="java.lang.String" value="Iniciar voIP (off)"/>
         <Property name="toolTipText" type="java.lang.String" value="AVISO: Esta func&#xe3;o s&#xf3; est&#xe1; dispon&#xed;vel para jogadores conectados em LAN."/>
       </Properties>
       <Events>
@@ -113,7 +117,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="50" width="200" height="32"/>
+          <AbsoluteConstraints x="250" y="120" width="180" height="32"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -125,9 +129,15 @@
         <Property name="text" type="java.lang.String" value="limpar chat diariamente"/>
         <Property name="toolTipText" type="java.lang.String" value="limpa o chat automaticamente todos os dias  as 00:00 horas."/>
       </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="checkboxChatStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="410" width="200" height="-1"/>
+          <AbsoluteConstraints x="10" y="160" width="210" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -136,11 +146,14 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="The Bold Font" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Desbanir!"/>
+        <Property name="text" type="java.lang.String" value="Desbanir"/>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Desbanir"/>
+      </AccessibilityProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="320" y="90" width="100" height="30"/>
+          <AbsoluteConstraints x="10" y="80" width="180" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
