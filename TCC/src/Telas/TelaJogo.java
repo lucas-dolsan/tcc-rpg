@@ -11,9 +11,12 @@ import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
 
+    public static PainelDeControle painel = null;
+
     public TelaJogo() {
         initComponents();
-        botaoFecharSala.setVisible(false);
+        botaoFecharSala.setVisible(true);
+        botaoFecharSala.setEnabled(false);
         campoEnviarTexto.requestFocus();
     }
 
@@ -259,6 +262,16 @@ public class TelaJogo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    private void popupSairSala() {
+        int sair = JOptionPane.showConfirmDialog(null, "Deseja sair da sala?", "Sair da sala", JOptionPane.YES_NO_OPTION);
+        if (sair == JOptionPane.YES_OPTION) {
+            painel.setVisible(false);
+            this.dispose();
+            TelaInicial.Start();
+            JogadorDAO.mensagemSairDaSala();
+        }
+    }
+
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
@@ -273,19 +286,13 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoFecharSalaActionPerformed
 
     private void botaoFecharSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoFecharSalaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             popupFecharSala();
         }
     }//GEN-LAST:event_botaoFecharSalaKeyPressed
 
     private void botaoSairDaSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairDaSalaActionPerformed
-        int sair = JOptionPane.showConfirmDialog(null, "Deseja sair da sala?", "Sair da sala", JOptionPane.YES_NO_OPTION);
-        if (sair == JOptionPane.YES_OPTION) {
-            painel.setVisible(false);
-            this.dispose();
-            TelaInicial.Start();
-            JogadorDAO.mensagemSairDaSala();
-        }
+        popupSairSala();
     }//GEN-LAST:event_botaoSairDaSalaActionPerformed
     public void enviarTexto() {
         String texto = campoEnviarTexto.getText();
@@ -331,7 +338,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
     private void botaoSairDaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoSairDaSalaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_botaoSairDaSalaKeyPressed
 
@@ -343,7 +350,7 @@ public class TelaJogo extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             enviarTexto();
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_campoEnviarTextoKeyPressed
 
@@ -351,43 +358,43 @@ public class TelaJogo extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             enviarTexto();
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_areaDeChatKeyPressed
 
     private void dadoD4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD4KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_dadoD4KeyPressed
 
     private void dadoD6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD6KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_dadoD6KeyPressed
 
     private void dadoD8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD8KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_dadoD8KeyPressed
 
     private void dadoD10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD10KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_dadoD10KeyPressed
 
     private void dadoD20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD20KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_dadoD20KeyPressed
 
     private void dadoD100KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD100KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_dadoD100KeyPressed
 
@@ -396,14 +403,18 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFrame telaSom = new TelaConfigurarSom();
-        telaSom.setVisible(true);
-        jButton1.setEnabled(false);
+        if (!painel.estadoVoip) {
+            JFrame telaSom = new TelaConfigurarSom();
+            telaSom.setVisible(true);
+            jButton1.setEnabled(false);
+        } else {
+            jButton1.setEnabled(false);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();
         }
     }//GEN-LAST:event_formKeyPressed
 
@@ -412,7 +423,7 @@ public class TelaJogo extends javax.swing.JFrame {
             JFrame telaSom = new TelaConfigurarSom();
             telaSom.setVisible(true);
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupFecharSala();
+            popupSairSala();;
         }
     }//GEN-LAST:event_jButton1KeyPressed
 
@@ -420,34 +431,30 @@ public class TelaJogo extends javax.swing.JFrame {
         TelaRolarCustomizado tela = new TelaRolarCustomizado(this, true);
         tela.setVisible(true);
     }//GEN-LAST:event_botaoDadoPersonalizadoActionPerformed
-    public static PainelDeControle painel = null;
 
     public static void Start(boolean dono) {
         painel = new PainelDeControle();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
-                if (dono) {
-                    botaoFecharSala.setVisible(true);
+                if (JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador()) {
+                    JogadorDAO.alterarIP(JogadorDAO.salaAtual.getNome_sala());
+                    botaoFecharSala.setEnabled(true);
                     painel.setVisible(true);
-                }else{
+                } else {
                     painel.dispose();
-                }
-                if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
-                    jButton1.setEnabled(false);
-                } else if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
-                    jButton1.setEnabled(true);
                 }
                 new Thread() {
                     @Override
                     public void run() {
                         while (true) {
-                            JogadorDAO.lerChat();
                             if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
                                 jButton1.setEnabled(false);
                             } else if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
                                 jButton1.setEnabled(true);
                             }
+                            JogadorDAO.lerChat();
                             try {
                                 Thread.sleep(1);
                             } catch (InterruptedException ex) {

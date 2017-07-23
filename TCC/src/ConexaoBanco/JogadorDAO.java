@@ -158,6 +158,10 @@ public class JogadorDAO {
         return false;
     }
 
+    /**
+     Não usa que não funciona
+     * @return
+     */
     public static boolean verificarDono() {
         String sql = ("SELECT * FROM sala WHERE fk_jogador =?");
         try {
@@ -172,7 +176,20 @@ public class JogadorDAO {
         }
         return false;
     }
-
+     public static void alterarIP(String nome_sala) {
+        String ip = TelaInicial.ipAddress;
+        final String sql = ("UPDATE sala SET ip_dono = ? WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, ip);
+            stmt.setString(2, nome_sala);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static boolean isVOIPAtivado(String nomeSala) {
         final String sql = ("SELECT voip_sala FROM sala WHERE nome_sala = ?;");
         try {
@@ -199,16 +216,17 @@ public class JogadorDAO {
     }
 
     public static void alterarVOIP(int estado) {
-        final String sql = ("UPDATE sala SET voip_sala = ?");
+        final String sql = ("UPDATE sala SET voip_sala = ? WHERE nome_sala = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, estado);
+            stmt.setString(2, salaAtual.getNome_sala());
+            stmt.execute();
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     public static void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
         String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala, ip_dono, limpar_chat_daily, voip_sala) values(?,?,?,?,?,?,?)";
         for (Sala sala : salas) {
