@@ -40,17 +40,17 @@ public class PainelDeControle extends javax.swing.JFrame {
         senhaSala.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
         senhaSala.setText("Jogadores:");
         getContentPane().add(senhaSala);
-        senhaSala.setBounds(220, 11, 200, 32);
+        senhaSala.setBounds(150, 10, 260, 32);
 
         botaoLimparChat.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        botaoLimparChat.setText("Limpar Chat da Sala");
+        botaoLimparChat.setText("Limpar chat");
         botaoLimparChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoLimparChatActionPerformed(evt);
             }
         });
         getContentPane().add(botaoLimparChat);
-        botaoLimparChat.setBounds(10, 11, 200, 32);
+        botaoLimparChat.setBounds(10, 120, 180, 32);
 
         caixaJogadores.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         caixaJogadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
@@ -60,15 +60,17 @@ public class PainelDeControle extends javax.swing.JFrame {
             }
         });
         getContentPane().add(caixaJogadores);
-        caixaJogadores.setBounds(220, 49, 200, 32);
+        caixaJogadores.setBounds(10, 40, 420, 32);
 
         jButton1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jButton1.setText("Banir!");
+        jButton1.setText("Banir");
+        jButton1.setActionCommand("Banir");
         getContentPane().add(jButton1);
-        jButton1.setBounds(220, 90, 100, 30);
+        jButton1.setBounds(250, 80, 180, 30);
+        jButton1.getAccessibleContext().setAccessibleName("Banir");
 
         jButton2.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jButton2.setText("Iniciar voIP (desligado)");
+        jButton2.setText("Iniciar voIP (off)");
         jButton2.setToolTipText("AVISO: Esta funcão só está disponível para jogadores conectados em LAN.");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +78,7 @@ public class PainelDeControle extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(10, 50, 200, 32);
+        jButton2.setBounds(250, 120, 180, 32);
 
         checkboxChat.setFont(new java.awt.Font("The Bold Font", 0, 14)); // NOI18N
         checkboxChat.setText("limpar chat diariamente");
@@ -87,12 +89,13 @@ public class PainelDeControle extends javax.swing.JFrame {
             }
         });
         getContentPane().add(checkboxChat);
-        checkboxChat.setBounds(10, 410, 200, 24);
+        checkboxChat.setBounds(10, 160, 210, 30);
 
         jButton3.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jButton3.setText("Desbanir!");
+        jButton3.setText("Desbanir");
         getContentPane().add(jButton3);
-        jButton3.setBounds(320, 90, 100, 30);
+        jButton3.setBounds(10, 80, 180, 30);
+        jButton3.getAccessibleContext().setAccessibleName("Desbanir");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,7 +135,7 @@ public class PainelDeControle extends javax.swing.JFrame {
                 }
             }.start();
             estadoVoip = true;
-            jButton2.setText("Desligar voIP (ligado)");
+            jButton2.setText("Desligar voIP (on)");
             TelaJogo.jButton1.setEnabled(false);
             JogadorDAO.alterarVOIP(1);
             System.out.println("Iniciando servidor...");
@@ -142,7 +145,7 @@ public class PainelDeControle extends javax.swing.JFrame {
             voipFrame.setVisible(false);
             voipFrame.dispose();
 
-            jButton2.setText("Ligar voIP (desligado)");
+            jButton2.setText("Ligar voIP (off)");
             TelaJogo.jButton1.setEnabled(true);
             JogadorDAO.alterarVOIP(0);
             System.out.println("Parando servidor...");

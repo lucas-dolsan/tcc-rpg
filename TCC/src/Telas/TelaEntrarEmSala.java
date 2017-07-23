@@ -10,7 +10,6 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     public TelaEntrarEmSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
         super(parent, modal);
         initComponents();
-        JogadorDAO.listarSalas();
         erroEntrarEmSala.setVisible(false);
         tela = telaInicial;
     }
@@ -46,6 +45,11 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
 
         caixaDeSalas.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         caixaDeSalas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        caixaDeSalas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                caixaDeSalasFocusGained(evt);
+            }
+        });
         caixaDeSalas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 caixaDeSalasKeyPressed(evt);
@@ -176,6 +180,11 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_formKeyPressed
+
+    private void caixaDeSalasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaDeSalasFocusGained
+        caixaDeSalas.removeAllItems();
+        JogadorDAO.listarSalas();
+    }//GEN-LAST:event_caixaDeSalasFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
