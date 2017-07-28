@@ -10,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientConnection extends Thread {
 
@@ -20,8 +22,8 @@ public class ClientConnection extends Thread {
     private long chId; //unique id of this client, generated in the costructor
     private ArrayList<Message> toSend = new ArrayList<Message>(); //queue of messages to be sent to the client
 
-    public InetAddress getInetAddress() { //returns this client's ip address
-        return s.getInetAddress();
+    public String getInetAddress() throws Exception { //returns this client's ip address
+        return ShowInterfaces.interfaceIP();
     }
 
     public int getPort() { //returns this client's tcp port
@@ -57,6 +59,8 @@ public class ClientConnection extends Thread {
                 s.close();
                 Log.add("ERROR " + getInetAddress() + ":" + getPort() + " " + ex);
             } catch (IOException ex1) {
+            } catch (Exception ex1) {
+                Logger.getLogger(ClientConnection.class.getName()).log(Level.SEVERE, null, ex1);
             }
             stop();
         }

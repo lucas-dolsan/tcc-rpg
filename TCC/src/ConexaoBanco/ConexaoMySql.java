@@ -16,35 +16,41 @@ public final class ConexaoMySql {
     
     private ConexaoMySql() {
         
-        String OS = System.getProperty("os.name");
-        if(OS.equalsIgnoreCase("Linux")){
-            dbPath = "/home/dolsan/Documentos/TCC-RPG-DB/TCC-RPG/TCC-RPG-DB.txt";
-        }else{
-            dbPath = "C:\\TCC-RPG\\TCC-RPG-DB.txt";
-        }
-        String[] linhas = new String[4];
-        try {
+//        String OS = System.getProperty("os.name");
+//        if(OS.equalsIgnoreCase("Linux")){
+//            dbPath = "/home/dolsan/Documentos/TCC-RPG-DB/TCC-RPG/TCC-RPG-DB.txt";
+//        }else{
+//            dbPath = "C:\\TCC-RPG\\TCC-RPG-DB.txt";
+//        }
+//        String[] linhas = new String[4];
+//        try {
+//
+//            FileReader reader = new FileReader(dbPath);
+//            BufferedReader bf = new BufferedReader(reader);
+//            String line;
+//            int i = 0;
+//            while ((line = bf.readLine()) != null) {
+//
+//                linhas[i] = line;
+//                i++;
+//
+//            }
+//            reader.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        String usuario = linhas[0];
+//        String senha = linhas[1];
+//        String driver = linhas[2];
+//        String enderecoBanco = linhas[3];
 
-            FileReader reader = new FileReader(dbPath);
-            BufferedReader bf = new BufferedReader(reader);
-            String line;
-            int i = 0;
-            while ((line = bf.readLine()) != null) {
+        String usuario = "schork_dolsan";
+        String senha = "dh4_fT2kl@d";
+        String driver = "com.mysql.jdbc.Driver";
+        String enderecoBanco = "schork_dolsan.mysql.dbaas.com.br:3306/schork_dolsan";
 
-                linhas[i] = line;
-                i++;
-
-            }
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String usuario = linhas[0];
-        String senha = linhas[1];
-        String driver = linhas[2];
-        String enderecoBanco = linhas[3];
 
         try {
             Class.forName(driver).newInstance();

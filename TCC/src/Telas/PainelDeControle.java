@@ -64,10 +64,8 @@ public class PainelDeControle extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jButton1.setText("Banir");
-        jButton1.setActionCommand("Banir");
         getContentPane().add(jButton1);
         jButton1.setBounds(250, 80, 180, 30);
-        jButton1.getAccessibleContext().setAccessibleName("Banir");
 
         jButton2.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jButton2.setText("Iniciar voIP (off)");
@@ -95,7 +93,6 @@ public class PainelDeControle extends javax.swing.JFrame {
         jButton3.setText("Desbanir");
         getContentPane().add(jButton3);
         jButton3.setBounds(10, 80, 180, 30);
-        jButton3.getAccessibleContext().setAccessibleName("Desbanir");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

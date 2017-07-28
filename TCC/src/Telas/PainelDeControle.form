@@ -93,11 +93,7 @@
           <Font name="The Bold Font" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Banir"/>
-        <Property name="actionCommand" type="java.lang.String" value="Banir"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Banir"/>
-      </AccessibilityProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="250" y="80" width="180" height="30"/>
@@ -148,9 +144,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Desbanir"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Desbanir"/>
-      </AccessibilityProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="10" y="80" width="180" height="30"/>
