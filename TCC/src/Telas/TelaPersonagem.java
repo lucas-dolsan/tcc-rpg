@@ -10,6 +10,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         nomeEmUso.setVisible(false);
+        erroSemNome.setVisible(false);
 
     }
 
@@ -63,6 +64,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         nomeEmUso = new javax.swing.JLabel();
         salvarEdicao = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        erroSemNome = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -75,14 +77,14 @@ public class TelaPersonagem extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 12)); // NOI18N
         jLabel1.setText("Nome DO Personagem:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 140, 20);
+        jLabel1.setBounds(10, 10, 180, 20);
         getContentPane().add(campoNomeJogador);
         campoNomeJogador.setBounds(10, 80, 180, 30);
 
         jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 12)); // NOI18N
         jLabel2.setText("Nome DO Jogador:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 60, 120, 20);
+        jLabel2.setBounds(10, 60, 180, 20);
         getContentPane().add(campoNomePersonagem);
         campoNomePersonagem.setBounds(10, 30, 180, 30);
 
@@ -173,7 +175,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jLabel12.setText("divindade:");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(200, 110, 80, 20);
+        jLabel12.setBounds(200, 110, 170, 20);
         getContentPane().add(campoDivindade);
         campoDivindade.setBounds(200, 130, 170, 30);
 
@@ -201,7 +203,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         jLabel16.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jLabel16.setText(" inteligência:");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(500, 30, 100, 20);
+        jLabel16.setBounds(500, 30, 110, 20);
         getContentPane().add(campoInteligencia);
         campoInteligencia.setBounds(500, 50, 110, 30);
 
@@ -269,6 +271,12 @@ public class TelaPersonagem extends javax.swing.JDialog {
         jPanel1.setFocusable(false);
         getContentPane().add(jPanel1);
         jPanel1.setBounds(370, 10, 400, 180);
+
+        erroSemNome.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        erroSemNome.setForeground(new java.awt.Color(255, 0, 0));
+        erroSemNome.setText("Personagem sem nome!");
+        getContentPane().add(erroSemNome);
+        erroSemNome.setBounds(10, 210, 210, 17);
 
         pack();
         setLocationRelativeTo(null);
@@ -391,12 +399,13 @@ public class TelaPersonagem extends javax.swing.JDialog {
     }
     private void botaoSalvarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarPersonagemActionPerformed
         if (jogDAO.personagemExiste(campoNomePersonagem.getText())) {
-            nomeEmUso.setVisible(true);
+            erroSemNome.setVisible(true);
         } else {
-
+            boolean aux = false;
             String nomePersonagem = campoNomePersonagem.getText();
             if (nomePersonagem == null) {
-                nomePersonagem = " ";
+                erroSemNome.setVisible(true);
+                aux = true;
             }
             String nomeJogador = campoNomeJogador.getText();
             if (nomeJogador == null) {
@@ -433,8 +442,11 @@ public class TelaPersonagem extends javax.swing.JDialog {
             int sabedoria = transformarSabedoriaEmInt();
             int destreza = transformarDestrezaEmInt();
             int carisma = transformarCarismaEmInt();
-            jogDAO.criarPersonagem(JogadorDAO.salaAtual.getPk_sala(), nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
-            this.dispose();
+            if (!aux) {
+                jogDAO.criarPersonagem(JogadorDAO.salaAtual.getPk_sala(), nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
+                this.dispose();
+            }
+
         }
     }//GEN-LAST:event_botaoSalvarPersonagemActionPerformed
 
@@ -559,6 +571,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
     public javax.swing.JTextField campoRaca;
     public javax.swing.JTextField campoSabedoria;
     public javax.swing.JTextField campoVida;
+    private javax.swing.JLabel erroSemNome;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

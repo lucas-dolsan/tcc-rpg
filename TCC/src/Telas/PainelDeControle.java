@@ -29,6 +29,7 @@ public class PainelDeControle extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         checkboxChat = new javax.swing.JRadioButton();
         jButton3 = new javax.swing.JButton();
+        botaoCriarObjetos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Painel de Controle de Sala");
@@ -88,12 +89,22 @@ public class PainelDeControle extends javax.swing.JFrame {
             }
         });
         getContentPane().add(checkboxChat);
-        checkboxChat.setBounds(10, 160, 210, 30);
+        checkboxChat.setBounds(10, 410, 210, 30);
 
         jButton3.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         jButton3.setText("Desbanir");
         getContentPane().add(jButton3);
         jButton3.setBounds(10, 80, 180, 30);
+
+        botaoCriarObjetos.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        botaoCriarObjetos.setText("Criar objetos");
+        botaoCriarObjetos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarObjetosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoCriarObjetos);
+        botaoCriarObjetos.setBounds(10, 160, 180, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -155,6 +166,12 @@ public class PainelDeControle extends javax.swing.JFrame {
             jogDAO.modificarChatDaily(JogadorDAO.salaAtual.getNome_sala(), 0);
         }
     }//GEN-LAST:event_checkboxChatStateChanged
+
+    private void botaoCriarObjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarObjetosActionPerformed
+        TelaCriarObjetos telaCriarObjetos = new TelaCriarObjetos(this, false);
+        telaCriarObjetos.setVisible(true);
+        botaoCriarObjetos.setEnabled(false);
+    }//GEN-LAST:event_botaoCriarObjetosActionPerformed
     public static void listarJogadoresAtuais() {
         for (Jogador jogador : JogadorDAO.jogadoresAtuais) {
             caixaJogadores.addItem(jogador.getNome_jog());
@@ -170,6 +187,7 @@ public class PainelDeControle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton botaoCriarObjetos;
     private javax.swing.JButton botaoLimparChat;
     public static javax.swing.JComboBox<String> caixaJogadores;
     public javax.swing.JRadioButton checkboxChat;
