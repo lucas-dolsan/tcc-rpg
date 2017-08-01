@@ -1,6 +1,5 @@
 package ClienteVoIP;
 
-
 import Dependencias.Message;
 import Dependencias.Utils;
 import java.io.IOException;
@@ -33,11 +32,11 @@ public class Client extends Thread {
                 System.out.println("mic unavailable " + e);
             }
             for (;;) { //this infinite cycle checks for new data from the server, then sends it to the correct AudioChannel. if needed, a new AudioChannel is created
-                
+
                 if (s.getInputStream().available() > 0) { //we got something from the server (workaround: used available method from InputStream instead of the one from ObjetInputStream because of a bug in the JRE)
                     Message in = (Message) (fromServer.readObject()); //read message
                     //decide which audio channel should get this message
-                    AudioChannel sendTo = null; 
+                    AudioChannel sendTo = null;
                     for (AudioChannel ch : chs) {
                         if (ch.getChId() == in.getChId()) {
                             sendTo = ch;
@@ -51,10 +50,17 @@ public class Client extends Thread {
                         ch.start();
                         chs.add(ch);
                     }
-                }else{ //see if some channels need to be killed and kill them
-                    ArrayList<AudioChannel> killMe=new ArrayList<AudioChannel>();
-                    for(AudioChannel c:chs) if(c.canKill()) killMe.add(c);
-                    for(AudioChannel c:killMe){c.closeAndKill(); chs.remove(c);}
+                } else { //see if some channels need to be killed and kill them
+                    ArrayList<AudioChannel> killMe = new ArrayList<AudioChannel>();
+                    for (AudioChannel c : chs) {
+                        if (c.canKill()) {
+                            killMe.add(c);
+                        }
+                    }
+                    for (AudioChannel c : killMe) {
+                        c.closeAndKill();
+                        chs.remove(c);
+                    }
                     Utils.sleep(1); //avoid busy wait
                 }
             }
@@ -63,4 +69,3 @@ public class Client extends Thread {
         }
     }
 }
- 

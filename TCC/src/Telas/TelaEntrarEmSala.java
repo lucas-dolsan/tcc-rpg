@@ -5,6 +5,7 @@ import com.sun.glass.events.KeyEvent;
 
 public class TelaEntrarEmSala extends javax.swing.JDialog {
 
+    JogadorDAO jogDAO = new JogadorDAO();
     private final TelaInicial tela;
 
     public TelaEntrarEmSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
@@ -130,13 +131,13 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     private void entrarEmSala() {
         String nomeSala = (caixaDeSalas.getSelectedItem().toString());
         String senhaSala = campoSenhaSala.getText();
-        if (JogadorDAO.entrarEmSala(nomeSala, senhaSala)) {
-            TelaJogo.Start(JogadorDAO.verificarDono());
+        if (jogDAO.entrarEmSala(nomeSala, senhaSala)) {
+            TelaJogo.Start(jogDAO.verificarDono());
             tela.dispose();
             this.dispose();
             System.out.println("[" + nomeSala + "]");
-            JogadorDAO.mensagemEntrarNaSala();
-            System.out.println(JogadorDAO.nickName +" entrou na sala");
+            jogDAO.mensagemEntrarNaSala();
+            System.out.println(JogadorDAO.nickName + " entrou na sala");
         } else {
             System.out.println("Erro ao entrar na sala " + nomeSala);
             erroEntrarEmSala.setVisible(true);
@@ -186,7 +187,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
 
     private void caixaDeSalasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaDeSalasFocusGained
         caixaDeSalas.removeAllItems();
-        JogadorDAO.listarSalas();
+        jogDAO.listarSalas();
     }//GEN-LAST:event_caixaDeSalasFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

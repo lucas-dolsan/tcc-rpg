@@ -15,7 +15,7 @@ public class Server {
 
     public ArrayList<Message> filaDeTransmissao = new ArrayList<Message>();
     public ArrayList<ClientConnection> clientes = new ArrayList<ClientConnection>();
-    public ArrayList<ClientConnection> conexoesMortas = new ArrayList<ClientConnection>(); 
+    public ArrayList<ClientConnection> conexoesMortas = new ArrayList<ClientConnection>();
 
     private int port = 0;
 
@@ -38,8 +38,7 @@ public class Server {
             s = new ServerSocket();
             s.setReuseAddress(true);
             s.bind(new InetSocketAddress(port));
-            s.setSoTimeout(10);
-            System.out.println("Servidor inciado com sucesso. Porta: "+ port);
+            System.out.println("Servidor inciado com sucesso. Porta: " + port);
         } catch (IOException ex) {
             System.out.println("Erro no servidor" + ex + "(porta " + port + ")");
             throw new Exception("ERRO: " + ex);
@@ -66,6 +65,7 @@ public class Server {
             addToClientes(cc);
         }
     }
+
     private class BroadcastThread extends Thread {
 
         public BroadcastThread() {
@@ -91,12 +91,12 @@ public class Server {
                         }
                     }
                     clientes.removeAll(conexoesMortas);
-                    if (filaDeTransmissao.isEmpty()) { 
-                        Utils.sleep(10); 
+                    if (filaDeTransmissao.isEmpty()) {
+                        Utils.sleep(10);
                         continue;
                     } else {
                         Message m = filaDeTransmissao.get(0);
-                        for (ClientConnection cc : clientes) { 
+                        for (ClientConnection cc : clientes) {
                             if (cc.getChId() != m.getChId()) {
                                 cc.addToQueue(m);
                             }

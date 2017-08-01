@@ -1,7 +1,6 @@
 package Telas;
 
 import ConexaoBanco.JogadorDAO;
-import static ConexaoBanco.JogadorDAO.isVOIPAtivado;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,6 +10,7 @@ import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
 
+    static JogadorDAO jogDAO = new JogadorDAO();
     public static PainelDeControle painel = null;
 
     public TelaJogo() {
@@ -51,8 +51,8 @@ public class TelaJogo extends javax.swing.JFrame {
         setTitle("Double Damage - Sala: "+ TelaConfigurarSala.nomeSala
         );
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(1280, 720));
-        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setMaximumSize(new java.awt.Dimension(1280, 680));
+        setMinimumSize(new java.awt.Dimension(1280, 680));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -80,7 +80,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoFecharSala);
-        botaoFecharSala.setBounds(10, 510, 150, 40);
+        botaoFecharSala.setBounds(10, 530, 220, 40);
 
         botaoSairDaSala.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         botaoSairDaSala.setForeground(new java.awt.Color(51, 51, 51));
@@ -96,7 +96,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoSairDaSala);
-        botaoSairDaSala.setBounds(10, 550, 150, 40);
+        botaoSairDaSala.setBounds(10, 580, 220, 40);
 
         campoEnviarTexto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         campoEnviarTexto.setForeground(new java.awt.Color(51, 51, 51));
@@ -109,7 +109,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(campoEnviarTexto);
-        campoEnviarTexto.setBounds(190, 590, 570, 40);
+        campoEnviarTexto.setBounds(240, 580, 570, 40);
 
         botaoEnviar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
         botaoEnviar.setForeground(new java.awt.Color(51, 51, 51));
@@ -125,7 +125,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoEnviar);
-        botaoEnviar.setBounds(770, 590, 110, 40);
+        botaoEnviar.setBounds(820, 580, 110, 40);
 
         DefaultCaret caret = (DefaultCaret)areaDeChat.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -144,7 +144,7 @@ public class TelaJogo extends javax.swing.JFrame {
         jScrollPane2.setViewportView(areaDeChat);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(190, 20, 690, 490);
+        jScrollPane2.setBounds(240, 10, 690, 490);
 
         dadoD4.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD4.setForeground(new java.awt.Color(51, 51, 51));
@@ -160,7 +160,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD4);
-        dadoD4.setBounds(190, 520, 60, 60);
+        dadoD4.setBounds(240, 510, 60, 60);
 
         dadoD6.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD6.setForeground(new java.awt.Color(51, 51, 51));
@@ -176,7 +176,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD6);
-        dadoD6.setBounds(260, 520, 60, 60);
+        dadoD6.setBounds(310, 510, 60, 60);
 
         dadoD8.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD8.setForeground(new java.awt.Color(51, 51, 51));
@@ -192,7 +192,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD8);
-        dadoD8.setBounds(330, 520, 60, 60);
+        dadoD8.setBounds(380, 510, 60, 60);
 
         dadoD10.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD10.setForeground(new java.awt.Color(51, 51, 51));
@@ -208,7 +208,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD10);
-        dadoD10.setBounds(400, 520, 60, 60);
+        dadoD10.setBounds(450, 510, 60, 60);
 
         dadoD20.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD20.setForeground(new java.awt.Color(51, 51, 51));
@@ -224,7 +224,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD20);
-        dadoD20.setBounds(470, 520, 60, 60);
+        dadoD20.setBounds(520, 510, 60, 60);
 
         dadoD100.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD100.setForeground(new java.awt.Color(51, 51, 51));
@@ -240,7 +240,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD100);
-        dadoD100.setBounds(540, 520, 60, 60);
+        dadoD100.setBounds(590, 510, 60, 60);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoMic.png"))); // NOI18N
         jButton1.setText("Juntar-se a conversa");
@@ -256,7 +256,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(690, 530, 190, 40);
+        jButton1.setBounds(740, 520, 190, 40);
 
         botaoDadoPersonalizado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-multiple.png"))); // NOI18N
         botaoDadoPersonalizado.addActionListener(new java.awt.event.ActionListener() {
@@ -265,37 +265,47 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoDadoPersonalizado);
-        botaoDadoPersonalizado.setBounds(610, 520, 60, 60);
+        botaoDadoPersonalizado.setBounds(660, 510, 60, 60);
 
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 16)); // NOI18N
         jLabel1.setText("fichas de texto:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(920, 10, 170, 20);
+        jLabel1.setBounds(10, 10, 170, 20);
 
         caixaFichasTexto.setFont(new java.awt.Font("The Bold Font", 1, 16)); // NOI18N
         caixaFichasTexto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {""}));
-        caixaFichasTexto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                caixaFichasTextoActionPerformed(evt);
+        caixaFichasTexto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                caixaFichasTextoFocusGained(evt);
             }
         });
         getContentPane().add(caixaFichasTexto);
-        caixaFichasTexto.setBounds(900, 30, 240, 30);
+        caixaFichasTexto.setBounds(10, 30, 220, 30);
 
         botaoVisualizarFicha.setFont(new java.awt.Font("The Bold Font", 1, 13)); // NOI18N
         botaoVisualizarFicha.setText("visualizar ficha");
+        botaoVisualizarFicha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVisualizarFichaActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoVisualizarFicha);
-        botaoVisualizarFicha.setBounds(900, 70, 240, 30);
+        botaoVisualizarFicha.setBounds(10, 100, 220, 30);
 
         botaoCriarFicha.setFont(new java.awt.Font("The Bold Font", 1, 13)); // NOI18N
         botaoCriarFicha.setText("criar ficha de texto");
+        botaoCriarFicha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarFichaActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoCriarFicha);
-        botaoCriarFicha.setBounds(900, 100, 240, 30);
+        botaoCriarFicha.setBounds(10, 70, 220, 30);
 
         jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 16)); // NOI18N
         jLabel2.setText("fichas de personagem:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(890, 140, 230, 20);
+        jLabel2.setBounds(10, 150, 230, 20);
 
         caixaFichaPersonagem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         caixaFichaPersonagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
@@ -305,7 +315,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(caixaFichaPersonagem);
-        caixaFichaPersonagem.setBounds(900, 170, 240, 30);
+        caixaFichaPersonagem.setBounds(10, 170, 220, 30);
 
         botaoVisualizarPersonagem.setFont(new java.awt.Font("The Bold Font", 1, 13)); // NOI18N
         botaoVisualizarPersonagem.setText("visualizar personagem");
@@ -315,7 +325,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoVisualizarPersonagem);
-        botaoVisualizarPersonagem.setBounds(900, 240, 240, 30);
+        botaoVisualizarPersonagem.setBounds(10, 240, 220, 30);
 
         botaoCriarPersonagem.setFont(new java.awt.Font("The Bold Font", 1, 13)); // NOI18N
         botaoCriarPersonagem.setText("criar personagem");
@@ -325,7 +335,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarPersonagem);
-        botaoCriarPersonagem.setBounds(900, 210, 240, 30);
+        botaoCriarPersonagem.setBounds(10, 210, 220, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -333,21 +343,21 @@ public class TelaJogo extends javax.swing.JFrame {
     private void popupSairSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja sair da sala?", "Sair da sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
-            System.out.println(JogadorDAO.player.getNome_jog()+" saiu da sala.");
+            System.out.println(JogadorDAO.player.getNome_jog() + " saiu da sala.");
             painel.setVisible(false);
             this.dispose();
             TelaInicial.Start();
-            JogadorDAO.mensagemSairDaSala();
+            jogDAO.mensagemSairDaSala();
         }
     }
 
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
-            System.out.println("Sala "+JogadorDAO.salaAtual.getNome_sala()+" fechada com sucesso.");
+            System.out.println("Sala " + JogadorDAO.salaAtual.getNome_sala() + " fechada com sucesso.");
             painel.setVisible(false);
             this.dispose();
-            JogadorDAO.fecharSala(this, TelaConfigurarSala.nomeSala);
+            jogDAO.fecharSala(this, TelaConfigurarSala.nomeSala);
             TelaInicial.Start();
         }
     }
@@ -367,7 +377,7 @@ public class TelaJogo extends javax.swing.JFrame {
     public void enviarTexto() {
         String texto = campoEnviarTexto.getText();
         if (!texto.isEmpty()) {
-            JogadorDAO.enviarChatBanco(texto);
+            jogDAO.enviarChatBanco(texto);
             campoEnviarTexto.setText("");
         }
 
@@ -469,7 +479,7 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_dadoD100KeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        JogadorDAO.mensagemSairDaSala();
+        jogDAO.mensagemSairDaSala();
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -502,17 +512,13 @@ public class TelaJogo extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_botaoDadoPersonalizadoActionPerformed
 
-    private void caixaFichasTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caixaFichasTextoActionPerformed
-
-    }//GEN-LAST:event_caixaFichasTextoActionPerformed
-
     private void caixaFichaPersonagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaFichaPersonagemFocusGained
         caixaFichaPersonagem.removeAllItems();
-        JogadorDAO.listarPersonagens();
+        jogDAO.listarPersonagens();
     }//GEN-LAST:event_caixaFichaPersonagemFocusGained
 
     private void botaoVisualizarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarPersonagemActionPerformed
-        JogadorDAO.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
+        jogDAO.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
     }//GEN-LAST:event_botaoVisualizarPersonagemActionPerformed
 
     private void botaoCriarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarPersonagemActionPerformed
@@ -522,6 +528,21 @@ public class TelaJogo extends javax.swing.JFrame {
         telaPersonagem.setVisible(true);
     }//GEN-LAST:event_botaoCriarPersonagemActionPerformed
 
+    private void botaoCriarFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarFichaActionPerformed
+        TelaFichaDeTexto telaFichaTexto = new TelaFichaDeTexto(this, rootPaneCheckingEnabled);
+        telaFichaTexto.botaoCriar.setEnabled(true);
+        telaFichaTexto.setVisible(true);
+    }//GEN-LAST:event_botaoCriarFichaActionPerformed
+
+    private void botaoVisualizarFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarFichaActionPerformed
+        jogDAO.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
+    }//GEN-LAST:event_botaoVisualizarFichaActionPerformed
+
+    private void caixaFichasTextoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaFichasTextoFocusGained
+        caixaFichasTexto.removeAllItems();
+        jogDAO.listarFichasTexto();
+    }//GEN-LAST:event_caixaFichasTextoFocusGained
+
     public static void Start(boolean dono) {
         painel = new PainelDeControle();
 
@@ -529,7 +550,7 @@ public class TelaJogo extends javax.swing.JFrame {
             public void run() {
                 new TelaJogo().setVisible(true);
                 if (JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador()) {
-                    JogadorDAO.alterarIP(JogadorDAO.salaAtual.getNome_sala());
+                    jogDAO.alterarIP(JogadorDAO.salaAtual.getNome_sala());
                     botaoFecharSala.setEnabled(true);
                     painel.setVisible(true);
                 } else {
@@ -540,20 +561,20 @@ public class TelaJogo extends javax.swing.JFrame {
                     public void run() {
                         while (true) {
                             if (!(JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador())) {
-                                if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
+                                if (jogDAO.isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
                                     jButton1.setEnabled(false);
                                     System.out.println("voIP está desativado");
-                                } else if (isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
+                                } else if (jogDAO.isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
                                     jButton1.setEnabled(true);
                                     System.out.println("voIP está ativado");
                                 }
                             }
-                            if(JogadorDAO.verificarChatDaily(JogadorDAO.salaAtual.getNome_sala())){
+                            if (jogDAO.verificarChatDaily(JogadorDAO.salaAtual.getNome_sala())) {
                                 painel.checkboxChat.setSelected(true);
-                            }else{
+                            } else {
                                 painel.checkboxChat.setSelected(false);
                             }
-                            JogadorDAO.lerChat();
+                            jogDAO.lerChat();
                             try {
                                 Thread.sleep(1);
                             } catch (InterruptedException ex) {
@@ -578,7 +599,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JButton botaoVisualizarFicha;
     private javax.swing.JButton botaoVisualizarPersonagem;
     public static javax.swing.JComboBox<String> caixaFichaPersonagem;
-    private javax.swing.JComboBox<String> caixaFichasTexto;
+    public static javax.swing.JComboBox<String> caixaFichasTexto;
     private javax.swing.JTextField campoEnviarTexto;
     private javax.swing.JButton dadoD10;
     private javax.swing.JButton dadoD100;

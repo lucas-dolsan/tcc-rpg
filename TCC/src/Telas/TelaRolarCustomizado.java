@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class TelaRolarCustomizado extends javax.swing.JDialog {
 
+    JogadorDAO jogDAO = new JogadorDAO();
     public int dado;
 
     public TelaRolarCustomizado(java.awt.Frame parent, boolean modal) {
@@ -122,29 +123,29 @@ public class TelaRolarCustomizado extends javax.swing.JDialog {
 
     public void rolarDado() {
         dado = converterCampoValorPersonalizar();
-        if(dado == 0){
-            
-        }else{
-            int modificadorMais = converterCampoModificadorMaisEmInt();
-        int modificadorMenos = converterCampoModificadorMenosEmInt();
-        if (modificadorMais > 0) {
-            int numero = rodar();
-            int numeroModificado = numero + modificadorMais;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 1);
-            this.dispose();
-        } else if (modificadorMenos > 0) {
-            int numero = rodar();
-            int numeroModificado = numero - modificadorMenos;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 2);
-            this.dispose();
+        if (dado == 0) {
+
         } else {
-            int numero = rodar();
-            int numeroModificado = 0;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 3);
-            this.dispose();
+            int modificadorMais = converterCampoModificadorMaisEmInt();
+            int modificadorMenos = converterCampoModificadorMenosEmInt();
+            if (modificadorMais > 0) {
+                int numero = rodar();
+                int numeroModificado = numero + modificadorMais;
+                jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 1);
+                this.dispose();
+            } else if (modificadorMenos > 0) {
+                int numero = rodar();
+                int numeroModificado = numero - modificadorMenos;
+                jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 2);
+                this.dispose();
+            } else {
+                int numero = rodar();
+                int numeroModificado = 0;
+                jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 3);
+                this.dispose();
+            }
         }
-        }
-        
+
     }
     private void botaoRolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRolarActionPerformed
         rolarDado();

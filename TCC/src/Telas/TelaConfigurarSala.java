@@ -5,6 +5,7 @@ import com.sun.glass.events.KeyEvent;
 
 public class TelaConfigurarSala extends javax.swing.JDialog {
 
+    JogadorDAO jogDAO = new JogadorDAO();
     private final TelaInicial tela;
 
     public TelaConfigurarSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
@@ -121,7 +122,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
 
     private void criarSala() {
         nomeSala = campoNomeSala.getText();
-        if (JogadorDAO.salaExiste(nomeSala)) {
+        if (jogDAO.salaExiste(nomeSala)) {
             System.out.println("Erro: Esta sala já existe.");
             erroSalaExistente.setVisible(true);
         } else if (nomeSala.isEmpty()) {
@@ -131,9 +132,9 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             char[] senha = campoSenhaSala.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
             System.out.println("Criando sala...");
-            JogadorDAO.criarSala(this, nomeSala, senhaAuxiliar);
-            System.out.println("Sala: "+nomeSala+" criada com sucesso.");
-            if (JogadorDAO.entrarEmSala(nomeSala, senhaAuxiliar)) {
+            jogDAO.criarSala(this, nomeSala, senhaAuxiliar);
+            System.out.println("Sala: " + nomeSala + " criada com sucesso.");
+            if (jogDAO.entrarEmSala(nomeSala, senhaAuxiliar)) {
                 TelaJogo.Start(JogadorDAO.salaAtual.getFk_jogador() == JogadorDAO.player.getPk_jogador());
                 tela.dispose();
                 this.dispose();

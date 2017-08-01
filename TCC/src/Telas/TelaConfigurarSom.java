@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 public class TelaConfigurarSom extends javax.swing.JFrame {
 
+    JogadorDAO jogDAO = new JogadorDAO();
     private MicTester micTester;
 
     private class MicTester extends Thread {
@@ -145,7 +146,7 @@ public class TelaConfigurarSom extends javax.swing.JFrame {
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
         try {
-            new Client(JogadorDAO.pegarIPDono(JogadorDAO.salaAtual.getNome_sala()),TelaJogo.painel.port).start();
+            new Client(jogDAO.pegarIPDono(JogadorDAO.salaAtual.getNome_sala()), TelaJogo.painel.port).start();
         } catch (Exception ex) {
             System.out.println("ERRO:" + ex);
             JOptionPane.showMessageDialog(rootPane, ex, "Erro", JOptionPane.ERROR_MESSAGE);
