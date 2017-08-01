@@ -13,13 +13,13 @@ public final class ConexaoMySql {
     private Statement statement;
     public static ConexaoMySql connection;
     private String dbPath = null;
-    
+
     private ConexaoMySql() {
-        
+
         String OS = System.getProperty("os.name");
-        if(OS.equalsIgnoreCase("Linux")){
+        if (OS.equalsIgnoreCase("Linux")) {
             dbPath = "/home/dolsan/Documentos/TCC-RPG-DB/TCC-RPG/TCC-RPG-DB.txt";
-        }else{
+        } else {
             dbPath = "C:\\TCC-RPG\\TCC-RPG-DB.txt";
         }
         String[] linhas = new String[4];

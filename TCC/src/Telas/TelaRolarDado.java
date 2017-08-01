@@ -11,6 +11,7 @@ import java.util.Random;
 
 public class TelaRolarDado extends javax.swing.JDialog {
 
+    JogadorDAO jogDAO = new JogadorDAO();
     private int dado;
 
     public TelaRolarDado(java.awt.Frame parent, boolean modal, int dado) {
@@ -136,17 +137,17 @@ public class TelaRolarDado extends javax.swing.JDialog {
         if (modificadorMais > 0) {
             int numero = rodar();
             int numeroModificado = numero + modificadorMais;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 1);
+            jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 1);
             this.dispose();
         } else if (modificadorMenos > 0) {
             int numero = rodar();
             int numeroModificado = numero - modificadorMenos;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 2);
+            jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 2);
             this.dispose();
         } else {
             int numero = rodar();
             int numeroModificado = 0;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 3);
+            jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 3);
             this.dispose();
         }
     }

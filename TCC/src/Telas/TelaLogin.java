@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 
 public class TelaLogin extends javax.swing.JFrame {
 
+    static JogadorDAO jogDAO = new JogadorDAO();
+
     public TelaLogin() {
         initComponents();
 
@@ -140,7 +142,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
             System.out.println("Efetuando login...");
             jogador.logar(login, senhaAuxiliar, this);
-            JogadorDAO.modificarUltimoLogin(login);
+            jogDAO.modificarUltimoLogin(login);
 
         } finally {
 
@@ -222,7 +224,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 new Thread() {
                     public void run() {
                         while (true) {
-                            JogadorDAO.ping();
+                            jogDAO.ping();
                         }
                     }
                 }.start();
