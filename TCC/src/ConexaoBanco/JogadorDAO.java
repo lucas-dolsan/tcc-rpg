@@ -314,20 +314,24 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
-    
-    
-    public void criarItemArma(String nome,int danoBase, String icone, int fk_personagem, String outrosAtributos, String descricao){
+
+    public void criarItemArma(String nome, int danoBase,String nomePersonagem, String icone, String outrosAtributos, String descricao) {
         final String sql = ("INSERT INTO itemWeapon(fk_personagem,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea) VALUES (?,?,?,?,?)");
         try {
             PreparedStatement stmt = c.prepareCall(sql);
-            stmt.setInt(1, fk_personagem);
-            stmt.setString(2, sql);
+           // stmt.setInt(1, fk_personagem);
+            stmt.setString(2, icone);
+            stmt.setInt(3, danoBase);
+            stmt.setString(4, outrosAtributos);
+            stmt.setString(5, descricao);
+            stmt.execute();
+            stmt.close();
         } catch (Exception e) {
-        
+            e.printStackTrace();
         }
-        
+
     }
-    
+
     public void listarPersonagensArmas() {
         final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
         try {
@@ -343,6 +347,7 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
+
     public void listarPersonagens() {
         final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
         try {
@@ -866,7 +871,7 @@ public class JogadorDAO {
         }
         return false;
     }
-    
+
     public boolean verificarNomeDeUsuario(String nick) {
         pegarJogadoresDoBanco();
         final String sql = "select * from jogador";

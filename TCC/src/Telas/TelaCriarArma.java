@@ -11,6 +11,7 @@ public class TelaCriarArma extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         loadImages();
+        erro.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +35,7 @@ public class TelaCriarArma extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         botaoSalvar = new javax.swing.JButton();
+        erro = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -113,6 +115,11 @@ public class TelaCriarArma extends javax.swing.JDialog {
         getContentPane().add(botaoSalvar);
         botaoSalvar.setBounds(240, 390, 100, 30);
 
+        erro.setForeground(new java.awt.Color(255, 0, 0));
+        erro.setText("Nome ou dano faltando!");
+        getContentPane().add(erro);
+        erro.setBounds(10, 390, 230, 20);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -121,9 +128,40 @@ public class TelaCriarArma extends javax.swing.JDialog {
         caixaPersonagem.removeAllItems();
         jogDAO.listarPersonagensArmas();
     }//GEN-LAST:event_caixaPersonagemFocusGained
-
+private int transformarDanoEmInt() {
+        if (campoDano.getText() == null) {
+            return 0;
+        } else {
+            String vida = campoDano.getText();
+            return Integer.parseInt(vida);
+        }
+    }
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        System.out.println(caixaIcons.getSelectedItem().toString());
+        boolean error = false;
+        String icon = caixaIcons.getSelectedItem().toString();
+        int aux = icon.lastIndexOf("/");
+        icon = icon.substring(aux+1);
+        if(!campoNome.getText().isEmpty() || campoNome.getText().equalsIgnoreCase(" ")){
+            String nome = campoNome.getText();
+        }else{
+            erro.setVisible(true);
+            error = true;
+            
+        }
+        int dano = transformarDanoEmInt();
+        if(dano==0){
+            erro.setVisible(true);
+            error = true;
+        }
+        String nomePersonagem = caixaPersonagem.getSelectedItem().toString();
+        String descricao = campoDescricao.getText();
+        String atributos = campoAtributos.getText();
+        if(!error){
+       //     jogDAO.criarItemArma(nome, dano, nomePersonagem, icon, atributos, descricao);
+        }
+        
+        
+        
     }//GEN-LAST:event_botaoSalvarActionPerformed
     private void loadImages() {
         for (int i = 1; i <= 184; i++) {
@@ -140,6 +178,7 @@ public class TelaCriarArma extends javax.swing.JDialog {
     private javax.swing.JTextField campoDano;
     private javax.swing.JTextArea campoDescricao;
     private javax.swing.JTextField campoNome;
+    private javax.swing.JLabel erro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
