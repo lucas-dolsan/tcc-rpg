@@ -38,8 +38,8 @@ public final class ConexaoMySql {
 //            e.printStackTrace();
 //        }
         String usuario = "schork_dolsan";
-        String senha ="dh4_fT2kl@d";
-        String driver ="com.mysql.jdbc.Driver";
+        String senha = "dh4_fT2kl@d";
+        String driver = "com.mysql.jdbc.Driver";
         String enderecoBanco = "schork_dolsan.mysql.dbaas.com.br:3306/schork_dolsan";
 
         try {

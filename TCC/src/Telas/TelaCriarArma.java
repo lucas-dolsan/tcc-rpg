@@ -1,62 +1,154 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Telas;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
+import ConexaoBanco.JogadorDAO;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 
-/**
- *
- * @author aluno
- */
 public class TelaCriarArma extends javax.swing.JDialog {
-    ImageIcon[] images;
+
+    JogadorDAO jogDAO = new JogadorDAO();
+
     public TelaCriarArma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents(); 
-
-        images = new ImageIcon[100];
-        Integer[] intArray = new Integer[100];
-        for (int i = 1; i < 100; i++) {
-            intArray[i] = new Integer(i);
-            images[i] = new ImageIcon(getClass().getResource("/WeaponIcons/Iconsweapon(1).png"));
-        }
-        
-        JComboBox caixa = new JComboBox(intArray);
-        caixa.setAlignmentX(10);
-        caixa.setAlignmentY(10);
-        caixa.setPreferredSize(new Dimension(116, 58));
-        
+        initComponents();
+        loadImages();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        caixaIcons = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        campoNome = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        campoDano = new javax.swing.JTextField();
+        caixaPersonagem = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        campoAtributos = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        campoDescricao = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        botaoSalvar = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Criação de Item");
+        setMaximumSize(new java.awt.Dimension(350, 440));
+        setMinimumSize(new java.awt.Dimension(350, 440));
+        setPreferredSize(new java.awt.Dimension(350, 440));
+        getContentPane().setLayout(null);
+
+        caixaIcons.setMaximumSize(new java.awt.Dimension(80, 60));
+        caixaIcons.setMinimumSize(new java.awt.Dimension(80, 60));
+        caixaIcons.setName(""); // NOI18N
+        caixaIcons.setPreferredSize(new java.awt.Dimension(80, 60));
+        getContentPane().add(caixaIcons);
+        caixaIcons.setBounds(10, 40, 80, 60);
+
+        jLabel1.setText("Nome do Item:");
+        jLabel1.setToolTipText("");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(100, 20, 290, 17);
+        getContentPane().add(campoNome);
+        campoNome.setBounds(100, 40, 240, 27);
+
+        jLabel2.setText("Dano base:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(100, 70, 190, 17);
+        getContentPane().add(campoDano);
+        campoDano.setBounds(100, 90, 240, 27);
+
+        caixaPersonagem.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                caixaPersonagemFocusGained(evt);
+            }
+        });
+        getContentPane().add(caixaPersonagem);
+        caixaPersonagem.setBounds(100, 140, 240, 27);
+
+        jLabel3.setText("Atribuir ao personagem:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(100, 120, 180, 17);
+
+        campoAtributos.setColumns(20);
+        campoAtributos.setRows(5);
+        jScrollPane2.setViewportView(campoAtributos);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(10, 190, 330, 87);
+
+        jLabel4.setText("Outros atributos:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(10, 170, 200, 20);
+
+        campoDescricao.setColumns(20);
+        campoDescricao.setRows(5);
+        jScrollPane3.setViewportView(campoDescricao);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(10, 300, 330, 87);
+
+        jLabel5.setText("Descrição:");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(10, 280, 330, 17);
+
+        jLabel6.setText("Icone:");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(10, 20, 80, 17);
+
+        botaoSalvar.setText("Salvar");
+        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSalvarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoSalvar);
+        botaoSalvar.setBounds(240, 390, 100, 30);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void caixaPersonagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaPersonagemFocusGained
+        caixaPersonagem.removeAllItems();
+        jogDAO.listarPersonagensArmas();
+    }//GEN-LAST:event_caixaPersonagemFocusGained
+
+    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
+        System.out.println(caixaIcons.getSelectedItem().toString());
+    }//GEN-LAST:event_botaoSalvarActionPerformed
+    private void loadImages() {
+        for (int i = 1; i <= 184; i++) {
+            Object icon = (new ImageIcon(getClass().getResource("/WeaponIcons/weapon(" + i + ").png")));
+            caixaIcons.addItem(icon);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoSalvar;
+    private javax.swing.JComboBox<Object> caixaIcons;
+    public static javax.swing.JComboBox<String> caixaPersonagem;
+    private javax.swing.JTextArea campoAtributos;
+    private javax.swing.JTextField campoDano;
+    private javax.swing.JTextArea campoDescricao;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

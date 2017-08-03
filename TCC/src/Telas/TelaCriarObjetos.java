@@ -52,7 +52,7 @@ public class TelaCriarObjetos extends javax.swing.JDialog {
         botaoCriarMagia.setBounds(12, 119, 190, 70);
 
         botaoCriarMisc.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        botaoCriarMisc.setText("Miscelânia");
+        botaoCriarMisc.setText("Miscelânea");
         getContentPane().add(botaoCriarMisc);
         botaoCriarMisc.setBounds(233, 119, 190, 70);
 
@@ -65,10 +65,9 @@ public class TelaCriarObjetos extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void botaoCriarArmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarArmaActionPerformed
-       TelaCriarArma telaCriarArma = new TelaCriarArma(null, true);
-       telaCriarArma.setVisible(true);
+        TelaCriarArma telaCriarArma = new TelaCriarArma(null, true);
+        telaCriarArma.setVisible(true);
     }//GEN-LAST:event_botaoCriarArmaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriarArma;
