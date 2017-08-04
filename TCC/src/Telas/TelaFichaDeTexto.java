@@ -34,12 +34,12 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(715, 560));
         getContentPane().setLayout(null);
         getContentPane().add(nomeFichaTexto);
-        nomeFichaTexto.setBounds(150, 10, 200, 29);
+        nomeFichaTexto.setBounds(180, 10, 200, 29);
 
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
         jLabel1.setText("Nome da ficha:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 131, 29);
+        jLabel1.setBounds(10, 10, 151, 29);
 
         telaTextoFicha.setColumns(20);
         telaTextoFicha.setRows(5);
@@ -74,7 +74,7 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
         fichaSemNome.setForeground(new java.awt.Color(204, 0, 0));
         fichaSemNome.setText("Ficha sem nome!");
         getContentPane().add(fichaSemNome);
-        fichaSemNome.setBounds(300, 480, 100, 30);
+        fichaSemNome.setBounds(280, 480, 140, 30);
 
         botaoExcluirFichaTexto.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         botaoExcluirFichaTexto.setText("Excluir");
@@ -91,7 +91,7 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
         nomeExiste.setForeground(new java.awt.Color(204, 0, 0));
         nomeExiste.setText("Nome já existe!");
         getContentPane().add(nomeExiste);
-        nomeExiste.setBounds(350, 10, 100, 30);
+        nomeExiste.setBounds(410, 10, 200, 30);
 
         pack();
         setLocationRelativeTo(null);
