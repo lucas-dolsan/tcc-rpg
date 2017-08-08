@@ -2,6 +2,7 @@ package Telas;
 
 import ConexaoBanco.JogadorDAO;
 import com.sun.glass.events.KeyEvent;
+import java.awt.Cursor;
 
 public class TelaConfigurarSala extends javax.swing.JDialog {
 
@@ -121,24 +122,33 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
     public static String nomeSala = "";
 
     private void criarSala() {
-        nomeSala = campoNomeSala.getText();
-        if (jogDAO.salaExiste(nomeSala)) {
-            System.out.println("Erro: Esta sala já existe.");
-            erroSalaExistente.setVisible(true);
-        } else if (nomeSala.isEmpty()) {
-            System.out.println("Erro: Nome da sala deve ser informado.");
-            erroSalaSemNome.setVisible(true);
-        } else {
-            char[] senha = campoSenhaSala.getPassword();
-            String senhaAuxiliar = String.valueOf(senha);
-            System.out.println("Criando sala...");
-            jogDAO.criarSala(this, nomeSala, senhaAuxiliar);
-            System.out.println("Sala: " + nomeSala + " criada com sucesso.");
-            if (jogDAO.entrarEmSala(nomeSala, senhaAuxiliar)) {
-                TelaJogo.Start(JogadorDAO.salaAtual.getFk_jogador() == JogadorDAO.player.getPk_jogador());
-                tela.dispose();
-                this.dispose();
+        try {
+
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            
+            nomeSala = campoNomeSala.getText();
+            if (jogDAO.salaExiste(nomeSala)) {
+                System.out.println("Erro: Esta sala já existe.");
+                erroSalaExistente.setVisible(true);
+            } else if (nomeSala.isEmpty()) {
+                System.out.println("Erro: Nome da sala deve ser informado.");
+                erroSalaSemNome.setVisible(true);
+            } else {
+                char[] senha = campoSenhaSala.getPassword();
+                String senhaAuxiliar = String.valueOf(senha);
+                System.out.println("Criando sala...");
+                jogDAO.criarSala(this, nomeSala, senhaAuxiliar);
+                System.out.println("Sala: " + nomeSala + " criada com sucesso.");
+                if (jogDAO.entrarEmSala(nomeSala, senhaAuxiliar)) {
+                    TelaJogo.Start(JogadorDAO.salaAtual.getFk_jogador() == JogadorDAO.player.getPk_jogador());
+                    tela.dispose();
+                    this.dispose();
+                }
             }
+        } finally {
+
+            setCursor(Cursor.getDefaultCursor());
+
         }
     }
     private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed

@@ -2,6 +2,7 @@ package Telas;
 
 import Objetos.*;
 import ConexaoBanco.JogadorDAO;
+import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 
 public class TelaRegistrar extends javax.swing.JDialog {
@@ -188,31 +189,40 @@ public class TelaRegistrar extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     public void entrarComEnter() {
-        String userName = campoUsername.getText();
-        String email = campoEmail.getText();
-        char[] senha = campoSenha.getPassword();
-        char[] confirmarSenha = campoConfirmarSenha.getPassword();
-        String senhaAuxiliar = String.valueOf(senha);
-        String confirmaSenha = String.valueOf(confirmarSenha);
-        boolean verificarEmail = jogDAO.verificarEmail(email);
-        boolean verificarNome = jogDAO.verificarNomeDeUsuario(userName);
-        boolean erro = false;
-        if (!senhaAuxiliar.equals(confirmaSenha) || senhaAuxiliar.isEmpty() || confirmaSenha.isEmpty()) {
-            erroSenhas.setVisible(true);
-            erro = true;
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+            String userName = campoUsername.getText();
+            String email = campoEmail.getText();
+            char[] senha = campoSenha.getPassword();
+            char[] confirmarSenha = campoConfirmarSenha.getPassword();
+            String senhaAuxiliar = String.valueOf(senha);
+            String confirmaSenha = String.valueOf(confirmarSenha);
+            boolean verificarEmail = jogDAO.verificarEmail(email);
+            boolean verificarNome = jogDAO.verificarNomeDeUsuario(userName);
+            boolean erro = false;
+            if (!senhaAuxiliar.equals(confirmaSenha) || senhaAuxiliar.isEmpty() || confirmaSenha.isEmpty()) {
+                erroSenhas.setVisible(true);
+                erro = true;
+            }
+            if (verificarEmail) {
+                erroEmail.setVisible(true);
+                erro = true;
+            }
+            if (verificarNome) {
+                erroNome.setVisible(true);
+                erro = true;
+            }
+            if (!erro) {
+                Jogador jogador = new Jogador(userName, email, senhaAuxiliar);
+                jogDAO.criarJogador(jogador, this);
+            }
+        } finally {
+            
+            setCursor(Cursor.getDefaultCursor());
+            
         }
-        if (verificarEmail) {
-            erroEmail.setVisible(true);
-            erro = true;
-        }
-        if (verificarNome) {
-            erroNome.setVisible(true);
-            erro = true;
-        }
-        if (!erro) {
-            Jogador jogador = new Jogador(userName, email, senhaAuxiliar);
-            jogDAO.criarJogador(jogador, this);
-        }
+
     }
     private void botaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarActionPerformed
         entrarComEnter();
