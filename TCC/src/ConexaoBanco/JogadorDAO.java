@@ -315,21 +315,88 @@ public class JogadorDAO {
         }
     }
 
-    public void criarItemArma(String nome, int danoBase,String nomePersonagem, String icone, String outrosAtributos, String descricao) {
-        final String sql = ("INSERT INTO itemWeapon(fk_personagem,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea) VALUES (?,?,?,?,?)");
+    public int pegarPk_personagem(String nome) {
+        final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
         try {
-            PreparedStatement stmt = c.prepareCall(sql);
-           // stmt.setInt(1, fk_personagem);
-            stmt.setString(2, icone);
-            stmt.setInt(3, danoBase);
-            stmt.setString(4, outrosAtributos);
-            stmt.setString(5, descricao);
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("pk_personagem");
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void criarItemArma(String nome, int danoBase, String nomePersonagem, String icone, String outrosAtributos, String descricao) {
+        int pk_personagem = pegarPk_personagem(nomePersonagem);
+        final String sql = ("INSERT INTO itemWeapon(fk_personagem,nome_itWea,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea) VALUES (?,?,?,?,?,?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pk_personagem);
+            stmt.setString(2, nome);
+            stmt.setString(3, icone);
+            stmt.setInt(4, danoBase);
+            stmt.setString(5, outrosAtributos);
+            stmt.setString(6, descricao);
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    public void listarPersonagensMagias() {
+        final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, salaAtual.getNome_sala());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                TelaCriarMagia.caixaPersonagem.addItem(rs.getString("nomePersonagem_fic"));
+            }
+            stmt.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarPersonagensItens() {
+        final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, salaAtual.getNome_sala());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                TelaCriarItem.caixaPersonagem.addItem(rs.getString("nomePersonagem_fic"));
+            }
+            stmt.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarPersonagensArmaduras() {
+        final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, salaAtual.getNome_sala());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                TelaCriarArmadura.caixaPersonagem.addItem(rs.getString("nomePersonagem_fic"));
+            }
+            stmt.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void listarPersonagensArmas() {

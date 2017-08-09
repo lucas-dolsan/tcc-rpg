@@ -20,8 +20,12 @@
             <file>file:/home/dolsan/tcc-rpg/TCC/src/Telas/TelaJogo.java</file>
         </group>
         <group>
-            <file>file:/home/aluno/tcc-rpg/TCC/src/ConexaoBanco/JogadorDAO.java</file>
-            <file>file:/home/aluno/tcc-rpg/TCC/src/Telas/TelaCriarArma.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaCriarObjetos.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaCriarItem.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/ConexaoBanco/JogadorDAO.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaCriarArmadura.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaCriarArma.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaCriarMagia.java</file>
         </group>
     </open-files>
 </project-private>

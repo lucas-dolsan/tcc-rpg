@@ -2,6 +2,7 @@ package Telas;
 
 import ConexaoBanco.JogadorDAO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class TelaCriarArma extends javax.swing.JDialog {
 
@@ -43,9 +44,9 @@ public class TelaCriarArma extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Criação de Item");
-        setMaximumSize(new java.awt.Dimension(350, 440));
-        setMinimumSize(new java.awt.Dimension(350, 440));
-        setPreferredSize(new java.awt.Dimension(350, 440));
+        setMaximumSize(new java.awt.Dimension(365, 480));
+        setMinimumSize(new java.awt.Dimension(365, 480));
+        setPreferredSize(new java.awt.Dimension(365, 480));
         getContentPane().setLayout(null);
 
         caixaIcons.setMaximumSize(new java.awt.Dimension(80, 60));
@@ -58,15 +59,15 @@ public class TelaCriarArma extends javax.swing.JDialog {
         jLabel1.setText("Nome do Item:");
         jLabel1.setToolTipText("");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(100, 20, 290, 17);
+        jLabel1.setBounds(100, 20, 240, 14);
         getContentPane().add(campoNome);
-        campoNome.setBounds(100, 40, 240, 27);
+        campoNome.setBounds(100, 40, 240, 30);
 
         jLabel2.setText("Dano base:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(100, 70, 190, 17);
+        jLabel2.setBounds(100, 70, 240, 14);
         getContentPane().add(campoDano);
-        campoDano.setBounds(100, 90, 240, 27);
+        campoDano.setBounds(100, 90, 240, 30);
 
         caixaPersonagem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -74,37 +75,37 @@ public class TelaCriarArma extends javax.swing.JDialog {
             }
         });
         getContentPane().add(caixaPersonagem);
-        caixaPersonagem.setBounds(100, 140, 240, 27);
+        caixaPersonagem.setBounds(100, 140, 240, 30);
 
         jLabel3.setText("Atribuir ao personagem:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(100, 120, 180, 17);
+        jLabel3.setBounds(100, 120, 180, 14);
 
         campoAtributos.setColumns(20);
         campoAtributos.setRows(5);
         jScrollPane2.setViewportView(campoAtributos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 190, 330, 87);
+        jScrollPane2.setBounds(10, 190, 330, 96);
 
         jLabel4.setText("Outros atributos:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 170, 200, 20);
+        jLabel4.setBounds(10, 170, 330, 20);
 
         campoDescricao.setColumns(20);
         campoDescricao.setRows(5);
         jScrollPane3.setViewportView(campoDescricao);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 300, 330, 87);
+        jScrollPane3.setBounds(10, 300, 330, 96);
 
         jLabel5.setText("Descrição:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 280, 330, 17);
+        jLabel5.setBounds(10, 284, 330, 20);
 
         jLabel6.setText("Icone:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 20, 80, 17);
+        jLabel6.setBounds(10, 20, 80, 14);
 
         botaoSalvar.setText("Salvar");
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,12 +114,12 @@ public class TelaCriarArma extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoSalvar);
-        botaoSalvar.setBounds(240, 390, 100, 30);
+        botaoSalvar.setBounds(240, 400, 100, 30);
 
         erro.setForeground(new java.awt.Color(255, 0, 0));
-        erro.setText("Nome ou dano faltando!");
+        erro.setText("Nome, personagem ou dano faltando!");
         getContentPane().add(erro);
-        erro.setBounds(10, 390, 230, 20);
+        erro.setBounds(10, 390, 230, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -128,7 +129,7 @@ public class TelaCriarArma extends javax.swing.JDialog {
         caixaPersonagem.removeAllItems();
         jogDAO.listarPersonagensArmas();
     }//GEN-LAST:event_caixaPersonagemFocusGained
-private int transformarDanoEmInt() {
+    private int transformarDanoEmInt() {
         if (campoDano.getText() == null) {
             return 0;
         } else {
@@ -140,28 +141,38 @@ private int transformarDanoEmInt() {
         boolean error = false;
         String icon = caixaIcons.getSelectedItem().toString();
         int aux = icon.lastIndexOf("/");
-        icon = icon.substring(aux+1);
-        if(!campoNome.getText().isEmpty() || campoNome.getText().equalsIgnoreCase(" ")){
-            String nome = campoNome.getText();
-        }else{
+        icon = icon.substring(aux + 1);
+        String nome = null;
+        if (!campoNome.getText().isEmpty() || campoNome.getText().equalsIgnoreCase(" ")) {
+            nome = campoNome.getText();
+        } else {
             erro.setVisible(true);
             error = true;
-            
+        }
+        if(nome == null){
+            error=true;
         }
         int dano = transformarDanoEmInt();
-        if(dano==0){
+        if (dano == 0) {
             erro.setVisible(true);
             error = true;
         }
         String nomePersonagem = caixaPersonagem.getSelectedItem().toString();
+        if (nomePersonagem.isEmpty() || nomePersonagem == null) {
+            erro.setVisible(true);
+            error = true;
+        }
         String descricao = campoDescricao.getText();
         String atributos = campoAtributos.getText();
-        if(!error){
-       //     jogDAO.criarItemArma(nome, dano, nomePersonagem, icon, atributos, descricao);
+        if (!error) {
+           JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
+           caixaPersonagem.removeAllItems();
+           campoAtributos.setText("");
+           campoDano.setText("0");
+           campoDescricao.setText("");
+           campoNome.setText("");
         }
-        
-        
-        
+
     }//GEN-LAST:event_botaoSalvarActionPerformed
     private void loadImages() {
         for (int i = 1; i <= 184; i++) {

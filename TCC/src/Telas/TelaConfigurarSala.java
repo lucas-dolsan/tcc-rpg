@@ -125,7 +125,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         try {
 
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            
+
             nomeSala = campoNomeSala.getText();
             if (jogDAO.salaExiste(nomeSala)) {
                 System.out.println("Erro: Esta sala já existe.");
