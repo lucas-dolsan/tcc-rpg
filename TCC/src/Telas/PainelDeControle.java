@@ -133,7 +133,6 @@ public class PainelDeControle extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     try {
-                        dao.alterarPorta(port, TelaConfigurarSala.nomeSala);
                         TelaJogo.jButton1.setEnabled(false);
                         voipFrame = new ServerRunner(port);
                         voipFrame.setVisible(false);
@@ -147,7 +146,8 @@ public class PainelDeControle extends javax.swing.JFrame {
             estadoVoip = true;
             jButton2.setText("Desligar voIP (on)");
             TelaJogo.jButton1.setEnabled(false);
-            dao.alterarVOIP(1);
+            dao.alterarPorta(port, TelaConfigurarSala.nomeSala);
+            dao.alterarVOIP(1); 
         } else {
             System.out.println("Parando servidor de voIP...");
             estadoVoip = false;

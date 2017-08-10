@@ -560,27 +560,53 @@ public class TelaJogo extends javax.swing.JFrame {
                 new Thread() {
                     @Override
                     public void run() {
-                        dao.pegarPorta(TelaConfigurarSala.nomeSala);
+                        
+                        if (dao.isVOIPAtivado(DAO.salaAtual.getNome_sala())) {
+                            
+                            System.out.println("voIP está ativado");
+                            
+                        } else {
+                            
+                            System.out.println("voIP está desativado");
+                            
+                        }
+                        
                         while (true) {
+                            
+                            painel.port = dao.pegarPorta(TelaConfigurarSala.nomeSala);
+                            
                             if (!(DAO.player.getPk_jogador() == DAO.salaAtual.getFk_jogador())) {
-                                if (dao.isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
-                                    jButton1.setEnabled(false);
-                                    System.out.println("voIP está desativado");
-                                } else if (dao.isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
+                                
+                                if (dao.isVOIPAtivado(DAO.salaAtual.getNome_sala())) {
+                                    
                                     jButton1.setEnabled(true);
-                                    System.out.println("voIP está ativado");
+                                    
+                                }else{
+                                    
+                                    jButton1.setEnabled(false);
                                 }
                             }
+                            
                             if (dao.verificarChatDaily(DAO.salaAtual.getNome_sala())) {
+                                
                                 painel.checkboxChat.setSelected(true);
+                                
                             } else {
+                                
                                 painel.checkboxChat.setSelected(false);
+                                
                             }
+                            
                             dao.lerChat();
+                            
                             try {
+                                
                                 Thread.sleep(1);
+                                
                             } catch (InterruptedException ex) {
+                                
                                 Logger.getLogger(TelaJogo.class.getName()).log(Level.SEVERE, null, ex);
+                                
                             }
 
                         }
