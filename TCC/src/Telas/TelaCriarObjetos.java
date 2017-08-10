@@ -1,12 +1,12 @@
 package Telas;
 
 public class TelaCriarObjetos extends javax.swing.JDialog {
-
+    
     public TelaCriarObjetos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,16 +43,31 @@ public class TelaCriarObjetos extends javax.swing.JDialog {
         botaoCriarArmadura.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         botaoCriarArmadura.setText("Armadura");
         botaoCriarArmadura.setPreferredSize(new java.awt.Dimension(180, 70));
+        botaoCriarArmadura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarArmaduraActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoCriarArmadura);
         botaoCriarArmadura.setBounds(233, 12, 190, 70);
 
         botaoCriarMagia.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         botaoCriarMagia.setText("Magias");
+        botaoCriarMagia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarMagiaActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoCriarMagia);
         botaoCriarMagia.setBounds(12, 119, 190, 70);
 
         botaoCriarMisc.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         botaoCriarMisc.setText("Miscelânea");
+        botaoCriarMisc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarMiscActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoCriarMisc);
         botaoCriarMisc.setBounds(233, 119, 190, 70);
 
@@ -68,6 +83,21 @@ public class TelaCriarObjetos extends javax.swing.JDialog {
         TelaCriarArma telaCriarArma = new TelaCriarArma(null, true);
         telaCriarArma.setVisible(true);
     }//GEN-LAST:event_botaoCriarArmaActionPerformed
+
+    private void botaoCriarMagiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarMagiaActionPerformed
+        TelaCriarMagia telaCriarMagia = new TelaCriarMagia(null, true);
+        telaCriarMagia.setVisible(true);
+    }//GEN-LAST:event_botaoCriarMagiaActionPerformed
+
+    private void botaoCriarArmaduraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarArmaduraActionPerformed
+        TelaCriarArmadura telaCriarArmadura = new TelaCriarArmadura(null, true);
+        telaCriarArmadura.setVisible(true);
+    }//GEN-LAST:event_botaoCriarArmaduraActionPerformed
+
+    private void botaoCriarMiscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarMiscActionPerformed
+        TelaCriarItem telaCriarItem = new TelaCriarItem(null, true);
+        telaCriarItem.setVisible(true);
+    }//GEN-LAST:event_botaoCriarMiscActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriarArma;

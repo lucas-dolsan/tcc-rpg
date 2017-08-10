@@ -218,9 +218,9 @@ public class TelaRegistrar extends javax.swing.JDialog {
                 jogDAO.criarJogador(jogador, this);
             }
         } finally {
-            
+
             setCursor(Cursor.getDefaultCursor());
-            
+
         }
 
     }
