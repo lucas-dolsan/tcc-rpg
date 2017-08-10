@@ -1,12 +1,12 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class TelaCriarMagia extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
 
     public TelaCriarMagia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -86,7 +86,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         jScrollPane2.setViewportView(campoAtributos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 190, 330, 96);
+        jScrollPane2.setBounds(10, 190, 330, 87);
 
         jLabel4.setText("Outros atributos:");
         getContentPane().add(jLabel4);
@@ -97,7 +97,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         jScrollPane3.setViewportView(campoDescricao);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 300, 330, 96);
+        jScrollPane3.setBounds(10, 300, 330, 87);
 
         jLabel5.setText("Descrição:");
         getContentPane().add(jLabel5);
@@ -105,7 +105,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
 
         jLabel6.setText("Icone:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 20, 80, 14);
+        jLabel6.setBounds(10, 20, 80, 17);
 
         botaoSalvar.setText("Salvar");
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +127,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
 
     private void caixaPersonagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaPersonagemFocusGained
         caixaPersonagem.removeAllItems();
-        jogDAO.listarPersonagensMagias();
+        dao.listarPersonagensMagias();
     }//GEN-LAST:event_caixaPersonagemFocusGained
     private int transformarDanoEmInt() {
         if (campoDano.getText() == null) {
@@ -150,8 +150,8 @@ public class TelaCriarMagia extends javax.swing.JDialog {
             error = true;
 
         }
-        if(nome == null){
-            error=true;
+        if (nome == null) {
+            error = true;
         }
         int dano = transformarDanoEmInt();
         if (dano == 0) {
@@ -166,12 +166,12 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         String descricao = campoDescricao.getText();
         String atributos = campoAtributos.getText();
         if (!error) {
-           JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
-           caixaPersonagem.removeAllItems();
-           campoAtributos.setText("");
-           campoDano.setText("0");
-           campoDescricao.setText("");
-           campoNome.setText("");
+            JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
+            caixaPersonagem.removeAllItems();
+            campoAtributos.setText("");
+            campoDano.setText("0");
+            campoDescricao.setText("");
+            campoNome.setText("");
         }
 
     }//GEN-LAST:event_botaoSalvarActionPerformed

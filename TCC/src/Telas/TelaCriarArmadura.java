@@ -1,12 +1,12 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class TelaCriarArmadura extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
 
     public TelaCriarArmadura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -125,7 +125,7 @@ public class TelaCriarArmadura extends javax.swing.JDialog {
 
     private void caixaPersonagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaPersonagemFocusGained
         caixaPersonagem.removeAllItems();
-        jogDAO.listarPersonagensArmaduras();
+        dao.listarPersonagensArmaduras();
     }//GEN-LAST:event_caixaPersonagemFocusGained
     private int transformarDefesaEmInt() {
         if (campoDefesa.getText() == null) {
@@ -140,7 +140,7 @@ public class TelaCriarArmadura extends javax.swing.JDialog {
         String icon = caixaIcons.getSelectedItem().toString();
         int aux = icon.lastIndexOf("/");
         icon = icon.substring(aux + 1);
-        String nome =null;
+        String nome = null;
         if (!campoNome.getText().isEmpty() || campoNome.getText().equalsIgnoreCase(" ")) {
             nome = campoNome.getText();
         } else {
@@ -148,8 +148,8 @@ public class TelaCriarArmadura extends javax.swing.JDialog {
             error = true;
 
         }
-        if(nome == null){
-            error=true;
+        if (nome == null) {
+            error = true;
         }
         int defesa = transformarDefesaEmInt();
         if (defesa == 0) {
@@ -164,12 +164,12 @@ public class TelaCriarArmadura extends javax.swing.JDialog {
         String descricao = campoDescricao.getText();
         String atributos = campoAtributos.getText();
         if (!error) {
-           JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
-           caixaPersonagem.removeAllItems();
-           campoAtributos.setText("");
-           campoDefesa.setText("0");
-           campoDescricao.setText("");
-           campoNome.setText("");
+            JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
+            caixaPersonagem.removeAllItems();
+            campoAtributos.setText("");
+            campoDefesa.setText("0");
+            campoDescricao.setText("");
+            campoNome.setText("");
         }
 
     }//GEN-LAST:event_botaoSalvarActionPerformed

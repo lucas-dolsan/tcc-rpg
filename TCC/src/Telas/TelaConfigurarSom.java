@@ -2,7 +2,7 @@ package Telas;
 
 import ClienteVoIP.Client;
 import ClienteVoIP.MicThread;
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import Dependencias.SoundPacket;
 import Dependencias.Utils;
 import javax.sound.sampled.AudioFormat;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 public class TelaConfigurarSom extends javax.swing.JFrame {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
     private MicTester micTester;
 
     private class MicTester extends Thread {
@@ -146,7 +146,8 @@ public class TelaConfigurarSom extends javax.swing.JFrame {
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
         try {
-            new Client(jogDAO.pegarIPDono(JogadorDAO.salaAtual.getNome_sala()), TelaJogo.painel.port).start();
+            System.out.println(TelaJogo.painel.port);
+            new Client(dao.pegarIPDono(DAO.salaAtual.getNome_sala()), TelaJogo.painel.port).start();
         } catch (Exception ex) {
             System.out.println("ERRO:" + ex);
             JOptionPane.showMessageDialog(rootPane, ex, "Erro", JOptionPane.ERROR_MESSAGE);

@@ -5,13 +5,13 @@
  */
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class TelaRolarDado extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
     private int dado;
 
     public TelaRolarDado(java.awt.Frame parent, boolean modal, int dado) {
@@ -137,17 +137,17 @@ public class TelaRolarDado extends javax.swing.JDialog {
         if (modificadorMais > 0) {
             int numero = rodar();
             int numeroModificado = numero + modificadorMais;
-            jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 1);
+            dao.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 1);
             this.dispose();
         } else if (modificadorMenos > 0) {
             int numero = rodar();
             int numeroModificado = numero - modificadorMenos;
-            jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 2);
+            dao.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 2);
             this.dispose();
         } else {
             int numero = rodar();
             int numeroModificado = 0;
-            jogDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 3);
+            dao.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 3);
             this.dispose();
         }
     }

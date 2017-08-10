@@ -1,12 +1,12 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class TelaCriarItem extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
 
     public TelaCriarItem(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -117,7 +117,7 @@ public class TelaCriarItem extends javax.swing.JDialog {
 
     private void caixaPersonagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaPersonagemFocusGained
         caixaPersonagem.removeAllItems();
-        jogDAO.listarPersonagensItens();
+        dao.listarPersonagensItens();
     }//GEN-LAST:event_caixaPersonagemFocusGained
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
@@ -143,12 +143,12 @@ public class TelaCriarItem extends javax.swing.JDialog {
         String descricao = campoDescricao.getText();
         String atributos = campoAtributos.getText();
         if (!error) {
-            
-           JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
-           caixaPersonagem.removeAllItems();
-           campoAtributos.setText("");
-           campoDescricao.setText("");
-           campoNome.setText("");
+
+            JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
+            caixaPersonagem.removeAllItems();
+            campoAtributos.setText("");
+            campoDescricao.setText("");
+            campoNome.setText("");
         }
 
     }//GEN-LAST:event_botaoSalvarActionPerformed

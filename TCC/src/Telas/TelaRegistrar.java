@@ -1,13 +1,13 @@
 package Telas;
 
 import Objetos.*;
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 
 public class TelaRegistrar extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
 
     public TelaRegistrar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -198,8 +198,8 @@ public class TelaRegistrar extends javax.swing.JDialog {
             char[] confirmarSenha = campoConfirmarSenha.getPassword();
             String senhaAuxiliar = String.valueOf(senha);
             String confirmaSenha = String.valueOf(confirmarSenha);
-            boolean verificarEmail = jogDAO.verificarEmail(email);
-            boolean verificarNome = jogDAO.verificarNomeDeUsuario(userName);
+            boolean verificarEmail = dao.verificarEmail(email);
+            boolean verificarNome = dao.verificarNomeDeUsuario(userName);
             boolean erro = false;
             if (!senhaAuxiliar.equals(confirmaSenha) || senhaAuxiliar.isEmpty() || confirmaSenha.isEmpty()) {
                 erroSenhas.setVisible(true);
@@ -215,7 +215,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
             }
             if (!erro) {
                 Jogador jogador = new Jogador(userName, email, senhaAuxiliar);
-                jogDAO.criarJogador(jogador, this);
+                dao.criarJogador(jogador, this);
             }
         } finally {
 

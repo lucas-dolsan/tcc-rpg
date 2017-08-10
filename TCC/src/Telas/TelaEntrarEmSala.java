@@ -1,12 +1,12 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
 
 public class TelaEntrarEmSala extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
     private final TelaInicial tela;
 
     public TelaEntrarEmSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
@@ -19,7 +19,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
                     setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                     caixaDeSalas.removeAllItems();
-                    jogDAO.listarSalas();
+                    dao.listarSalas();
 
                 } finally {
 
@@ -152,13 +152,13 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
 
             String nomeSala = (caixaDeSalas.getSelectedItem().toString());
             String senhaSala = campoSenhaSala.getText();
-            if (jogDAO.entrarEmSala(nomeSala, senhaSala)) {
-                TelaJogo.Start(jogDAO.verificarDono());
+            if (dao.entrarEmSala(nomeSala, senhaSala)) {
+                TelaJogo.Start(dao.verificarDono());
                 tela.dispose();
                 this.dispose();
                 System.out.println("[" + nomeSala + "]");
-                jogDAO.mensagemEntrarNaSala();
-                System.out.println(JogadorDAO.nickName + " entrou na sala");
+                dao.mensagemEntrarNaSala();
+                System.out.println(DAO.nickName + " entrou na sala");
             } else {
                 System.out.println("Erro ao entrar na sala " + nomeSala);
                 erroEntrarEmSala.setVisible(true);

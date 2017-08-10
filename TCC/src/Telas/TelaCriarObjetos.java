@@ -1,12 +1,12 @@
 package Telas;
 
 public class TelaCriarObjetos extends javax.swing.JDialog {
-    
+
     public TelaCriarObjetos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
