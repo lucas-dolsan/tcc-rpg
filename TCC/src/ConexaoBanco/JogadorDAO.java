@@ -567,7 +567,35 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
-
+    public int pegarPorta(String nome_sala){
+    final String sql = ("SELECT porta_sala FROM sala WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nome_sala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public void alterarPorta(int porta_sala, String nome_sala){
+          final String sql = ("UPDATE sala SET porta_sala = ? WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, porta_sala);
+            stmt.setString(2, nome_sala);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+    
+    
+    }
     public String pegarIPDono(String nome_sala) {
         pegarSalasDoBanco();
         final String sql = ("SELECT ip_dono FROM sala WHERE nome_sala = ?");
@@ -627,7 +655,7 @@ public class JogadorDAO {
     public void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
-        String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala, ip_dono, limpar_chat_daily, voip_sala) values(?,?,?,?,?,?,?)";
+        String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala, ip_dono, limpar_chat_daily, voip_sala, porta_sala) values(?,?,?,?,?,?,?,?)";
         for (Sala sala : salas) {
             if (sala.getNome_sala().equalsIgnoreCase(nomeSala)) {
                 salaAtual = sala;
@@ -643,6 +671,7 @@ public class JogadorDAO {
             stmt.setString(5, TelaInicial.ipAddress);
             stmt.setInt(6, 0);
             stmt.setBoolean(7, false);
+            stmt.setInt(8, 0);
             stmt.execute();
             tela.dispose();
         } catch (Exception e) {

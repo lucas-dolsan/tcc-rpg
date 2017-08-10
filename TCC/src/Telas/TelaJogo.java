@@ -559,6 +559,7 @@ public class TelaJogo extends javax.swing.JFrame {
                 new Thread() {
                     @Override
                     public void run() {
+                        jogDAO.pegarPorta(TelaConfigurarSala.nomeSala);
                         while (true) {
                             if (!(JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador())) {
                                 if (jogDAO.isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {

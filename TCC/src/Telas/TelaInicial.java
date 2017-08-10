@@ -3,6 +3,7 @@ package Telas;
 import ServidorVoIP.Log;
 import java.awt.event.KeyEvent;
 import java.net.Inet4Address;
+import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -15,41 +16,31 @@ import javax.swing.JOptionPane;
 public class TelaInicial extends javax.swing.JFrame {
 
     public static String ipAddress = null;
-
-    private static void pegarIPLocal() {
-
-        Enumeration<NetworkInterface> net = null;
-        try {
-            net = NetworkInterface.getNetworkInterfaces();
-        } catch (SocketException e) {
-            System.out.println("Sem conexão com a rede local");
-            try {
-                throw new Exception("Erro de rede");
-            } catch (Exception ex) {
-                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        while (net.hasMoreElements()) {
-            NetworkInterface element = net.nextElement();
-            Enumeration<InetAddress> addresses = element.getInetAddresses();
-            while (addresses.hasMoreElements()) {
-                InetAddress ip = addresses.nextElement();
-                if (ip instanceof Inet4Address) {
-                    if (ip.isSiteLocalAddress()) {
-                        ipAddress = ip.getHostAddress();
-                        System.out.println("Conexão com rede local está ativa: \nEndereço de IP local: " + ipAddress);
-                        break;
+    
+    private static String getFirstNonLoopbackAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException {
+        Enumeration en = NetworkInterface.getNetworkInterfaces();
+        while (en.hasMoreElements()) {
+            NetworkInterface i = (NetworkInterface) en.nextElement();
+            for (Enumeration en2 = i.getInetAddresses(); en2.hasMoreElements();) {
+                InetAddress addr = (InetAddress) en2.nextElement();
+                if (!addr.isLoopbackAddress()) {
+                    if (addr instanceof Inet4Address) {
+                        if (preferIPv6) {
+                            continue;
+                        }
+                        return addr.getHostAddress();
+                    }
+                    if (addr instanceof Inet6Address) {
+                        if (preferIpv4) {
+                            continue;
+                        }
+                        return addr.getHostAddress();
                     }
                 }
             }
-            if (ipAddress != null) {
-                break;
-            }
         }
-
+        return null;
     }
-
     public TelaInicial() {
         initComponents();
     }
@@ -202,7 +193,12 @@ private void deslogar() {
             public void run() {
                 if (ipAddress == null) {
                     System.out.println("Login realizado. @" + TelaLogin.campoLogin.getText());
-                    pegarIPLocal();
+                    try {
+                        ipAddress = getFirstNonLoopbackAddress(true, false);
+                            System.out.println(ipAddress);
+                    } catch (SocketException ex) {
+                        Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     System.out.println("--------------------------------------------------------------------------------");
                 }
                 new TelaInicial().setVisible(true);

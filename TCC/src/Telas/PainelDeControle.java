@@ -11,7 +11,7 @@ public class PainelDeControle extends javax.swing.JFrame {
     JogadorDAO jogDAO = new JogadorDAO();
     JFrame voipFrame = null;
     public boolean estadoVoip = false;
-    public int port = 1775;
+    public int port = 0;
 
     public PainelDeControle() {
         initComponents();
@@ -133,6 +133,7 @@ public class PainelDeControle extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     try {
+                        jogDAO.alterarPorta(port, TelaConfigurarSala.nomeSala);
                         TelaJogo.jButton1.setEnabled(false);
                         voipFrame = new ServerRunner(port);
                         voipFrame.setVisible(false);
