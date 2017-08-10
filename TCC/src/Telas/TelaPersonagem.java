@@ -1,10 +1,10 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 
 public class TelaPersonagem extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
 
     public TelaPersonagem(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -398,7 +398,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         }
     }
     private void botaoSalvarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarPersonagemActionPerformed
-        if (jogDAO.personagemExiste(campoNomePersonagem.getText())) {
+        if (dao.personagemExiste(campoNomePersonagem.getText())) {
             erroSemNome.setVisible(true);
         } else {
             boolean aux = false;
@@ -443,7 +443,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             int destreza = transformarDestrezaEmInt();
             int carisma = transformarCarismaEmInt();
             if (!aux) {
-                jogDAO.criarPersonagem(JogadorDAO.salaAtual.getPk_sala(), nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
+                dao.criarPersonagem(DAO.salaAtual.getPk_sala(), nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
                 this.dispose();
             }
 
@@ -451,7 +451,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoSalvarPersonagemActionPerformed
 
     private void salvarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarEdicaoActionPerformed
-        if (campoNomePersonagem.getText().equalsIgnoreCase(JogadorDAO.nomePersonagem)) {
+        if (campoNomePersonagem.getText().equalsIgnoreCase(DAO.nomePersonagem)) {
             String nomePersonagem = campoNomePersonagem.getText();
             if (nomePersonagem == null) {
                 nomePersonagem = " ";
@@ -491,10 +491,10 @@ public class TelaPersonagem extends javax.swing.JDialog {
             int sabedoria = transformarSabedoriaEmInt();
             int destreza = transformarDestrezaEmInt();
             int carisma = transformarCarismaEmInt();
-            jogDAO.salvarEdicaoPersonagem(nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
+            dao.salvarEdicaoPersonagem(nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
             this.dispose();
         } else {
-            if (jogDAO.personagemExiste(campoNomePersonagem.getText())) {
+            if (dao.personagemExiste(campoNomePersonagem.getText())) {
                 nomeEmUso.setVisible(true);
             } else {
                 String nomePersonagem = campoNomePersonagem.getText();
@@ -536,7 +536,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
                 int sabedoria = transformarSabedoriaEmInt();
                 int destreza = transformarDestrezaEmInt();
                 int carisma = transformarCarismaEmInt();
-                jogDAO.salvarEdicaoPersonagem(nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
+                dao.salvarEdicaoPersonagem(nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
                 this.dispose();
             }
         }
@@ -544,7 +544,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
     }//GEN-LAST:event_salvarEdicaoActionPerformed
 
     private void botaoExcluirPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirPersonagemActionPerformed
-        jogDAO.excluirPersonagem();
+        dao.excluirPersonagem();
         this.dispose();
     }//GEN-LAST:event_botaoExcluirPersonagemActionPerformed
 

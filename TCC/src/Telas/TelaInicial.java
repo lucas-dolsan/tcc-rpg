@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class TelaInicial extends javax.swing.JFrame {
 
     public static String ipAddress = null;
-    
+
     private static String getFirstNonLoopbackAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException {
         Enumeration en = NetworkInterface.getNetworkInterfaces();
         while (en.hasMoreElements()) {
@@ -41,6 +41,7 @@ public class TelaInicial extends javax.swing.JFrame {
         }
         return null;
     }
+
     public TelaInicial() {
         initComponents();
     }
@@ -195,7 +196,7 @@ private void deslogar() {
                     System.out.println("Login realizado. @" + TelaLogin.campoLogin.getText());
                     try {
                         ipAddress = getFirstNonLoopbackAddress(true, false);
-                            System.out.println(ipAddress);
+                        System.out.println(ipAddress);
                     } catch (SocketException ex) {
                         Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
                     }

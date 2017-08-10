@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class JogadorDAO {
+public class DAO {
 
     public static String nomeFichaTexto = "";
     public static String nomePersonagem = "";
@@ -19,6 +19,10 @@ public class JogadorDAO {
     public static ArrayList<Sala> salas = new ArrayList<Sala>();
     public static ArrayList<Jogador> jogadoresAtuais = new ArrayList<Jogador>();
     public static Connection c = ConexaoMySql.getConnection();
+
+    public void atualizarBanco() {
+        pegarSalasDoBanco();
+    }
 
     public String SaltedPassword(String unecryptedPassword) {
         String salt = "(NioU&y%%OguyF=d%6S)(L.~mnHXR6#@3jn0*FX7HD(iSHuvTdkfsC5$¨865709giVFTcf76)VB9";
@@ -36,7 +40,7 @@ public class JogadorDAO {
 
     public void mensagemSairDaSala() {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
-        String mensagem = "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " Saiu da Sala]\n";
+        String mensagem = "[" + pegarTempoServer() + "] [" + DAO.nickName + " Saiu da Sala]\n";
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, mensagem);
@@ -49,7 +53,7 @@ public class JogadorDAO {
 
     public void mensagemEntrarNaSala() {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
-        String mensagem = "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " Entrou na Sala]\n";
+        String mensagem = "[" + pegarTempoServer() + "] [" + DAO.nickName + " Entrou na Sala]\n";
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, mensagem);
@@ -141,7 +145,7 @@ public class JogadorDAO {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, nomeFicha);
             stmt.setString(2, texto);
-            stmt.setString(3, JogadorDAO.nomeFichaTexto);
+            stmt.setString(3, DAO.nomeFichaTexto);
             stmt.execute();
             stmt.execute();
         } catch (Exception e) {
@@ -171,7 +175,7 @@ public class JogadorDAO {
             stmt.setInt(16, pontosSabedoria_fic);
             stmt.setInt(17, pontosCarisma_fic);
             stmt.setInt(18, pontosDefesa_fic);
-            stmt.setString(19, JogadorDAO.nomePersonagem);
+            stmt.setString(19, DAO.nomePersonagem);
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
@@ -180,7 +184,7 @@ public class JogadorDAO {
     }
 
     public void pegarDadosFichaTexto(String nomeFichaTexto) {
-        JogadorDAO.nomeFichaTexto = nomeFichaTexto;
+        DAO.nomeFichaTexto = nomeFichaTexto;
         final String sql = ("SELECT * FROM fichaTexto WHERE nome_fict = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
@@ -209,7 +213,7 @@ public class JogadorDAO {
     }
 
     public void pegarDadosPersonagem(String nomePersonagem) {
-        JogadorDAO.nomePersonagem = nomePersonagem;
+        DAO.nomePersonagem = nomePersonagem;
         final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
@@ -279,7 +283,7 @@ public class JogadorDAO {
         final String sql = ("DELETE FROM fichaTexto WHERE nome_ficT = ?;");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setString(1, JogadorDAO.nomeFichaTexto);
+            stmt.setString(1, DAO.nomeFichaTexto);
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
@@ -291,7 +295,7 @@ public class JogadorDAO {
         final String sql = ("DELETE FROM personagem WHERE nomePersonagem_fic = ?;");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setString(1, JogadorDAO.nomePersonagem);
+            stmt.setString(1, DAO.nomePersonagem);
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
@@ -567,22 +571,27 @@ public class JogadorDAO {
             e.printStackTrace();
         }
     }
-    public int pegarPorta(String nome_sala){
-    final String sql = ("SELECT porta_sala FROM sala WHERE nome_sala = ?");
+
+    public int pegarPorta(String nome_sala) {
+        final String sql = ("SELECT * FROM sala WHERE nome_sala =(?)");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, nome_sala);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1);
+                int porta = rs.getInt(9);
+                return porta;
             }
+            rs.close();
+            stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
     }
-    public void alterarPorta(int porta_sala, String nome_sala){
-          final String sql = ("UPDATE sala SET porta_sala = ? WHERE nome_sala = ?");
+
+    public void alterarPorta(int porta_sala, String nome_sala) {
+        final String sql = ("UPDATE sala SET porta_sala = ? WHERE nome_sala = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, porta_sala);
@@ -592,10 +601,9 @@ public class JogadorDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    
-    
-    
+
     }
+
     public String pegarIPDono(String nome_sala) {
         pegarSalasDoBanco();
         final String sql = ("SELECT ip_dono FROM sala WHERE nome_sala = ?");
@@ -699,24 +707,24 @@ public class JogadorDAO {
         switch (texto) {
             case "/help": {
                 String help = "\n     /ping: retorna o tempo de resposta do servidor \n     /time: retorna o tempo do servidor \n     /owner: retorna o nome do dono da sala \n     /clear: limpa a sua janela de chat \n";
-                return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + help + "\n";
+                return "[" + pegarTempoServer() + "] [" + DAO.nickName + "]: " + help + "\n";
             }
             case "/ping": {
-                return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + ping() + "\n";
+                return "[" + pegarTempoServer() + "] [" + DAO.nickName + "]: " + ping() + "\n";
             }
             case "/time": {
-                return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: Server time:" + pegarTempoServer() + "\n \n";
+                return "[" + pegarTempoServer() + "] [" + DAO.nickName + "]: Server time:" + pegarTempoServer() + "\n \n";
             }
             case "/owner": {
                 String aux = dono();
                 if (aux.isEmpty()) {
                     break;
                 } else {
-                    return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + aux + "\n";
+                    return "[" + pegarTempoServer() + "] [" + DAO.nickName + "]: " + aux + "\n";
                 }
             }
             default: {
-                return "[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + "]: " + texto + "\n";
+                return "[" + pegarTempoServer() + "] [" + DAO.nickName + "]: " + texto + "\n";
             }
         }
         return "";
@@ -756,15 +764,15 @@ public class JogadorDAO {
         String mensagem = "";
         switch (tipo) {
             case 1: {
-                mensagem = ("[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " rolou um dado D" + dado + "] = " + numeroModificado + " {[" + numero + "+" + modificadorMais + "]}\n");
+                mensagem = ("[" + pegarTempoServer() + "] [" + DAO.nickName + " rolou um dado D" + dado + "] = " + numeroModificado + " {[" + numero + "+" + modificadorMais + "]}\n");
                 break;
             }
             case 2: {
-                mensagem = ("[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " rolou um dado D" + dado + "] = " + numeroModificado + " {[" + numero + "-" + modificadorMenos + "]}\n");
+                mensagem = ("[" + pegarTempoServer() + "] [" + DAO.nickName + " rolou um dado D" + dado + "] = " + numeroModificado + " {[" + numero + "-" + modificadorMenos + "]}\n");
                 break;
             }
             case 3: {
-                mensagem = ("[" + pegarTempoServer() + "] [" + JogadorDAO.nickName + " rolou um dado D" + dado + "] = " + numero + "\n");
+                mensagem = ("[" + pegarTempoServer() + "] [" + DAO.nickName + " rolou um dado D" + dado + "] = " + numero + "\n");
                 break;
             }
         }

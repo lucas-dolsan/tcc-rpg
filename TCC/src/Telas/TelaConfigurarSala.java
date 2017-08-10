@@ -1,12 +1,12 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
 
 public class TelaConfigurarSala extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
     private final TelaInicial tela;
 
     public TelaConfigurarSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
@@ -127,7 +127,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
             nomeSala = campoNomeSala.getText();
-            if (jogDAO.salaExiste(nomeSala)) {
+            if (dao.salaExiste(nomeSala)) {
                 System.out.println("Erro: Esta sala já existe.");
                 erroSalaExistente.setVisible(true);
             } else if (nomeSala.isEmpty()) {
@@ -137,10 +137,10 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
                 char[] senha = campoSenhaSala.getPassword();
                 String senhaAuxiliar = String.valueOf(senha);
                 System.out.println("Criando sala...");
-                jogDAO.criarSala(this, nomeSala, senhaAuxiliar);
+                dao.criarSala(this, nomeSala, senhaAuxiliar);
                 System.out.println("Sala: " + nomeSala + " criada com sucesso.");
-                if (jogDAO.entrarEmSala(nomeSala, senhaAuxiliar)) {
-                    TelaJogo.Start(JogadorDAO.salaAtual.getFk_jogador() == JogadorDAO.player.getPk_jogador());
+                if (dao.entrarEmSala(nomeSala, senhaAuxiliar)) {
+                    TelaJogo.Start(DAO.salaAtual.getFk_jogador() == DAO.player.getPk_jogador());
                     tela.dispose();
                     this.dispose();
                 }

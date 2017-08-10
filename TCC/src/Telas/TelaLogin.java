@@ -1,6 +1,6 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import static Telas.TelaRegistrar.erros;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 
 public class TelaLogin extends javax.swing.JFrame {
 
-    static JogadorDAO jogDAO = new JogadorDAO();
+    static DAO dao = new DAO();
 
     public TelaLogin() {
         initComponents();
@@ -132,7 +132,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoRegistrarSeActionPerformed
     public void entrarComEnter() {
 
-        JogadorDAO jogador = new JogadorDAO();
+        DAO jogador = new DAO();
         String login = campoLogin.getText();
         char[] senha = campoSenha.getPassword();
         String senhaAuxiliar = String.valueOf(senha);
@@ -142,7 +142,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
             System.out.println("Efetuando login...");
             jogador.logar(login, senhaAuxiliar, this);
-            jogDAO.modificarUltimoLogin(login);
+            dao.modificarUltimoLogin(login);
 
         } finally {
 
@@ -224,7 +224,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 new Thread() {
                     public void run() {
                         while (true) {
-                            jogDAO.ping();
+                            dao.ping();
                         }
                     }
                 }.start();

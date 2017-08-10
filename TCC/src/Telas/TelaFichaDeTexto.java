@@ -1,10 +1,10 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 
 public class TelaFichaDeTexto extends javax.swing.JDialog {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
 
     public TelaFichaDeTexto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -103,29 +103,29 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
             fichaSemNome.setVisible(true);
         } else {
             String textoFicha = telaTextoFicha.getText();
-            jogDAO.criarFichaTexto(JogadorDAO.salaAtual.getPk_sala(), nomeFicha, textoFicha);
+            dao.criarFichaTexto(DAO.salaAtual.getPk_sala(), nomeFicha, textoFicha);
         }
         this.dispose();
     }//GEN-LAST:event_botaoCriarActionPerformed
 
     private void botaoExcluirFichaTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirFichaTextoActionPerformed
-        jogDAO.excluirFichaTexto();
+        dao.excluirFichaTexto();
         this.dispose();
     }//GEN-LAST:event_botaoExcluirFichaTextoActionPerformed
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        if (nomeFichaTexto.getText().equalsIgnoreCase(JogadorDAO.nomeFichaTexto)) {
+        if (nomeFichaTexto.getText().equalsIgnoreCase(DAO.nomeFichaTexto)) {
             String nomeFicha = nomeFichaTexto.getText();
             String texto = telaTextoFicha.getText();
-            jogDAO.salvarEdicaoFichaTexto(texto, nomeFicha);
+            dao.salvarEdicaoFichaTexto(texto, nomeFicha);
             this.dispose();
         } else {
-            if (jogDAO.fichaExiste(nomeFichaTexto.getText())) {
+            if (dao.fichaExiste(nomeFichaTexto.getText())) {
                 nomeExiste.setVisible(true);
             } else {
                 String nomeFicha = nomeFichaTexto.getText();
                 String texto = telaTextoFicha.getText();
-                jogDAO.salvarEdicaoFichaTexto(texto, nomeFicha);
+                dao.salvarEdicaoFichaTexto(texto, nomeFicha);
                 this.dispose();
             }
         }

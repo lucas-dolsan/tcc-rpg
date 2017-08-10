@@ -1,6 +1,6 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import Objetos.Jogador;
 import ServidorVoIP.ServerRunner;
 import javax.swing.JFrame;
@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class PainelDeControle extends javax.swing.JFrame {
 
-    JogadorDAO jogDAO = new JogadorDAO();
+    DAO dao = new DAO();
     JFrame voipFrame = null;
     public boolean estadoVoip = false;
     public int port = 0;
@@ -112,7 +112,7 @@ public class PainelDeControle extends javax.swing.JFrame {
     private void botaoLimparChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimparChatActionPerformed
         int sair = JOptionPane.showConfirmDialog(null, "Deseja limpar o chat?", "Limpar chat", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
-            jogDAO.limparChat();
+            dao.limparChat();
         }
     }//GEN-LAST:event_botaoLimparChatActionPerformed
 
@@ -133,7 +133,7 @@ public class PainelDeControle extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     try {
-                        jogDAO.alterarPorta(port, TelaConfigurarSala.nomeSala);
+                        dao.alterarPorta(port, TelaConfigurarSala.nomeSala);
                         TelaJogo.jButton1.setEnabled(false);
                         voipFrame = new ServerRunner(port);
                         voipFrame.setVisible(false);
@@ -147,7 +147,7 @@ public class PainelDeControle extends javax.swing.JFrame {
             estadoVoip = true;
             jButton2.setText("Desligar voIP (on)");
             TelaJogo.jButton1.setEnabled(false);
-            jogDAO.alterarVOIP(1);
+            dao.alterarVOIP(1);
         } else {
             System.out.println("Parando servidor de voIP...");
             estadoVoip = false;
@@ -156,15 +156,15 @@ public class PainelDeControle extends javax.swing.JFrame {
 
             jButton2.setText("Ligar voIP (off)");
             TelaJogo.jButton1.setEnabled(true);
-            jogDAO.alterarVOIP(0);
+            dao.alterarVOIP(0);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void checkboxChatStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkboxChatStateChanged
         if (checkboxChat.isSelected()) {
-            jogDAO.modificarChatDaily(JogadorDAO.salaAtual.getNome_sala(), 1);
+            dao.modificarChatDaily(DAO.salaAtual.getNome_sala(), 1);
         } else {
-            jogDAO.modificarChatDaily(JogadorDAO.salaAtual.getNome_sala(), 0);
+            dao.modificarChatDaily(DAO.salaAtual.getNome_sala(), 0);
         }
     }//GEN-LAST:event_checkboxChatStateChanged
 
@@ -174,7 +174,7 @@ public class PainelDeControle extends javax.swing.JFrame {
         botaoCriarObjetos.setEnabled(false);
     }//GEN-LAST:event_botaoCriarObjetosActionPerformed
     public static void listarJogadoresAtuais() {
-        for (Jogador jogador : JogadorDAO.jogadoresAtuais) {
+        for (Jogador jogador : DAO.jogadoresAtuais) {
             caixaJogadores.addItem(jogador.getNome_jog());
         }
     }

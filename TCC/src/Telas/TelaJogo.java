@@ -1,6 +1,6 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,7 +10,7 @@ import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
 
-    static JogadorDAO jogDAO = new JogadorDAO();
+    static DAO dao = new DAO();
     public static PainelDeControle painel = null;
 
     public TelaJogo() {
@@ -343,21 +343,21 @@ public class TelaJogo extends javax.swing.JFrame {
     private void popupSairSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja sair da sala?", "Sair da sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
-            System.out.println(JogadorDAO.player.getNome_jog() + " saiu da sala.");
+            System.out.println(DAO.player.getNome_jog() + " saiu da sala.");
             painel.setVisible(false);
             this.dispose();
             TelaInicial.Start();
-            jogDAO.mensagemSairDaSala();
+            dao.mensagemSairDaSala();
         }
     }
 
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
-            System.out.println("Sala " + JogadorDAO.salaAtual.getNome_sala() + " fechada com sucesso.");
+            System.out.println("Sala " + DAO.salaAtual.getNome_sala() + " fechada com sucesso.");
             painel.setVisible(false);
             this.dispose();
-            jogDAO.fecharSala(this, TelaConfigurarSala.nomeSala);
+            dao.fecharSala(this, TelaConfigurarSala.nomeSala);
             TelaInicial.Start();
         }
     }
@@ -377,7 +377,7 @@ public class TelaJogo extends javax.swing.JFrame {
     public void enviarTexto() {
         String texto = campoEnviarTexto.getText();
         if (!texto.isEmpty()) {
-            jogDAO.enviarChatBanco(texto);
+            dao.enviarChatBanco(texto);
             campoEnviarTexto.setText("");
         }
 
@@ -479,10 +479,11 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_dadoD100KeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        jogDAO.mensagemSairDaSala();
+        dao.mensagemSairDaSala();
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dao.atualizarBanco();
         if (!painel.estadoVoip) {
             JFrame telaSom = new TelaConfigurarSom();
             telaSom.setVisible(true);
@@ -514,11 +515,11 @@ public class TelaJogo extends javax.swing.JFrame {
 
     private void caixaFichaPersonagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaFichaPersonagemFocusGained
         caixaFichaPersonagem.removeAllItems();
-        jogDAO.listarPersonagens();
+        dao.listarPersonagens();
     }//GEN-LAST:event_caixaFichaPersonagemFocusGained
 
     private void botaoVisualizarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarPersonagemActionPerformed
-        jogDAO.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
+        dao.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
     }//GEN-LAST:event_botaoVisualizarPersonagemActionPerformed
 
     private void botaoCriarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarPersonagemActionPerformed
@@ -535,12 +536,12 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCriarFichaActionPerformed
 
     private void botaoVisualizarFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarFichaActionPerformed
-        jogDAO.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
+        dao.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
     }//GEN-LAST:event_botaoVisualizarFichaActionPerformed
 
     private void caixaFichasTextoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaFichasTextoFocusGained
         caixaFichasTexto.removeAllItems();
-        jogDAO.listarFichasTexto();
+        dao.listarFichasTexto();
     }//GEN-LAST:event_caixaFichasTextoFocusGained
 
     public static void Start(boolean dono) {
@@ -549,8 +550,8 @@ public class TelaJogo extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
-                if (JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador()) {
-                    jogDAO.alterarIP(JogadorDAO.salaAtual.getNome_sala());
+                if (DAO.player.getPk_jogador() == DAO.salaAtual.getFk_jogador()) {
+                    dao.alterarIP(DAO.salaAtual.getNome_sala());
                     botaoFecharSala.setEnabled(true);
                     painel.setVisible(true);
                 } else {
@@ -559,23 +560,23 @@ public class TelaJogo extends javax.swing.JFrame {
                 new Thread() {
                     @Override
                     public void run() {
-                        jogDAO.pegarPorta(TelaConfigurarSala.nomeSala);
+                        dao.pegarPorta(TelaConfigurarSala.nomeSala);
                         while (true) {
-                            if (!(JogadorDAO.player.getPk_jogador() == JogadorDAO.salaAtual.getFk_jogador())) {
-                                if (jogDAO.isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
+                            if (!(DAO.player.getPk_jogador() == DAO.salaAtual.getFk_jogador())) {
+                                if (dao.isVOIPAtivado(TelaConfigurarSala.nomeSala) == false) {
                                     jButton1.setEnabled(false);
                                     System.out.println("voIP está desativado");
-                                } else if (jogDAO.isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
+                                } else if (dao.isVOIPAtivado(TelaConfigurarSala.nomeSala) == true) {
                                     jButton1.setEnabled(true);
                                     System.out.println("voIP está ativado");
                                 }
                             }
-                            if (jogDAO.verificarChatDaily(JogadorDAO.salaAtual.getNome_sala())) {
+                            if (dao.verificarChatDaily(DAO.salaAtual.getNome_sala())) {
                                 painel.checkboxChat.setSelected(true);
                             } else {
                                 painel.checkboxChat.setSelected(false);
                             }
-                            jogDAO.lerChat();
+                            dao.lerChat();
                             try {
                                 Thread.sleep(1);
                             } catch (InterruptedException ex) {
