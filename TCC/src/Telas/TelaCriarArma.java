@@ -1,6 +1,7 @@
 package Telas;
 
 import ConexaoBanco.DAO;
+import Objetos.ItemArma;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -59,13 +60,13 @@ public class TelaCriarArma extends javax.swing.JDialog {
         jLabel1.setText("Nome do Item:");
         jLabel1.setToolTipText("");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(100, 20, 240, 17);
+        jLabel1.setBounds(100, 20, 240, 14);
         getContentPane().add(campoNome);
         campoNome.setBounds(100, 40, 240, 30);
 
         jLabel2.setText("Dano base:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(100, 70, 240, 17);
+        jLabel2.setBounds(100, 70, 240, 14);
         getContentPane().add(campoDano);
         campoDano.setBounds(100, 90, 240, 30);
 
@@ -79,14 +80,14 @@ public class TelaCriarArma extends javax.swing.JDialog {
 
         jLabel3.setText("Atribuir ao personagem:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(100, 120, 180, 17);
+        jLabel3.setBounds(100, 120, 180, 14);
 
         campoAtributos.setColumns(20);
         campoAtributos.setRows(5);
         jScrollPane2.setViewportView(campoAtributos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 190, 330, 87);
+        jScrollPane2.setBounds(10, 190, 330, 96);
 
         jLabel4.setText("Outros atributos:");
         getContentPane().add(jLabel4);
@@ -97,7 +98,7 @@ public class TelaCriarArma extends javax.swing.JDialog {
         jScrollPane3.setViewportView(campoDescricao);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 300, 330, 87);
+        jScrollPane3.setBounds(10, 300, 330, 96);
 
         jLabel5.setText("Descrição:");
         getContentPane().add(jLabel5);
@@ -105,7 +106,7 @@ public class TelaCriarArma extends javax.swing.JDialog {
 
         jLabel6.setText("Icone:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 20, 80, 17);
+        jLabel6.setBounds(10, 20, 80, 14);
 
         botaoSalvar.setText("Salvar");
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,12 +166,20 @@ public class TelaCriarArma extends javax.swing.JDialog {
         String descricao = campoDescricao.getText();
         String atributos = campoAtributos.getText();
         if (!error) {
-            JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
-            caixaPersonagem.removeAllItems();
-            campoAtributos.setText("");
-            campoDano.setText("0");
-            campoDescricao.setText("");
-            campoNome.setText("");
+            try {
+                ItemArma ia = new ItemArma(dao.pegarPk_personagem(nomePersonagem), nome, icon, dano, atributos, descricao);
+                dao.criarItemArma(ia);
+                JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
+                caixaPersonagem.removeAllItems();
+                campoAtributos.setText("");
+                campoDano.setText("0");
+                campoDescricao.setText("");
+                campoNome.setText("");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Houve um erro durante a criação do item.\nPor favor tente novamente!");
+            }
+
         }
 
     }//GEN-LAST:event_botaoSalvarActionPerformed

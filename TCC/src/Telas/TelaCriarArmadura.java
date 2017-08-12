@@ -1,6 +1,7 @@
 package Telas;
 
 import ConexaoBanco.DAO;
+import Objetos.ItemArmadura;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -164,12 +165,20 @@ public class TelaCriarArmadura extends javax.swing.JDialog {
         String descricao = campoDescricao.getText();
         String atributos = campoAtributos.getText();
         if (!error) {
-            JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
-            caixaPersonagem.removeAllItems();
-            campoAtributos.setText("");
-            campoDefesa.setText("0");
-            campoDescricao.setText("");
-            campoNome.setText("");
+            try {
+                ItemArmadura ia = new ItemArmadura(dao.pegarPk_personagem(nomePersonagem), nome, icon, defesa, atributos, descricao);
+                dao.criarItemArmadura(ia);
+                JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
+                caixaPersonagem.removeAllItems();
+                campoAtributos.setText("");
+                campoDefesa.setText("0");
+                campoDescricao.setText("");
+                campoNome.setText("");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Houve um erro durante a criação do item.\nPor favor tente novamente!");
+            }
+
         }
 
     }//GEN-LAST:event_botaoSalvarActionPerformed

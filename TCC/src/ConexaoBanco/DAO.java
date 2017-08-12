@@ -7,9 +7,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 public class DAO {
-
+    
     public static String nomeFichaTexto = "";
     public static String nomePersonagem = "";
     public static Jogador player = null;
@@ -19,14 +21,10 @@ public class DAO {
     public static ArrayList<Sala> salas = new ArrayList<Sala>();
     public static ArrayList<Jogador> jogadoresAtuais = new ArrayList<Jogador>();
     public static Connection c = ConexaoMySql.getConnection();
-
-    public void atualizarBanco() {
-        pegarSalasDoBanco();
-    }
-
+    
     public String SaltedPassword(String unecryptedPassword) {
         String salt = "(NioU&y%%OguyF=d%6S)(L.~mnHXR6#@3jn0*FX7HD(iSHuvTdkfsC5$¨865709giVFTcf76)VB9";
-
+        
         MessageDigest messageDigest = null;
         try {
             messageDigest = MessageDigest.getInstance("SHA");
@@ -37,7 +35,35 @@ public class DAO {
         String encryptedPassword = (new BigInteger(messageDigest.digest())).toString(16);
         return encryptedPassword;
     }
-
+    
+    public void listarArmas() {
+        final String sql = ("SELECT * FROM itemWeapon WHERE fk_personagem = (?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+            ResultSet rs = stmt.executeQuery();
+            DefaultTableModel model = new DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{
+                        "Icone", "Nome", "Dano/Defesa", "Atributos", "Descrição"
+                    }
+            );
+            while (rs.next()) {
+                String nomeIcon = rs.getString("icone_itWea");
+                System.out.println(nomeIcon);
+                Object icon = (new ImageIcon(getClass().getResource("/WeaponIcons/" + nomeIcon)));
+                String nome = rs.getString("nome_itWea");
+                int dano = rs.getInt("danoBase_itWea");
+                String atibutos = rs.getString("atributos_itWea");
+                String descricao = rs.getString("descricao_itWea");
+                Object[] arma = {icon, nome, dano, atibutos, descricao};
+                model.addRow(arma);
+            }
+            TelaEquipamentos.tabela.setModel(model);
+        } catch (Exception e) {
+        }
+    }
+    
     public void mensagemSairDaSala() {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
         String mensagem = "[" + pegarTempoServer() + "] [" + DAO.nickName + " Saiu da Sala]\n";
@@ -50,7 +76,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void mensagemEntrarNaSala() {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
         String mensagem = "[" + pegarTempoServer() + "] [" + DAO.nickName + " Entrou na Sala]\n";
@@ -63,7 +89,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public boolean fichaExiste(String nomeFichaE) {
         String sql = "SELECT nome_ficT FROM fichaTexto WHERE nome_ficT = ?";
         try {
@@ -78,7 +104,7 @@ public class DAO {
         }
         return false;
     }
-
+    
     public boolean personagemExiste(String nomePersonagem) {
         String sql = "SELECT nomePersonagem_fic FROM personagem WHERE nomePersonagem_fic = ?";
         try {
@@ -93,58 +119,58 @@ public class DAO {
         }
         return false;
     }
-
-    public void criarFichaTexto(int fk_sala, String nome_ficT, String texto_ficT) {
+    
+    public void criarFichaTexto(FichaTexto ft) {
         final String sql = ("INSERT INTO fichaTexto(fk_sala, nome_ficT, texto_fict) VALUES(?,?,?);");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, fk_sala);
-            stmt.setString(2, nome_ficT);
-            stmt.setString(3, texto_ficT);
+            stmt.setInt(1, ft.getFk_sala());
+            stmt.setString(2, ft.getNome_fict());
+            stmt.setString(3, ft.getTexto_fict());
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    public void criarPersonagem(int fk_sala, String nomePersonagem_fic, String nomeJogador_fic, String raca_fic, String classe_fic, int pontosVida_fic, int pontosMana_fic, int nivel_fic, int idade_fic, String divindade_fic, String lore_fic, String outrosAtributos_fic, int pontosForca_fic, int pontosInteligencia_fic, int pontosDefesa_fic, int pontosConstituicao_fic, int pontosSabedoria_fic, int pontosDestreza_fic, int pontosCarisma_fic) {
+    
+    public void criarPersonagem(FichaPersonagem p) {
         final String sql = ("insert into personagem(fk_sala,outrosAtributos_fic,lore_fic,raca_fic,classe_fic,nomePersonagem_fic,nomeJogador_fic,divindade_fic,nivel_fic,idade_fic,pontosVida_fic,pontosMana_fic,pontosForca_fic,pontosConstituicao_fic,pontosDestreza_fic,pontosInteligencia_fic,pontosSabedoria_fic,pontosCarisma_fic,pontosDefesa_fic) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, fk_sala);
-            stmt.setString(2, outrosAtributos_fic);
-            stmt.setString(3, lore_fic);
-            stmt.setString(4, raca_fic);
-            stmt.setString(5, classe_fic);
-            stmt.setString(6, nomePersonagem_fic);
-            stmt.setString(7, nomeJogador_fic);
-            stmt.setString(8, divindade_fic);
-            stmt.setInt(9, nivel_fic);
-            stmt.setInt(10, idade_fic);
-            stmt.setInt(11, pontosVida_fic);
-            stmt.setInt(12, pontosMana_fic);
-            stmt.setInt(13, pontosForca_fic);
-            stmt.setInt(14, pontosConstituicao_fic);
-            stmt.setInt(15, pontosDestreza_fic);
-            stmt.setInt(16, pontosInteligencia_fic);
-            stmt.setInt(17, pontosSabedoria_fic);
-            stmt.setInt(18, pontosCarisma_fic);
-            stmt.setInt(19, pontosDefesa_fic);
+            stmt.setInt(1, p.getFk_sala());
+            stmt.setString(2, p.getOutrosAtributos_fic());
+            stmt.setString(3, p.getLore_fic());
+            stmt.setString(4, p.getRaca_fic());
+            stmt.setString(5, p.getClasse_fic());
+            stmt.setString(6, p.getNomePersonagem_fic());
+            stmt.setString(7, p.getNomeJogador_fic());
+            stmt.setString(8, p.getDivindade_fic());
+            stmt.setInt(9, p.getNivel_fic());
+            stmt.setInt(10, p.getIdade_fic());
+            stmt.setInt(11, p.getPontosVida_fic());
+            stmt.setInt(12, p.getPontosMana_fic());
+            stmt.setInt(13, p.getPontosForca_fic());
+            stmt.setInt(14, p.getPontosConstituicao_fic());
+            stmt.setInt(15, p.getPontosDestreza_fic());
+            stmt.setInt(16, p.getPontosInteligencia_fic());
+            stmt.setInt(17, p.getPontosSabedoria_fic());
+            stmt.setInt(18, p.getPontosCarisma_fic());
+            stmt.setInt(19, p.getPontosDefesa_fic());
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
-    public void salvarEdicaoFichaTexto(String texto, String nomeFicha) {
+    
+    public void salvarEdicaoFichaTexto(FichaTexto ft) {
         final String sql = ("UPDATE fichaTexto SET nome_ficT = ? texto_ficT = ? WHERE nome_ficT = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setString(1, nomeFicha);
-            stmt.setString(2, texto);
+            stmt.setString(1, ft.getNome_fict());
+            stmt.setString(2, ft.getTexto_fict());
             stmt.setString(3, DAO.nomeFichaTexto);
             stmt.execute();
             stmt.execute();
@@ -152,29 +178,29 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
-    public void salvarEdicaoPersonagem(String nomePersonagem_fic, String nomeJogador_fic, String raca_fic, String classe_fic, int pontosVida_fic, int pontosMana_fic, int nivel_fic, int idade_fic, String divindade_fic, String lore_fic, String outrosAtributos_fic, int pontosForca_fic, int pontosInteligencia_fic, int pontosDefesa_fic, int pontosConstituicao_fic, int pontosSabedoria_fic, int pontosDestreza_fic, int pontosCarisma_fic) {
+    
+    public void salvarEdicaoPersonagem(FichaPersonagem p) {
         final String sql = ("UPDATE personagem SET outrosAtributos_fic=?,lore_fic=?,raca_fic=?,classe_fic=?,nomePersonagem_fic=?,nomeJogador_fic=?,divindade_fic=?,nivel_fic=?,idade_fic=?,pontosVida_fic=?,pontosMana_fic=?,pontosForca_fic=?,pontosConstituicao_fic=?,pontosDestreza_fic=?,pontosInteligencia_fic=?,pontosSabedoria_fic=?,pontosCarisma_fic=?,pontosDefesa_fic=? WHERE nomePersonagem_fic = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setString(1, outrosAtributos_fic);
-            stmt.setString(2, lore_fic);
-            stmt.setString(3, raca_fic);
-            stmt.setString(4, classe_fic);
-            stmt.setString(5, nomePersonagem_fic);
-            stmt.setString(6, nomeJogador_fic);
-            stmt.setString(7, divindade_fic);
-            stmt.setInt(8, nivel_fic);
-            stmt.setInt(9, idade_fic);
-            stmt.setInt(10, pontosVida_fic);
-            stmt.setInt(11, pontosMana_fic);
-            stmt.setInt(12, pontosForca_fic);
-            stmt.setInt(13, pontosConstituicao_fic);
-            stmt.setInt(14, pontosDestreza_fic);
-            stmt.setInt(15, pontosInteligencia_fic);
-            stmt.setInt(16, pontosSabedoria_fic);
-            stmt.setInt(17, pontosCarisma_fic);
-            stmt.setInt(18, pontosDefesa_fic);
+            stmt.setString(1, p.getOutrosAtributos_fic());
+            stmt.setString(2, p.getLore_fic());
+            stmt.setString(3, p.getRaca_fic());
+            stmt.setString(4, p.getClasse_fic());
+            stmt.setString(5, p.getNomePersonagem_fic());
+            stmt.setString(6, p.getNomeJogador_fic());
+            stmt.setString(7, p.getDivindade_fic());
+            stmt.setInt(8, p.getNivel_fic());
+            stmt.setInt(9, p.getIdade_fic());
+            stmt.setInt(10, p.getPontosVida_fic());
+            stmt.setInt(11, p.getPontosMana_fic());
+            stmt.setInt(12, p.getPontosForca_fic());
+            stmt.setInt(13, p.getPontosConstituicao_fic());
+            stmt.setInt(14, p.getPontosDestreza_fic());
+            stmt.setInt(15, p.getPontosInteligencia_fic());
+            stmt.setInt(16, p.getPontosSabedoria_fic());
+            stmt.setInt(17, p.getPontosCarisma_fic());
+            stmt.setInt(18, p.getPontosDefesa_fic());
             stmt.setString(19, DAO.nomePersonagem);
             stmt.execute();
             stmt.close();
@@ -182,7 +208,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void pegarDadosFichaTexto(String nomeFichaTexto) {
         DAO.nomeFichaTexto = nomeFichaTexto;
         final String sql = ("SELECT * FROM fichaTexto WHERE nome_fict = ?");
@@ -209,9 +235,9 @@ public class DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void pegarDadosPersonagem(String nomePersonagem) {
         DAO.nomePersonagem = nomePersonagem;
         final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
@@ -246,7 +272,7 @@ public class DAO {
                     telaPersonagem.botaoSalvarPersonagem.setVisible(false);
                     telaPersonagem.salvarEdicao.setEnabled(true);
                     telaPersonagem.setVisible(true);
-
+                    
                 } else {
                     telaPersonagem.botaoEquipamentos.setEnabled(true);
                     telaPersonagem.botaoMagias.setEnabled(true);
@@ -270,7 +296,7 @@ public class DAO {
                     telaPersonagem.campoVida.setEditable(false);
                     telaPersonagem.setVisible(true);
                 }
-
+                
             }
             stmt.close();
             rs.close();
@@ -278,7 +304,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void excluirFichaTexto() {
         final String sql = ("DELETE FROM fichaTexto WHERE nome_ficT = ?;");
         try {
@@ -290,7 +316,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void excluirPersonagem() {
         final String sql = ("DELETE FROM personagem WHERE nomePersonagem_fic = ?;");
         try {
@@ -302,7 +328,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void listarFichasTexto() {
         final String sql = ("SELECT * FROM fichaTexto fic join sala sala on fic.fk_sala = sala.pk_sala WHERE sala.nome_sala = ?");
         try {
@@ -318,7 +344,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public int pegarPk_personagem(String nome) {
         final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
         try {
@@ -335,26 +361,76 @@ public class DAO {
         }
         return 0;
     }
-
-    public void criarItemArma(String nome, int danoBase, String nomePersonagem, String icone, String outrosAtributos, String descricao) {
-        int pk_personagem = pegarPk_personagem(nomePersonagem);
+    
+    public void criarItemArma(ItemArma ia) {
         final String sql = ("INSERT INTO itemWeapon(fk_personagem,nome_itWea,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea) VALUES (?,?,?,?,?,?)");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, pk_personagem);
-            stmt.setString(2, nome);
-            stmt.setString(3, icone);
-            stmt.setInt(4, danoBase);
-            stmt.setString(5, outrosAtributos);
-            stmt.setString(6, descricao);
+            stmt.setInt(1, ia.getFk_personagem());
+            stmt.setString(2, ia.getNome_itWea());
+            stmt.setString(3, ia.getIcone_itWea());
+            stmt.setInt(4, ia.getDanoBase_itWea());
+            stmt.setString(5, ia.getAtributos_itWea());
+            stmt.setString(6, ia.getDescricao_itWea());
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
+    public void criarItemArmadura(ItemArmadura ia) {
+        final String sql = ("INSERT INTO itemArmor(fk_personagem,nome_iArmo,icone_iArmo,defesaBase_iArmo,atributos_iArmo,descricao_iArmo) VALUES(?,?,?,?,?,?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, ia.getFk_personagem());
+            stmt.setString(2, ia.getNome_iArmo());
+            stmt.setString(3, ia.getIcone_iArmo());
+            stmt.setInt(4, ia.getDefesaBase_iArmo());
+            stmt.setString(5, ia.getAtributos_iArmo());
+            stmt.setString(6, ia.getDescricao_iArmo());
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void criarMagia(Magia ma) {
+        final String sql = ("INSERT INTO magia(fk_personagem,nome_mag,icone_mag,efeito_mag,tipo_mag,descricao_mag,atributos_mag) VALUES (?,?,?,?,?,?,?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, ma.getFk_personagem());
+            stmt.setString(2, ma.getNome_mag());
+            stmt.setString(3, ma.getIcone_mag());
+            stmt.setString(4, ma.getEfeito_mag());
+            stmt.setString(5, ma.getTipo_mag());
+            stmt.setString(6, ma.getDescricao_mag());
+            stmt.setString(7, ma.getAtributos_mag());
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void criarItem(Item it) {
+        final String sql = ("INSERT INTO item(fk_personagem,nome_ite,icone_ite,atributos_ite,descricao_ite)VALUES (?,?,?,?,?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, it.getFk_personagem());
+            stmt.setString(2, it.getNome_ite());
+            stmt.setString(3, it.getIcone_ite());
+            stmt.setString(4, it.getAtributos_ite());
+            stmt.setString(5, it.getDescricao_ite());
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void listarPersonagensMagias() {
         final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
         try {
@@ -370,7 +446,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void listarPersonagensItens() {
         final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
         try {
@@ -386,7 +462,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void listarPersonagensArmaduras() {
         final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
         try {
@@ -402,7 +478,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void listarPersonagensArmas() {
         final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
         try {
@@ -418,7 +494,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void listarPersonagens() {
         final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
         try {
@@ -434,7 +510,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void listarSalas() {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
@@ -451,7 +527,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void banir(int pk_jogador, String motivo_ban) {
         final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban, motivo_ban) VALUES(?,?,?,?)");
         try {
@@ -463,7 +539,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void banir(int pk_jogador) {
         final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban) VALUES(?,?,?)");
         try {
@@ -474,7 +550,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void criarJogador(Jogador jogador, TelaRegistrar tela) {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
@@ -491,7 +567,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void limparChat() {
         final String sql = ("UPDATE sala SET chat_sala = '' WHERE pk_sala = ?");
         try {
@@ -503,7 +579,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void listarJogadores(Jogador jogador) {
         pegarJogadoresDoBanco();
         final String sql = ("select * from jogador;");
@@ -521,9 +597,9 @@ public class DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public boolean salaExiste(String nomeSala) {
         pegarSalasDoBanco();
         String sql = "SELECT nome_sala FROM sala WHERE nome_sala = ?";
@@ -539,7 +615,7 @@ public class DAO {
         }
         return false;
     }
-
+    
     public boolean verificarDono() {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
@@ -557,7 +633,7 @@ public class DAO {
         }
         return false;
     }
-
+    
     public void alterarIP(String nome_sala) {
         String ip = TelaInicial.ipAddress;
         final String sql = ("UPDATE sala SET ip_dono = ? WHERE nome_sala = ?");
@@ -571,7 +647,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public int pegarPorta(String nome_sala) {
         final String sql = ("SELECT * FROM sala WHERE nome_sala =(?)");
         try {
@@ -589,7 +665,7 @@ public class DAO {
         }
         return 0;
     }
-
+    
     public void alterarPorta(int porta_sala, String nome_sala) {
         final String sql = ("UPDATE sala SET porta_sala = ? WHERE nome_sala = ?");
         try {
@@ -601,9 +677,9 @@ public class DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public String pegarIPDono(String nome_sala) {
         pegarSalasDoBanco();
         final String sql = ("SELECT ip_dono FROM sala WHERE nome_sala = ?");
@@ -619,7 +695,7 @@ public class DAO {
         }
         return null;
     }
-
+    
     public boolean isVOIPAtivado(String nomeSala) {
         pegarSalasDoBanco();
         final String sql = ("SELECT voip_sala FROM sala WHERE nome_sala = ?;");
@@ -639,13 +715,13 @@ public class DAO {
                     return false;
                 }
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
-
+    
     public void alterarVOIP(int estado) {
         pegarSalasDoBanco();
         final String sql = ("UPDATE sala SET voip_sala = ? WHERE nome_sala = ?");
@@ -659,7 +735,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
@@ -685,12 +761,12 @@ public class DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public String pegarTempoServer() {
         final String sql = ("SELECT CURTIME();");
-
+        
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -702,7 +778,7 @@ public class DAO {
         }
         return null;
     }
-
+    
     public String comando(String texto) {
         switch (texto) {
             case "/help": {
@@ -729,7 +805,7 @@ public class DAO {
         }
         return "";
     }
-
+    
     public String dono() {
         final String sql = ("SELECT * FROM jogador jog JOIN sala sala ON jog.pk_jogador = sala.fk_jogador WHERE nome_sala =?");
         try {
@@ -744,7 +820,7 @@ public class DAO {
         }
         return "";
     }
-
+    
     public String ping() {
         final String sql = ("/* ping */ SELECT 1");
         try {
@@ -758,7 +834,7 @@ public class DAO {
         }
         return null;
     }
-
+    
     public void enviarDadoBanco(int dado, int numeroModificado, int numero, int modificadorMais, int modificadorMenos, int tipo) {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
         String mensagem = "";
@@ -785,7 +861,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void enviarChatBanco(String texto) {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
         String mensagem = comando(texto);
@@ -798,7 +874,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void fecharSala(Telas.TelaJogo telaJogo, String nomeSala) {
         String sql = ("delete from sala where nome_sala = ?;");
         try {
@@ -809,9 +885,9 @@ public class DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void lerChat() {
         final String sql = ("select chat_sala from sala where nome_sala=?");
         try {
@@ -827,7 +903,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public boolean entrarEmSala(String nomeSala, String senhaSala) {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
@@ -852,8 +928,8 @@ public class DAO {
         }
         return false;
     }
-
-    private void pegarSalasDoBanco() {
+    
+    public void pegarSalasDoBanco() {
         if (!salas.isEmpty()) {
             salas.clear();
         }
@@ -874,8 +950,8 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
-    private void pegarJogadoresDoBanco() {
+    
+    public void pegarJogadoresDoBanco() {
         if (!jogadores.isEmpty()) {
             jogadores.clear();
         }
@@ -898,8 +974,8 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
-    private void pegarJogadoresDaSala() {
+    
+    public void pegarJogadoresDaSala() {
         final String sql = ("SELECT * FROM jogador jog JOIN sala sala ON jog.pk_jogador = sala.fk_jogador WHERE sala.pk_sala =?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
@@ -920,7 +996,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    
     public void logar(String email, String senha, TelaLogin tela) {
         pegarJogadoresDoBanco();
         final String sql = ("select * from jogador where email_jog =? and senha_jog = sha1(md5(?));");
@@ -954,9 +1030,9 @@ public class DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public boolean verificarEmail(String email) {
         pegarJogadoresDoBanco();
         final String sql = ("select * from jogador");
@@ -975,7 +1051,7 @@ public class DAO {
         }
         return false;
     }
-
+    
     public boolean verificarNomeDeUsuario(String nick) {
         pegarJogadoresDoBanco();
         final String sql = "select * from jogador";
@@ -990,13 +1066,13 @@ public class DAO {
                 }
             }
             stmt.close();
-
+            
         } catch (Exception erro) {
             erro.printStackTrace();
         }
         return false;
     }
-
+    
     public void modificarUltimoLogin(String login) {
         pegarJogadoresDoBanco();
         final String sql = "UPDATE jogador SET dt_ultimoLogin = now() WHERE email_jog = ?";
@@ -1009,7 +1085,7 @@ public class DAO {
             ex.printStackTrace();
         }
     }
-
+    
     public void modificarChatDaily(String nomeSala, int estado) {
         final String sql = "UPDATE sala SET limpar_chat_daily = ? WHERE nome_sala = ?";
         try {
@@ -1022,7 +1098,7 @@ public class DAO {
             erro.printStackTrace();
         }
     }
-
+    
     public boolean verificarChatDaily(String nomeSala) {
         final String sql = "SELECT limpar_chat_daily FROM sala WHERE nome_sala = ?";
         try {
@@ -1037,7 +1113,7 @@ public class DAO {
                 }
             }
             stmt.close();
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }

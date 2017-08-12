@@ -147,7 +147,7 @@ public class PainelDeControle extends javax.swing.JFrame {
             jButton2.setText("Desligar voIP (on)");
             TelaJogo.jButton1.setEnabled(false);
             dao.alterarPorta(port, TelaConfigurarSala.nomeSala);
-            dao.alterarVOIP(1); 
+            dao.alterarVOIP(1);
         } else {
             System.out.println("Parando servidor de voIP...");
             estadoVoip = false;

@@ -1,19 +1,20 @@
 package Telas;
 
 import ConexaoBanco.DAO;
+import Objetos.FichaPersonagem;
 
 public class TelaPersonagem extends javax.swing.JDialog {
-
+    
     DAO dao = new DAO();
-
+    
     public TelaPersonagem(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         nomeEmUso.setVisible(false);
         erroSemNome.setVisible(false);
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,6 +93,11 @@ public class TelaPersonagem extends javax.swing.JDialog {
         botaoEquipamentos.setText("EQUIPAMENTOS");
         botaoEquipamentos.setEnabled(false);
         botaoEquipamentos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoEquipamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoEquipamentosActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoEquipamentos);
         botaoEquipamentos.setBounds(620, 190, 150, 30);
 
@@ -276,7 +282,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         erroSemNome.setForeground(new java.awt.Color(255, 0, 0));
         erroSemNome.setText("Personagem sem nome!");
         getContentPane().add(erroSemNome);
-        erroSemNome.setBounds(10, 210, 210, 17);
+        erroSemNome.setBounds(10, 210, 210, 19);
 
         pack();
         setLocationRelativeTo(null);
@@ -298,7 +304,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         campoDestreza.setText("0");
         campoCarisma.setText("0");
     }
-
+    
     private int transformarVidaEmInt() {
         if (campoVida.getText() == null) {
             return 0;
@@ -307,7 +313,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(vida);
         }
     }
-
+    
     private int transformarManaEmInt() {
         if (campoMana.getText() == null) {
             return 0;
@@ -316,7 +322,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(mana);
         }
     }
-
+    
     private int transformarNivelEmInt() {
         if (campoNivel.getText() == null) {
             return 0;
@@ -325,7 +331,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(nivel);
         }
     }
-
+    
     private int transformarIdadeEmInt() {
         if (campoIdade.getText() == null) {
             return 0;
@@ -334,7 +340,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(idade);
         }
     }
-
+    
     private int transformarForcaEmInt() {
         if (campoForca.getText() == null) {
             return 0;
@@ -343,7 +349,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(forca);
         }
     }
-
+    
     private int transformarInteligenciaEmInt() {
         if (campoInteligencia.getText() == null) {
             return 0;
@@ -352,7 +358,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(inteligencia);
         }
     }
-
+    
     private int transformarDefesaEmInt() {
         if (campoDefesa.getText() == null) {
             return 0;
@@ -361,7 +367,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(defesa);
         }
     }
-
+    
     private int transformarConstituicaoEmInt() {
         if (campoConstituicao.getText() == null) {
             return 0;
@@ -370,7 +376,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(constituicao);
         }
     }
-
+    
     private int transformarSabedoriaEmInt() {
         if (campoSabedoria.getText() == null) {
             return 0;
@@ -379,7 +385,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(sabedoria);
         }
     }
-
+    
     private int transformarDestrezaEmInt() {
         if (campoDestreza.getText() == null) {
             return 0;
@@ -388,7 +394,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(destreza);
         }
     }
-
+    
     private int transformarCarismaEmInt() {
         if (campoCarisma.getText() == null) {
             return 0;
@@ -443,10 +449,11 @@ public class TelaPersonagem extends javax.swing.JDialog {
             int destreza = transformarDestrezaEmInt();
             int carisma = transformarCarismaEmInt();
             if (!aux) {
-                dao.criarPersonagem(DAO.salaAtual.getPk_sala(), nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
+                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa);
+                dao.criarPersonagem(p);
                 this.dispose();
             }
-
+            
         }
     }//GEN-LAST:event_botaoSalvarPersonagemActionPerformed
 
@@ -491,7 +498,8 @@ public class TelaPersonagem extends javax.swing.JDialog {
             int sabedoria = transformarSabedoriaEmInt();
             int destreza = transformarDestrezaEmInt();
             int carisma = transformarCarismaEmInt();
-            dao.salvarEdicaoPersonagem(nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
+            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa);
+            dao.salvarEdicaoPersonagem(p);
             this.dispose();
         } else {
             if (dao.personagemExiste(campoNomePersonagem.getText())) {
@@ -536,7 +544,8 @@ public class TelaPersonagem extends javax.swing.JDialog {
                 int sabedoria = transformarSabedoriaEmInt();
                 int destreza = transformarDestrezaEmInt();
                 int carisma = transformarCarismaEmInt();
-                dao.salvarEdicaoPersonagem(nomePersonagem, nomeJogador, raca, classe, vida, mana, nivel, idade, divindade, lore, outrosAtributos, forca, inteligencia, defesa, constituicao, sabedoria, destreza, carisma);
+                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa);
+                dao.salvarEdicaoPersonagem(p);
                 this.dispose();
             }
         }
@@ -547,6 +556,11 @@ public class TelaPersonagem extends javax.swing.JDialog {
         dao.excluirPersonagem();
         this.dispose();
     }//GEN-LAST:event_botaoExcluirPersonagemActionPerformed
+
+    private void botaoEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEquipamentosActionPerformed
+        TelaEquipamentos telaEquipamentos = new TelaEquipamentos(null, true);
+        telaEquipamentos.setVisible(true);
+    }//GEN-LAST:event_botaoEquipamentosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton botaoEquipamentos;

@@ -1,6 +1,7 @@
 package Telas;
 
 import ConexaoBanco.DAO;
+import Objetos.Item;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -143,12 +144,19 @@ public class TelaCriarItem extends javax.swing.JDialog {
         String descricao = campoDescricao.getText();
         String atributos = campoAtributos.getText();
         if (!error) {
+            try {
+                Item it = new Item(dao.pegarPk_personagem(nomePersonagem), nome, icon, atributos, descricao);
+                dao.criarItem(it);
+                JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
+                caixaPersonagem.removeAllItems();
+                campoAtributos.setText("");
+                campoDescricao.setText("");
+                campoNome.setText("");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Houve um erro durante a criação do item.\nPor favor tente novamente!");
+            }
 
-            JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
-            caixaPersonagem.removeAllItems();
-            campoAtributos.setText("");
-            campoDescricao.setText("");
-            campoNome.setText("");
         }
 
     }//GEN-LAST:event_botaoSalvarActionPerformed
