@@ -1,6 +1,7 @@
 package Telas;
 
 import ConexaoBanco.DAO;
+import Objetos.FichaTexto;
 
 public class TelaFichaDeTexto extends javax.swing.JDialog {
 
@@ -39,7 +40,7 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
         jLabel1.setText("Nome da ficha:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 151, 29);
+        jLabel1.setBounds(10, 10, 131, 29);
 
         telaTextoFicha.setColumns(20);
         telaTextoFicha.setRows(5);
@@ -102,8 +103,8 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
         if (nomeFicha.isEmpty() || nomeFicha.equalsIgnoreCase(" ")) {
             fichaSemNome.setVisible(true);
         } else {
-            String textoFicha = telaTextoFicha.getText();
-            dao.criarFichaTexto(DAO.salaAtual.getPk_sala(), nomeFicha, textoFicha);
+            FichaTexto ft = new FichaTexto(DAO.salaAtual.getPk_sala(), nomeFichaTexto.getText(), telaTextoFicha.getText());
+            dao.criarFichaTexto(ft);
         }
         this.dispose();
     }//GEN-LAST:event_botaoCriarActionPerformed
@@ -115,17 +116,15 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         if (nomeFichaTexto.getText().equalsIgnoreCase(DAO.nomeFichaTexto)) {
-            String nomeFicha = nomeFichaTexto.getText();
-            String texto = telaTextoFicha.getText();
-            dao.salvarEdicaoFichaTexto(texto, nomeFicha);
+            FichaTexto ft = new FichaTexto(DAO.salaAtual.getPk_sala(), nomeFichaTexto.getText(), telaTextoFicha.getText());
+            dao.salvarEdicaoFichaTexto(ft);
             this.dispose();
         } else {
             if (dao.fichaExiste(nomeFichaTexto.getText())) {
                 nomeExiste.setVisible(true);
             } else {
-                String nomeFicha = nomeFichaTexto.getText();
-                String texto = telaTextoFicha.getText();
-                dao.salvarEdicaoFichaTexto(texto, nomeFicha);
+                FichaTexto ft = new FichaTexto(DAO.salaAtual.getPk_sala(), nomeFichaTexto.getText(), telaTextoFicha.getText());
+                dao.salvarEdicaoFichaTexto(ft);
                 this.dispose();
             }
         }
