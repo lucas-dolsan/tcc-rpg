@@ -80,7 +80,7 @@ public class TelaCriarArma extends javax.swing.JDialog {
 
         jLabel3.setText("Atribuir ao personagem:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(100, 120, 180, 14);
+        jLabel3.setBounds(100, 120, 180, 20);
 
         campoAtributos.setColumns(20);
         campoAtributos.setRows(5);
