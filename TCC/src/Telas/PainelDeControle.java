@@ -30,6 +30,9 @@ public class PainelDeControle extends javax.swing.JFrame {
         checkboxChat = new javax.swing.JRadioButton();
         jButton3 = new javax.swing.JButton();
         botaoCriarObjetos = new javax.swing.JButton();
+        botaoMudarMapa = new javax.swing.JButton();
+        botaoCriarNPC = new javax.swing.JButton();
+        botaoCriarMonstro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Painel de Controle de Sala");
@@ -39,13 +42,14 @@ public class PainelDeControle extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        senhaSala.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
-        senhaSala.setText("Jogadores:");
+        senhaSala.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        senhaSala.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        senhaSala.setText("JOGADORES:");
         getContentPane().add(senhaSala);
-        senhaSala.setBounds(150, 10, 260, 32);
+        senhaSala.setBounds(10, 10, 420, 32);
 
-        botaoLimparChat.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        botaoLimparChat.setText("Limpar chat");
+        botaoLimparChat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoLimparChat.setText("LIMPAR CHAT");
         botaoLimparChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoLimparChatActionPerformed(evt);
@@ -54,7 +58,7 @@ public class PainelDeControle extends javax.swing.JFrame {
         getContentPane().add(botaoLimparChat);
         botaoLimparChat.setBounds(10, 120, 180, 32);
 
-        caixaJogadores.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        caixaJogadores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         caixaJogadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         caixaJogadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,13 +68,13 @@ public class PainelDeControle extends javax.swing.JFrame {
         getContentPane().add(caixaJogadores);
         caixaJogadores.setBounds(10, 40, 420, 32);
 
-        jButton1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jButton1.setText("Banir");
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setText("BANIR");
         getContentPane().add(jButton1);
         jButton1.setBounds(250, 80, 180, 30);
 
-        jButton2.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jButton2.setText("Iniciar voIP (off)");
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton2.setText("INICIAR VOIP (OFF)");
         jButton2.setToolTipText("AVISO: Esta funcão só está disponível para jogadores conectados em LAN.");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,13 +95,13 @@ public class PainelDeControle extends javax.swing.JFrame {
         getContentPane().add(checkboxChat);
         checkboxChat.setBounds(10, 410, 210, 30);
 
-        jButton3.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jButton3.setText("Desbanir");
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setText("DESBANIR");
         getContentPane().add(jButton3);
         jButton3.setBounds(10, 80, 180, 30);
 
-        botaoCriarObjetos.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        botaoCriarObjetos.setText("Criar objetos");
+        botaoCriarObjetos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoCriarObjetos.setText("CRIAR OBJETOS");
         botaoCriarObjetos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCriarObjetosActionPerformed(evt);
@@ -105,6 +109,21 @@ public class PainelDeControle extends javax.swing.JFrame {
         });
         getContentPane().add(botaoCriarObjetos);
         botaoCriarObjetos.setBounds(10, 160, 180, 30);
+
+        botaoMudarMapa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoMudarMapa.setText("MUDAR MAPA");
+        getContentPane().add(botaoMudarMapa);
+        botaoMudarMapa.setBounds(250, 160, 180, 30);
+
+        botaoCriarNPC.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoCriarNPC.setText("CRIAR NPC");
+        getContentPane().add(botaoCriarNPC);
+        botaoCriarNPC.setBounds(10, 200, 180, 30);
+
+        botaoCriarMonstro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoCriarMonstro.setText("CRIAR MONSTRO");
+        getContentPane().add(botaoCriarMonstro);
+        botaoCriarMonstro.setBounds(250, 200, 180, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -144,7 +163,7 @@ public class PainelDeControle extends javax.swing.JFrame {
                 }
             }.start();
             estadoVoip = true;
-            jButton2.setText("Desligar voIP (on)");
+            jButton2.setText("DESLIGAR VOIP (ON)");
             TelaJogo.jButton1.setEnabled(false);
             dao.alterarPorta(port, TelaConfigurarSala.nomeSala);
             dao.alterarVOIP(1);
@@ -153,7 +172,6 @@ public class PainelDeControle extends javax.swing.JFrame {
             estadoVoip = false;
             voipFrame.setVisible(false);
             voipFrame.dispose();
-
             jButton2.setText("Ligar voIP (off)");
             TelaJogo.jButton1.setEnabled(true);
             dao.alterarVOIP(0);
@@ -188,8 +206,11 @@ public class PainelDeControle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoCriarMonstro;
+    private javax.swing.JButton botaoCriarNPC;
     public static javax.swing.JButton botaoCriarObjetos;
     private javax.swing.JButton botaoLimparChat;
+    private javax.swing.JButton botaoMudarMapa;
     public static javax.swing.JComboBox<String> caixaJogadores;
     public javax.swing.JRadioButton checkboxChat;
     private javax.swing.JButton jButton1;

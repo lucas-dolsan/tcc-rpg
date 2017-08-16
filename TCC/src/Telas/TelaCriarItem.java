@@ -53,6 +53,7 @@ public class TelaCriarItem extends javax.swing.JDialog {
         getContentPane().add(caixaIcons);
         caixaIcons.setBounds(10, 40, 80, 60);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nome do Item:");
         jLabel1.setToolTipText("");
         getContentPane().add(jLabel1);
@@ -68,36 +69,43 @@ public class TelaCriarItem extends javax.swing.JDialog {
         getContentPane().add(caixaPersonagem);
         caixaPersonagem.setBounds(100, 100, 240, 30);
 
-        jLabel3.setText("Atribuir ao personagem:");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Atribuir ao personagem/NPC/monstro:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(100, 70, 180, 30);
+        jLabel3.setBounds(100, 80, 240, 20);
 
         campoAtributos.setColumns(20);
+        campoAtributos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         campoAtributos.setRows(5);
         jScrollPane2.setViewportView(campoAtributos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 190, 330, 96);
+        jScrollPane2.setBounds(10, 190, 330, 81);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Outros atributos:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(10, 170, 330, 20);
 
         campoDescricao.setColumns(20);
+        campoDescricao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         campoDescricao.setRows(5);
         jScrollPane3.setViewportView(campoDescricao);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 300, 330, 96);
+        jScrollPane3.setBounds(10, 300, 330, 81);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Descrição:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 284, 330, 20);
+        jLabel5.setBounds(10, 274, 330, 30);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Icone:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 20, 80, 14);
+        jLabel6.setBounds(10, 20, 80, 20);
 
+        botaoSalvar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoSalvar.setText("Salvar");
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +115,7 @@ public class TelaCriarItem extends javax.swing.JDialog {
         getContentPane().add(botaoSalvar);
         botaoSalvar.setBounds(240, 400, 100, 30);
 
+        erro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         erro.setForeground(new java.awt.Color(255, 0, 0));
         erro.setText("Nome ou personagem faltando!");
         getContentPane().add(erro);
