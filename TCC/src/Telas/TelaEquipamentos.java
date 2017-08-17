@@ -28,13 +28,32 @@ public class TelaEquipamentos extends javax.swing.JDialog {
             new Object [][] {
             },
             new String [] {
-                "Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
+                "ID","Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
             }
         ));
         tabela.setCellSelectionEnabled(true);
         tabela.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabela.setEnabled(false);
         tabela.setRowHeight(52);
         jScrollPane2.setViewportView(tabela);
+        tabela.getColumnModel().getColumn(0).setMaxWidth(50);
+        tabela.getColumnModel().getColumn(0).setMinWidth(50);
+        tabela.getColumnModel().getColumn(1).setMaxWidth(52);
+        tabela.getColumnModel().getColumn(1).setMinWidth(52);
+        tabela.getColumnModel().getColumn(2).setMaxWidth(150);
+        tabela.getColumnModel().getColumn(2).setMinWidth(150);
+        tabela.getColumnModel().getColumn(3).setMaxWidth(90);
+        tabela.getColumnModel().getColumn(3).setMinWidth(90);
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = tabela.rowAtPoint(evt.getPoint());
+                if (row >= 0 && DAO.donoDaSala) {
+                    System.out.println("caralhou: " +tabela.getValueAt(row, 0).toString());
+
+                }
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
