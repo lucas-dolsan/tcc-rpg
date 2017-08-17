@@ -56,7 +56,7 @@ public class PainelDeControle extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoLimparChat);
-        botaoLimparChat.setBounds(10, 120, 180, 32);
+        botaoLimparChat.setBounds(10, 120, 210, 32);
 
         caixaJogadores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         caixaJogadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
@@ -71,7 +71,7 @@ public class PainelDeControle extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("BANIR");
         getContentPane().add(jButton1);
-        jButton1.setBounds(250, 80, 180, 30);
+        jButton1.setBounds(220, 80, 210, 30);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("INICIAR VOIP (OFF)");
@@ -82,10 +82,10 @@ public class PainelDeControle extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(250, 120, 180, 32);
+        jButton2.setBounds(220, 120, 210, 32);
 
         checkboxChat.setFont(new java.awt.Font("The Bold Font", 0, 14)); // NOI18N
-        checkboxChat.setText("limpar chat diariamente");
+        checkboxChat.setText("LIMPAR CHAT DIARIAMENTE");
         checkboxChat.setToolTipText("limpa o chat automaticamente todos os dias  as 00:00 horas.");
         checkboxChat.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -93,12 +93,12 @@ public class PainelDeControle extends javax.swing.JFrame {
             }
         });
         getContentPane().add(checkboxChat);
-        checkboxChat.setBounds(10, 410, 210, 30);
+        checkboxChat.setBounds(10, 410, 240, 30);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("DESBANIR");
         getContentPane().add(jButton3);
-        jButton3.setBounds(10, 80, 180, 30);
+        jButton3.setBounds(10, 80, 210, 30);
 
         botaoCriarObjetos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoCriarObjetos.setText("CRIAR OBJETOS");
@@ -108,22 +108,22 @@ public class PainelDeControle extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarObjetos);
-        botaoCriarObjetos.setBounds(10, 160, 180, 30);
+        botaoCriarObjetos.setBounds(10, 160, 210, 30);
 
         botaoMudarMapa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoMudarMapa.setText("MUDAR MAPA");
         getContentPane().add(botaoMudarMapa);
-        botaoMudarMapa.setBounds(250, 160, 180, 30);
+        botaoMudarMapa.setBounds(220, 160, 210, 30);
 
         botaoCriarNPC.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoCriarNPC.setText("CRIAR NPC");
         getContentPane().add(botaoCriarNPC);
-        botaoCriarNPC.setBounds(10, 200, 180, 30);
+        botaoCriarNPC.setBounds(10, 200, 210, 30);
 
         botaoCriarMonstro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoCriarMonstro.setText("CRIAR MONSTRO");
         getContentPane().add(botaoCriarMonstro);
-        botaoCriarMonstro.setBounds(250, 200, 180, 30);
+        botaoCriarMonstro.setBounds(220, 200, 210, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
