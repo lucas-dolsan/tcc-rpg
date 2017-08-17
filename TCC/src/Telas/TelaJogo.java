@@ -626,6 +626,9 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_caixaFichasTextoFocusGained
 
     public static void Start(boolean dono) {
+        if (dono) {
+            DAO.donoDaSala = true;
+        }
         painel = new PainelDeControle();
 
         java.awt.EventQueue.invokeLater(new Runnable() {

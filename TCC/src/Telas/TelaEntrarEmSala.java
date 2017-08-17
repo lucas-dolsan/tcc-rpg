@@ -15,16 +15,11 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         new Thread() {
             public void run() {
                 try {
-
                     setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
                     caixaDeSalas.removeAllItems();
                     dao.listarSalas();
-
                 } finally {
-
                     setCursor(Cursor.getDefaultCursor());
-
                 }
             }
         }.start();

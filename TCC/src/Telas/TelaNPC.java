@@ -11,24 +11,26 @@ public class TelaNPC extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labelImagem = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        campoNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        campoFuncao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        campoVida = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        campoDano = new javax.swing.JTextField();
+        campoDefesa = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        campoLore = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tabelaNPC = new javax.swing.JTable();
+        botaAdicionarImagem = new javax.swing.JButton();
+        botaoSalvar = new javax.swing.JButton();
+        botaoExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(455, 600));
@@ -36,30 +38,30 @@ public class TelaNPC extends javax.swing.JDialog {
         setPreferredSize(new java.awt.Dimension(455, 600));
         getContentPane().setLayout(null);
 
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 11, 150, 280);
+        labelImagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(labelImagem);
+        labelImagem.setBounds(10, 11, 150, 280);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("NOME:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(170, 0, 220, 30);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(170, 30, 260, 30);
+        getContentPane().add(campoNome);
+        campoNome.setBounds(170, 30, 260, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("FUNÇÃO:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(170, 60, 260, 20);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(170, 80, 260, 30);
+        getContentPane().add(campoFuncao);
+        campoFuncao.setBounds(170, 80, 260, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("VIDA:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(170, 110, 80, 20);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(170, 130, 80, 30);
+        getContentPane().add(campoVida);
+        campoVida.setBounds(170, 130, 80, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("DANO:");
@@ -70,19 +72,19 @@ public class TelaNPC extends javax.swing.JDialog {
         jLabel6.setText("DEFESA:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(350, 110, 80, 20);
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(260, 130, 80, 30);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(350, 130, 80, 30);
+        getContentPane().add(campoDano);
+        campoDano.setBounds(260, 130, 80, 30);
+        getContentPane().add(campoDefesa);
+        campoDefesa.setBounds(350, 130, 80, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("LORE:");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(170, 160, 260, 20);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        campoLore.setColumns(20);
+        campoLore.setRows(5);
+        jScrollPane1.setViewportView(campoLore);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(170, 180, 260, 110);
@@ -92,7 +94,7 @@ public class TelaNPC extends javax.swing.JDialog {
         getContentPane().add(jLabel8);
         jLabel8.setBounds(10, 290, 150, 30);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaNPC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -103,15 +105,25 @@ public class TelaNPC extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabelaNPC);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(10, 320, 420, 200);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("ADICIONAR IMAGEM");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(10, 523, 150, 30);
+        botaAdicionarImagem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        botaAdicionarImagem.setText("ADICIONAR IMAGEM");
+        getContentPane().add(botaAdicionarImagem);
+        botaAdicionarImagem.setBounds(10, 523, 150, 30);
+
+        botaoSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        botaoSalvar.setText("SALVAR");
+        getContentPane().add(botaoSalvar);
+        botaoSalvar.setBounds(341, 523, 90, 30);
+
+        botaoExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        botaoExcluir.setText("EXCLUIR");
+        getContentPane().add(botaoExcluir);
+        botaoExcluir.setBounds(240, 523, 90, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -119,8 +131,15 @@ public class TelaNPC extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton botaAdicionarImagem;
+    private javax.swing.JButton botaoExcluir;
+    private javax.swing.JButton botaoSalvar;
+    private javax.swing.JTextField campoDano;
+    private javax.swing.JTextField campoDefesa;
+    private javax.swing.JTextField campoFuncao;
+    private javax.swing.JTextArea campoLore;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField campoVida;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -130,12 +149,7 @@ public class TelaNPC extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel labelImagem;
+    private javax.swing.JTable tabelaNPC;
     // End of variables declaration//GEN-END:variables
 }

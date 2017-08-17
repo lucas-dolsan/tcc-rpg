@@ -21,6 +21,7 @@ public class DAO {
     public static ArrayList<Sala> salas = new ArrayList<Sala>();
     public static ArrayList<Jogador> jogadoresAtuais = new ArrayList<Jogador>();
     public static Connection c = ConexaoMySql.getConnection();
+    public static boolean donoDaSala = false;
 
     public String SaltedPassword(String unecryptedPassword) {
         String salt = "(NioU&y%%OguyF=d%6S)(L.~mnHXR6#@3jn0*FX7HD(iSHuvTdkfsC5$¨865709giVFTcf76)VB9";
@@ -44,13 +45,14 @@ public class DAO {
             ResultSet rs = stmt.executeQuery();
             DefaultTableModel model = (DefaultTableModel) TelaEquipamentos.tabela.getModel();
             while (rs.next()) {
+                int id = rs.getInt("pk_itemWeapon");
                 String nomeIcon = rs.getString("icone_itWea");
                 ImageIcon icon = (new ImageIcon(getClass().getResource("/WeaponIcons/" + nomeIcon)));
                 String nome = rs.getString("nome_itWea");
                 int dano = rs.getInt("danoBase_itWea");
                 String atibutos = rs.getString("atributos_itWea");
                 String descricao = rs.getString("descricao_itWea");
-                Object[] arma = {icon, nome, dano, atibutos, descricao};
+                Object[] arma = {id, icon, nome, dano, atibutos, descricao};
                 model.addRow(arma);
             }
 
