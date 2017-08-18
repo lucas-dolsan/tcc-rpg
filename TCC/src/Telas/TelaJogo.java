@@ -64,8 +64,9 @@ public class TelaJogo extends javax.swing.JFrame {
         setTitle("Double Damage - Sala: "+ TelaConfigurarSala.nomeSala
         );
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(1280, 680));
-        setMinimumSize(new java.awt.Dimension(1280, 680));
+        setMaximumSize(new java.awt.Dimension(1320, 680));
+        setMinimumSize(new java.awt.Dimension(1320, 680));
+        setPreferredSize(new java.awt.Dimension(1320, 680));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -93,7 +94,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoFecharSala);
-        botaoFecharSala.setBounds(10, 530, 220, 40);
+        botaoFecharSala.setBounds(10, 530, 240, 40);
 
         botaoSairDaSala.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoSairDaSala.setText("SAIR DA SALA");
@@ -109,7 +110,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoSairDaSala);
-        botaoSairDaSala.setBounds(10, 580, 220, 40);
+        botaoSairDaSala.setBounds(10, 580, 240, 40);
 
         campoEnviarTexto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         campoEnviarTexto.setForeground(new java.awt.Color(51, 51, 51));
@@ -123,7 +124,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(campoEnviarTexto);
-        campoEnviarTexto.setBounds(240, 580, 570, 40);
+        campoEnviarTexto.setBounds(270, 580, 580, 40);
 
         botaoEnviar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         botaoEnviar.setText("ENVIAR");
@@ -138,7 +139,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoEnviar);
-        botaoEnviar.setBounds(820, 580, 110, 40);
+        botaoEnviar.setBounds(860, 580, 110, 40);
 
         DefaultCaret caret = (DefaultCaret)areaDeChat.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -158,7 +159,7 @@ public class TelaJogo extends javax.swing.JFrame {
         jScrollPane2.setViewportView(areaDeChat);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(240, 10, 690, 490);
+        jScrollPane2.setBounds(270, 10, 700, 490);
 
         dadoD4.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD4.setForeground(new java.awt.Color(51, 51, 51));
@@ -175,7 +176,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD4);
-        dadoD4.setBounds(240, 510, 60, 60);
+        dadoD4.setBounds(270, 510, 60, 60);
 
         dadoD6.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD6.setForeground(new java.awt.Color(51, 51, 51));
@@ -192,7 +193,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD6);
-        dadoD6.setBounds(310, 510, 60, 60);
+        dadoD6.setBounds(340, 510, 60, 60);
 
         dadoD8.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD8.setForeground(new java.awt.Color(51, 51, 51));
@@ -209,7 +210,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD8);
-        dadoD8.setBounds(380, 510, 60, 60);
+        dadoD8.setBounds(410, 510, 60, 60);
 
         dadoD10.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD10.setForeground(new java.awt.Color(51, 51, 51));
@@ -226,7 +227,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD10);
-        dadoD10.setBounds(450, 510, 60, 60);
+        dadoD10.setBounds(480, 510, 60, 60);
 
         dadoD20.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD20.setForeground(new java.awt.Color(51, 51, 51));
@@ -243,7 +244,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD20);
-        dadoD20.setBounds(520, 510, 60, 60);
+        dadoD20.setBounds(550, 510, 60, 60);
 
         dadoD100.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
         dadoD100.setForeground(new java.awt.Color(51, 51, 51));
@@ -260,7 +261,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(dadoD100);
-        dadoD100.setBounds(590, 510, 60, 60);
+        dadoD100.setBounds(620, 510, 60, 60);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoMic.png"))); // NOI18N
@@ -277,7 +278,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(730, 520, 200, 40);
+        jButton1.setBounds(760, 520, 210, 40);
 
         botaoDadoPersonalizado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-multiple.png"))); // NOI18N
         botaoDadoPersonalizado.setToolTipText("Rodar dado com valor personalizado!");
@@ -287,12 +288,12 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoDadoPersonalizado);
-        botaoDadoPersonalizado.setBounds(660, 510, 60, 60);
+        botaoDadoPersonalizado.setBounds(690, 510, 60, 60);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setText("FICHAS DE TEXTO:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 220, 20);
+        jLabel1.setBounds(10, 10, 240, 20);
 
         caixaFichasTexto.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         caixaFichasTexto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {""}));
@@ -302,7 +303,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(caixaFichasTexto);
-        caixaFichasTexto.setBounds(10, 30, 220, 30);
+        caixaFichasTexto.setBounds(10, 30, 240, 30);
 
         botaoVisualizarFicha.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botaoVisualizarFicha.setText("VISUALIZAR FICHA");
@@ -312,7 +313,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoVisualizarFicha);
-        botaoVisualizarFicha.setBounds(10, 100, 220, 30);
+        botaoVisualizarFicha.setBounds(10, 100, 240, 30);
 
         botaoCriarFicha.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botaoCriarFicha.setText("CRIAR FICHA DE TEXTO");
@@ -322,12 +323,12 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarFicha);
-        botaoCriarFicha.setBounds(10, 70, 220, 30);
+        botaoCriarFicha.setBounds(10, 70, 240, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel2.setText("FICHAS DE PERSONAGEM:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 140, 230, 20);
+        jLabel2.setBounds(10, 140, 240, 20);
 
         caixaFichaPersonagem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         caixaFichaPersonagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
@@ -337,7 +338,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(caixaFichaPersonagem);
-        caixaFichaPersonagem.setBounds(10, 160, 220, 30);
+        caixaFichaPersonagem.setBounds(10, 160, 240, 30);
 
         botaoVisualizarPersonagem.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botaoVisualizarPersonagem.setText("VISUALIZAR PERSONAGEM");
@@ -347,7 +348,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoVisualizarPersonagem);
-        botaoVisualizarPersonagem.setBounds(10, 230, 220, 30);
+        botaoVisualizarPersonagem.setBounds(10, 230, 240, 30);
 
         botaoCriarPersonagem.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botaoCriarPersonagem.setText("CRIAR PERSONAGEM");
@@ -357,48 +358,48 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarPersonagem);
-        botaoCriarPersonagem.setBounds(10, 200, 220, 30);
+        botaoCriarPersonagem.setBounds(10, 200, 240, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setText("NPC's:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 270, 220, 20);
+        jLabel3.setBounds(10, 270, 240, 20);
 
         getContentPane().add(caixaNPC);
-        caixaNPC.setBounds(10, 290, 220, 30);
+        caixaNPC.setBounds(10, 290, 240, 30);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButton2.setText("VISUALIZAR NPC");
         getContentPane().add(jButton2);
-        jButton2.setBounds(10, 330, 220, 30);
+        jButton2.setBounds(10, 330, 240, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setText("MONSTROS:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 370, 210, 20);
+        jLabel4.setBounds(10, 370, 240, 20);
 
         getContentPane().add(caixaMonstros);
-        caixaMonstros.setBounds(10, 390, 220, 30);
+        caixaMonstros.setBounds(10, 390, 240, 30);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButton3.setText("VISUALIZAR MONSTRO");
         getContentPane().add(jButton3);
-        jButton3.setBounds(10, 430, 220, 30);
+        jButton3.setBounds(10, 430, 240, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel5.setText("MAPA DA AVENTURA:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(940, 10, 320, 20);
+        jLabel5.setBounds(990, 10, 320, 20);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(940, 30, 320, 230);
+        jLabel6.setBounds(990, 30, 320, 230);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton4.setText("MANUAIS DE JOGO");
         getContentPane().add(jButton4);
-        jButton4.setBounds(940, 310, 320, 30);
+        jButton4.setBounds(990, 310, 320, 30);
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -406,17 +407,17 @@ public class TelaJogo extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(940, 376, 320, 240);
+        jScrollPane1.setBounds(990, 380, 320, 240);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel7.setText("ANOTAÇÕES DO MESTRE:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(940, 354, 330, 20);
+        jLabel7.setBounds(990, 360, 330, 20);
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton5.setText("ATUALIZAR MAPA");
         getContentPane().add(jButton5);
-        jButton5.setBounds(940, 270, 320, 30);
+        jButton5.setBounds(990, 270, 320, 30);
 
         pack();
         setLocationRelativeTo(null);
