@@ -1,6 +1,7 @@
 package Telas;
 
 import ConexaoBanco.DAO;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaEquipamentos extends javax.swing.JDialog {
@@ -11,6 +12,8 @@ public class TelaEquipamentos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         dao.listarArmas();
+        dao.listarArmaduras();
+        dao.listarItens();
     }
 
     @SuppressWarnings("unchecked")
@@ -28,7 +31,7 @@ public class TelaEquipamentos extends javax.swing.JDialog {
             new Object [][] {
             },
             new String [] {
-                "ID","Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
+                "Id","Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
             }
         ));
         tabela.setCellSelectionEnabled(true);
@@ -49,7 +52,19 @@ public class TelaEquipamentos extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = tabela.rowAtPoint(evt.getPoint());
                 if (row >= 0 && DAO.donoDaSala) {
-                    System.out.println("caralhou: " +tabela.getValueAt(row, 0).toString());
+                    String url = tabela.getValueAt(row, 0).toString();
+                    if(url.contains("weapon")){
+                        int sair = JOptionPane.showConfirmDialog(null, "Deseja excluir item?", "Excluir item", JOptionPane.YES_NO_OPTION);
+                        if (sair == JOptionPane.YES_OPTION) {
+
+                        }
+                    }
+                    if(url.contains("armadura")){
+                        System.out.println("armadura");
+                    }
+                    if(url.contains("item")){
+                        System.out.println("item");
+                    }
 
                 }
             }

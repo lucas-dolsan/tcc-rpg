@@ -117,6 +117,53 @@ public class DAO {
         }
     }
 
+    public void listarArmaduras() {
+        final String sql = ("SELECT * FROM itemArmor WHERE fk_personagem = (?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+            ResultSet rs = stmt.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaEquipamentos.tabela.getModel();
+            while (rs.next()) {
+                int id = rs.getInt("pk_itemArmor");
+                String nomeIcon = rs.getString("icone_iArmo");
+                ImageIcon icon = (new ImageIcon(getClass().getResource("/ArmaduraIcons/" + nomeIcon)));
+                String nome = rs.getString("nome_iArmo");
+                int defesa = rs.getInt("defesaBase_iArmo");
+                String atibutos = rs.getString("atributos_iArmo");
+                String descricao = rs.getString("descricao_iArmo");
+                Object[] armor = {id, icon, nome, defesa, atibutos, descricao};
+                model.addRow(armor);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarItens() {
+        final String sql = ("SELECT * FROM item WHERE fk_personagem = (?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+            ResultSet rs = stmt.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaEquipamentos.tabela.getModel();
+            while (rs.next()) {
+                int id = rs.getInt("pk_item");
+                String nomeIcon = rs.getString("icone_ite");
+                ImageIcon icon = (new ImageIcon(getClass().getResource("/ItemIcons/" + nomeIcon)));
+                String nome = rs.getString("nome_ite");
+                String atibutos = rs.getString("atributos_ite");
+                String descricao = rs.getString("descricao_ite");
+                Object[] item = {id, icon, nome, null, atibutos, descricao};
+                model.addRow(item);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void mensagemSairDaSala() {
         final String sql = ("update sala SET chat_sala=concat(chat_sala,(?)) where nome_sala = (?)");
         String mensagem = "[" + pegarTempoServer() + "] [" + DAO.nickName + " Saiu da Sala]\n";

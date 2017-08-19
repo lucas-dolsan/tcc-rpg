@@ -31,6 +31,7 @@ public class TelaNPC extends javax.swing.JDialog {
         botaAdicionarImagem = new javax.swing.JButton();
         botaoSalvar = new javax.swing.JButton();
         botaoExcluir = new javax.swing.JButton();
+        botaoMatarNPC = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(455, 600));
@@ -118,12 +119,17 @@ public class TelaNPC extends javax.swing.JDialog {
         botaoSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoSalvar.setText("SALVAR");
         getContentPane().add(botaoSalvar);
-        botaoSalvar.setBounds(341, 523, 90, 30);
+        botaoSalvar.setBounds(351, 523, 80, 30);
 
         botaoExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoExcluir.setText("EXCLUIR");
         getContentPane().add(botaoExcluir);
-        botaoExcluir.setBounds(240, 523, 90, 30);
+        botaoExcluir.setBounds(270, 523, 80, 30);
+
+        botaoMatarNPC.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        botaoMatarNPC.setText("MATAR NPC");
+        getContentPane().add(botaoMatarNPC);
+        botaoMatarNPC.setBounds(160, 523, 110, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -133,6 +139,7 @@ public class TelaNPC extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaAdicionarImagem;
     private javax.swing.JButton botaoExcluir;
+    private javax.swing.JButton botaoMatarNPC;
     private javax.swing.JButton botaoSalvar;
     private javax.swing.JTextField campoDano;
     private javax.swing.JTextField campoDefesa;
