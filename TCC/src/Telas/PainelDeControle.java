@@ -3,8 +3,11 @@ package Telas;
 import ConexaoBanco.DAO;
 import Objetos.Jogador;
 import ServidorVoIP.ServerRunner;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PainelDeControle extends javax.swing.JFrame {
 
@@ -112,6 +115,11 @@ public class PainelDeControle extends javax.swing.JFrame {
 
         botaoMudarMapa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoMudarMapa.setText("MUDAR MAPA");
+        botaoMudarMapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoMudarMapaActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoMudarMapa);
         botaoMudarMapa.setBounds(220, 160, 210, 30);
 
@@ -191,6 +199,28 @@ public class PainelDeControle extends javax.swing.JFrame {
         telaCriarObjetos.setVisible(true);
         botaoCriarObjetos.setEnabled(false);
     }//GEN-LAST:event_botaoCriarObjetosActionPerformed
+
+    private void botaoMudarMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMudarMapaActionPerformed
+        JFileChooser escolherArquivo = new JFileChooser();
+        escolherArquivo.setMaximumSize(new java.awt.Dimension(800, 600));
+        escolherArquivo.setMinimumSize(new java.awt.Dimension(800, 600));
+        escolherArquivo.setPreferredSize(new java.awt.Dimension(800, 600));
+        FileFilter filter = new FileNameExtensionFilter("Imagens em JPEG", "jpg", "jpeg");
+        FileFilter filter2 = new FileNameExtensionFilter("Imagens em PNG", "png");
+        FileFilter filter3 = new FileNameExtensionFilter("Imagens em GIF", "gif");
+        escolherArquivo.addChoosableFileFilter(filter);
+        escolherArquivo.addChoosableFileFilter(filter2);
+        escolherArquivo.addChoosableFileFilter(filter3);
+        escolherArquivo.setAcceptAllFileFilterUsed(false);
+        escolherArquivo.setMultiSelectionEnabled(false);
+        int resultado = escolherArquivo.showOpenDialog(this);
+        if (resultado == escolherArquivo.CANCEL_OPTION) {
+
+        } else {
+            String path = escolherArquivo.getSelectedFile().getPath();
+            dao.uploadMapa(path);
+        }
+    }//GEN-LAST:event_botaoMudarMapaActionPerformed
     public static void listarJogadoresAtuais() {
         for (Jogador jogador : DAO.jogadoresAtuais) {
             caixaJogadores.addItem(jogador.getNome_jog());

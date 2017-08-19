@@ -29,54 +29,36 @@ public class DAO {
     public void uploadMapa(String caminhoDaImagem) {
         FileInputStream fis = null;
         PreparedStatement stmt = null;
-
         File arquivo = new File(caminhoDaImagem);
         try {
-
             fis = new FileInputStream(arquivo);
-
         } catch (FileNotFoundException ex) {
-
             ex.printStackTrace();
-
         }
-
         try {
-            
             String sqlExists = ("SELECT pk_mapa FROM mapa WHERE fk_sala = ?");
             PreparedStatement stmtE = c.prepareStatement(sqlExists);
             stmtE.setInt(1, salaAtual.getPk_sala());
             ResultSet rs = stmtE.executeQuery();
-
             if (!rs.next()) {
-
                 try {
-
                     String sqlInsert = ("INSERT INTO mapa(fk_sala, imagem_mapa) VALUES ( ?, ?)");
                     stmt = c.prepareStatement(sqlInsert);
                     stmt.setInt(1, salaAtual.getPk_sala());
                     stmt.setBinaryStream(2, fis, (int) arquivo.length());
                     stmt.execute();
-
                 } catch (SQLException ex) {
-
                     ex.printStackTrace();
-
                 }
-
             } else {
-
                 String sqlUpdate = ("UPDATE mapa SET imagem_mapa = ? WHERE fk_sala = ?");
                 stmt = c.prepareStatement(sqlUpdate);
                 stmt.setBinaryStream(1, fis, (int) arquivo.length());
                 stmt.setInt(2, salaAtual.getPk_sala());
                 stmt.execute();
             }
-
         } catch (SQLException ex) {
-            
             ex.printStackTrace();
-            
         }
 
     }
@@ -84,21 +66,15 @@ public class DAO {
     public Blob downloadMapa() {
         String sql = "SELECT imagem_mapa  FROM mapa WHERE fk_sala  = ?";
         try {
-
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, salaAtual.getPk_sala());
             ResultSet rs = stmt.executeQuery();
-
             if (rs.next()) {
-
                 Blob mapaBlob = rs.getBlob("imagem_mapa");
                 return mapaBlob;
-
             }
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
         return null;
     }
