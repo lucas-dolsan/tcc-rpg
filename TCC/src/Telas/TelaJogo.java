@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,7 +23,6 @@ public class TelaJogo extends javax.swing.JFrame {
         botaoFecharSala.setVisible(true);
         botaoFecharSala.setEnabled(false);
         campoEnviarTexto.requestFocus();
-        dao.uploadMapa("/home/lucas-dolsan/Downloads/nazie.jpg");
     }
 
     @SuppressWarnings("unchecked")
@@ -60,12 +58,12 @@ public class TelaJogo extends javax.swing.JFrame {
         caixaMonstros = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        mapaLabel = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        botaoAtualizarMapa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Double Damage - Sala: "+ TelaConfigurarSala.nomeSala
@@ -398,10 +396,10 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(990, 10, 320, 20);
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(990, 30, 320, 230);
+        mapaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mapaLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(mapaLabel);
+        mapaLabel.setBounds(990, 30, 320, 230);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton4.setText("MANUAIS DE JOGO");
@@ -421,15 +419,15 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(990, 360, 330, 20);
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jButton5.setText("ATUALIZAR MAPA");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botaoAtualizarMapa.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        botaoAtualizarMapa.setText("ATUALIZAR MAPA");
+        botaoAtualizarMapa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botaoAtualizarMapaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5);
-        jButton5.setBounds(990, 270, 320, 30);
+        getContentPane().add(botaoAtualizarMapa);
+        botaoAtualizarMapa.setBounds(990, 270, 320, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -637,22 +635,22 @@ public class TelaJogo extends javax.swing.JFrame {
         caixaFichasTexto.removeAllItems();
         dao.listarFichasTexto();
     }//GEN-LAST:event_caixaFichasTextoFocusGained
-    private static void atulizarMapa() {
+    private static void atualizarMapa() {
         try {
-
             BufferedImage imagem = ImageIO.read(dao.downloadMapa().getBinaryStream());
             ImageIcon imagemIcone = new ImageIcon(imagem);
-            jLabel6.setIcon(imagemIcone);
-
+            mapaLabel.setIcon(imagemIcone);
         } catch (SQLException | IOException ex) {
-
             ex.printStackTrace();
-
         }
     }
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        atulizarMapa();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void botaoAtualizarMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarMapaActionPerformed
+        new Thread() {
+            public void run() {
+                atualizarMapa();
+            }
+        }.start();
+    }//GEN-LAST:event_botaoAtualizarMapaActionPerformed
 
     public static void Start(boolean dono) {
         if (dono) {
@@ -672,11 +670,8 @@ public class TelaJogo extends javax.swing.JFrame {
                 }
 
                 new Thread() {
-
                     public void run() {
-
-                        atulizarMapa();
-
+                        atualizarMapa();
                     }
 
                 }.start();
@@ -684,55 +679,31 @@ public class TelaJogo extends javax.swing.JFrame {
                 new Thread() {
                     @Override
                     public void run() {
-
                         if (dao.isVOIPAtivado(DAO.salaAtual.getNome_sala())) {
-
                             System.out.println("voIP está ativado");
-
                         } else {
-
                             System.out.println("voIP está desativado");
-
                         }
-
                         while (true) {
-
                             painel.port = dao.pegarPorta(TelaConfigurarSala.nomeSala);
-
                             if (!(DAO.player.getPk_jogador() == DAO.salaAtual.getFk_jogador())) {
-
                                 if (dao.isVOIPAtivado(DAO.salaAtual.getNome_sala())) {
-
                                     jButton1.setEnabled(true);
-
                                 } else {
-
                                     jButton1.setEnabled(false);
                                 }
                             }
-
                             if (dao.verificarChatDaily(DAO.salaAtual.getNome_sala())) {
-
                                 painel.checkboxChat.setSelected(true);
-
                             } else {
-
                                 painel.checkboxChat.setSelected(false);
-
                             }
-
                             dao.lerChat();
-
                             try {
-
-                                Thread.sleep(1);
-
+                                Thread.sleep(10);
                             } catch (InterruptedException ex) {
-
                                 Logger.getLogger(TelaJogo.class.getName()).log(Level.SEVERE, null, ex);
-
                             }
-
                         }
                     }
                 }.start();
@@ -742,6 +713,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextArea areaDeChat;
+    private javax.swing.JButton botaoAtualizarMapa;
     private javax.swing.JButton botaoCriarFicha;
     private javax.swing.JButton botaoCriarPersonagem;
     private javax.swing.JButton botaoDadoPersonalizado;
@@ -765,16 +737,15 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private static javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private static javax.swing.JLabel mapaLabel;
     // End of variables declaration//GEN-END:variables
 }
