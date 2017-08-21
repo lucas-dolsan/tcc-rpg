@@ -15,10 +15,12 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
         new Thread() {
             public void run() {
                 try {
+                    caixaDeSalas.setEnabled(false);
                     setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     caixaDeSalas.removeAllItems();
                     dao.listarSalas();
                 } finally {
+                    caixaDeSalas.setEnabled(true);
                     setCursor(Cursor.getDefaultCursor());
                 }
             }
@@ -144,7 +146,6 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     private void entrarEmSala() {
         try {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
             String nomeSala = (caixaDeSalas.getSelectedItem().toString());
             String senhaSala = campoSenhaSala.getText();
             if (dao.entrarEmSala(nomeSala, senhaSala)) {
@@ -158,8 +159,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
                 System.out.println("Erro ao entrar na sala " + nomeSala);
                 erroEntrarEmSala.setVisible(true);
             }
-        } finally {
-
+        } finally {            
             setCursor(Cursor.getDefaultCursor());
 
         }

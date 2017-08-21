@@ -9,7 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
@@ -17,7 +19,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
     static DAO dao = new DAO();
     public static PainelDeControle painel = null;
-
+    public static  ImageIcon imagemIcone = null;
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(true);
@@ -69,9 +71,7 @@ public class TelaJogo extends javax.swing.JFrame {
         setTitle("Double Damage - Sala: "+ TelaConfigurarSala.nomeSala
         );
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(1320, 680));
         setMinimumSize(new java.awt.Dimension(1320, 680));
-        setPreferredSize(new java.awt.Dimension(1320, 680));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -152,7 +152,6 @@ public class TelaJogo extends javax.swing.JFrame {
         areaDeChat.setColumns(20);
         areaDeChat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         areaDeChat.setRows(5);
-        areaDeChat.setToolTipText("");
         areaDeChat.setWrapStyleWord(true);
         areaDeChat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         areaDeChat.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -397,7 +396,13 @@ public class TelaJogo extends javax.swing.JFrame {
         jLabel5.setBounds(990, 10, 320, 20);
 
         mapaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mapaLabel.setToolTipText("Clique para visualizar a imagem completa");
         mapaLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        mapaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mapaLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(mapaLabel);
         mapaLabel.setBounds(990, 30, 320, 230);
 
@@ -638,7 +643,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private static void atualizarMapa() {
         try {
             BufferedImage imagem = ImageIO.read(dao.downloadMapa().getBinaryStream());
-            ImageIcon imagemIcone = new ImageIcon(imagem);
+            imagemIcone = new ImageIcon(imagem);
             mapaLabel.setIcon(imagemIcone);
         } catch (SQLException | IOException ex) {
             ex.printStackTrace();
@@ -651,6 +656,17 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         }.start();
     }//GEN-LAST:event_botaoAtualizarMapaActionPerformed
+
+    private void mapaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapaLabelMouseClicked
+        JDialog dialog = new JDialog();
+        dialog.setUndecorated(true);
+        JLabel label = new JLabel(imagemIcone);
+        dialog.setLocationRelativeTo(this);
+        dialog.setUndecorated(false);
+        dialog.add(label);
+        dialog.pack();
+        dialog.setVisible(true);
+    }//GEN-LAST:event_mapaLabelMouseClicked
 
     public static void Start(boolean dono) {
         if (dono) {
