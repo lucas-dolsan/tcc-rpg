@@ -11,7 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PainelDeControle extends javax.swing.JFrame {
 
-    DAO dao = new DAO();
+    static DAO dao = new DAO();
     JFrame voipFrame = null;
     public boolean estadoVoip = false;
     public int port = 0;
@@ -63,9 +63,9 @@ public class PainelDeControle extends javax.swing.JFrame {
 
         caixaJogadores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         caixaJogadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
-        caixaJogadores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                caixaJogadoresActionPerformed(evt);
+        caixaJogadores.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                caixaJogadoresFocusGained(evt);
             }
         });
         getContentPane().add(caixaJogadores);
@@ -143,15 +143,14 @@ public class PainelDeControle extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoLimparChatActionPerformed
 
-    private void caixaJogadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caixaJogadoresActionPerformed
-        listarJogadoresAtuais();
-    }//GEN-LAST:event_caixaJogadoresActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (!estadoVoip) {
             do {
+                dao.alterarPorta(0, dao.salaAtual.getNome_sala());
                 String configPort = JOptionPane.showInputDialog("Escolha em qual porta o servidor de voIP funcionará: ");
-                port = Integer.parseInt(configPort);
+                if (configPort != null) {
+                    port = Integer.parseInt(configPort);
+                }
                 if (port < 1024 || port > 65535) {
                     JOptionPane.showMessageDialog(null, "AVISO: Apenas valores maiores que 1024 e menores que 65535!");
                 }
@@ -180,7 +179,7 @@ public class PainelDeControle extends javax.swing.JFrame {
             estadoVoip = false;
             voipFrame.setVisible(false);
             voipFrame.dispose();
-            jButton2.setText("Ligar voIP (off)");
+            jButton2.setText("LIGAR VOIP (OFF)");
             TelaJogo.jButton1.setEnabled(true);
             dao.alterarVOIP(0);
         }
@@ -215,17 +214,19 @@ public class PainelDeControle extends javax.swing.JFrame {
         escolherArquivo.setMultiSelectionEnabled(false);
         int resultado = escolherArquivo.showOpenDialog(this);
         if (resultado == escolherArquivo.CANCEL_OPTION) {
-
+            System.out.println("Escolha de arquivos cancelada");
         } else {
             String path = escolherArquivo.getSelectedFile().getPath();
+            System.out.println("Arquivo: [" + path + "] selecionado");
             dao.uploadMapa(path);
         }
     }//GEN-LAST:event_botaoMudarMapaActionPerformed
-    public static void listarJogadoresAtuais() {
-        for (Jogador jogador : DAO.jogadoresAtuais) {
-            caixaJogadores.addItem(jogador.getNome_jog());
-        }
-    }
+
+    private void caixaJogadoresFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaJogadoresFocusGained
+        caixaJogadores.removeAllItems();
+        dao.jogadoresAtuais.clear();
+        dao.pegarJogadoresDaSala();
+    }//GEN-LAST:event_caixaJogadoresFocusGained
 
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {

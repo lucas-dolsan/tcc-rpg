@@ -25,6 +25,7 @@ public class TelaJogo extends javax.swing.JFrame {
         botaoFecharSala.setVisible(true);
         botaoFecharSala.setEnabled(false);
         campoEnviarTexto.requestFocus();
+        dao.associarJogadorASala();
     }
 
     @SuppressWarnings("unchecked")
@@ -716,7 +717,7 @@ public class TelaJogo extends javax.swing.JFrame {
                             }
                             dao.lerChat();
                             try {
-                                Thread.sleep(10);
+                                Thread.sleep(5);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(TelaJogo.class.getName()).log(Level.SEVERE, null, ex);
                             }

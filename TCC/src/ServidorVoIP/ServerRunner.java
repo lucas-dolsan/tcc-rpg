@@ -1,11 +1,6 @@
 package ServidorVoIP;
 
-import Telas.PainelDeControle;
 import Telas.TelaJogo;
-import java.io.IOException;
-import java.net.BindException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ServerRunner extends javax.swing.JFrame {
 
@@ -44,19 +39,27 @@ public class ServerRunner extends javax.swing.JFrame {
                     if (server == null) {
                         try {
                             server = new Server(port);
-                        } catch (Throwable ex) {
-                            Logger.getLogger(PainelDeControle.class.getName()).log(Level.SEVERE, null, ex);
+
+                        } catch (Exception ex) {
+
+                            ex.printStackTrace();
+
                         }
                     } else {
+
                         try {
+
                             server.filaDeTransmissao.clear();
                             server.clientes.clear();
                             server.conexoesMortas.clear();
                             server.s.close();
                             server = null;
-                        } catch (IOException ex) {
-                            Logger.getLogger(ServerRunner.class.getName()).log(Level.SEVERE, null, ex);
+
+                        } catch (Exception ex) {
+
+                            ex.printStackTrace();
                         }
+
                     }
                 }
             }
