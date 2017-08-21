@@ -5,7 +5,7 @@
             <url>src/Telas/TelaJogo.java</url>
             <bookmark id="1">
                 <name/>
-                <line>433</line>
+                <line>438</line>
                 <key/>
             </bookmark>
         </file>
@@ -20,12 +20,10 @@
             <file>file:/home/dolsan/tcc-rpg/TCC/src/Telas/TelaJogo.java</file>
         </group>
         <group>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/ConexaoBanco/DAO.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaEquipamentos.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaVisualizarObjeto.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/PainelDeControle.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaJogo.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaNPC.java</file>
+            <file>file:/home/lucas-dolsan/Documentos/repositories/tcc-rpg/TCC/src/Telas/PainelDeControle.java</file>
+            <file>file:/home/lucas-dolsan/Documentos/repositories/tcc-rpg/TCC/src/Telas/TelaEntrarEmSala.java</file>
+            <file>file:/home/lucas-dolsan/Documentos/repositories/tcc-rpg/TCC/src/ConexaoBanco/DAO.java</file>
+            <file>file:/home/lucas-dolsan/Documentos/repositories/tcc-rpg/TCC/src/Telas/TelaJogo.java</file>
         </group>
     </open-files>
 </project-private>

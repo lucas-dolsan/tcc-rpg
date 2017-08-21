@@ -1075,8 +1075,45 @@ public class DAO {
         }
     }
 
+    public void associarJogadorASala() {
+        final String SqlExists = ("SELECT pk_jog_sal FROM jog_sal WHERE fk_jogador = ? AND fk_sala = ? ");
+
+        try {
+
+            PreparedStatement stmtE = c.prepareStatement(SqlExists);
+            stmtE.setInt(1, player.getPk_jogador());
+            stmtE.setInt(2, salaAtual.getPk_sala());
+            ResultSet rs = stmtE.executeQuery();
+
+            if (!rs.next()) {
+
+                final String sql = ("INSERT INTO jog_sal(fk_jogador, fk_sala, ban) VALUES (?, ?, ?)");
+                try {
+
+                    PreparedStatement stmt = c.prepareStatement(sql);
+                    stmt.setInt(1, player.getPk_jogador());
+                    stmt.setInt(2, salaAtual.getPk_sala());
+                    stmt.setInt(3, 0);
+                    stmt.execute();
+
+                } catch (Exception ex) {
+
+                    ex.printStackTrace();
+
+                }
+
+            }
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+
+        }
+
+    }
+
     public void pegarJogadoresDaSala() {
-        final String sql = ("SELECT * FROM jogador jog JOIN sala sala ON jog.pk_jogador = sala.fk_jogador WHERE sala.pk_sala =?");
+        final String sql = ("SELECT * FROM jogador jog JOIN jog_sal  js ON jog.pk_jogador = js.fk_jogador WHERE js.fk_sala = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, salaAtual.getPk_sala());
@@ -1090,10 +1127,14 @@ public class DAO {
                 jogador.setDt_registro(rs.getDate("dt_registro"));
                 jogador.setDt_ultimoLogin(rs.getDate("dt_ultimoLogin"));
                 jogadoresAtuais.add(jogador);
+                PainelDeControle.caixaJogadores.addItem(jogador.getNome_jog());
             }
             stmt.close();
+
         } catch (Exception e) {
+
             e.printStackTrace();
+
         }
     }
 
@@ -1104,7 +1145,9 @@ public class DAO {
             pegarJogadoresDoBanco();
             Thread pegarVariaveisLocais = new Thread() {
                 public void run() {
+
                     pegarSalasDoBanco();
+
                 }
             };
             pegarVariaveisLocais.start();
