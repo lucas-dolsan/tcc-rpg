@@ -78,9 +78,11 @@ public class TelaCriarItem extends javax.swing.JDialog {
         campoAtributos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         campoAtributos.setRows(5);
         jScrollPane2.setViewportView(campoAtributos);
+        campoAtributos.setLineWrap(true);
+        campoAtributos.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 190, 330, 81);
+        jScrollPane2.setBounds(10, 190, 330, 77);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Outros atributos:");
@@ -91,9 +93,11 @@ public class TelaCriarItem extends javax.swing.JDialog {
         campoDescricao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         campoDescricao.setRows(5);
         jScrollPane3.setViewportView(campoDescricao);
+        campoDescricao.setLineWrap(true);
+        campoDescricao.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 300, 330, 81);
+        jScrollPane3.setBounds(10, 300, 330, 77);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Descrição:");

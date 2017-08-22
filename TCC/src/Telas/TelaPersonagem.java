@@ -115,6 +115,8 @@ public class TelaPersonagem extends javax.swing.JDialog {
         campoOutrosAtributos.setColumns(20);
         campoOutrosAtributos.setRows(5);
         jScrollPane1.setViewportView(campoOutrosAtributos);
+        campoOutrosAtributos.setLineWrap(true);
+        campoOutrosAtributos.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(340, 250, 270, 90);
@@ -122,6 +124,8 @@ public class TelaPersonagem extends javax.swing.JDialog {
         campoLore.setColumns(20);
         campoLore.setRows(5);
         jScrollPane2.setViewportView(campoLore);
+        campoLore.setLineWrap(true);
+        campoLore.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(6, 250, 330, 90);
@@ -282,7 +286,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         erroSemNome.setForeground(new java.awt.Color(255, 0, 0));
         erroSemNome.setText("Personagem sem nome!");
         getContentPane().add(erroSemNome);
-        erroSemNome.setBounds(10, 210, 210, 19);
+        erroSemNome.setBounds(10, 210, 210, 17);
 
         pack();
         setLocationRelativeTo(null);

@@ -627,30 +627,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
-    public void banir(int pk_jogador, String motivo_ban) {
-        final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban, motivo_ban) VALUES(?,?,?,?)");
-        try {
-            PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, pk_jogador);
-            stmt.setInt(2, salaAtual.getPk_sala());
-            stmt.setString(4, motivo_ban);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void banir(int pk_jogador) {
-        final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban) VALUES(?,?,?)");
-        try {
-            PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, pk_jogador);
-            stmt.setInt(2, salaAtual.getPk_sala());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     public void criarJogador(Jogador jogador, TelaRegistrar tela) {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
@@ -1077,37 +1054,25 @@ public class DAO {
 
     public void associarJogadorASala() {
         final String SqlExists = ("SELECT pk_jog_sal FROM jog_sal WHERE fk_jogador = ? AND fk_sala = ? ");
-
         try {
-
             PreparedStatement stmtE = c.prepareStatement(SqlExists);
             stmtE.setInt(1, player.getPk_jogador());
             stmtE.setInt(2, salaAtual.getPk_sala());
             ResultSet rs = stmtE.executeQuery();
-
             if (!rs.next()) {
-
                 final String sql = ("INSERT INTO jog_sal(fk_jogador, fk_sala, ban) VALUES (?, ?, ?)");
                 try {
-
                     PreparedStatement stmt = c.prepareStatement(sql);
                     stmt.setInt(1, player.getPk_jogador());
                     stmt.setInt(2, salaAtual.getPk_sala());
                     stmt.setInt(3, 0);
                     stmt.execute();
-
                 } catch (Exception ex) {
-
                     ex.printStackTrace();
-
                 }
-
             }
-
         } catch (Exception ex) {
-
             ex.printStackTrace();
-
         }
 
     }

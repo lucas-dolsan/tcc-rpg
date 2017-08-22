@@ -64,7 +64,7 @@ public class TelaJogo extends javax.swing.JFrame {
         mapaLabel = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        campoAnotacao = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         botaoAtualizarMapa = new javax.swing.JButton();
 
@@ -162,6 +162,8 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(areaDeChat);
+        areaDeChat.setLineWrap(true);
+        areaDeChat.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(270, 10, 700, 490);
@@ -412,10 +414,12 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(990, 310, 320, 30);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        campoAnotacao.setColumns(20);
+        campoAnotacao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        campoAnotacao.setRows(5);
+        jScrollPane1.setViewportView(campoAnotacao);
+        campoAnotacao.setLineWrap(true);
+        campoAnotacao.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(990, 380, 320, 240);
@@ -743,6 +747,7 @@ public class TelaJogo extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> caixaFichasTexto;
     private javax.swing.JComboBox<String> caixaMonstros;
     private javax.swing.JComboBox<String> caixaNPC;
+    private javax.swing.JTextArea campoAnotacao;
     private javax.swing.JTextField campoEnviarTexto;
     private javax.swing.JButton dadoD10;
     private javax.swing.JButton dadoD100;
@@ -762,7 +767,6 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private static javax.swing.JLabel mapaLabel;
     // End of variables declaration//GEN-END:variables
 }

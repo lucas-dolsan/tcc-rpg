@@ -86,6 +86,8 @@ public class TelaNPC extends javax.swing.JDialog {
         campoLore.setColumns(20);
         campoLore.setRows(5);
         jScrollPane1.setViewportView(campoLore);
+        campoLore.setLineWrap(true);
+        campoLore.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(170, 180, 260, 110);

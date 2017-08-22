@@ -40,11 +40,14 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
         jLabel1.setText("Nome da ficha:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 131, 29);
+        jLabel1.setBounds(10, 10, 170, 29);
 
         telaTextoFicha.setColumns(20);
         telaTextoFicha.setRows(5);
+        telaTextoFicha.setPreferredSize(new java.awt.Dimension(620, 1700));
         jScrollPane1.setViewportView(telaTextoFicha);
+        telaTextoFicha.setLineWrap(true);
+        telaTextoFicha.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 50, 680, 420);
@@ -140,6 +143,6 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nomeExiste;
     public javax.swing.JTextField nomeFichaTexto;
-    public javax.swing.JTextArea telaTextoFicha;
+    public static javax.swing.JTextArea telaTextoFicha;
     // End of variables declaration//GEN-END:variables
 }
