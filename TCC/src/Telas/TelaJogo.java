@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
-
+    
     static DAO dao = new DAO();
     public static PainelDeControle painel = null;
     public static ImageIcon imagemIcone = null;
-
+    
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(true);
@@ -28,7 +28,7 @@ public class TelaJogo extends javax.swing.JFrame {
         campoEnviarTexto.requestFocus();
         dao.associarJogadorASala();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -119,7 +119,7 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(botaoSairDaSala);
         botaoSairDaSala.setBounds(10, 580, 240, 40);
 
-        campoEnviarTexto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        campoEnviarTexto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         campoEnviarTexto.setForeground(new java.awt.Color(51, 51, 51));
         campoEnviarTexto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         campoEnviarTexto.setMaximumSize(new java.awt.Dimension(630, 50));
@@ -453,7 +453,7 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.mensagemSairDaSala();
         }
     }
-
+    
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
@@ -483,7 +483,7 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.enviarChatBanco(texto);
             campoEnviarTexto.setText("");
         }
-
+        
     }
     private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
         enviarTexto();
@@ -673,13 +673,13 @@ public class TelaJogo extends javax.swing.JFrame {
         dialog.pack();
         dialog.setVisible(true);
     }//GEN-LAST:event_mapaLabelMouseClicked
-
+    
     public static void Start(boolean dono) {
         if (dono) {
             DAO.donoDaSala = true;
         }
         painel = new PainelDeControle();
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
@@ -690,14 +690,24 @@ public class TelaJogo extends javax.swing.JFrame {
                 } else {
                     painel.dispose();
                 }
-
+                
                 new Thread() {
                     public void run() {
                         atualizarMapa();
                     }
-
+                    
                 }.start();
-
+                new Thread() {
+                    @Override
+                    public void run() {
+                        dao.lerChat();
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }.start();
                 new Thread() {
                     @Override
                     public void run() {
@@ -715,16 +725,18 @@ public class TelaJogo extends javax.swing.JFrame {
                                     jButton1.setEnabled(false);
                                 }
                             }
-                            if (dao.verificarChatDaily(DAO.salaAtual.getNome_sala())) {
-                                painel.checkboxChat.setSelected(true);
-                            } else {
-                                painel.checkboxChat.setSelected(false);
-                            }
-                            dao.lerChat();
-                            try {
-                                Thread.sleep(5);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(TelaJogo.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        }
+                    }
+                }.start();
+                
+                new Thread() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+                                JOptionPane.showMessageDialog(null, "Se fudeu pra caralho", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+                                System.exit(0);
                             }
                         }
                     }

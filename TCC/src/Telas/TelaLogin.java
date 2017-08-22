@@ -62,13 +62,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Email:");
+        jLabel1.setText("EMAIL:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(420, 380, 440, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Senha:");
+        jLabel2.setText("SENHA:");
         jLabel2.setToolTipText("");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(420, 480, 445, 40);
@@ -76,7 +76,7 @@ public class TelaLogin extends javax.swing.JFrame {
         botaoEntrar.setBackground(new java.awt.Color(255, 255, 255));
         botaoEntrar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         botaoEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoEntrar.png"))); // NOI18N
-        botaoEntrar.setText("Entrar");
+        botaoEntrar.setText("ENTRAR");
         botaoEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEntrarActionPerformed(evt);
@@ -93,7 +93,7 @@ public class TelaLogin extends javax.swing.JFrame {
         botaoRegistrarSe.setBackground(new java.awt.Color(255, 255, 255));
         botaoRegistrarSe.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         botaoRegistrarSe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoRegistrar.png"))); // NOI18N
-        botaoRegistrarSe.setText("Registrar");
+        botaoRegistrarSe.setText("REGISTRAR");
         botaoRegistrarSe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoRegistrarSeActionPerformed(evt);

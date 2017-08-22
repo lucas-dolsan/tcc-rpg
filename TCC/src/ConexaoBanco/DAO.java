@@ -444,7 +444,23 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
+    public int pegarPk_jogador(String nome) {
+        final String sql = ("SELECT * FROM jogador WHERE nome_jog = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("pk_jogador");
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
     public int pegarPk_personagem(String nome) {
         final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
         try {

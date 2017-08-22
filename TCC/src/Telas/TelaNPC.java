@@ -34,9 +34,10 @@ public class TelaNPC extends javax.swing.JDialog {
         botaoMatarNPC = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(455, 600));
-        setMinimumSize(new java.awt.Dimension(455, 600));
-        setPreferredSize(new java.awt.Dimension(455, 600));
+        setMaximumSize(new java.awt.Dimension(440, 590));
+        setMinimumSize(new java.awt.Dimension(440, 590));
+        setPreferredSize(new java.awt.Dimension(440, 590));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         labelImagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
