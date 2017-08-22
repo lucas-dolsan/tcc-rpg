@@ -6,16 +6,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class TelaCriarMagia extends javax.swing.JDialog {
-    
+
     DAO dao = new DAO();
-    
+
     public TelaCriarMagia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         loadImages();
         erro.setVisible(false);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -142,7 +142,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         caixaPersonagem.removeAllItems();
         dao.listarPersonagensMagias();
     }//GEN-LAST:event_caixaPersonagemFocusGained
-    
+
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         boolean error = false;
         String icon = caixaIcons.getSelectedItem().toString();
@@ -154,7 +154,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         } else {
             erro.setVisible(true);
             error = true;
-            
+
         }
         if (nome == null) {
             error = true;
@@ -182,9 +182,9 @@ public class TelaCriarMagia extends javax.swing.JDialog {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Houve um erro durante a criação do item.\nPor favor tente novamente!");
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_botaoSalvarActionPerformed
     private void loadImages() {
         for (int i = 1; i <= 534; i++) {

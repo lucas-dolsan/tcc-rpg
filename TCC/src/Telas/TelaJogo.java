@@ -19,7 +19,8 @@ public class TelaJogo extends javax.swing.JFrame {
 
     static DAO dao = new DAO();
     public static PainelDeControle painel = null;
-    public static  ImageIcon imagemIcone = null;
+    public static ImageIcon imagemIcone = null;
+
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(true);

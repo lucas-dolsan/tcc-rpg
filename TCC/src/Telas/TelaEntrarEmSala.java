@@ -159,7 +159,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
                 System.out.println("Erro ao entrar na sala " + nomeSala);
                 erroEntrarEmSala.setVisible(true);
             }
-        } finally {            
+        } finally {
             setCursor(Cursor.getDefaultCursor());
 
         }

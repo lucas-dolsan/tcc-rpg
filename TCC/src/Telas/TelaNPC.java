@@ -137,7 +137,6 @@ public class TelaNPC extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaAdicionarImagem;
     private javax.swing.JButton botaoExcluir;

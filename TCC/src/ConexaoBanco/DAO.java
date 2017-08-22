@@ -627,7 +627,7 @@ public class DAO {
             e.printStackTrace();
         }
     }
-    
+
     public void criarJogador(Jogador jogador, TelaRegistrar tela) {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
@@ -638,7 +638,6 @@ public class DAO {
             stmt.setString(2, jogador.getEmail_jog());
             stmt.setString(3, SaltedPassword(jogador.getSenha_jog()));
             stmt.execute();
-            tela.labelRegistrado.setVisible(true);
             tela.dispose();
         } catch (Exception e) {
             e.printStackTrace();

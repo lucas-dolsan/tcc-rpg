@@ -31,7 +31,6 @@ public class TelaRegistrar extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         erroSenhas = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        labelRegistrado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Registrar");
@@ -173,13 +172,6 @@ public class TelaRegistrar extends javax.swing.JDialog {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(115, 160, 380, 20);
 
-        labelRegistrado.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        labelRegistrado.setForeground(new java.awt.Color(0, 204, 0));
-        labelRegistrado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelRegistrado.setText("registrado com sucesso.");
-        getContentPane().add(labelRegistrado);
-        labelRegistrado.setBounds(120, 500, 370, 50);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -278,7 +270,6 @@ public class TelaRegistrar extends javax.swing.JDialog {
         erroNome.setVisible(false);
         erroEmail.setVisible(false);
         erroSenhas.setVisible(false);
-        labelRegistrado.setVisible(false);
     }
 
     public static void main(String args[]) {
@@ -331,6 +322,5 @@ public class TelaRegistrar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    public static javax.swing.JLabel labelRegistrado;
     // End of variables declaration//GEN-END:variables
 }
