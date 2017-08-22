@@ -1258,7 +1258,53 @@ public class DAO {
             stmt.close();
 
         } catch (Exception ex) {
+
             ex.printStackTrace();
+
+        }
+        return false;
+    }
+
+    public void AlterarEstadoBan(int ban, int fk_jogador, int fk_sala) {
+        final String sql = ("UPDATE jog_sal SET BAN = ? WHERE fk_jogador = ? AND fk_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, ban);
+            stmt.setInt(2, fk_jogador);
+            stmt.setInt(3, fk_sala);
+            stmt.execute();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public boolean isBanido(int fk_jogador, int fk_sala) {
+        final String sql = ("SELECT ban FROM jog_sal WHERE fk_jogador = ? AND fk_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, fk_jogador);
+            stmt.setInt(2, fk_sala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt("ban") == 1) {
+
+                    return true;
+
+                } else {
+
+                    return false;
+
+                }
+
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
         }
         return false;
     }
