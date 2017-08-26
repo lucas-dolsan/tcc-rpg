@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
-    
+
     static DAO dao = new DAO();
     public static PainelDeControle painel = null;
     public static ImageIcon imagemIcone = null;
-    
+
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(true);
@@ -28,7 +28,7 @@ public class TelaJogo extends javax.swing.JFrame {
         campoEnviarTexto.requestFocus();
         dao.associarJogadorASala();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -378,6 +378,11 @@ public class TelaJogo extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButton2.setText("VISUALIZAR NPC");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(10, 330, 240, 30);
 
@@ -391,6 +396,11 @@ public class TelaJogo extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButton3.setText("VISUALIZAR MONSTRO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(10, 430, 240, 30);
 
@@ -412,6 +422,11 @@ public class TelaJogo extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton4.setText("MANUAIS DE JOGO");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4);
         jButton4.setBounds(990, 310, 320, 30);
 
@@ -453,7 +468,7 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.mensagemSairDaSala();
         }
     }
-    
+
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
@@ -483,40 +498,76 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.enviarChatBanco(texto);
             campoEnviarTexto.setText("");
         }
-        
+
     }
     private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
         enviarTexto();
     }//GEN-LAST:event_botaoEnviarActionPerformed
 
     private void dadoD4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD4ActionPerformed
-        TelaRolarDado tela = new TelaRolarDado(this, true, 4);
-        tela.setVisible(true);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            TelaRolarDado tela = new TelaRolarDado(this, true, 4);
+            tela.setVisible(true);
+        }
     }//GEN-LAST:event_dadoD4ActionPerformed
 
     private void dadoD6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD6ActionPerformed
-        TelaRolarDado tela = new TelaRolarDado(this, true, 6);
-        tela.setVisible(true);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            TelaRolarDado tela = new TelaRolarDado(this, true, 6);
+            tela.setVisible(true);
+        }
     }//GEN-LAST:event_dadoD6ActionPerformed
 
     private void dadoD8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD8ActionPerformed
-        TelaRolarDado tela = new TelaRolarDado(this, true, 8);
-        tela.setVisible(true);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            TelaRolarDado tela = new TelaRolarDado(this, true, 8);
+            tela.setVisible(true);
+        }
     }//GEN-LAST:event_dadoD8ActionPerformed
 
     private void dadoD10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD10ActionPerformed
-        TelaRolarDado tela = new TelaRolarDado(this, true, 10);
-        tela.setVisible(true);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            TelaRolarDado tela = new TelaRolarDado(this, true, 10);
+            tela.setVisible(true);
+        }
     }//GEN-LAST:event_dadoD10ActionPerformed
 
     private void dadoD20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD20ActionPerformed
-        TelaRolarDado tela = new TelaRolarDado(this, true, 20);
-        tela.setVisible(true);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            TelaRolarDado tela = new TelaRolarDado(this, true, 20);
+            tela.setVisible(true);
+        }
     }//GEN-LAST:event_dadoD20ActionPerformed
 
     private void dadoD100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD100ActionPerformed
-        TelaRolarDado tela = new TelaRolarDado(this, true, 100);
-        tela.setVisible(true);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            TelaRolarDado tela = new TelaRolarDado(this, true, 100);
+            tela.setVisible(true);
+        }
     }//GEN-LAST:event_dadoD100ActionPerformed
 
     private void botaoSairDaSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoSairDaSalaKeyPressed
@@ -526,7 +577,13 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSairDaSalaKeyPressed
 
     private void botaoEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEnviarKeyPressed
-        enviarTexto();
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            enviarTexto();
+        }
     }//GEN-LAST:event_botaoEnviarKeyPressed
 
     private void campoEnviarTextoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEnviarTextoKeyPressed
@@ -586,16 +643,21 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dao.pegarSalasDoBanco();
-        if (!painel.estadoVoip) {
-            JFrame telaSom = new TelaConfigurarSom();
-            telaSom.setVisible(true);
-            jButton1.setEnabled(false);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
         } else {
-            jButton1.setEnabled(false);
-        }
+            dao.pegarSalasDoBanco();
+            if (!painel.estadoVoip) {
+                JFrame telaSom = new TelaConfigurarSom();
+                telaSom.setVisible(true);
+                jButton1.setEnabled(false);
+            } else {
+                jButton1.setEnabled(false);
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             popupSairSala();
@@ -622,24 +684,48 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_caixaFichaPersonagemFocusGained
 
     private void botaoVisualizarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarPersonagemActionPerformed
-        dao.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            dao.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_botaoVisualizarPersonagemActionPerformed
 
     private void botaoCriarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarPersonagemActionPerformed
-        TelaPersonagem telaPersonagem = new TelaPersonagem(this, rootPaneCheckingEnabled);
-        telaPersonagem.botaoSalvarPersonagem.setEnabled(true);
-        telaPersonagem.zerarValores();
-        telaPersonagem.setVisible(true);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            TelaPersonagem telaPersonagem = new TelaPersonagem(this, rootPaneCheckingEnabled);
+            telaPersonagem.botaoSalvarPersonagem.setEnabled(true);
+            telaPersonagem.zerarValores();
+            telaPersonagem.setVisible(true);
+        }
     }//GEN-LAST:event_botaoCriarPersonagemActionPerformed
 
     private void botaoCriarFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarFichaActionPerformed
-        TelaFichaDeTexto telaFichaTexto = new TelaFichaDeTexto(this, rootPaneCheckingEnabled);
-        telaFichaTexto.botaoCriar.setEnabled(true);
-        telaFichaTexto.setVisible(true);
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            TelaFichaDeTexto telaFichaTexto = new TelaFichaDeTexto(this, rootPaneCheckingEnabled);
+            telaFichaTexto.botaoCriar.setEnabled(true);
+            telaFichaTexto.setVisible(true);
+        }
     }//GEN-LAST:event_botaoCriarFichaActionPerformed
 
     private void botaoVisualizarFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarFichaActionPerformed
-        dao.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            dao.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_botaoVisualizarFichaActionPerformed
 
     private void caixaFichasTextoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaFichasTextoFocusGained
@@ -656,13 +742,18 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }
     private void botaoAtualizarMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarMapaActionPerformed
-        new Thread() {
-            public void run() {
-                atualizarMapa();
-            }
-        }.start();
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            new Thread() {
+                public void run() {
+                    atualizarMapa();
+                }
+            }.start();
     }//GEN-LAST:event_botaoAtualizarMapaActionPerformed
-
+    }
     private void mapaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapaLabelMouseClicked
         JDialog dialog = new JDialog();
         dialog.setUndecorated(true);
@@ -673,13 +764,46 @@ public class TelaJogo extends javax.swing.JFrame {
         dialog.pack();
         dialog.setVisible(true);
     }//GEN-LAST:event_mapaLabelMouseClicked
-    
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            // TODO add your handling code here:
+            System.out.println("em construção");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+            // TODO add your handling code here:
+            System.out.println("em construção");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            TelaInicial.Start();
+        } else {
+        // TODO add your handling code here:
+            System.out.println("em construção");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     public static void Start(boolean dono) {
         if (dono) {
             DAO.donoDaSala = true;
         }
         painel = new PainelDeControle();
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
@@ -690,12 +814,12 @@ public class TelaJogo extends javax.swing.JFrame {
                 } else {
                     painel.dispose();
                 }
-                
+
                 new Thread() {
                     public void run() {
                         atualizarMapa();
                     }
-                    
+
                 }.start();
                 new Thread() {
                     @Override
@@ -725,19 +849,7 @@ public class TelaJogo extends javax.swing.JFrame {
                                     jButton1.setEnabled(false);
                                 }
                             }
-                            
-                        }
-                    }
-                }.start();
-                
-                new Thread() {
-                    @Override
-                    public void run() {
-                        while (true) {
-                            if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
-                                JOptionPane.showMessageDialog(null, "Se fudeu pra caralho", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
-                                System.exit(0);
-                            }
+
                         }
                     }
                 }.start();

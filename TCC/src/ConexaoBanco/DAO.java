@@ -461,11 +461,11 @@ public class DAO {
         return 0;
     }
     
-    public int pegarPk_personagem(String nome) {
+    public int pegarPk_personagem(String nomePersonagem) {
         final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setString(1, nome);
+            stmt.setString(1, nomePersonagem);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt("pk_personagem");
@@ -477,7 +477,23 @@ public class DAO {
         }
         return 0;
     }
-
+    public int pegarPk_sala(String nomeSala){
+    
+        final String sql = ("SELECT * FROM sala WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomeSala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("pk_sala");
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
     public void criarItemArma(ItemArma ia) {
         final String sql = ("INSERT INTO itemWeapon(fk_personagem,nome_itWea,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea) VALUES (?,?,?,?,?,?)");
         try {
