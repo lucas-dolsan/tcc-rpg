@@ -4,17 +4,17 @@ import ConexaoBanco.DAO;
 import Objetos.FichaPersonagem;
 
 public class TelaPersonagem extends javax.swing.JDialog {
-    
+
     DAO dao = new DAO();
-    
+
     public TelaPersonagem(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         nomeEmUso.setVisible(false);
         erroSemNome.setVisible(false);
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -64,7 +64,6 @@ public class TelaPersonagem extends javax.swing.JDialog {
         botaoExcluirPersonagem = new javax.swing.JButton();
         nomeEmUso = new javax.swing.JLabel();
         salvarEdicao = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         erroSemNome = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
@@ -75,21 +74,21 @@ public class TelaPersonagem extends javax.swing.JDialog {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 12)); // NOI18N
-        jLabel1.setText("Nome DO Personagem:");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("NOME DO PERSONAGEM:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 10, 180, 20);
         getContentPane().add(campoNomeJogador);
         campoNomeJogador.setBounds(10, 80, 180, 30);
 
-        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 12)); // NOI18N
-        jLabel2.setText("Nome DO Jogador:");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("NOME DO JOGADOR:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(10, 60, 180, 20);
         getContentPane().add(campoNomePersonagem);
         campoNomePersonagem.setBounds(10, 30, 180, 30);
 
-        botaoEquipamentos.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        botaoEquipamentos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoEquipamentos.setText("EQUIPAMENTOS");
         botaoEquipamentos.setEnabled(false);
         botaoEquipamentos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -101,7 +100,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         getContentPane().add(botaoEquipamentos);
         botaoEquipamentos.setBounds(620, 190, 150, 30);
 
-        botaoMagias.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        botaoMagias.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoMagias.setText("MAGIAS");
         botaoMagias.setEnabled(false);
         botaoMagias.addActionListener(new java.awt.event.ActionListener() {
@@ -113,129 +112,135 @@ public class TelaPersonagem extends javax.swing.JDialog {
         botaoMagias.setBounds(620, 230, 150, 30);
 
         campoOutrosAtributos.setColumns(20);
+        campoOutrosAtributos.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         campoOutrosAtributos.setRows(5);
         jScrollPane1.setViewportView(campoOutrosAtributos);
+        campoOutrosAtributos.setLineWrap(true);
+        campoOutrosAtributos.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(340, 250, 270, 90);
 
         campoLore.setColumns(20);
+        campoLore.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         campoLore.setRows(5);
         jScrollPane2.setViewportView(campoLore);
+        campoLore.setLineWrap(true);
+        campoLore.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(6, 250, 330, 90);
 
-        jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("LORE:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(10, 230, 100, 20);
 
-        jLabel4.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel4.setText("Outros atributos:");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("OUTROS ATRIBUTOS:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(340, 230, 140, 20);
+        jLabel4.setBounds(340, 230, 270, 20);
 
-        jLabel5.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel5.setText("Raça:");
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("RAÇA:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 110, 80, 20);
+        jLabel5.setBounds(10, 110, 180, 20);
         getContentPane().add(campoRaca);
         campoRaca.setBounds(10, 130, 180, 30);
 
-        jLabel6.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel6.setText("Classe:");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("CLASSE:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 160, 90, 20);
+        jLabel6.setBounds(10, 160, 180, 20);
         getContentPane().add(campoClasse);
         campoClasse.setBounds(10, 180, 180, 30);
 
-        jLabel7.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel7.setText("nível:");
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("NÍVEL:");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(200, 60, 80, 20);
 
-        jLabel8.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("IDADE:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(290, 60, 90, 20);
+        jLabel8.setBounds(290, 60, 80, 20);
         getContentPane().add(campoIdade);
         campoIdade.setBounds(290, 80, 80, 30);
         getContentPane().add(campoNivel);
         campoNivel.setBounds(200, 80, 80, 30);
 
-        jLabel9.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel9.setText("Vida:");
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("VIDA:");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(200, 10, 80, 20);
 
-        jLabel10.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel10.setText("Mana:");
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setText("MANA:");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(290, 10, 90, 20);
+        jLabel10.setBounds(290, 10, 80, 20);
         getContentPane().add(campoVida);
         campoVida.setBounds(200, 30, 80, 30);
         getContentPane().add(campoMana);
         campoMana.setBounds(290, 30, 80, 30);
 
-        jLabel12.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel12.setText("divindade:");
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("DIVINDADE:");
         getContentPane().add(jLabel12);
         jLabel12.setBounds(200, 110, 170, 20);
         getContentPane().add(campoDivindade);
         campoDivindade.setBounds(200, 130, 170, 30);
 
-        jLabel13.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel13.setText("Força:");
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("FORÇA:");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(380, 30, 100, 20);
+        jLabel13.setBounds(380, 10, 100, 20);
         getContentPane().add(campoForca);
-        campoForca.setBounds(380, 50, 110, 30);
+        campoForca.setBounds(380, 30, 110, 30);
 
-        jLabel14.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel14.setText("Constituição:");
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel14.setText("CONSTITUIÇÃO:");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(380, 80, 110, 20);
+        jLabel14.setBounds(380, 60, 110, 20);
         getContentPane().add(campoConstituicao);
-        campoConstituicao.setBounds(380, 100, 110, 30);
+        campoConstituicao.setBounds(380, 80, 110, 30);
 
-        jLabel15.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel15.setText("Destreza:");
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel15.setText("DESTREZA:");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(380, 130, 110, 20);
+        jLabel15.setBounds(380, 110, 110, 20);
         getContentPane().add(campoDestreza);
-        campoDestreza.setBounds(380, 150, 110, 30);
+        campoDestreza.setBounds(380, 130, 110, 30);
 
-        jLabel16.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel16.setText(" inteligência:");
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel16.setText("INTELIGÊNCIA:");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(500, 30, 110, 20);
+        jLabel16.setBounds(500, 10, 110, 20);
         getContentPane().add(campoInteligencia);
-        campoInteligencia.setBounds(500, 50, 110, 30);
+        campoInteligencia.setBounds(500, 30, 110, 30);
 
-        jLabel17.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel17.setText("sabedoria:");
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("SABEDORIA:");
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(500, 80, 110, 20);
+        jLabel17.setBounds(500, 60, 110, 20);
         getContentPane().add(campoSabedoria);
-        campoSabedoria.setBounds(500, 100, 110, 30);
+        campoSabedoria.setBounds(500, 80, 110, 30);
 
-        jLabel18.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel18.setText("carisma:");
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setText("CARISMA:");
         getContentPane().add(jLabel18);
-        jLabel18.setBounds(500, 130, 110, 20);
+        jLabel18.setBounds(500, 110, 110, 20);
         getContentPane().add(campoCarisma);
-        campoCarisma.setBounds(500, 150, 110, 30);
+        campoCarisma.setBounds(500, 130, 110, 30);
 
-        jLabel19.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel19.setText("defesa:");
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel19.setText("DEFESA:");
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(620, 30, 90, 20);
+        jLabel19.setBounds(620, 10, 110, 20);
         getContentPane().add(campoDefesa);
-        campoDefesa.setBounds(620, 50, 110, 30);
+        campoDefesa.setBounds(620, 30, 110, 30);
 
-        botaoSalvarPersonagem.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        botaoSalvarPersonagem.setText("salvar");
+        botaoSalvarPersonagem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoSalvarPersonagem.setText("SALVAR");
         botaoSalvarPersonagem.setEnabled(false);
         botaoSalvarPersonagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,8 +250,8 @@ public class TelaPersonagem extends javax.swing.JDialog {
         getContentPane().add(botaoSalvarPersonagem);
         botaoSalvarPersonagem.setBounds(620, 270, 150, 30);
 
-        botaoExcluirPersonagem.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        botaoExcluirPersonagem.setText("excluir ficha");
+        botaoExcluirPersonagem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoExcluirPersonagem.setText("EXCLUIR FICHA");
         botaoExcluirPersonagem.setEnabled(false);
         botaoExcluirPersonagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,14 +261,14 @@ public class TelaPersonagem extends javax.swing.JDialog {
         getContentPane().add(botaoExcluirPersonagem);
         botaoExcluirPersonagem.setBounds(620, 310, 150, 30);
 
-        nomeEmUso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        nomeEmUso.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nomeEmUso.setForeground(new java.awt.Color(255, 0, 0));
         nomeEmUso.setText("Nome do personagem já em uso!");
         getContentPane().add(nomeEmUso);
         nomeEmUso.setBounds(10, 210, 270, 14);
 
-        salvarEdicao.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        salvarEdicao.setText("salvar edição");
+        salvarEdicao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        salvarEdicao.setText("SALVAR EDIÇÃO");
         salvarEdicao.setEnabled(false);
         salvarEdicao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,16 +278,11 @@ public class TelaPersonagem extends javax.swing.JDialog {
         getContentPane().add(salvarEdicao);
         salvarEdicao.setBounds(620, 270, 150, 30);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atributos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("The Bold Font", 1, 14))); // NOI18N
-        jPanel1.setFocusable(false);
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(370, 10, 400, 180);
-
-        erroSemNome.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        erroSemNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         erroSemNome.setForeground(new java.awt.Color(255, 0, 0));
         erroSemNome.setText("Personagem sem nome!");
         getContentPane().add(erroSemNome);
-        erroSemNome.setBounds(10, 210, 210, 19);
+        erroSemNome.setBounds(10, 210, 210, 15);
 
         pack();
         setLocationRelativeTo(null);
@@ -304,7 +304,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
         campoDestreza.setText("0");
         campoCarisma.setText("0");
     }
-    
+
     private int transformarVidaEmInt() {
         if (campoVida.getText() == null) {
             return 0;
@@ -313,7 +313,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(vida);
         }
     }
-    
+
     private int transformarManaEmInt() {
         if (campoMana.getText() == null) {
             return 0;
@@ -322,7 +322,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(mana);
         }
     }
-    
+
     private int transformarNivelEmInt() {
         if (campoNivel.getText() == null) {
             return 0;
@@ -331,7 +331,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(nivel);
         }
     }
-    
+
     private int transformarIdadeEmInt() {
         if (campoIdade.getText() == null) {
             return 0;
@@ -340,7 +340,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(idade);
         }
     }
-    
+
     private int transformarForcaEmInt() {
         if (campoForca.getText() == null) {
             return 0;
@@ -349,7 +349,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(forca);
         }
     }
-    
+
     private int transformarInteligenciaEmInt() {
         if (campoInteligencia.getText() == null) {
             return 0;
@@ -358,7 +358,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(inteligencia);
         }
     }
-    
+
     private int transformarDefesaEmInt() {
         if (campoDefesa.getText() == null) {
             return 0;
@@ -367,7 +367,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(defesa);
         }
     }
-    
+
     private int transformarConstituicaoEmInt() {
         if (campoConstituicao.getText() == null) {
             return 0;
@@ -376,7 +376,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(constituicao);
         }
     }
-    
+
     private int transformarSabedoriaEmInt() {
         if (campoSabedoria.getText() == null) {
             return 0;
@@ -385,7 +385,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(sabedoria);
         }
     }
-    
+
     private int transformarDestrezaEmInt() {
         if (campoDestreza.getText() == null) {
             return 0;
@@ -394,7 +394,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             return Integer.parseInt(destreza);
         }
     }
-    
+
     private int transformarCarismaEmInt() {
         if (campoCarisma.getText() == null) {
             return 0;
@@ -453,7 +453,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
                 dao.criarPersonagem(p);
                 this.dispose();
             }
-            
+
         }
     }//GEN-LAST:event_botaoSalvarPersonagemActionPerformed
 
@@ -605,7 +605,6 @@ public class TelaPersonagem extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JLabel nomeEmUso;

@@ -60,13 +60,13 @@ public class TelaCriarArma extends javax.swing.JDialog {
         jLabel1.setText("Nome do Item:");
         jLabel1.setToolTipText("");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(100, 20, 240, 14);
+        jLabel1.setBounds(100, 20, 240, 17);
         getContentPane().add(campoNome);
         campoNome.setBounds(100, 40, 240, 30);
 
         jLabel2.setText("Dano base:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(100, 70, 240, 14);
+        jLabel2.setBounds(100, 70, 240, 17);
         getContentPane().add(campoDano);
         campoDano.setBounds(100, 90, 240, 30);
 
@@ -85,9 +85,11 @@ public class TelaCriarArma extends javax.swing.JDialog {
         campoAtributos.setColumns(20);
         campoAtributos.setRows(5);
         jScrollPane2.setViewportView(campoAtributos);
+        campoAtributos.setLineWrap(true);
+        campoAtributos.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 190, 330, 96);
+        jScrollPane2.setBounds(10, 190, 330, 87);
 
         jLabel4.setText("Outros atributos:");
         getContentPane().add(jLabel4);
@@ -96,9 +98,11 @@ public class TelaCriarArma extends javax.swing.JDialog {
         campoDescricao.setColumns(20);
         campoDescricao.setRows(5);
         jScrollPane3.setViewportView(campoDescricao);
+        campoDescricao.setLineWrap(true);
+        campoDescricao.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 300, 330, 96);
+        jScrollPane3.setBounds(10, 300, 330, 87);
 
         jLabel5.setText("Descrição:");
         getContentPane().add(jLabel5);
@@ -106,7 +110,7 @@ public class TelaCriarArma extends javax.swing.JDialog {
 
         jLabel6.setText("Icone:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 20, 80, 14);
+        jLabel6.setBounds(10, 20, 80, 17);
 
         botaoSalvar.setText("Salvar");
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {

@@ -28,10 +28,9 @@ public class PainelDeControle extends javax.swing.JFrame {
         senhaSala = new javax.swing.JLabel();
         botaoLimparChat = new javax.swing.JButton();
         caixaJogadores = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        botaoBanir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        checkboxChat = new javax.swing.JRadioButton();
-        jButton3 = new javax.swing.JButton();
+        botaoDesbanir = new javax.swing.JButton();
         botaoCriarObjetos = new javax.swing.JButton();
         botaoMudarMapa = new javax.swing.JButton();
         botaoCriarNPC = new javax.swing.JButton();
@@ -71,10 +70,15 @@ public class PainelDeControle extends javax.swing.JFrame {
         getContentPane().add(caixaJogadores);
         caixaJogadores.setBounds(10, 40, 420, 32);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("BANIR");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(220, 80, 210, 30);
+        botaoBanir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoBanir.setText("BANIR");
+        botaoBanir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBanirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoBanir);
+        botaoBanir.setBounds(220, 80, 210, 30);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("INICIAR VOIP (OFF)");
@@ -87,21 +91,15 @@ public class PainelDeControle extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(220, 120, 210, 32);
 
-        checkboxChat.setFont(new java.awt.Font("The Bold Font", 0, 14)); // NOI18N
-        checkboxChat.setText("LIMPAR CHAT DIARIAMENTE");
-        checkboxChat.setToolTipText("limpa o chat automaticamente todos os dias  as 00:00 horas.");
-        checkboxChat.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                checkboxChatStateChanged(evt);
+        botaoDesbanir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botaoDesbanir.setText("DESBANIR");
+        botaoDesbanir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoDesbanirActionPerformed(evt);
             }
         });
-        getContentPane().add(checkboxChat);
-        checkboxChat.setBounds(10, 410, 240, 30);
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setText("DESBANIR");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(10, 80, 210, 30);
+        getContentPane().add(botaoDesbanir);
+        botaoDesbanir.setBounds(10, 80, 210, 30);
 
         botaoCriarObjetos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoCriarObjetos.setText("CRIAR OBJETOS");
@@ -185,14 +183,6 @@ public class PainelDeControle extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void checkboxChatStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkboxChatStateChanged
-        if (checkboxChat.isSelected()) {
-            dao.modificarChatDaily(DAO.salaAtual.getNome_sala(), 1);
-        } else {
-            dao.modificarChatDaily(DAO.salaAtual.getNome_sala(), 0);
-        }
-    }//GEN-LAST:event_checkboxChatStateChanged
-
     private void botaoCriarObjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarObjetosActionPerformed
         TelaCriarObjetos telaCriarObjetos = new TelaCriarObjetos(this, false);
         telaCriarObjetos.setVisible(true);
@@ -228,6 +218,14 @@ public class PainelDeControle extends javax.swing.JFrame {
         dao.pegarJogadoresDaSala();
     }//GEN-LAST:event_caixaJogadoresFocusGained
 
+    private void botaoBanirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBanirActionPerformed
+        dao.AlterarEstadoBan(1, dao.pegarPk_jogador(caixaJogadores.getSelectedItem().toString()), DAO.salaAtual.getPk_sala());
+    }//GEN-LAST:event_botaoBanirActionPerformed
+
+    private void botaoDesbanirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDesbanirActionPerformed
+        dao.AlterarEstadoBan(0, dao.pegarPk_jogador(caixaJogadores.getSelectedItem().toString()), DAO.salaAtual.getPk_sala());
+    }//GEN-LAST:event_botaoDesbanirActionPerformed
+
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -237,16 +235,15 @@ public class PainelDeControle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoBanir;
     private javax.swing.JButton botaoCriarMonstro;
     private javax.swing.JButton botaoCriarNPC;
     public static javax.swing.JButton botaoCriarObjetos;
+    private javax.swing.JButton botaoDesbanir;
     private javax.swing.JButton botaoLimparChat;
     private javax.swing.JButton botaoMudarMapa;
     public static javax.swing.JComboBox<String> caixaJogadores;
-    public javax.swing.JRadioButton checkboxChat;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel senhaSala;
     // End of variables declaration//GEN-END:variables
 }

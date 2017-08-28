@@ -3,6 +3,7 @@ package Telas;
 import ConexaoBanco.DAO;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
+import javax.swing.JOptionPane;
 
 public class TelaEntrarEmSala extends javax.swing.JDialog {
 
@@ -144,26 +145,29 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     private void entrarEmSala() {
-        try {
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            String nomeSala = (caixaDeSalas.getSelectedItem().toString());
-            String senhaSala = campoSenhaSala.getText();
-            if (dao.entrarEmSala(nomeSala, senhaSala)) {
-                TelaJogo.Start(dao.verificarDono());
-                tela.dispose();
-                this.dispose();
-                System.out.println("[" + nomeSala + "]");
-                dao.mensagemEntrarNaSala();
-                System.out.println(DAO.nickName + " entrou na sala");
-            } else {
-                System.out.println("Erro ao entrar na sala " + nomeSala);
-                erroEntrarEmSala.setVisible(true);
+        if (!dao.isBanido(DAO.player.getPk_jogador(),dao.pegarPk_sala(caixaDeSalas.getSelectedItem().toString()))) {
+            try {
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                String nomeSala = (caixaDeSalas.getSelectedItem().toString());
+                String senhaSala = campoSenhaSala.getText();
+                if (dao.entrarEmSala(nomeSala, senhaSala)) {
+                    TelaJogo.Start(dao.verificarDono());
+                    tela.dispose();
+                    this.dispose();
+                    System.out.println("[" + nomeSala + "]");
+                    dao.mensagemEntrarNaSala();
+                    System.out.println(DAO.nickName + " entrou na sala");
+                } else {
+                    System.out.println("Erro ao entrar na sala " + nomeSala);
+                    erroEntrarEmSala.setVisible(true);
+                }
+            } finally {
+                setCursor(Cursor.getDefaultCursor());
             }
-        } finally {            
-            setCursor(Cursor.getDefaultCursor());
-
+        } else {
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Você foi banido da sala");
         }
-
     }
     private void botaoEntrarEmSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaActionPerformed
         entrarEmSala();

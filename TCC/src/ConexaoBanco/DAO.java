@@ -444,12 +444,28 @@ public class DAO {
             e.printStackTrace();
         }
     }
-
-    public int pegarPk_personagem(String nome) {
-        final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
+    public int pegarPk_jogador(String nome) {
+        final String sql = ("SELECT * FROM jogador WHERE nome_jog = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("pk_jogador");
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    public int pegarPk_personagem(String nomePersonagem) {
+        final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomePersonagem);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt("pk_personagem");
@@ -461,7 +477,23 @@ public class DAO {
         }
         return 0;
     }
-
+    public int pegarPk_sala(String nomeSala){
+    
+        final String sql = ("SELECT * FROM sala WHERE nome_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomeSala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("pk_sala");
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
     public void criarItemArma(ItemArma ia) {
         final String sql = ("INSERT INTO itemWeapon(fk_personagem,nome_itWea,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea) VALUES (?,?,?,?,?,?)");
         try {
@@ -628,29 +660,6 @@ public class DAO {
         }
     }
 
-    public void banir(int pk_jogador, String motivo_ban) {
-        final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban, motivo_ban) VALUES(?,?,?,?)");
-        try {
-            PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, pk_jogador);
-            stmt.setInt(2, salaAtual.getPk_sala());
-            stmt.setString(4, motivo_ban);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void banir(int pk_jogador) {
-        final String sql = ("INSERT INTO banlist(fk_jogador, fk_sala, dt_ban) VALUES(?,?,?)");
-        try {
-            PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, pk_jogador);
-            stmt.setInt(2, salaAtual.getPk_sala());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void criarJogador(Jogador jogador, TelaRegistrar tela) {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
@@ -661,7 +670,6 @@ public class DAO {
             stmt.setString(2, jogador.getEmail_jog());
             stmt.setString(3, SaltedPassword(jogador.getSenha_jog()));
             stmt.execute();
-            tela.labelRegistrado.setVisible(true);
             tela.dispose();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1077,37 +1085,25 @@ public class DAO {
 
     public void associarJogadorASala() {
         final String SqlExists = ("SELECT pk_jog_sal FROM jog_sal WHERE fk_jogador = ? AND fk_sala = ? ");
-
         try {
-
             PreparedStatement stmtE = c.prepareStatement(SqlExists);
             stmtE.setInt(1, player.getPk_jogador());
             stmtE.setInt(2, salaAtual.getPk_sala());
             ResultSet rs = stmtE.executeQuery();
-
             if (!rs.next()) {
-
                 final String sql = ("INSERT INTO jog_sal(fk_jogador, fk_sala, ban) VALUES (?, ?, ?)");
                 try {
-
                     PreparedStatement stmt = c.prepareStatement(sql);
                     stmt.setInt(1, player.getPk_jogador());
                     stmt.setInt(2, salaAtual.getPk_sala());
                     stmt.setInt(3, 0);
                     stmt.execute();
-
                 } catch (Exception ex) {
-
                     ex.printStackTrace();
-
                 }
-
             }
-
         } catch (Exception ex) {
-
             ex.printStackTrace();
-
         }
 
     }
@@ -1258,7 +1254,53 @@ public class DAO {
             stmt.close();
 
         } catch (Exception ex) {
+
             ex.printStackTrace();
+
+        }
+        return false;
+    }
+
+    public void AlterarEstadoBan(int ban, int fk_jogador, int fk_sala) {
+        final String sql = ("UPDATE jog_sal SET BAN = ? WHERE fk_jogador = ? AND fk_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, ban);
+            stmt.setInt(2, fk_jogador);
+            stmt.setInt(3, fk_sala);
+            stmt.execute();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public boolean isBanido(int fk_jogador, int fk_sala) {
+        final String sql = ("SELECT ban FROM jog_sal WHERE fk_jogador = ? AND fk_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, fk_jogador);
+            stmt.setInt(2, fk_sala);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt("ban") == 1) {
+
+                    return true;
+
+                } else {
+
+                    return false;
+
+                }
+
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
         }
         return false;
     }

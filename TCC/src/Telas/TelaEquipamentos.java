@@ -54,10 +54,7 @@ public class TelaEquipamentos extends javax.swing.JDialog {
                 if (row >= 0 && DAO.donoDaSala) {
                     String url = tabela.getValueAt(row, 0).toString();
                     if(url.contains("weapon")){
-                        int sair = JOptionPane.showConfirmDialog(null, "Deseja excluir item?", "Excluir item", JOptionPane.YES_NO_OPTION);
-                        if (sair == JOptionPane.YES_OPTION) {
-
-                        }
+                        System.out.println("weapon");
                     }
                     if(url.contains("armadura")){
                         System.out.println("armadura");

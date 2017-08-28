@@ -34,9 +34,10 @@ public class TelaNPC extends javax.swing.JDialog {
         botaoMatarNPC = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(455, 600));
-        setMinimumSize(new java.awt.Dimension(455, 600));
-        setPreferredSize(new java.awt.Dimension(455, 600));
+        setMaximumSize(new java.awt.Dimension(440, 590));
+        setMinimumSize(new java.awt.Dimension(440, 590));
+        setPreferredSize(new java.awt.Dimension(440, 590));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         labelImagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -86,6 +87,8 @@ public class TelaNPC extends javax.swing.JDialog {
         campoLore.setColumns(20);
         campoLore.setRows(5);
         jScrollPane1.setViewportView(campoLore);
+        campoLore.setLineWrap(true);
+        campoLore.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(170, 180, 260, 110);
@@ -134,7 +137,6 @@ public class TelaNPC extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaAdicionarImagem;
