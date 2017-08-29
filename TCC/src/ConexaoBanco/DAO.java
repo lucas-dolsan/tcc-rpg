@@ -17,7 +17,6 @@ public class DAO {
     
     public static String nomeFichaTexto = "";
     public static String nomePersonagem = "";
-    public static String nomeNPC = "";
     public static Jogador player = null;
     public static Sala salaAtual = null;
     public static String nickName = "";
@@ -341,7 +340,7 @@ public class DAO {
     }
     
     public void pegarDadosNPC(String nomeNPC) {
-        DAO.nomeNPC = nomeNPC;
+        DAO.nomePersonagem = nomeNPC;
         final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);

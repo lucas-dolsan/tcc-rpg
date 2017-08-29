@@ -11,6 +11,9 @@ public class TelaNPC extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         nomeEmUso.setVisible(false);
+        campoDano.setText("0");
+        campoDefesa.setText("0");
+        campoVida.setText("0");
     }
 
     @SuppressWarnings("unchecked")
@@ -142,6 +145,11 @@ public class TelaNPC extends javax.swing.JDialog {
         botaoExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoExcluir.setText("EXCLUIR");
         botaoExcluir.setEnabled(false);
+        botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoExcluirActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoExcluir);
         botaoExcluir.setBounds(270, 523, 80, 30);
 
@@ -153,6 +161,11 @@ public class TelaNPC extends javax.swing.JDialog {
 
         botaoSalvarEdicao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoSalvarEdicao.setText("SALVAR");
+        botaoSalvarEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSalvarEdicaoActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoSalvarEdicao);
         botaoSalvarEdicao.setBounds(351, 523, 80, 30);
 
@@ -215,6 +228,57 @@ private int transformarVidaEmInt() {
             this.dispose();
         }
     }//GEN-LAST:event_botaoSalvarActionPerformed
+
+    private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
+        dao.excluirPersonagem();
+        this.dispose();
+    }//GEN-LAST:event_botaoExcluirActionPerformed
+
+    private void botaoSalvarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarEdicaoActionPerformed
+        if (campoNome.getText().equalsIgnoreCase(DAO.nomePersonagem)) {
+String nome = campoNome.getText();
+            if (nome == null) {
+                nome = " ";
+            }
+            int vida = transformarVidaEmInt();
+            int dano = transformarDanoEmInt();
+            int defesa = transformarDefesaEmInt();
+            String lore = campoLore.getText();
+            if (lore == null) {
+                lore = " ";
+            }
+            String funcao = campoFuncao.getText();
+            if (funcao == null) {
+                funcao = " ";
+            }
+            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", funcao, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "n");
+            dao.salvarEdicaoPersonagem(p);
+            this.dispose();
+        } else {
+            if (dao.personagemExiste(campoNome.getText())) {
+                nomeEmUso.setVisible(true);
+            } else {
+            String nome = campoNome.getText();
+            if (nome == null) {
+                nome = " ";
+            }
+            int vida = transformarVidaEmInt();
+            int dano = transformarDanoEmInt();
+            int defesa = transformarDefesaEmInt();
+            String lore = campoLore.getText();
+            if (lore == null) {
+                lore = " ";
+            }
+            String funcao = campoFuncao.getText();
+            if (funcao == null) {
+                funcao = " ";
+            }
+            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", funcao, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "n");
+            dao.salvarEdicaoPersonagem(p);
+            this.dispose();
+            }
+        }
+    }//GEN-LAST:event_botaoSalvarEdicaoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton botaAdicionarImagem;
