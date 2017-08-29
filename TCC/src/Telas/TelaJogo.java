@@ -16,19 +16,21 @@ import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
-    
+
     static DAO dao = new DAO();
     public static PainelDeControle painel = null;
     public static ImageIcon imagemIcone = null;
-    
+
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(true);
         botaoFecharSala.setEnabled(false);
         campoEnviarTexto.requestFocus();
         dao.associarJogadorASala();
+        campoAnotacao.setVisible(false);
+        textoAnotacao.setVisible(false);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,7 +68,7 @@ public class TelaJogo extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         campoAnotacao = new javax.swing.JTextArea();
-        jLabel7 = new javax.swing.JLabel();
+        textoAnotacao = new javax.swing.JLabel();
         botaoAtualizarMapa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,7 +121,7 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(botaoSairDaSala);
         botaoSairDaSala.setBounds(10, 580, 240, 40);
 
-        campoEnviarTexto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        campoEnviarTexto.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         campoEnviarTexto.setForeground(new java.awt.Color(51, 51, 51));
         campoEnviarTexto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         campoEnviarTexto.setMaximumSize(new java.awt.Dimension(630, 50));
@@ -447,10 +449,10 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(990, 380, 320, 240);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel7.setText("ANOTAÇÕES DO MESTRE:");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(990, 360, 330, 20);
+        textoAnotacao.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        textoAnotacao.setText("ANOTAÇÕES DO MESTRE:");
+        getContentPane().add(textoAnotacao);
+        textoAnotacao.setBounds(990, 360, 330, 20);
 
         botaoAtualizarMapa.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         botaoAtualizarMapa.setText("ATUALIZAR MAPA");
@@ -475,7 +477,7 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.mensagemSairDaSala();
         }
     }
-    
+
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
@@ -499,16 +501,20 @@ public class TelaJogo extends javax.swing.JFrame {
     private void botaoSairDaSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairDaSalaActionPerformed
         popupSairSala();
     }//GEN-LAST:event_botaoSairDaSalaActionPerformed
-    public void enviarTexto() {
-        String texto = campoEnviarTexto.getText();
+    public void enviarTexto(String texto) {
         if (!texto.isEmpty()) {
             dao.enviarChatBanco(texto);
             campoEnviarTexto.setText("");
         }
-        
+
     }
     private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
-        enviarTexto();
+        new Thread() {
+            @Override
+            public void run() {
+                enviarTexto(campoEnviarTexto.getText());
+            }
+        }.start();
     }//GEN-LAST:event_botaoEnviarActionPerformed
 
     private void dadoD4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoD4ActionPerformed
@@ -584,29 +590,43 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSairDaSalaKeyPressed
 
     private void botaoEnviarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEnviarKeyPressed
-        if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
+        if (DAO.donoDaSala) {
             JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             TelaInicial.Start();
         } else {
-            enviarTexto();
+            enviarTexto(campoEnviarTexto.getText());
         }
     }//GEN-LAST:event_botaoEnviarKeyPressed
 
     private void campoEnviarTextoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEnviarTextoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            enviarTexto();
-        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupSairSala();
-        }
+        new Thread() {
+            @Override
+            public void run() {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    enviarTexto(campoEnviarTexto.getText());
+                } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    popupSairSala();
+                }
+            }
+
+        }.start();
+
     }//GEN-LAST:event_campoEnviarTextoKeyPressed
 
     private void areaDeChatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_areaDeChatKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            enviarTexto();
-        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            popupSairSala();
-        }
+        new Thread() {
+            @Override
+            public void run() {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    enviarTexto(campoEnviarTexto.getText());
+                } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    popupSairSala();
+                }
+            }
+
+        }.start();
+
     }//GEN-LAST:event_areaDeChatKeyPressed
 
     private void dadoD4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dadoD4KeyPressed
@@ -686,8 +706,13 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoDadoPersonalizadoActionPerformed
 
     private void caixaFichaPersonagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaFichaPersonagemFocusGained
-        caixaFichaPersonagem.removeAllItems();
-        dao.listarPersonagens();
+        new Thread() {
+            @Override
+            public void run() {
+                caixaFichaPersonagem.removeAllItems();
+                dao.listarPersonagens();
+            }
+        }.start();
     }//GEN-LAST:event_caixaFichaPersonagemFocusGained
 
     private void botaoVisualizarPersonagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarPersonagemActionPerformed
@@ -696,7 +721,12 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
         } else {
-            dao.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
+            new Thread() {
+                @Override
+                public void run() {
+                    dao.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
+                }
+            }.start();
         }
     }//GEN-LAST:event_botaoVisualizarPersonagemActionPerformed
 
@@ -731,7 +761,12 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
         } else {
-            dao.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
+            new Thread() {
+                @Override
+                public void run() {
+                    dao.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
+                }
+            }.start();
         }
     }//GEN-LAST:event_botaoVisualizarFichaActionPerformed
 
@@ -778,7 +813,13 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
         } else {
-            dao.pegarDadosNPC(caixaNPC.getSelectedItem().toString());
+            new Thread() {
+                @Override
+                public void run() {
+                    dao.pegarDadosNPC(caixaNPC.getSelectedItem().toString());
+                }
+
+            }.start();
         }
     }//GEN-LAST:event_botaoVisualizarNPCActionPerformed
 
@@ -805,42 +846,54 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void caixaNPCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaNPCFocusGained
-        caixaNPC.removeAllItems();
-        dao.listarNPC();
+        new Thread() {
+            @Override
+            public void run() {
+                caixaNPC.removeAllItems();
+                dao.listarNPC();
+            }
+
+        }.start();
     }//GEN-LAST:event_caixaNPCFocusGained
-    
+
     public static void Start(boolean dono) {
         if (dono) {
             DAO.donoDaSala = true;
         }
         painel = new PainelDeControle();
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
-                if (DAO.player.getPk_jogador() == DAO.salaAtual.getFk_jogador()) {
+                if (dono) {
                     dao.alterarIP(DAO.salaAtual.getNome_sala());
                     botaoFecharSala.setEnabled(true);
                     painel.setVisible(true);
+                    campoAnotacao.setVisible(true);
+                    textoAnotacao.setVisible(true);
+
                 } else {
                     painel.dispose();
                 }
-                
+
                 new Thread() {
                     public void run() {
                         atualizarMapa();
                     }
-                    
+
                 }.start();
                 new Thread() {
                     @Override
                     public void run() {
-                        dao.lerChat();
-                        try {
-                            Thread.sleep(1);
-                        } catch (InterruptedException ex) {
-                            ex.printStackTrace();
+                        while (true) {
+                            dao.lerChat();
+                            try {
+                                Thread.sleep(5);
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
                         }
+
                     }
                 }.start();
                 new Thread() {
@@ -860,7 +913,7 @@ public class TelaJogo extends javax.swing.JFrame {
                                     botaoConectarVOIP.setEnabled(false);
                                 }
                             }
-                            
+
                         }
                     }
                 }.start();
@@ -886,7 +939,7 @@ public class TelaJogo extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> caixaFichasTexto;
     public static javax.swing.JComboBox<String> caixaMonstros;
     public static javax.swing.JComboBox<String> caixaNPC;
-    private javax.swing.JTextArea campoAnotacao;
+    private static javax.swing.JTextArea campoAnotacao;
     private javax.swing.JTextField campoEnviarTexto;
     private javax.swing.JButton dadoD10;
     private javax.swing.JButton dadoD100;
@@ -900,9 +953,9 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private static javax.swing.JLabel mapaLabel;
+    private static javax.swing.JLabel textoAnotacao;
     // End of variables declaration//GEN-END:variables
 }
