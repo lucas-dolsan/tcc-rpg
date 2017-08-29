@@ -236,7 +236,7 @@ private int transformarVidaEmInt() {
 
     private void botaoSalvarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarEdicaoActionPerformed
         if (campoNome.getText().equalsIgnoreCase(DAO.nomePersonagem)) {
-String nome = campoNome.getText();
+            String nome = campoNome.getText();
             if (nome == null) {
                 nome = " ";
             }
@@ -258,24 +258,24 @@ String nome = campoNome.getText();
             if (dao.personagemExiste(campoNome.getText())) {
                 nomeEmUso.setVisible(true);
             } else {
-            String nome = campoNome.getText();
-            if (nome == null) {
-                nome = " ";
-            }
-            int vida = transformarVidaEmInt();
-            int dano = transformarDanoEmInt();
-            int defesa = transformarDefesaEmInt();
-            String lore = campoLore.getText();
-            if (lore == null) {
-                lore = " ";
-            }
-            String funcao = campoFuncao.getText();
-            if (funcao == null) {
-                funcao = " ";
-            }
-            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", funcao, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "n");
-            dao.salvarEdicaoPersonagem(p);
-            this.dispose();
+                String nome = campoNome.getText();
+                if (nome == null) {
+                    nome = " ";
+                }
+                int vida = transformarVidaEmInt();
+                int dano = transformarDanoEmInt();
+                int defesa = transformarDefesaEmInt();
+                String lore = campoLore.getText();
+                if (lore == null) {
+                    lore = " ";
+                }
+                String funcao = campoFuncao.getText();
+                if (funcao == null) {
+                    funcao = " ";
+                }
+                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", funcao, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "n");
+                dao.salvarEdicaoPersonagem(p);
+                this.dispose();
             }
         }
     }//GEN-LAST:event_botaoSalvarEdicaoActionPerformed

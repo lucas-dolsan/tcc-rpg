@@ -10,17 +10,17 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PainelDeControle extends javax.swing.JFrame {
-    
+
     static DAO dao = new DAO();
     JFrame voipFrame = null;
     public boolean estadoVoip = false;
     public int port = 0;
-    
+
     public PainelDeControle() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -195,26 +195,31 @@ public class PainelDeControle extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCriarObjetosActionPerformed
 
     private void botaoMudarMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMudarMapaActionPerformed
-        JFileChooser escolherArquivo = new JFileChooser();
-        escolherArquivo.setMaximumSize(new java.awt.Dimension(800, 600));
-        escolherArquivo.setMinimumSize(new java.awt.Dimension(800, 600));
-        escolherArquivo.setPreferredSize(new java.awt.Dimension(800, 600));
-        FileFilter filter = new FileNameExtensionFilter("Imagens em JPEG", "jpg", "jpeg");
-        FileFilter filter2 = new FileNameExtensionFilter("Imagens em PNG", "png");
-        FileFilter filter3 = new FileNameExtensionFilter("Imagens em GIF", "gif");
-        escolherArquivo.addChoosableFileFilter(filter);
-        escolherArquivo.addChoosableFileFilter(filter2);
-        escolherArquivo.addChoosableFileFilter(filter3);
-        escolherArquivo.setAcceptAllFileFilterUsed(false);
-        escolherArquivo.setMultiSelectionEnabled(false);
-        int resultado = escolherArquivo.showOpenDialog(this);
-        if (resultado == escolherArquivo.CANCEL_OPTION) {
-            System.out.println("Escolha de arquivos cancelada");
-        } else {
-            String path = escolherArquivo.getSelectedFile().getPath();
-            System.out.println("Arquivo: [" + path + "] selecionado");
-            dao.uploadMapa(path);
-        }
+        new Thread() {
+            @Override
+            public void run() {
+                JFileChooser escolherArquivo = new JFileChooser();
+                escolherArquivo.setMaximumSize(new java.awt.Dimension(800, 600));
+                escolherArquivo.setMinimumSize(new java.awt.Dimension(800, 600));
+                escolherArquivo.setPreferredSize(new java.awt.Dimension(800, 600));
+                FileFilter filter = new FileNameExtensionFilter("Imagens em JPEG", "jpg", "jpeg");
+                FileFilter filter2 = new FileNameExtensionFilter("Imagens em PNG", "png");
+                FileFilter filter3 = new FileNameExtensionFilter("Imagens em GIF", "gif");
+                escolherArquivo.addChoosableFileFilter(filter);
+                escolherArquivo.addChoosableFileFilter(filter2);
+                escolherArquivo.addChoosableFileFilter(filter3);
+                escolherArquivo.setAcceptAllFileFilterUsed(false);
+                escolherArquivo.setMultiSelectionEnabled(false);
+                int resultado = escolherArquivo.showOpenDialog(null);
+                if (resultado == escolherArquivo.CANCEL_OPTION) {
+                    System.out.println("Escolha de arquivos cancelada");
+                } else {
+                    String path = escolherArquivo.getSelectedFile().getPath();
+                    System.out.println("Arquivo: [" + path + "] selecionado");
+                    dao.uploadMapa(path);
+                }
+            }
+        }.start();
     }//GEN-LAST:event_botaoMudarMapaActionPerformed
 
     private void caixaJogadoresFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaJogadoresFocusGained
@@ -235,9 +240,9 @@ public class PainelDeControle extends javax.swing.JFrame {
         TelaNPC telaNPC = new TelaNPC(this, true);
         telaNPC.botaoSalvar.setEnabled(true);
         telaNPC.setVisible(true);
-        
+
     }//GEN-LAST:event_botaoCriarNPCActionPerformed
-    
+
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -145,7 +145,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     private void entrarEmSala() {
-        if (!dao.isBanido(DAO.player.getPk_jogador(),dao.pegarPk_sala(caixaDeSalas.getSelectedItem().toString()))) {
+        if (!dao.isBanido(DAO.player.getPk_jogador(), dao.pegarPk_sala(caixaDeSalas.getSelectedItem().toString()))) {
             try {
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 String nomeSala = (caixaDeSalas.getSelectedItem().toString());
