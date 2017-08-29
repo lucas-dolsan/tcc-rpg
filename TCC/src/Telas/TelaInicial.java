@@ -70,6 +70,11 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoConfigurarConta.setBackground(new java.awt.Color(255, 255, 255));
         botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         botaoConfigurarConta.setText("Configurar Conta");
+        botaoConfigurarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoConfigurarContaActionPerformed(evt);
+            }
+        });
         botaoConfigurarConta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 botaoConfigurarContaKeyPressed(evt);
@@ -188,6 +193,10 @@ private void deslogar() {
             deslogar();
         }
     }//GEN-LAST:event_formKeyPressed
+
+    private void botaoConfigurarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfigurarContaActionPerformed
+ 
+    }//GEN-LAST:event_botaoConfigurarContaActionPerformed
 
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
