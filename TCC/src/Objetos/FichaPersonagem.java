@@ -22,11 +22,7 @@ public class FichaPersonagem {
     private int pontosSabedoria_fic;
     private int pontosCarisma_fic;
     private int pontosDefesa_fic;
-
-    @Override
-    public String toString() {
-        return "Personagem{" + "pk_personagem=" + pk_personagem + ", fk_sala=" + fk_sala + ", outrosAtributos_fic=" + outrosAtributos_fic + ", lore_fic=" + lore_fic + ", raca_fic=" + raca_fic + ", classe_fic=" + classe_fic + ", nomePersonagem_fic=" + nomePersonagem_fic + ", nomeJogador_fic=" + nomeJogador_fic + ", divindade_fic=" + divindade_fic + ", nivel_fic=" + nivel_fic + ", idade_fic=" + idade_fic + ", pontosVida_fic=" + pontosVida_fic + ", pontosMana_fic=" + pontosMana_fic + ", pontosForca_fic=" + pontosForca_fic + ", pontosConstituicao_fic=" + pontosConstituicao_fic + ", pontosDestreza_fic=" + pontosDestreza_fic + ", pontosInteligencia_fic=" + pontosInteligencia_fic + ", pontosSabedoria_fic=" + pontosSabedoria_fic + ", pontosCarisma_fic=" + pontosCarisma_fic + ", pontosDefesa_fic=" + pontosDefesa_fic + '}';
-    }
+    private String tipo_fi;
 
     public int getPk_personagem() {
         return pk_personagem;
@@ -191,7 +187,15 @@ public class FichaPersonagem {
     public FichaPersonagem() {
     }
 
-    public FichaPersonagem(int fk_sala, String outrosAtributos_fic, String lore_fic, String raca_fic, String classe_fic, String nomePersonagem_fic, String nomeJogador_fic, String divindade_fic, int nivel_fic, int idade_fic, int pontosVida_fic, int pontosMana_fic, int pontosForca_fic, int pontosConstituicao_fic, int pontosDestreza_fic, int pontosInteligencia_fic, int pontosSabedoria_fic, int pontosCarisma_fic, int pontosDefesa_fic) {
+    public String getTipo_fi() {
+        return tipo_fi;
+    }
+
+    public void setTipo_fi(String tipo_fi) {
+        this.tipo_fi = tipo_fi;
+    }
+
+    public FichaPersonagem(int fk_sala, String outrosAtributos_fic, String lore_fic, String raca_fic, String classe_fic, String nomePersonagem_fic, String nomeJogador_fic, String divindade_fic, int nivel_fic, int idade_fic, int pontosVida_fic, int pontosMana_fic, int pontosForca_fic, int pontosConstituicao_fic, int pontosDestreza_fic, int pontosInteligencia_fic, int pontosSabedoria_fic, int pontosCarisma_fic, int pontosDefesa_fic, String tipo_fi) {
         this.fk_sala = fk_sala;
         this.outrosAtributos_fic = outrosAtributos_fic;
         this.lore_fic = lore_fic;
@@ -211,5 +215,7 @@ public class FichaPersonagem {
         this.pontosSabedoria_fic = pontosSabedoria_fic;
         this.pontosCarisma_fic = pontosCarisma_fic;
         this.pontosDefesa_fic = pontosDefesa_fic;
+        this.tipo_fi = tipo_fi;
     }
+
 }

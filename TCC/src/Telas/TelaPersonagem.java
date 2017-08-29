@@ -449,7 +449,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             int destreza = transformarDestrezaEmInt();
             int carisma = transformarCarismaEmInt();
             if (!aux) {
-                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa);
+                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa,"p");
                 dao.criarPersonagem(p);
                 this.dispose();
             }
@@ -498,7 +498,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
             int sabedoria = transformarSabedoriaEmInt();
             int destreza = transformarDestrezaEmInt();
             int carisma = transformarCarismaEmInt();
-            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa);
+            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa,"p");
             dao.salvarEdicaoPersonagem(p);
             this.dispose();
         } else {
@@ -544,7 +544,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
                 int sabedoria = transformarSabedoriaEmInt();
                 int destreza = transformarDestrezaEmInt();
                 int carisma = transformarCarismaEmInt();
-                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa);
+                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), outrosAtributos, lore, raca, classe, nomePersonagem, nomeJogador, divindade, nivel, idade, vida, mana, forca, constituicao, destreza, inteligencia, sabedoria, carisma, defesa,"p");
                 dao.salvarEdicaoPersonagem(p);
                 this.dispose();
             }

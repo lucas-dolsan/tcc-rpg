@@ -10,17 +10,17 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PainelDeControle extends javax.swing.JFrame {
-
+    
     static DAO dao = new DAO();
     JFrame voipFrame = null;
     public boolean estadoVoip = false;
     public int port = 0;
-
+    
     public PainelDeControle() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,6 +123,11 @@ public class PainelDeControle extends javax.swing.JFrame {
 
         botaoCriarNPC.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoCriarNPC.setText("CRIAR NPC");
+        botaoCriarNPC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarNPCActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoCriarNPC);
         botaoCriarNPC.setBounds(10, 200, 210, 30);
 
@@ -157,7 +162,7 @@ public class PainelDeControle extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     try {
-                        TelaJogo.jButton1.setEnabled(false);
+                        TelaJogo.botaoConectarVOIP.setEnabled(false);
                         voipFrame = new ServerRunner(port);
                         voipFrame.setVisible(false);
                         JFrame telaSom = new TelaConfigurarSom();
@@ -169,7 +174,7 @@ public class PainelDeControle extends javax.swing.JFrame {
             }.start();
             estadoVoip = true;
             jButton2.setText("DESLIGAR VOIP (ON)");
-            TelaJogo.jButton1.setEnabled(false);
+            TelaJogo.botaoConectarVOIP.setEnabled(false);
             dao.alterarPorta(port, TelaConfigurarSala.nomeSala);
             dao.alterarVOIP(1);
         } else {
@@ -178,7 +183,7 @@ public class PainelDeControle extends javax.swing.JFrame {
             voipFrame.setVisible(false);
             voipFrame.dispose();
             jButton2.setText("LIGAR VOIP (OFF)");
-            TelaJogo.jButton1.setEnabled(true);
+            TelaJogo.botaoConectarVOIP.setEnabled(true);
             dao.alterarVOIP(0);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -226,6 +231,13 @@ public class PainelDeControle extends javax.swing.JFrame {
         dao.AlterarEstadoBan(0, dao.pegarPk_jogador(caixaJogadores.getSelectedItem().toString()), DAO.salaAtual.getPk_sala());
     }//GEN-LAST:event_botaoDesbanirActionPerformed
 
+    private void botaoCriarNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarNPCActionPerformed
+        TelaNPC telaNPC = new TelaNPC(this, true);
+        telaNPC.botaoSalvar.setEnabled(true);
+        telaNPC.setVisible(true);
+        
+    }//GEN-LAST:event_botaoCriarNPCActionPerformed
+    
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

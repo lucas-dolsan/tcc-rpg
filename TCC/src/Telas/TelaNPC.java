@@ -1,10 +1,16 @@
 package Telas;
 
+import ConexaoBanco.DAO;
+import Objetos.FichaPersonagem;
+
 public class TelaNPC extends javax.swing.JDialog {
+
+    DAO dao = new DAO();
 
     public TelaNPC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        nomeEmUso.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +38,8 @@ public class TelaNPC extends javax.swing.JDialog {
         botaoSalvar = new javax.swing.JButton();
         botaoExcluir = new javax.swing.JButton();
         botaoMatarNPC = new javax.swing.JButton();
+        botaoSalvarEdicao = new javax.swing.JButton();
+        nomeEmUso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(440, 590));
@@ -116,39 +124,110 @@ public class TelaNPC extends javax.swing.JDialog {
 
         botaAdicionarImagem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaAdicionarImagem.setText("ADICIONAR IMAGEM");
+        botaAdicionarImagem.setEnabled(false);
         getContentPane().add(botaAdicionarImagem);
         botaAdicionarImagem.setBounds(10, 523, 150, 30);
 
         botaoSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoSalvar.setText("SALVAR");
+        botaoSalvar.setEnabled(false);
+        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSalvarActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoSalvar);
         botaoSalvar.setBounds(351, 523, 80, 30);
 
         botaoExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoExcluir.setText("EXCLUIR");
+        botaoExcluir.setEnabled(false);
         getContentPane().add(botaoExcluir);
         botaoExcluir.setBounds(270, 523, 80, 30);
 
         botaoMatarNPC.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoMatarNPC.setText("MATAR NPC");
+        botaoMatarNPC.setEnabled(false);
         getContentPane().add(botaoMatarNPC);
         botaoMatarNPC.setBounds(160, 523, 110, 30);
+
+        botaoSalvarEdicao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        botaoSalvarEdicao.setText("SALVAR");
+        getContentPane().add(botaoSalvarEdicao);
+        botaoSalvarEdicao.setBounds(351, 523, 80, 30);
+
+        nomeEmUso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        nomeEmUso.setForeground(new java.awt.Color(255, 0, 0));
+        nomeEmUso.setText("Nome de personagem já em uso!");
+        getContentPane().add(nomeEmUso);
+        nomeEmUso.setBounds(170, 290, 260, 20);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+private int transformarVidaEmInt() {
+        if (campoVida.getText() == null) {
+            return 0;
+        } else {
+            String vida = campoVida.getText();
+            return Integer.parseInt(vida);
+        }
+    }
+
+    private int transformarDanoEmInt() {
+        if (campoDano.getText() == null) {
+            return 0;
+        } else {
+            String dano = campoDano.getText();
+            return Integer.parseInt(dano);
+        }
+    }
+
+    private int transformarDefesaEmInt() {
+        if (campoDefesa.getText() == null) {
+            return 0;
+        } else {
+            String defesa = campoDefesa.getText();
+            return Integer.parseInt(defesa);
+        }
+    }
+    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
+        if (dao.personagemExiste(campoNome.getText())) {
+            nomeEmUso.setVisible(true);
+        } else {
+            String nome = campoNome.getText();
+            if (nome == null) {
+                nome = " ";
+            }
+            int vida = transformarVidaEmInt();
+            int dano = transformarDanoEmInt();
+            int defesa = transformarDefesaEmInt();
+            String lore = campoLore.getText();
+            if (lore == null) {
+                lore = " ";
+            }
+            String funcao = campoFuncao.getText();
+            if (funcao == null) {
+                funcao = " ";
+            }
+            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", funcao, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "n");
+            dao.criarPersonagem(p);
+            this.dispose();
+        }
+    }//GEN-LAST:event_botaoSalvarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaAdicionarImagem;
-    private javax.swing.JButton botaoExcluir;
-    private javax.swing.JButton botaoMatarNPC;
-    private javax.swing.JButton botaoSalvar;
-    private javax.swing.JTextField campoDano;
-    private javax.swing.JTextField campoDefesa;
-    private javax.swing.JTextField campoFuncao;
-    private javax.swing.JTextArea campoLore;
-    private javax.swing.JTextField campoNome;
-    private javax.swing.JTextField campoVida;
+    public javax.swing.JButton botaAdicionarImagem;
+    public javax.swing.JButton botaoExcluir;
+    public javax.swing.JButton botaoMatarNPC;
+    public static javax.swing.JButton botaoSalvar;
+    public javax.swing.JButton botaoSalvarEdicao;
+    public javax.swing.JTextField campoDano;
+    public javax.swing.JTextField campoDefesa;
+    public javax.swing.JTextField campoFuncao;
+    public javax.swing.JTextArea campoLore;
+    public javax.swing.JTextField campoNome;
+    public javax.swing.JTextField campoVida;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -159,6 +238,7 @@ public class TelaNPC extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelImagem;
+    private javax.swing.JLabel nomeEmUso;
     private javax.swing.JTable tabelaNPC;
     // End of variables declaration//GEN-END:variables
 }

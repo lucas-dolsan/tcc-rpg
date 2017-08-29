@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
-
+    
     static DAO dao = new DAO();
     public static PainelDeControle painel = null;
     public static ImageIcon imagemIcone = null;
-
+    
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(true);
@@ -28,7 +28,7 @@ public class TelaJogo extends javax.swing.JFrame {
         campoEnviarTexto.requestFocus();
         dao.associarJogadorASala();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,7 +45,7 @@ public class TelaJogo extends javax.swing.JFrame {
         dadoD10 = new javax.swing.JButton();
         dadoD20 = new javax.swing.JButton();
         dadoD100 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        botaoConectarVOIP = new javax.swing.JButton();
         botaoDadoPersonalizado = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         caixaFichasTexto = new javax.swing.JComboBox<>();
@@ -57,10 +57,10 @@ public class TelaJogo extends javax.swing.JFrame {
         botaoCriarPersonagem = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         caixaNPC = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        botaoVisualizarNPC = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         caixaMonstros = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        botaoVisualizarMonstro = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         mapaLabel = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -271,22 +271,22 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(dadoD100);
         dadoD100.setBounds(620, 510, 60, 60);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoMic.png"))); // NOI18N
-        jButton1.setText("Juntar-se à conversa");
-        jButton1.setToolTipText("AVISO: Você só poderá se comunicar com jogadores na sua rede local .");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoConectarVOIP.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        botaoConectarVOIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoMic.png"))); // NOI18N
+        botaoConectarVOIP.setText("Juntar-se à conversa");
+        botaoConectarVOIP.setToolTipText("AVISO: Você só poderá se comunicar com jogadores na sua rede local .");
+        botaoConectarVOIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoConectarVOIPActionPerformed(evt);
             }
         });
-        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+        botaoConectarVOIP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton1KeyPressed(evt);
+                botaoConectarVOIPKeyPressed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(760, 520, 210, 40);
+        getContentPane().add(botaoConectarVOIP);
+        botaoConectarVOIP.setBounds(760, 520, 210, 40);
 
         botaoDadoPersonalizado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/dice-multiple.png"))); // NOI18N
         botaoDadoPersonalizado.setToolTipText("Rodar dado com valor personalizado!");
@@ -373,36 +373,43 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(10, 270, 240, 20);
 
+        caixaNPC.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        caixaNPC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                caixaNPCFocusGained(evt);
+            }
+        });
         getContentPane().add(caixaNPC);
         caixaNPC.setBounds(10, 290, 240, 30);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton2.setText("VISUALIZAR NPC");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoVisualizarNPC.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        botaoVisualizarNPC.setText("VISUALIZAR NPC");
+        botaoVisualizarNPC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoVisualizarNPCActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(10, 330, 240, 30);
+        getContentPane().add(botaoVisualizarNPC);
+        botaoVisualizarNPC.setBounds(10, 330, 240, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setText("MONSTROS:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(10, 370, 240, 20);
 
+        caixaMonstros.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         getContentPane().add(caixaMonstros);
         caixaMonstros.setBounds(10, 390, 240, 30);
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton3.setText("VISUALIZAR MONSTRO");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botaoVisualizarMonstro.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        botaoVisualizarMonstro.setText("VISUALIZAR MONSTRO");
+        botaoVisualizarMonstro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botaoVisualizarMonstroActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(10, 430, 240, 30);
+        getContentPane().add(botaoVisualizarMonstro);
+        botaoVisualizarMonstro.setBounds(10, 430, 240, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel5.setText("MAPA DA AVENTURA:");
@@ -468,7 +475,7 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.mensagemSairDaSala();
         }
     }
-
+    
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
@@ -498,7 +505,7 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.enviarChatBanco(texto);
             campoEnviarTexto.setText("");
         }
-
+        
     }
     private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
         enviarTexto();
@@ -642,7 +649,7 @@ public class TelaJogo extends javax.swing.JFrame {
         dao.mensagemSairDaSala();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoConectarVOIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConectarVOIPActionPerformed
         if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
             JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -652,11 +659,11 @@ public class TelaJogo extends javax.swing.JFrame {
             if (!painel.estadoVoip) {
                 JFrame telaSom = new TelaConfigurarSom();
                 telaSom.setVisible(true);
-                jButton1.setEnabled(false);
+                botaoConectarVOIP.setEnabled(false);
             } else {
-                jButton1.setEnabled(false);
+                botaoConectarVOIP.setEnabled(false);
             }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaoConectarVOIPActionPerformed
     }
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -664,14 +671,14 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formKeyPressed
 
-    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+    private void botaoConectarVOIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoConectarVOIPKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             JFrame telaSom = new TelaConfigurarSom();
             telaSom.setVisible(true);
         } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             popupSairSala();;
         }
-    }//GEN-LAST:event_jButton1KeyPressed
+    }//GEN-LAST:event_botaoConectarVOIPKeyPressed
 
     private void botaoDadoPersonalizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDadoPersonalizadoActionPerformed
         TelaRolarCustomizado tela = new TelaRolarCustomizado(this, true);
@@ -765,18 +772,17 @@ public class TelaJogo extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_mapaLabelMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botaoVisualizarNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarNPCActionPerformed
         if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
             JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             TelaInicial.Start();
         } else {
-            // TODO add your handling code here:
-            System.out.println("em construção");
+            dao.pegarDadosNPC(caixaNPC.getSelectedItem().toString());
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botaoVisualizarNPCActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botaoVisualizarMonstroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVisualizarMonstroActionPerformed
         if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
             JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -785,7 +791,7 @@ public class TelaJogo extends javax.swing.JFrame {
             // TODO add your handling code here:
             System.out.println("em construção");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botaoVisualizarMonstroActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
@@ -793,17 +799,22 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
         } else {
-        // TODO add your handling code here:
+            // TODO add your handling code here:
             System.out.println("em construção");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void caixaNPCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaNPCFocusGained
+        caixaNPC.removeAllItems();
+        dao.listarNPC();
+    }//GEN-LAST:event_caixaNPCFocusGained
+    
     public static void Start(boolean dono) {
         if (dono) {
             DAO.donoDaSala = true;
         }
         painel = new PainelDeControle();
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
@@ -814,12 +825,12 @@ public class TelaJogo extends javax.swing.JFrame {
                 } else {
                     painel.dispose();
                 }
-
+                
                 new Thread() {
                     public void run() {
                         atualizarMapa();
                     }
-
+                    
                 }.start();
                 new Thread() {
                     @Override
@@ -844,12 +855,12 @@ public class TelaJogo extends javax.swing.JFrame {
                             painel.port = dao.pegarPorta(TelaConfigurarSala.nomeSala);
                             if (!(DAO.player.getPk_jogador() == DAO.salaAtual.getFk_jogador())) {
                                 if (dao.isVOIPAtivado(DAO.salaAtual.getNome_sala())) {
-                                    jButton1.setEnabled(true);
+                                    botaoConectarVOIP.setEnabled(true);
                                 } else {
-                                    jButton1.setEnabled(false);
+                                    botaoConectarVOIP.setEnabled(false);
                                 }
                             }
-
+                            
                         }
                     }
                 }.start();
@@ -860,6 +871,7 @@ public class TelaJogo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextArea areaDeChat;
     private javax.swing.JButton botaoAtualizarMapa;
+    public static javax.swing.JButton botaoConectarVOIP;
     private javax.swing.JButton botaoCriarFicha;
     private javax.swing.JButton botaoCriarPersonagem;
     private javax.swing.JButton botaoDadoPersonalizado;
@@ -867,11 +879,13 @@ public class TelaJogo extends javax.swing.JFrame {
     public static javax.swing.JButton botaoFecharSala;
     private javax.swing.JButton botaoSairDaSala;
     private javax.swing.JButton botaoVisualizarFicha;
+    private javax.swing.JButton botaoVisualizarMonstro;
+    private javax.swing.JButton botaoVisualizarNPC;
     private javax.swing.JButton botaoVisualizarPersonagem;
     public static javax.swing.JComboBox<String> caixaFichaPersonagem;
     public static javax.swing.JComboBox<String> caixaFichasTexto;
-    private javax.swing.JComboBox<String> caixaMonstros;
-    private javax.swing.JComboBox<String> caixaNPC;
+    public static javax.swing.JComboBox<String> caixaMonstros;
+    public static javax.swing.JComboBox<String> caixaNPC;
     private javax.swing.JTextArea campoAnotacao;
     private javax.swing.JTextField campoEnviarTexto;
     private javax.swing.JButton dadoD10;
@@ -880,9 +894,6 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JButton dadoD4;
     private javax.swing.JButton dadoD6;
     private javax.swing.JButton dadoD8;
-    public static javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
