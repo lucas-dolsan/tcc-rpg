@@ -2,6 +2,15 @@ package Telas;
 
 import ConexaoBanco.DAO;
 import Objetos.FichaPersonagem;
+import static Telas.TelaJogo.imagemIcone;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class TelaNPC extends javax.swing.JDialog {
 
@@ -36,21 +45,25 @@ public class TelaNPC extends javax.swing.JDialog {
         campoLore = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabelaNPC = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         botaAdicionarImagem = new javax.swing.JButton();
         botaoSalvar = new javax.swing.JButton();
         botaoExcluir = new javax.swing.JButton();
         botaoMatarNPC = new javax.swing.JButton();
         botaoSalvarEdicao = new javax.swing.JButton();
         nomeEmUso = new javax.swing.JLabel();
+        botaoAtualizarIMG = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(440, 590));
-        setMinimumSize(new java.awt.Dimension(440, 590));
-        setPreferredSize(new java.awt.Dimension(440, 590));
+        setTitle("NPC: "+DAO.nomePersonagem
+        );
+        setMaximumSize(new java.awt.Dimension(440, 640));
+        setMinimumSize(new java.awt.Dimension(440, 640));
+        setPreferredSize(new java.awt.Dimension(440, 640));
         setResizable(false);
         getContentPane().setLayout(null);
 
+        labelImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelImagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(labelImagem);
         labelImagem.setBounds(10, 11, 150, 280);
@@ -107,29 +120,51 @@ public class TelaNPC extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("ITENS:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(10, 290, 150, 30);
+        jLabel8.setBounds(10, 330, 150, 30);
 
-        tabelaNPC.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id","Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
             }
         ));
-        jScrollPane2.setViewportView(tabelaNPC);
+        tabela.setEnabled(false);
+        tabela.setRowHeight(52);
+        jScrollPane2.setViewportView(tabela);
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = tabela.rowAtPoint(evt.getPoint());
+                if (row >= 0 && DAO.donoDaSala) {
+                    String url = tabela.getValueAt(row, 0).toString();
+                    if(url.contains("weapon")){
+                        System.out.println("weapon");
+                    }
+                    if(url.contains("armadura")){
+                        System.out.println("armadura");
+                    }
+                    if(url.contains("item")){
+                        System.out.println("item");
+                    }
+
+                }
+            }
+        });
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 320, 420, 200);
+        jScrollPane2.setBounds(10, 360, 420, 220);
 
         botaAdicionarImagem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaAdicionarImagem.setText("ADICIONAR IMAGEM");
         botaAdicionarImagem.setEnabled(false);
+        botaAdicionarImagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaAdicionarImagemActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaAdicionarImagem);
-        botaAdicionarImagem.setBounds(10, 523, 150, 30);
+        botaAdicionarImagem.setBounds(10, 580, 150, 30);
 
         botaoSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoSalvar.setText("SALVAR");
@@ -140,7 +175,7 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoSalvar);
-        botaoSalvar.setBounds(351, 523, 80, 30);
+        botaoSalvar.setBounds(350, 580, 80, 30);
 
         botaoExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoExcluir.setText("EXCLUIR");
@@ -151,13 +186,18 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoExcluir);
-        botaoExcluir.setBounds(270, 523, 80, 30);
+        botaoExcluir.setBounds(270, 580, 80, 30);
 
         botaoMatarNPC.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoMatarNPC.setText("MATAR NPC");
         botaoMatarNPC.setEnabled(false);
+        botaoMatarNPC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoMatarNPCActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoMatarNPC);
-        botaoMatarNPC.setBounds(160, 523, 110, 30);
+        botaoMatarNPC.setBounds(160, 580, 110, 30);
 
         botaoSalvarEdicao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoSalvarEdicao.setText("SALVAR");
@@ -167,13 +207,23 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoSalvarEdicao);
-        botaoSalvarEdicao.setBounds(351, 523, 80, 30);
+        botaoSalvarEdicao.setBounds(350, 580, 80, 30);
 
         nomeEmUso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nomeEmUso.setForeground(new java.awt.Color(255, 0, 0));
         nomeEmUso.setText("Nome de personagem já em uso!");
         getContentPane().add(nomeEmUso);
         nomeEmUso.setBounds(170, 290, 260, 20);
+
+        botaoAtualizarIMG.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        botaoAtualizarIMG.setText("ATUALIZAR IMAGEM");
+        botaoAtualizarIMG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAtualizarIMGActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botaoAtualizarIMG);
+        botaoAtualizarIMG.setBounds(10, 293, 150, 29);
 
         pack();
         setLocationRelativeTo(null);
@@ -280,8 +330,59 @@ private int transformarVidaEmInt() {
         }
     }//GEN-LAST:event_botaoSalvarEdicaoActionPerformed
 
+    private void botaAdicionarImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaAdicionarImagemActionPerformed
+        new Thread() {
+            @Override
+            public void run() {
+                JFileChooser escolherArquivo = new JFileChooser();
+                escolherArquivo.setMaximumSize(new java.awt.Dimension(800, 600));
+                escolherArquivo.setMinimumSize(new java.awt.Dimension(800, 600));
+                escolherArquivo.setPreferredSize(new java.awt.Dimension(800, 600));
+                FileFilter filter = new FileNameExtensionFilter("Imagens em JPEG", "jpg", "jpeg");
+                FileFilter filter2 = new FileNameExtensionFilter("Imagens em PNG", "png");
+                FileFilter filter3 = new FileNameExtensionFilter("Imagens em GIF", "gif");
+                escolherArquivo.addChoosableFileFilter(filter);
+                escolherArquivo.addChoosableFileFilter(filter2);
+                escolherArquivo.addChoosableFileFilter(filter3);
+                escolherArquivo.setAcceptAllFileFilterUsed(false);
+                escolherArquivo.setMultiSelectionEnabled(false);
+                int resultado = escolherArquivo.showOpenDialog(null);
+                if (resultado == escolherArquivo.CANCEL_OPTION) {
+                    System.out.println("Escolha de arquivos cancelada");
+                } else {
+                    String path = escolherArquivo.getSelectedFile().getPath();
+                    System.out.println("Arquivo: [" + path + "] selecionado");
+                    dao.uploadNPC(path);
+                }
+            }
+        }.start();
+    }//GEN-LAST:event_botaAdicionarImagemActionPerformed
+
+    private void botaoMatarNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMatarNPCActionPerformed
+
+    }//GEN-LAST:event_botaoMatarNPCActionPerformed
+
+    private void botaoAtualizarIMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarIMGActionPerformed
+        new Thread() {
+            @Override
+            public void run() {
+                if (dao.verificarImagemNPCExiste()) {
+                    try {
+                        BufferedImage imagem = ImageIO.read(dao.downloadImagemNPC().getBinaryStream());
+                        imagemIcone = new ImageIcon(imagem);
+                        labelImagem.setIcon(imagemIcone);
+                    } catch (SQLException | IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+
+        }.start();
+    }//GEN-LAST:event_botaoAtualizarIMGActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton botaAdicionarImagem;
+    private javax.swing.JButton botaoAtualizarIMG;
     public javax.swing.JButton botaoExcluir;
     public javax.swing.JButton botaoMatarNPC;
     public static javax.swing.JButton botaoSalvar;
@@ -301,8 +402,8 @@ private int transformarVidaEmInt() {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelImagem;
+    public javax.swing.JLabel labelImagem;
     private javax.swing.JLabel nomeEmUso;
-    private javax.swing.JTable tabelaNPC;
+    public static javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }
