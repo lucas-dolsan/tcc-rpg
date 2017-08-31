@@ -10,17 +10,17 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PainelDeControle extends javax.swing.JFrame {
-
+    
     static DAO dao = new DAO();
     JFrame voipFrame = null;
     public boolean estadoVoip = false;
     public int port = 0;
-
+    
     public PainelDeControle() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -239,10 +239,11 @@ public class PainelDeControle extends javax.swing.JFrame {
     private void botaoCriarNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarNPCActionPerformed
         TelaNPC telaNPC = new TelaNPC(this, true);
         telaNPC.botaoSalvar.setEnabled(true);
+        telaNPC.botaAdicionarImagem.setEnabled(false);
         telaNPC.setVisible(true);
 
     }//GEN-LAST:event_botaoCriarNPCActionPerformed
-
+    
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

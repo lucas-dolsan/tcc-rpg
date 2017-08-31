@@ -68,7 +68,7 @@ public class TelaConfigurarConta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(confirmar);
-        confirmar.setBounds(280, 250, 150, 40);
+        confirmar.setBounds(280, 240, 150, 40);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton2.setText("CANCELAR");
@@ -78,7 +78,7 @@ public class TelaConfigurarConta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(30, 250, 150, 40);
+        jButton2.setBounds(30, 240, 150, 40);
 
         pack();
         setLocationRelativeTo(null);
