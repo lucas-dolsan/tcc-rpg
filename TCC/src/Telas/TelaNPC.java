@@ -57,9 +57,9 @@ public class TelaNPC extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("NPC: "+DAO.nomePersonagem
         );
-        setMaximumSize(new java.awt.Dimension(440, 640));
-        setMinimumSize(new java.awt.Dimension(440, 640));
-        setPreferredSize(new java.awt.Dimension(440, 640));
+        setMaximumSize(new java.awt.Dimension(500, 655));
+        setMinimumSize(new java.awt.Dimension(500, 655));
+        setPreferredSize(new java.awt.Dimension(500, 655));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -73,35 +73,35 @@ public class TelaNPC extends javax.swing.JDialog {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(170, 0, 220, 30);
         getContentPane().add(campoNome);
-        campoNome.setBounds(170, 30, 260, 30);
+        campoNome.setBounds(170, 30, 320, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("FUNÇÃO:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(170, 60, 260, 20);
         getContentPane().add(campoFuncao);
-        campoFuncao.setBounds(170, 80, 260, 30);
+        campoFuncao.setBounds(170, 80, 320, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("VIDA:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(170, 110, 80, 20);
         getContentPane().add(campoVida);
-        campoVida.setBounds(170, 130, 80, 30);
+        campoVida.setBounds(170, 130, 90, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("DANO:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(260, 110, 80, 20);
+        jLabel5.setBounds(290, 110, 80, 20);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("DEFESA:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(350, 110, 80, 20);
+        jLabel6.setBounds(410, 110, 80, 20);
         getContentPane().add(campoDano);
-        campoDano.setBounds(260, 130, 80, 30);
+        campoDano.setBounds(290, 130, 90, 30);
         getContentPane().add(campoDefesa);
-        campoDefesa.setBounds(350, 130, 80, 30);
+        campoDefesa.setBounds(400, 130, 90, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("LORE:");
@@ -115,37 +115,81 @@ public class TelaNPC extends javax.swing.JDialog {
         campoLore.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(170, 180, 260, 110);
+        jScrollPane1.setBounds(170, 180, 320, 110);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("ITENS:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(10, 330, 150, 30);
+        jLabel8.setBounds(10, 320, 150, 20);
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
             new String [] {
-                "Id","Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
+                "Id","Quant.","Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
             }
         ));
+        tabela.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabela.setEnabled(false);
         tabela.setRowHeight(52);
         jScrollPane2.setViewportView(tabela);
+        tabela.getColumnModel().getColumn(0).setMaxWidth(30);
+        tabela.getColumnModel().getColumn(0).setMinWidth(30);
+        tabela.getColumnModel().getColumn(1).setMinWidth(40);
+        tabela.getColumnModel().getColumn(1).setMinWidth(40);
+        tabela.getColumnModel().getColumn(2).setMaxWidth(52);
+        tabela.getColumnModel().getColumn(2).setMinWidth(52);
+        tabela.getColumnModel().getColumn(3).setMaxWidth(100);
+        tabela.getColumnModel().getColumn(3).setMinWidth(100);
+        tabela.getColumnModel().getColumn(4).setMaxWidth(90);
+        tabela.getColumnModel().getColumn(4).setMinWidth(90);
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = tabela.rowAtPoint(evt.getPoint());
-                if (row >= 0 && DAO.donoDaSala) {
-                    String url = tabela.getValueAt(row, 0).toString();
+                if (row >= 0&&DAO.donoDaSala) {
+                    String url = tabela.getValueAt(row, 2).toString();
                     if(url.contains("weapon")){
-                        System.out.println("weapon");
+                        String aux = tabela.getValueAt(row, 0).toString();
+                        int id = Integer.parseInt(aux);
+                        TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),1,id);
+                        telaVisualizarObjeto.setVisible(true);
+                        try{
+                            tabela.removeAll();
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        dao.listarArmasNPC();
+                        dao.listarArmadurasNPC();
+                        dao.listarItensNPC();
                     }
                     if(url.contains("armadura")){
-                        System.out.println("armadura");
+                        String aux = tabela.getValueAt(row, 0).toString();
+                        int id = Integer.parseInt(aux);
+                        TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),2,id);
+                        telaVisualizarObjeto.setVisible(true);
+                        try{
+                            tabela.removeAll();
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        dao.listarArmasNPC();
+                        dao.listarArmadurasNPC();
+                        dao.listarItensNPC();
                     }
                     if(url.contains("item")){
-                        System.out.println("item");
+                        String aux = tabela.getValueAt(row, 0).toString();
+                        int id = Integer.parseInt(aux);
+                        TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),3,id);
+                        telaVisualizarObjeto.setVisible(true);
+                        try{
+                            tabela.removeAll();
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        dao.listarArmasNPC();
+                        dao.listarArmadurasNPC();
+                        dao.listarItensNPC();
                     }
 
                 }
@@ -153,7 +197,7 @@ public class TelaNPC extends javax.swing.JDialog {
         });
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 360, 420, 220);
+        jScrollPane2.setBounds(10, 340, 480, 240);
 
         botaAdicionarImagem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaAdicionarImagem.setText("ADICIONAR IMAGEM");
@@ -164,7 +208,7 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaAdicionarImagem);
-        botaAdicionarImagem.setBounds(10, 580, 150, 30);
+        botaAdicionarImagem.setBounds(83, 590, 147, 30);
 
         botaoSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoSalvar.setText("SALVAR");
@@ -175,7 +219,7 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoSalvar);
-        botaoSalvar.setBounds(350, 580, 80, 30);
+        botaoSalvar.setBounds(410, 590, 80, 30);
 
         botaoExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoExcluir.setText("EXCLUIR");
@@ -186,7 +230,7 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoExcluir);
-        botaoExcluir.setBounds(270, 580, 80, 30);
+        botaoExcluir.setBounds(330, 590, 80, 30);
 
         botaoMatarNPC.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoMatarNPC.setText("MATAR NPC");
@@ -197,7 +241,7 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoMatarNPC);
-        botaoMatarNPC.setBounds(160, 580, 110, 30);
+        botaoMatarNPC.setBounds(230, 590, 100, 30);
 
         botaoSalvarEdicao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoSalvarEdicao.setText("SALVAR");
@@ -207,7 +251,7 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoSalvarEdicao);
-        botaoSalvarEdicao.setBounds(350, 580, 80, 30);
+        botaoSalvarEdicao.setBounds(410, 590, 80, 30);
 
         nomeEmUso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nomeEmUso.setForeground(new java.awt.Color(255, 0, 0));

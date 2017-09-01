@@ -1,7 +1,6 @@
 package Telas;
 
 import ConexaoBanco.DAO;
-import Objetos.Jogador;
 import ServidorVoIP.ServerRunner;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -10,17 +9,17 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PainelDeControle extends javax.swing.JFrame {
-    
+
     static DAO dao = new DAO();
     JFrame voipFrame = null;
     public boolean estadoVoip = false;
     public int port = 0;
-    
+
     public PainelDeControle() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -223,9 +222,14 @@ public class PainelDeControle extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoMudarMapaActionPerformed
 
     private void caixaJogadoresFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaJogadoresFocusGained
-        caixaJogadores.removeAllItems();
-        dao.jogadoresAtuais.clear();
-        dao.pegarJogadoresDaSala();
+        new Thread() {
+            @Override
+            public void run() {
+                caixaJogadores.removeAllItems();
+                dao.jogadoresAtuais.clear();
+                dao.pegarJogadoresDaSala();
+            }
+        }.start();
     }//GEN-LAST:event_caixaJogadoresFocusGained
 
     private void botaoBanirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBanirActionPerformed
@@ -243,7 +247,7 @@ public class PainelDeControle extends javax.swing.JFrame {
         telaNPC.setVisible(true);
 
     }//GEN-LAST:event_botaoCriarNPCActionPerformed
-    
+
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

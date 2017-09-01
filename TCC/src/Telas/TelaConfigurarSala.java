@@ -33,15 +33,16 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Configurar sala");
         setBounds(new java.awt.Rectangle(400, 355, 355, 355));
-        setMaximumSize(new java.awt.Dimension(400, 355));
-        setMinimumSize(new java.awt.Dimension(400, 355));
+        setMaximumSize(new java.awt.Dimension(400, 275));
+        setMinimumSize(new java.awt.Dimension(400, 275));
+        setPreferredSize(new java.awt.Dimension(400, 275));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setText("NOME DA SALA:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 20, 340, 30);
+        jLabel2.setBounds(30, 10, 340, 30);
 
         campoNomeSala.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         campoNomeSala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -51,18 +52,18 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoNomeSala);
-        campoNomeSala.setBounds(30, 50, 340, 40);
+        campoNomeSala.setBounds(30, 40, 340, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setText("SENHA DA SALA (OPCIONAL): ");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 120, 340, 30);
+        jLabel3.setBounds(30, 100, 340, 30);
 
         erroSalaExistente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroSalaExistente.setForeground(new java.awt.Color(204, 0, 0));
         erroSalaExistente.setText("Sala com esse nome já existente!");
         getContentPane().add(erroSalaExistente);
-        erroSalaExistente.setBounds(30, 190, 340, 20);
+        erroSalaExistente.setBounds(30, 170, 340, 20);
 
         campoSenhaSala.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         campoSenhaSala.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -72,7 +73,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoSenhaSala);
-        campoSenhaSala.setBounds(30, 150, 340, 40);
+        campoSenhaSala.setBounds(30, 130, 340, 40);
 
         botaoCriar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         botaoCriar.setText("CRIAR");
@@ -87,7 +88,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoCriar);
-        botaoCriar.setBounds(30, 260, 140, 40);
+        botaoCriar.setBounds(30, 190, 140, 40);
 
         botaoCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         botaoCancelar.setText("CANCELAR");
@@ -102,13 +103,13 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoCancelar);
-        botaoCancelar.setBounds(230, 260, 140, 40);
+        botaoCancelar.setBounds(230, 190, 140, 40);
 
         erroSalaSemNome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroSalaSemNome.setForeground(new java.awt.Color(204, 0, 0));
         erroSalaSemNome.setText("Aviso: sala sem nome!");
         getContentPane().add(erroSalaSemNome);
-        erroSalaSemNome.setBounds(30, 90, 160, 20);
+        erroSalaSemNome.setBounds(30, 80, 160, 20);
 
         pack();
         setLocationRelativeTo(null);

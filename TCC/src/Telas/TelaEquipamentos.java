@@ -1,7 +1,6 @@
 package Telas;
 
 import ConexaoBanco.DAO;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaEquipamentos extends javax.swing.JDialog {
@@ -31,7 +30,7 @@ public class TelaEquipamentos extends javax.swing.JDialog {
             new Object [][] {
             },
             new String [] {
-                "Id","Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
+                "Id","Quant.","Icone", "Nome", "Dano/Defesa", "Atributos","Descrição"
             }
         ));
         tabela.setCellSelectionEnabled(true);
@@ -41,26 +40,61 @@ public class TelaEquipamentos extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tabela);
         tabela.getColumnModel().getColumn(0).setMaxWidth(50);
         tabela.getColumnModel().getColumn(0).setMinWidth(50);
-        tabela.getColumnModel().getColumn(1).setMaxWidth(52);
-        tabela.getColumnModel().getColumn(1).setMinWidth(52);
-        tabela.getColumnModel().getColumn(2).setMaxWidth(150);
-        tabela.getColumnModel().getColumn(2).setMinWidth(150);
-        tabela.getColumnModel().getColumn(3).setMaxWidth(90);
-        tabela.getColumnModel().getColumn(3).setMinWidth(90);
+        tabela.getColumnModel().getColumn(1).setMinWidth(50);
+        tabela.getColumnModel().getColumn(1).setMinWidth(50);
+        tabela.getColumnModel().getColumn(2).setMaxWidth(52);
+        tabela.getColumnModel().getColumn(2).setMinWidth(52);
+        tabela.getColumnModel().getColumn(3).setMaxWidth(150);
+        tabela.getColumnModel().getColumn(3).setMinWidth(150);
+        tabela.getColumnModel().getColumn(4).setMaxWidth(90);
+        tabela.getColumnModel().getColumn(4).setMinWidth(90);
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = tabela.rowAtPoint(evt.getPoint());
-                if (row >= 0 && DAO.donoDaSala) {
-                    String url = tabela.getValueAt(row, 0).toString();
+                if (row >= 0&&DAO.donoDaSala) {
+                    String url = tabela.getValueAt(row, 2).toString();
                     if(url.contains("weapon")){
-                        System.out.println("weapon");
+                        String aux = tabela.getValueAt(row, 0).toString();
+                        int id = Integer.parseInt(aux);
+                        TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),1,id);
+                        telaVisualizarObjeto.setVisible(true);
+                        try{
+                            tabela.removeAll();
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        dao.listarArmas();
+                        dao.listarArmaduras();
+                        dao.listarItens();
                     }
                     if(url.contains("armadura")){
-                        System.out.println("armadura");
+                        String aux = tabela.getValueAt(row, 0).toString();
+                        int id = Integer.parseInt(aux);
+                        TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),2,id);
+                        telaVisualizarObjeto.setVisible(true);
+                        try{
+                            tabela.removeAll();
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        dao.listarArmas();
+                        dao.listarArmaduras();
+                        dao.listarItens();
                     }
                     if(url.contains("item")){
-                        System.out.println("item");
+                        String aux = tabela.getValueAt(row, 0).toString();
+                        int id = Integer.parseInt(aux);
+                        TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),3,id);
+                        telaVisualizarObjeto.setVisible(true);
+                        try{
+                            tabela.removeAll();
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        dao.listarArmas();
+                        dao.listarArmaduras();
+                        dao.listarItens();
                     }
 
                 }
