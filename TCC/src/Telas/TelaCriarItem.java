@@ -36,6 +36,8 @@ public class TelaCriarItem extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         botaoSalvar = new javax.swing.JButton();
         erro = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        campoQuantidade = new javax.swing.JTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -43,7 +45,9 @@ public class TelaCriarItem extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Criação de Item");
-        setMinimumSize(new java.awt.Dimension(365, 480));
+        setMaximumSize(new java.awt.Dimension(365, 470));
+        setMinimumSize(new java.awt.Dimension(365, 470));
+        setPreferredSize(new java.awt.Dimension(365, 470));
         getContentPane().setLayout(null);
 
         caixaIcons.setMaximumSize(new java.awt.Dimension(80, 60));
@@ -67,12 +71,12 @@ public class TelaCriarItem extends javax.swing.JDialog {
             }
         });
         getContentPane().add(caixaPersonagem);
-        caixaPersonagem.setBounds(100, 100, 240, 30);
+        caixaPersonagem.setBounds(100, 120, 240, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Atribuir ao personagem/NPC/monstro:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(100, 80, 240, 20);
+        jLabel3.setBounds(100, 100, 240, 20);
 
         campoAtributos.setColumns(20);
         campoAtributos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -82,7 +86,7 @@ public class TelaCriarItem extends javax.swing.JDialog {
         campoAtributos.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 190, 330, 77);
+        jScrollPane2.setBounds(10, 190, 330, 81);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Outros atributos:");
@@ -97,7 +101,7 @@ public class TelaCriarItem extends javax.swing.JDialog {
         campoDescricao.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 300, 330, 77);
+        jScrollPane3.setBounds(10, 300, 330, 81);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Descrição:");
@@ -117,13 +121,20 @@ public class TelaCriarItem extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoSalvar);
-        botaoSalvar.setBounds(240, 400, 100, 30);
+        botaoSalvar.setBounds(220, 390, 120, 30);
 
         erro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         erro.setForeground(new java.awt.Color(255, 0, 0));
         erro.setText("Nome ou personagem faltando!");
         getContentPane().add(erro);
         erro.setBounds(10, 390, 230, 30);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Quantidade:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 100, 90, 20);
+        getContentPane().add(campoQuantidade);
+        campoQuantidade.setBounds(10, 120, 80, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -133,7 +144,14 @@ public class TelaCriarItem extends javax.swing.JDialog {
         caixaPersonagem.removeAllItems();
         dao.listarPersonagensItens();
     }//GEN-LAST:event_caixaPersonagemFocusGained
-
+    private int tranformarQuantidadeEmInt() {
+        if (campoQuantidade.getText() == null) {
+            return 0;
+        } else {
+            String quantidade = campoQuantidade.getText();
+            return Integer.parseInt(quantidade);
+        }
+    }
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         boolean error = false;
         String icon = caixaIcons.getSelectedItem().toString();
@@ -156,9 +174,10 @@ public class TelaCriarItem extends javax.swing.JDialog {
         }
         String descricao = campoDescricao.getText();
         String atributos = campoAtributos.getText();
+        int quantidade = tranformarQuantidadeEmInt();
         if (!error) {
             try {
-                Item it = new Item(dao.pegarPk_personagem(nomePersonagem), nome, icon, atributos, descricao);
+                Item it = new Item(dao.pegarPk_personagem(nomePersonagem), nome, icon, atributos, descricao, quantidade);
                 dao.criarItem(it);
                 JOptionPane.showMessageDialog(this, "Item criado com sucesso!");
                 caixaPersonagem.removeAllItems();
@@ -187,8 +206,10 @@ public class TelaCriarItem extends javax.swing.JDialog {
     private javax.swing.JTextArea campoAtributos;
     private javax.swing.JTextArea campoDescricao;
     private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField campoQuantidade;
     private javax.swing.JLabel erro;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

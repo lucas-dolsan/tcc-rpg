@@ -8,21 +8,26 @@ public class Item {
     private String icone_ite;
     private String atributos_ite;
     private String descricao_ite;
+    private int quantidade_ite;
 
-    public Item(int fk_personagem, String nome_ite, String icone_ite, String atributos_ite, String descricao_ite) {
+    public int getQuantidade_ite() {
+        return quantidade_ite;
+    }
+
+    public void setQuantidade_ite(int quantidade_ite) {
+        this.quantidade_ite = quantidade_ite;
+    }
+
+    public Item(int fk_personagem, String nome_ite, String icone_ite, String atributos_ite, String descricao_ite, int quantidade_ite) {
         this.fk_personagem = fk_personagem;
         this.nome_ite = nome_ite;
         this.icone_ite = icone_ite;
         this.atributos_ite = atributos_ite;
         this.descricao_ite = descricao_ite;
+        this.quantidade_ite = quantidade_ite;
     }
 
     public Item() {
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" + "pk_item=" + pk_item + ", fk_personagem=" + fk_personagem + ", nome_ite=" + nome_ite + ", icone_ite=" + icone_ite + ", atributos_ite=" + atributos_ite + ", descricao_ite=" + descricao_ite + '}';
     }
 
     public int getPk_item() {

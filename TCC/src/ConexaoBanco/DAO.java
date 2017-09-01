@@ -165,7 +165,8 @@ public class DAO {
                 int dano = rs.getInt("danoBase_itWea");
                 String atibutos = rs.getString("atributos_itWea");
                 String descricao = rs.getString("descricao_itWea");
-                Object[] arma = {id, icon, nome, dano, atibutos, descricao};
+                int quantidade = rs.getInt("quantidade_itWea");
+                Object[] arma = {id, quantidade, icon, nome, dano, atibutos, descricao};
                 model.addRow(arma);
             }
 
@@ -189,7 +190,8 @@ public class DAO {
                 int dano = rs.getInt("danoBase_itWea");
                 String atibutos = rs.getString("atributos_itWea");
                 String descricao = rs.getString("descricao_itWea");
-                Object[] arma = {id, icon, nome, dano, atibutos, descricao};
+                int quantidade = rs.getInt("quantidade_itWea");
+                Object[] arma = {id, quantidade, icon, nome, dano, atibutos, descricao};
                 model.addRow(arma);
             }
 
@@ -213,11 +215,12 @@ public class DAO {
                 int defesa = rs.getInt("defesaBase_iArmo");
                 String atibutos = rs.getString("atributos_iArmo");
                 String descricao = rs.getString("descricao_iArmo");
-                Object[] armor = {id, icon, nome, defesa, atibutos, descricao};
+                int quantidade = rs.getInt("quantidade_iArmo");
+                Object[] armor = {id, quantidade, icon, nome, defesa, atibutos, descricao};
                 model.addRow(armor);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -237,11 +240,12 @@ public class DAO {
                 int defesa = rs.getInt("defesaBase_iArmo");
                 String atibutos = rs.getString("atributos_iArmo");
                 String descricao = rs.getString("descricao_iArmo");
-                Object[] armor = {id, icon, nome, defesa, atibutos, descricao};
+                int quantidade = rs.getInt("quantidade_iArmo");
+                Object[] armor = {id, quantidade, icon, nome, defesa, atibutos, descricao};
                 model.addRow(armor);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -260,12 +264,158 @@ public class DAO {
                 String nome = rs.getString("nome_ite");
                 String atibutos = rs.getString("atributos_ite");
                 String descricao = rs.getString("descricao_ite");
-                Object[] item = {id, icon, nome, null, atibutos, descricao};
+                int quantidade = rs.getInt("quantidade_ite");
+                Object[] item = {id, quantidade, icon, nome, null, atibutos, descricao};
                 model.addRow(item);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void excluirItem(int id, int tipo) {
+        switch (tipo) {
+            case 1: {
+                String sqlDelete = ("DELETE FROM itemWeapon WHERE fk_personagem = ? AND pk_itemWeapon = ?");
+                try {
+                    PreparedStatement stmtDelete = c.prepareStatement(sqlDelete);
+                    stmtDelete.setInt(1, pegarPk_personagem(nomePersonagem));
+                    stmtDelete.setInt(2, id);
+                    stmtDelete.execute();
+                    stmtDelete.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+            case 2: {
+                String sqlDelete = ("DELETE FROM itemArmor WHERE fk_personagem = ? AND pk_itemArmor = ?");
+                try {
+                    PreparedStatement stmtDelete = c.prepareStatement(sqlDelete);
+                    stmtDelete.setInt(1, pegarPk_personagem(nomePersonagem));
+                    stmtDelete.setInt(2, id);
+                    stmtDelete.execute();
+                    stmtDelete.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+            case 3: {
+                String sqlDelete = ("DELETE FROM item WHERE fk_personagem = ? AND pk_item = ?");
+                try {
+                    PreparedStatement stmtDelete = c.prepareStatement(sqlDelete);
+                    stmtDelete.setInt(1, pegarPk_personagem(nomePersonagem));
+                    stmtDelete.setInt(2, id);
+                    stmtDelete.execute();
+                    stmtDelete.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+    }
+
+    public void trocarItem(int id, int tipo, String nomePers) {
+        switch (tipo) {
+            case 1: {
+                final String sql = ("SELECT * FROM itemWeapon WHERE fk_personagem = ? AND pk_itemWeapon = ?");
+                try {
+                    PreparedStatement stmt = c.prepareStatement(sql);
+                    stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+                    stmt.setInt(2, id);
+                    ResultSet rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        String sqlInsert = ("INSERT INTO itemWeapon(fk_personagem,nome_itWea,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea,quantidade_itWea) VALUES (?,?,?,?,?,?,?)");
+                        PreparedStatement stmtInsert = c.prepareStatement(sqlInsert);
+                        stmtInsert.setInt(1, pegarPk_personagem(nomePers));
+                        stmtInsert.setString(2, rs.getString("nome_itWea"));
+                        stmtInsert.setString(3, rs.getString("icone_itWea"));
+                        stmtInsert.setInt(4, rs.getInt("danoBase_itWea"));
+                        stmtInsert.setString(5, rs.getString("atributos_itWea"));
+                        stmtInsert.setString(6, rs.getString("descricao_itWea"));
+                        stmtInsert.setInt(7, rs.getInt("quantidade_itWea"));
+                        stmtInsert.execute();
+                        stmtInsert.close();
+                        String sqlDelete = ("DELETE FROM itemWeapon WHERE fk_personagem = ? AND pk_itemWeapon = ?");
+                        PreparedStatement stmtDelete = c.prepareStatement(sqlDelete);
+                        stmtDelete.setInt(1, pegarPk_personagem(nomePersonagem));
+                        stmtDelete.setInt(2, id);
+                        stmtDelete.execute();
+                        stmtDelete.close();
+                    }
+                    stmt.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+            case 2: {
+                final String sql = ("SELECT * FROM itemArmor WHERE fk_personagem = ? AND pk_itemArmor = ?");
+                try {
+                    PreparedStatement stmt = c.prepareStatement(sql);
+                    stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+                    stmt.setInt(2, id);
+                    ResultSet rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        String sqlInsert = ("INSERT INTO itemArmor(fk_personagem,nome_iArmo,icone_iArmo,defesaBase_iArmo,atributos_iArmo,descricao_iArmo,quantidade_iArmo) VALUES(?,?,?,?,?,?,?)");
+                        PreparedStatement stmtInsert = c.prepareStatement(sqlInsert);
+                        stmtInsert.setInt(1, pegarPk_personagem(nomePers));
+                        stmtInsert.setString(2, rs.getString("nome_iArmo"));
+                        stmtInsert.setString(3, rs.getString("icone_iArmo"));
+                        stmtInsert.setInt(4, rs.getInt("defesaBase_iArmo"));
+                        stmtInsert.setString(5, rs.getString("atributos_iArmo"));
+                        stmtInsert.setString(6, rs.getString("descricao_iArmo"));
+                        stmtInsert.setInt(7, rs.getInt("quantidade_iArmo"));
+                        stmtInsert.execute();
+                        stmtInsert.close();
+                        String sqlDelete = ("DELETE FROM itemArmor WHERE fk_personagem = ? AND pk_itemArmor = ?");
+                        PreparedStatement stmtDelete = c.prepareStatement(sqlDelete);
+                        stmtDelete.setInt(1, pegarPk_personagem(nomePersonagem));
+                        stmtDelete.setInt(2, id);
+                        stmtDelete.execute();
+                        stmtDelete.close();
+                    }
+                    stmt.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+            case 3: {
+                final String sql = ("SELECT * FROM item WHERE fk_personagem = ? AND pk_item = ?");
+                try {
+                    PreparedStatement stmt = c.prepareStatement(sql);
+                    stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+                    stmt.setInt(2, id);
+                    ResultSet rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        String sqlInsert = ("INSERT INTO item(fk_personagem,nome_ite,icone_ite,atributos_ite,descricao_ite,quantidade_ite)VALUES (?,?,?,?,?,?)");
+                        PreparedStatement stmtInsert = c.prepareStatement(sqlInsert);
+                        stmtInsert.setInt(1, pegarPk_personagem(nomePers));
+                        stmtInsert.setString(2, rs.getString("nome_ite"));
+                        stmtInsert.setString(3, rs.getString("icone_ite"));
+                        stmtInsert.setString(4, rs.getString("atributos_ite"));
+                        stmtInsert.setString(5, rs.getString("quantidade_ite"));
+                        stmtInsert.setInt(6, rs.getInt("quantidade_itWea"));
+                        stmtInsert.execute();
+                        stmtInsert.close();
+                        String sqlDelete = ("DELETE FROM item WHERE fk_personagem = ? AND pk_item = ?");
+                        PreparedStatement stmtDelete = c.prepareStatement(sqlDelete);
+                        stmtDelete.setInt(1, pegarPk_personagem(nomePersonagem));
+                        stmtDelete.setInt(2, id);
+                        stmtDelete.execute();
+                        stmtDelete.close();
+                    }
+                    stmt.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            }
         }
     }
 
@@ -283,7 +433,8 @@ public class DAO {
                 String nome = rs.getString("nome_ite");
                 String atibutos = rs.getString("atributos_ite");
                 String descricao = rs.getString("descricao_ite");
-                Object[] item = {id, icon, nome, null, atibutos, descricao};
+                int quantidade = rs.getInt("quantidade_ite");
+                Object[] item = {id, quantidade, icon, nome, null, atibutos, descricao};
                 model.addRow(item);
             }
 
@@ -692,7 +843,7 @@ public class DAO {
     }
 
     public void criarItemArma(ItemArma ia) {
-        final String sql = ("INSERT INTO itemWeapon(fk_personagem,nome_itWea,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea) VALUES (?,?,?,?,?,?)");
+        final String sql = ("INSERT INTO itemWeapon(fk_personagem,nome_itWea,icone_itWea,danoBase_itWea, atributos_itWea,descricao_itWea,quantidade_itWea) VALUES (?,?,?,?,?,?,?)");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, ia.getFk_personagem());
@@ -701,6 +852,7 @@ public class DAO {
             stmt.setInt(4, ia.getDanoBase_itWea());
             stmt.setString(5, ia.getAtributos_itWea());
             stmt.setString(6, ia.getDescricao_itWea());
+            stmt.setInt(7, ia.getQuantidade_itWea());
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
@@ -710,7 +862,7 @@ public class DAO {
     }
 
     public void criarItemArmadura(ItemArmadura ia) {
-        final String sql = ("INSERT INTO itemArmor(fk_personagem,nome_iArmo,icone_iArmo,defesaBase_iArmo,atributos_iArmo,descricao_iArmo) VALUES(?,?,?,?,?,?)");
+        final String sql = ("INSERT INTO itemArmor(fk_personagem,nome_iArmo,icone_iArmo,defesaBase_iArmo,atributos_iArmo,descricao_iArmo,quantidade_iArmo) VALUES(?,?,?,?,?,?,?)");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, ia.getFk_personagem());
@@ -719,6 +871,7 @@ public class DAO {
             stmt.setInt(4, ia.getDefesaBase_iArmo());
             stmt.setString(5, ia.getAtributos_iArmo());
             stmt.setString(6, ia.getDescricao_iArmo());
+            stmt.setInt(7, ia.getQuantidade_iArmo());
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
@@ -739,13 +892,13 @@ public class DAO {
             stmt.setString(7, ma.getAtributos_mag());
             stmt.execute();
             stmt.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public void criarItem(Item it) {
-        final String sql = ("INSERT INTO item(fk_personagem,nome_ite,icone_ite,atributos_ite,descricao_ite)VALUES (?,?,?,?,?)");
+        final String sql = ("INSERT INTO item(fk_personagem,nome_ite,icone_ite,atributos_ite,descricao_ite,quantidade_ite)VALUES (?,?,?,?,?,?)");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, it.getFk_personagem());
@@ -753,6 +906,7 @@ public class DAO {
             stmt.setString(3, it.getIcone_ite());
             stmt.setString(4, it.getAtributos_ite());
             stmt.setString(5, it.getDescricao_ite());
+            stmt.setInt(6, it.getQuantidade_ite());
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
@@ -768,6 +922,22 @@ public class DAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 TelaCriarMagia.caixaPersonagem.addItem(rs.getString("nomePersonagem_fic"));
+            }
+            stmt.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarPersonagensEnviarObjeto() {
+        final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, salaAtual.getNome_sala());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                TelaVisualizarObjeto.caixaPersonagem.addItem(rs.getString("nomePersonagem_fic"));
             }
             stmt.close();
             rs.close();

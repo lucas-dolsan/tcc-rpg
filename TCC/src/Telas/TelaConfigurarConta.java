@@ -35,30 +35,30 @@ public class TelaConfigurarConta extends javax.swing.JDialog {
 
         campoSenha.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         getContentPane().add(campoSenha);
-        campoSenha.setBounds(30, 190, 400, 40);
+        campoSenha.setBounds(30, 180, 400, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setText("INFORME O NOVO NOME DE USUÁRIO:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 20, 400, 30);
+        jLabel1.setBounds(30, 10, 400, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel2.setText("INFORME O NOVO EMAIL:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 90, 400, 30);
+        jLabel2.setBounds(30, 80, 400, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setText("INFORME A NOVA SENHA:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 160, 280, 30);
+        jLabel3.setBounds(30, 150, 280, 30);
 
         campoEmail.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         getContentPane().add(campoEmail);
-        campoEmail.setBounds(30, 120, 400, 40);
+        campoEmail.setBounds(30, 110, 400, 40);
 
         campoNome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         getContentPane().add(campoNome);
-        campoNome.setBounds(30, 50, 400, 40);
+        campoNome.setBounds(30, 40, 400, 40);
 
         confirmar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         confirmar.setText("CONFIRMAR");
@@ -68,7 +68,7 @@ public class TelaConfigurarConta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(confirmar);
-        confirmar.setBounds(280, 240, 150, 40);
+        confirmar.setBounds(280, 230, 150, 40);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jButton2.setText("CANCELAR");
@@ -78,7 +78,7 @@ public class TelaConfigurarConta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(30, 240, 150, 40);
+        jButton2.setBounds(30, 230, 150, 40);
 
         pack();
         setLocationRelativeTo(null);

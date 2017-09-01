@@ -9,14 +9,24 @@ public class ItemArma {
     private int danoBase_itWea;
     private String atributos_itWea;
     private String descricao_itWea;
+    private int quantidade_itWea;
 
-    public ItemArma(int fk_personagem, String nome_itWea, String icone_itWea, int danoBase_itWea, String atributos_itWea, String descricao_itWea) {
+    public ItemArma(int fk_personagem, String nome_itWea, String icone_itWea, int danoBase_itWea, String atributos_itWea, String descricao_itWea, int quantidade_itWea) {
         this.fk_personagem = fk_personagem;
         this.nome_itWea = nome_itWea;
         this.icone_itWea = icone_itWea;
         this.danoBase_itWea = danoBase_itWea;
         this.atributos_itWea = atributos_itWea;
         this.descricao_itWea = descricao_itWea;
+        this.quantidade_itWea = quantidade_itWea;
+    }
+
+    public int getQuantidade_itWea() {
+        return quantidade_itWea;
+    }
+
+    public void setQuantidade_itWea(int quantidade_itWea) {
+        this.quantidade_itWea = quantidade_itWea;
     }
 
     @Override

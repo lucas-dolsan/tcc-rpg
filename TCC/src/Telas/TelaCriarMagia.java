@@ -59,6 +59,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         getContentPane().add(caixaIcons);
         caixaIcons.setBounds(10, 40, 80, 60);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nome do Item:");
         jLabel1.setToolTipText("");
         getContentPane().add(jLabel1);
@@ -66,6 +67,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         getContentPane().add(campoNome);
         campoNome.setBounds(100, 40, 240, 30);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Efeito:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(100, 70, 190, 20);
@@ -80,9 +82,10 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         getContentPane().add(caixaPersonagem);
         caixaPersonagem.setBounds(100, 190, 240, 30);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Atribuir ao personagem:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(100, 170, 180, 20);
+        jLabel3.setBounds(100, 170, 240, 20);
 
         campoAtributos.setColumns(20);
         campoAtributos.setRows(5);
@@ -91,8 +94,9 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         campoAtributos.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 240, 330, 87);
+        jScrollPane2.setBounds(10, 240, 330, 96);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Outros atributos:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(10, 220, 330, 20);
@@ -104,16 +108,19 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         campoDescricao.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(10, 360, 330, 87);
+        jScrollPane3.setBounds(10, 360, 330, 96);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Descrição:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(10, 340, 330, 20);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Icone:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 20, 80, 17);
+        jLabel6.setBounds(10, 20, 80, 20);
 
+        botaoSalvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         botaoSalvar.setText("Salvar");
         botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,14 +130,16 @@ public class TelaCriarMagia extends javax.swing.JDialog {
         getContentPane().add(botaoSalvar);
         botaoSalvar.setBounds(240, 460, 100, 30);
 
+        erro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         erro.setForeground(new java.awt.Color(255, 0, 0));
         erro.setText("Nome, personagem ou dano faltando!");
         getContentPane().add(erro);
         erro.setBounds(10, 460, 230, 30);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Tipo da magia:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(100, 120, 70, 20);
+        jLabel7.setBounds(100, 120, 240, 20);
         getContentPane().add(caixaTipoMagia);
         caixaTipoMagia.setBounds(100, 140, 240, 30);
 

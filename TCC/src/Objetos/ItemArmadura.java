@@ -9,14 +9,24 @@ public class ItemArmadura {
     private int defesaBase_iArmo;
     private String atributos_iArmo;
     private String descricao_iArmo;
+    private int quantidade_iArmo;
 
-    public ItemArmadura(int fk_personagem, String nome_iArmo, String icone_iArmo, int defesaBase_iArmo, String atributos_iArmo, String descricao_iArmo) {
+    public ItemArmadura(int fk_personagem, String nome_iArmo, String icone_iArmo, int defesaBase_iArmo, String atributos_iArmo, String descricao_iArmo, int quantidade_iArmo) {
         this.fk_personagem = fk_personagem;
         this.nome_iArmo = nome_iArmo;
         this.icone_iArmo = icone_iArmo;
         this.defesaBase_iArmo = defesaBase_iArmo;
         this.atributos_iArmo = atributos_iArmo;
         this.descricao_iArmo = descricao_iArmo;
+        this.quantidade_iArmo = quantidade_iArmo;
+    }
+
+    public int getQuantidade_iArmo() {
+        return quantidade_iArmo;
+    }
+
+    public void setQuantidade_iArmo(int quantidade_iArmo) {
+        this.quantidade_iArmo = quantidade_iArmo;
     }
 
     public ItemArmadura() {

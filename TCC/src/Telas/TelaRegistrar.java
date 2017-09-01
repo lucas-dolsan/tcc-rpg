@@ -206,7 +206,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
                 erroNome.setVisible(true);
                 erro = true;
             }
-            if(!email.contains("@")){
+            if (!email.contains("@")) {
                 erroEmail.setVisible(true);
                 erro = true;
             }

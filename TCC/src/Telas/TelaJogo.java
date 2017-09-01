@@ -775,13 +775,18 @@ public class TelaJogo extends javax.swing.JFrame {
         dao.listarFichasTexto();
     }//GEN-LAST:event_caixaFichasTextoFocusGained
     private static void atualizarMapa() {
-        try {
-            BufferedImage imagem = ImageIO.read(dao.downloadMapa().getBinaryStream());
-            imagemIcone = new ImageIcon(imagem);
-            mapaLabel.setIcon(imagemIcone);
-        } catch (SQLException | IOException ex) {
-            ex.printStackTrace();
-        }
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    BufferedImage imagem = ImageIO.read(dao.downloadMapa().getBinaryStream());
+                    imagemIcone = new ImageIcon(imagem);
+                    mapaLabel.setIcon(imagemIcone);
+                } catch (SQLException | IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }.start();
     }
     private void botaoAtualizarMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarMapaActionPerformed
         if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
@@ -871,16 +876,13 @@ public class TelaJogo extends javax.swing.JFrame {
                     painel.setVisible(true);
                     campoAnotacao.setVisible(true);
                     textoAnotacao.setVisible(true);
-
                 } else {
                     painel.dispose();
                 }
-
                 new Thread() {
                     public void run() {
                         atualizarMapa();
                     }
-
                 }.start();
                 new Thread() {
                     @Override

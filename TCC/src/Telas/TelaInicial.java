@@ -14,9 +14,9 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class TelaInicial extends javax.swing.JFrame {
-    
+
     public static String ipAddress = null;
-    
+
     private static String getFirstNonLoopbackAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException {
         Enumeration en = NetworkInterface.getNetworkInterfaces();
         while (en.hasMoreElements()) {
@@ -41,11 +41,11 @@ public class TelaInicial extends javax.swing.JFrame {
         }
         return null;
     }
-    
+
     public TelaInicial() {
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -198,7 +198,7 @@ private void deslogar() {
         TelaConfigurarConta telaConfigurarConta = new TelaConfigurarConta(this, true);
         telaConfigurarConta.setVisible(true);
     }//GEN-LAST:event_botaoConfigurarContaActionPerformed
-    
+
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
