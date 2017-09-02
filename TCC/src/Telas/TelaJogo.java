@@ -400,6 +400,11 @@ public class TelaJogo extends javax.swing.JFrame {
         jLabel4.setBounds(10, 370, 240, 20);
 
         caixaMonstros.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        caixaMonstros.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                caixaMonstrosFocusGained(evt);
+            }
+        });
         getContentPane().add(caixaMonstros);
         caixaMonstros.setBounds(10, 390, 240, 30);
 
@@ -721,12 +726,7 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
         } else {
-            new Thread() {
-                @Override
-                public void run() {
-                    dao.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
-                }
-            }.start();
+            dao.pegarDadosPersonagem(caixaFichaPersonagem.getSelectedItem().toString());
         }
     }//GEN-LAST:event_botaoVisualizarPersonagemActionPerformed
 
@@ -761,12 +761,7 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
         } else {
-            new Thread() {
-                @Override
-                public void run() {
-                    dao.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
-                }
-            }.start();
+            dao.pegarDadosFichaTexto(caixaFichasTexto.getSelectedItem().toString());
         }
     }//GEN-LAST:event_botaoVisualizarFichaActionPerformed
 
@@ -818,13 +813,7 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
         } else {
-            new Thread() {
-                @Override
-                public void run() {
-                    dao.pegarDadosNPC(caixaNPC.getSelectedItem().toString());
-                }
-
-            }.start();
+            dao.pegarDadosNPC(caixaNPC.getSelectedItem().toString());
         }
     }//GEN-LAST:event_botaoVisualizarNPCActionPerformed
 
@@ -834,8 +823,7 @@ public class TelaJogo extends javax.swing.JFrame {
             this.dispose();
             TelaInicial.Start();
         } else {
-            // TODO add your handling code here:
-            System.out.println("em construção");
+            dao.pegarDadosMon(caixaMonstros.getSelectedItem().toString());
         }
     }//GEN-LAST:event_botaoVisualizarMonstroActionPerformed
 
@@ -860,6 +848,17 @@ public class TelaJogo extends javax.swing.JFrame {
 
         }.start();
     }//GEN-LAST:event_caixaNPCFocusGained
+
+    private void caixaMonstrosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaMonstrosFocusGained
+        new Thread() {
+            @Override
+            public void run() {
+                caixaMonstros.removeAllItems();
+                dao.listarMonstros();
+            }
+
+        }.start();
+    }//GEN-LAST:event_caixaMonstrosFocusGained
 
     public static void Start(boolean dono) {
         if (dono) {

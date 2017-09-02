@@ -132,6 +132,11 @@ public class PainelDeControle extends javax.swing.JFrame {
 
         botaoCriarMonstro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoCriarMonstro.setText("CRIAR MONSTRO");
+        botaoCriarMonstro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarMonstroActionPerformed(evt);
+            }
+        });
         getContentPane().add(botaoCriarMonstro);
         botaoCriarMonstro.setBounds(220, 200, 210, 30);
 
@@ -245,8 +250,14 @@ public class PainelDeControle extends javax.swing.JFrame {
         telaNPC.botaoSalvar.setEnabled(true);
         telaNPC.botaAdicionarImagem.setEnabled(false);
         telaNPC.setVisible(true);
-
     }//GEN-LAST:event_botaoCriarNPCActionPerformed
+
+    private void botaoCriarMonstroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarMonstroActionPerformed
+        TelaMonstro telaMonstro = new TelaMonstro(this, true);
+        telaMonstro.botaoSalvar.setEnabled(true);
+        telaMonstro.botaAdicionarImagem.setEnabled(false);
+        telaMonstro.setVisible(true);
+    }//GEN-LAST:event_botaoCriarMonstroActionPerformed
 
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
