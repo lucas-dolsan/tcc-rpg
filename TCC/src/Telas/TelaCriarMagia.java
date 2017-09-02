@@ -47,6 +47,7 @@ public class TelaCriarMagia extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Criação de Item");
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(365, 540));
         setMinimumSize(new java.awt.Dimension(365, 540));
         setPreferredSize(new java.awt.Dimension(365, 540));

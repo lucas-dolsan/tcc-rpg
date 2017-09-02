@@ -204,6 +204,31 @@ public class DAO {
         return encryptedPassword;
     }
 
+    public void listarMagias() {
+        final String sql = ("SELECT * FROM magia WHERE fk_personagem = (?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+            ResultSet rs = stmt.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaMagias.tabela.getModel();
+            while (rs.next()) {
+                int id = rs.getInt("pk_magia");
+                String nomeIcon = rs.getString("icone_mag");
+                ImageIcon icon = (new ImageIcon(getClass().getResource("/MagiaIcons/" + nomeIcon)));
+                String nome = rs.getString("nome_mag");
+                String efeito = rs.getString("efeito_mag");
+                String tipo = rs.getString("tipo_mag");
+                String atibutos = rs.getString("atributos_mag");
+                String descricao = rs.getString("descricao_mag");
+                Object[] magia = {id, icon, nome, efeito, tipo, atibutos, descricao};
+                model.addRow(magia);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void listarArmas() {
         final String sql = ("SELECT * FROM itemWeapon WHERE fk_personagem = (?)");
         try {
@@ -1104,7 +1129,7 @@ public class DAO {
     }
 
     public void listarPersonagensMagias() {
-        final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ?;");
+        final String sql = ("select * from personagem per join sala sala on per.fk_sala = sala.pk_sala where sala.nome_sala = ? AND per.tipo_fic = 'p'");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, salaAtual.getNome_sala());
@@ -1452,10 +1477,40 @@ public class DAO {
         }
     }
 
+    public void pegarAnotacoesBanco() {
+        pegarSalasDoBanco();
+        final String sql = ("SELECT anotacoes_sala FROM sala WHERE pk_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, salaAtual.getPk_sala());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                TelaJogo.campoAnotacao.setText(rs.getString("anotacoes_sala"));
+            }
+            stmt.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void atualizarAnotacoes(String texto) {
+        final String sql = ("UPDATE sala SET anotacoes_sala = ? WHERE pk_sala = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, texto);
+            stmt.setInt(2, salaAtual.getPk_sala());
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void criarSala(TelaConfigurarSala tela, String nomeSala, String senhaSala) {
         pegarSalasDoBanco();
         pegarJogadoresDoBanco();
-        String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala, ip_dono, limpar_chat_daily, voip_sala, porta_sala) values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into sala(fk_jogador, nome_sala, senha_sala, chat_sala, ip_dono, limpar_chat_daily, voip_sala, porta_sala,anotacoes_sala) values(?,?,?,?,?,?,?,?,?)";
         for (Sala sala : salas) {
             if (sala.getNome_sala().equalsIgnoreCase(nomeSala)) {
                 salaAtual = sala;
@@ -1472,6 +1527,7 @@ public class DAO {
             stmt.setInt(6, 0);
             stmt.setBoolean(7, false);
             stmt.setInt(8, 0);
+            stmt.setString(9, "");
             stmt.execute();
             tela.dispose();
         } catch (Exception e) {

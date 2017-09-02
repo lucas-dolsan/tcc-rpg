@@ -67,9 +67,8 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        botaoConfigurarConta.setBackground(new java.awt.Color(255, 255, 255));
-        botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoConfigurarConta.setText("Configurar Conta");
+        botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        botaoConfigurarConta.setText("CONFIGURAR SALA");
         botaoConfigurarConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoConfigurarContaActionPerformed(evt);
@@ -81,11 +80,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoConfigurarConta);
-        botaoConfigurarConta.setBounds(430, 540, 450, 60);
+        botaoConfigurarConta.setBounds(460, 510, 450, 60);
 
-        botaoCriarSala.setBackground(new java.awt.Color(255, 255, 255));
-        botaoCriarSala.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoCriarSala.setText("Criar nova Sala");
+        botaoCriarSala.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        botaoCriarSala.setText("CRIAR NOVA SALA");
         botaoCriarSala.setName(""); // NOI18N
         botaoCriarSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,11 +96,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarSala);
-        botaoCriarSala.setBounds(430, 400, 450, 60);
+        botaoCriarSala.setBounds(460, 350, 450, 60);
 
-        botaoEntrarEmSala.setBackground(new java.awt.Color(255, 255, 255));
-        botaoEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoEntrarEmSala.setText("Entrar em uma Sala");
+        botaoEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        botaoEntrarEmSala.setText("ENTRAR EM UMA SALA");
         botaoEntrarEmSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEntrarEmSalaActionPerformed(evt);
@@ -114,9 +111,11 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoEntrarEmSala);
-        botaoEntrarEmSala.setBounds(430, 470, 450, 60);
+        botaoEntrarEmSala.setBounds(460, 430, 450, 60);
 
+        botaoDeslogar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         botaoDeslogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoLogout.png"))); // NOI18N
+        botaoDeslogar.setText("SAIR!");
         botaoDeslogar.setToolTipText("Desconectar.");
         botaoDeslogar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,12 +128,12 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoDeslogar);
-        botaoDeslogar.setBounds(1192, 650, 80, 40);
+        botaoDeslogar.setBounds(1150, 630, 110, 40);
 
         planoFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        planoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/logo.png"))); // NOI18N
+        planoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/planoDeFundo.png"))); // NOI18N
         getContentPane().add(planoFundo);
-        planoFundo.setBounds(210, 0, 800, 400);
+        planoFundo.setBounds(0, 0, 1280, 720);
 
         pack();
         setLocationRelativeTo(null);

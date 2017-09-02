@@ -23,8 +23,13 @@ public class TelaEquipamentos extends javax.swing.JDialog {
         tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(620, 450));
-        setMinimumSize(new java.awt.Dimension(620, 450));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(800, 402));
+        setMinimumSize(new java.awt.Dimension(800, 402));
+
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(702, 402));
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(702, 402));
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(702, 402));
 
         tabela.setModel(new DefaultTableModel(
             new Object [][] {
@@ -46,8 +51,12 @@ public class TelaEquipamentos extends javax.swing.JDialog {
         tabela.getColumnModel().getColumn(2).setMinWidth(52);
         tabela.getColumnModel().getColumn(3).setMaxWidth(150);
         tabela.getColumnModel().getColumn(3).setMinWidth(150);
-        tabela.getColumnModel().getColumn(4).setMaxWidth(90);
-        tabela.getColumnModel().getColumn(4).setMinWidth(90);
+        tabela.getColumnModel().getColumn(4).setMaxWidth(100);
+        tabela.getColumnModel().getColumn(4).setMinWidth(100);
+        tabela.getColumnModel().getColumn(5).setMaxWidth(150);
+        tabela.getColumnModel().getColumn(5).setMinWidth(150);
+        tabela.getColumnModel().getColumn(6).setMaxWidth(150);
+        tabela.getColumnModel().getColumn(6).setMinWidth(150);
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -88,7 +97,7 @@ public class TelaEquipamentos extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

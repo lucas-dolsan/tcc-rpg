@@ -56,6 +56,7 @@ public class TelaMonstro extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Monstro: "+DAO.nomePersonagem
         );
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(500, 655));
         setResizable(false);
         getContentPane().setLayout(null);

@@ -35,6 +35,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Registrar");
         setAlwaysOnTop(true);
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(460, 480));
         setMinimumSize(new java.awt.Dimension(460, 480));
         setResizable(false);
@@ -126,8 +127,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         campoUsername.setBounds(40, 40, 380, 40);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("NOME DE USUÁRIO:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(40, 20, 380, 20);
@@ -148,14 +148,12 @@ public class TelaRegistrar extends javax.swing.JDialog {
         getContentPane().add(erroEmail);
         erroEmail.setBounds(40, 170, 380, 30);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("SENHA:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(40, 200, 380, 20);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("CONFIRMAR SENHA:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(40, 290, 380, 20);
@@ -167,8 +165,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
         getContentPane().add(erroSenhas);
         erroSenhas.setBounds(40, 350, 380, 30);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("EMAIL:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(40, 110, 380, 20);

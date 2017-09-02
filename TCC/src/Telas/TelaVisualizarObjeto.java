@@ -45,6 +45,7 @@ public class TelaVisualizarObjeto extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Enviar Objeto");
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(370, 170));
         setMinimumSize(new java.awt.Dimension(370, 170));
         setPreferredSize(new java.awt.Dimension(370, 170));
@@ -60,7 +61,7 @@ public class TelaVisualizarObjeto extends javax.swing.JDialog {
         caixaPersonagem.setBounds(10, 30, 160, 30);
 
         botaoEnviarItem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        botaoEnviarItem.setText("Enviar!");
+        botaoEnviarItem.setText("ENVIAR!");
         botaoEnviarItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEnviarItemActionPerformed(evt);
@@ -70,12 +71,12 @@ public class TelaVisualizarObjeto extends javax.swing.JDialog {
         botaoEnviarItem.setBounds(10, 90, 160, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Enviar item para:");
+        jLabel1.setText("ENVIAR ITEM PARA:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 10, 160, 20);
 
         botaoExcluir.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        botaoExcluir.setText("Excluir item!");
+        botaoExcluir.setText("EXCLUIR ITEM!");
         botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoExcluirActionPerformed(evt);

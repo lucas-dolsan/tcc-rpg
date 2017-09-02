@@ -70,6 +70,7 @@ public class TelaPersonagem extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Ficha de Personagem");
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(780, 380));
         setResizable(false);
         getContentPane().setLayout(null);
@@ -289,7 +290,8 @@ public class TelaPersonagem extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoMagiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMagiasActionPerformed
-        // TODO add your handling code here:
+        TelaMagias telaMagias = new TelaMagias(null, true);
+        telaMagias.setVisible(true);
     }//GEN-LAST:event_botaoMagiasActionPerformed
     public void zerarValores() {
         campoVida.setText("0");

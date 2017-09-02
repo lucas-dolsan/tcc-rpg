@@ -56,6 +56,7 @@ public class TelaNPC extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("NPC: "+DAO.nomePersonagem
         );
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(500, 655));
         setMinimumSize(new java.awt.Dimension(500, 655));
         setPreferredSize(new java.awt.Dimension(500, 655));

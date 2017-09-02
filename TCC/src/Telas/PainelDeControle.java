@@ -37,6 +37,7 @@ public class PainelDeControle extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Painel de Controle de Sala");
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(440, 470));
         setMinimumSize(new java.awt.Dimension(440, 470));
         setPreferredSize(new java.awt.Dimension(440, 470));
