@@ -12,11 +12,11 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class TelaNPC extends javax.swing.JDialog {
+public class TelaMonstro extends javax.swing.JDialog {
 
     DAO dao = new DAO();
 
-    public TelaNPC(java.awt.Frame parent, boolean modal) {
+    public TelaMonstro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         nomeEmUso.setVisible(false);
@@ -33,7 +33,7 @@ public class TelaNPC extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        campoFuncao = new javax.swing.JTextField();
+        campoTipo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         campoVida = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -54,58 +54,56 @@ public class TelaNPC extends javax.swing.JDialog {
         botaoAtualizarIMG = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("NPC: "+DAO.nomePersonagem
+        setTitle("Monstro: "+DAO.nomePersonagem
         );
-        setMaximumSize(new java.awt.Dimension(500, 655));
         setMinimumSize(new java.awt.Dimension(500, 655));
-        setPreferredSize(new java.awt.Dimension(500, 655));
         setResizable(false);
         getContentPane().setLayout(null);
 
         labelImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelImagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(labelImagem);
-        labelImagem.setBounds(10, 11, 150, 280);
+        labelImagem.setBounds(10, 11, 260, 150);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("NOME:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(170, 0, 220, 30);
+        jLabel2.setBounds(10, 220, 110, 20);
         getContentPane().add(campoNome);
-        campoNome.setBounds(170, 30, 320, 30);
+        campoNome.setBounds(10, 240, 480, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("FUNÇÃO:");
+        jLabel3.setText("TIPO:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(170, 60, 260, 20);
-        getContentPane().add(campoFuncao);
-        campoFuncao.setBounds(170, 80, 320, 30);
+        jLabel3.setBounds(10, 270, 260, 20);
+        getContentPane().add(campoTipo);
+        campoTipo.setBounds(10, 290, 480, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("VIDA:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(170, 110, 80, 20);
+        jLabel4.setBounds(10, 170, 80, 20);
         getContentPane().add(campoVida);
-        campoVida.setBounds(170, 130, 90, 30);
+        campoVida.setBounds(10, 190, 90, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("DANO:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(280, 110, 80, 20);
+        jLabel5.setBounds(120, 170, 80, 20);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("DEFESA:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(410, 110, 80, 20);
+        jLabel6.setBounds(240, 170, 80, 20);
         getContentPane().add(campoDano);
-        campoDano.setBounds(280, 130, 100, 30);
+        campoDano.setBounds(120, 190, 100, 30);
         getContentPane().add(campoDefesa);
-        campoDefesa.setBounds(400, 130, 90, 30);
+        campoDefesa.setBounds(240, 190, 90, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("LORE:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(170, 160, 260, 20);
+        jLabel7.setBounds(280, 10, 260, 20);
 
         campoLore.setColumns(20);
         campoLore.setRows(5);
@@ -114,7 +112,7 @@ public class TelaNPC extends javax.swing.JDialog {
         campoLore.setWrapStyleWord(true);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(170, 180, 320, 110);
+        jScrollPane1.setBounds(280, 30, 210, 130);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("ITENS:");
@@ -153,21 +151,21 @@ public class TelaNPC extends javax.swing.JDialog {
                         int id = Integer.parseInt(aux);
                         TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),1,id);
                         telaVisualizarObjeto.setVisible(true);
-                        TelaNPC.this.dispose();
+                        TelaMonstro.this.dispose();
                     }
                     if(url.contains("armadura")){
                         String aux = tabela.getValueAt(row, 0).toString();
                         int id = Integer.parseInt(aux);
                         TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),2,id);
                         telaVisualizarObjeto.setVisible(true);
-                        TelaNPC.this.dispose();
+                        TelaMonstro.this.dispose();
                     }
                     if(url.contains("item")){
                         String aux = tabela.getValueAt(row, 0).toString();
                         int id = Integer.parseInt(aux);
                         TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),3,id);
                         telaVisualizarObjeto.setVisible(true);
-                        TelaNPC.this.dispose();
+                        TelaMonstro.this.dispose();
                     }
 
                 }
@@ -186,7 +184,7 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaAdicionarImagem);
-        botaAdicionarImagem.setBounds(183, 590, 147, 30);
+        botaAdicionarImagem.setBounds(180, 590, 150, 30);
 
         botaoSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoSalvar.setText("SALVAR");
@@ -224,7 +222,7 @@ public class TelaNPC extends javax.swing.JDialog {
         nomeEmUso.setForeground(new java.awt.Color(255, 0, 0));
         nomeEmUso.setText("Nome de personagem já em uso!");
         getContentPane().add(nomeEmUso);
-        nomeEmUso.setBounds(170, 290, 260, 20);
+        nomeEmUso.setBounds(120, 220, 250, 20);
 
         botaoAtualizarIMG.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         botaoAtualizarIMG.setText("ATUALIZAR IMAGEM");
@@ -234,7 +232,7 @@ public class TelaNPC extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoAtualizarIMG);
-        botaoAtualizarIMG.setBounds(10, 293, 150, 29);
+        botaoAtualizarIMG.setBounds(340, 189, 150, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -280,11 +278,11 @@ private int transformarVidaEmInt() {
             if (lore == null) {
                 lore = " ";
             }
-            String funcao = campoFuncao.getText();
-            if (funcao == null) {
-                funcao = " ";
+            String tipo = campoTipo.getText();
+            if (tipo == null) {
+                tipo = " ";
             }
-            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", funcao, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "n");
+            FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", tipo, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "m");
             dao.criarPersonagem(p);
             this.dispose();
         }
@@ -308,7 +306,7 @@ private int transformarVidaEmInt() {
             if (lore == null) {
                 lore = " ";
             }
-            String funcao = campoFuncao.getText();
+            String funcao = campoTipo.getText();
             if (funcao == null) {
                 funcao = " ";
             }
@@ -330,11 +328,11 @@ private int transformarVidaEmInt() {
                 if (lore == null) {
                     lore = " ";
                 }
-                String funcao = campoFuncao.getText();
-                if (funcao == null) {
-                    funcao = " ";
+                String  tipo = campoTipo.getText();
+                if (tipo == null) {
+                    tipo = " ";
                 }
-                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", funcao, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "n");
+                FichaPersonagem p = new FichaPersonagem(DAO.salaAtual.getPk_sala(), " ", lore, " ", tipo, nome, " ", " ", 0, 0, vida, dano, 0, 0, 0, 0, 0, 0, defesa, "m");
                 dao.salvarEdicaoPersonagem(p);
                 this.dispose();
             }
@@ -363,7 +361,7 @@ private int transformarVidaEmInt() {
                 } else {
                     String path = escolherArquivo.getSelectedFile().getPath();
                     System.out.println("Arquivo: [" + path + "] selecionado");
-                    dao.uploadNPC(path);
+                    dao.uploadMon(path);
                 }
             }
         }.start();
@@ -373,9 +371,9 @@ private int transformarVidaEmInt() {
         new Thread() {
             @Override
             public void run() {
-                if (dao.verificarImagemNPCExiste()) {
+                if (dao.verificarImagemMonExiste()) {
                     try {
-                        BufferedImage imagem = ImageIO.read(dao.downloadImagemNPC().getBinaryStream());
+                        BufferedImage imagem = ImageIO.read(dao.downloadImagemMon().getBinaryStream());
                         imagemIcone = new ImageIcon(imagem);
                         labelImagem.setIcon(imagemIcone);
                     } catch (SQLException | IOException ex) {
@@ -395,9 +393,9 @@ private int transformarVidaEmInt() {
     public javax.swing.JButton botaoSalvarEdicao;
     public javax.swing.JTextField campoDano;
     public javax.swing.JTextField campoDefesa;
-    public javax.swing.JTextField campoFuncao;
     public javax.swing.JTextArea campoLore;
     public javax.swing.JTextField campoNome;
+    public javax.swing.JTextField campoTipo;
     public javax.swing.JTextField campoVida;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

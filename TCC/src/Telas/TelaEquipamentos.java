@@ -59,42 +59,21 @@ public class TelaEquipamentos extends javax.swing.JDialog {
                         int id = Integer.parseInt(aux);
                         TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),1,id);
                         telaVisualizarObjeto.setVisible(true);
-                        try{
-                            tabela.removeAll();
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                        dao.listarArmas();
-                        dao.listarArmaduras();
-                        dao.listarItens();
+                        TelaEquipamentos.this.dispose();
                     }
                     if(url.contains("armadura")){
                         String aux = tabela.getValueAt(row, 0).toString();
                         int id = Integer.parseInt(aux);
                         TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),2,id);
                         telaVisualizarObjeto.setVisible(true);
-                        try{
-                            tabela.removeAll();
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                        dao.listarArmas();
-                        dao.listarArmaduras();
-                        dao.listarItens();
+                        TelaEquipamentos.this.dispose();
                     }
                     if(url.contains("item")){
                         String aux = tabela.getValueAt(row, 0).toString();
                         int id = Integer.parseInt(aux);
                         TelaVisualizarObjeto telaVisualizarObjeto = new TelaVisualizarObjeto(null, true,tabela.getValueAt(row, 3).toString(),tabela.getValueAt(row,2).toString(),3,id);
                         telaVisualizarObjeto.setVisible(true);
-                        try{
-                            tabela.removeAll();
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                        dao.listarArmas();
-                        dao.listarArmaduras();
-                        dao.listarItens();
+                        TelaEquipamentos.this.dispose();
                     }
 
                 }

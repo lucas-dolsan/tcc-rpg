@@ -84,6 +84,60 @@ public class DAO {
         return null;
     }
 
+    public void uploadMon(String caminhoDaImagem) {
+        FileInputStream fis = null;
+        PreparedStatement stmt = null;
+        File arquivo = new File(caminhoDaImagem);
+        int pkPersonagem = this.pegarPk_personagem(nomePersonagem);
+        try {
+            fis = new FileInputStream(arquivo);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            String sqlExists = ("SELECT pk_imagemMon FROM imagemMon WHERE  fk_personagem = ?");
+            PreparedStatement stmtE = c.prepareStatement(sqlExists);
+            stmtE.setInt(1, pkPersonagem);
+            ResultSet rs = stmtE.executeQuery();
+            if (!rs.next()) {
+                try {
+                    String sqlInsert = ("INSERT INTO imagemMon(fk_personagem, imagem_mon) VALUES (?,?)");
+                    stmt = c.prepareStatement(sqlInsert);
+                    stmt.setInt(1, pkPersonagem);
+                    stmt.setBinaryStream(2, fis, (int) arquivo.length());
+                    stmt.execute();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                String sqlUpdate = ("UPDATE imagemMon SET imagem_mon = ? WHERE fk_personagem =?");
+                stmt = c.prepareStatement(sqlUpdate);
+                stmt.setBinaryStream(1, fis, (int) arquivo.length());
+                stmt.setInt(2, pkPersonagem);
+                stmt.execute();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public Blob downloadImagemMon() {
+        String sql = "SELECT imagem_mon  FROM imagemMon WHERE fk_personagem  = ?";
+        int pkPersonagem = this.pegarPk_personagem(nomePersonagem);
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pkPersonagem);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Blob mapaBlob = rs.getBlob("imagem_mon");
+                return mapaBlob;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void uploadMapa(String caminhoDaImagem) {
         FileInputStream fis = null;
         PreparedStatement stmt = null;
@@ -200,6 +254,55 @@ public class DAO {
         }
     }
 
+    public void listarArmasMon() {
+        final String sql = ("SELECT * FROM itemWeapon WHERE fk_personagem = (?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+            ResultSet rs = stmt.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaMonstro.tabela.getModel();
+            while (rs.next()) {
+                int id = rs.getInt("pk_itemWeapon");
+                String nomeIcon = rs.getString("icone_itWea");
+                ImageIcon icon = (new ImageIcon(getClass().getResource("/WeaponIcons/" + nomeIcon)));
+                String nome = rs.getString("nome_itWea");
+                int dano = rs.getInt("danoBase_itWea");
+                String atibutos = rs.getString("atributos_itWea");
+                String descricao = rs.getString("descricao_itWea");
+                int quantidade = rs.getInt("quantidade_itWea");
+                Object[] arma = {id, quantidade, icon, nome, dano, atibutos, descricao};
+                model.addRow(arma);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarArmadurasMon() {
+        final String sql = ("SELECT * FROM itemArmor WHERE fk_personagem = (?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+            ResultSet rs = stmt.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaMonstro.tabela.getModel();
+            while (rs.next()) {
+                int id = rs.getInt("pk_itemArmor");
+                String nomeIcon = rs.getString("icone_iArmo");
+                ImageIcon icon = (new ImageIcon(getClass().getResource("/ArmaduraIcons/" + nomeIcon)));
+                String nome = rs.getString("nome_iArmo");
+                int defesa = rs.getInt("defesaBase_iArmo");
+                String atibutos = rs.getString("atributos_iArmo");
+                String descricao = rs.getString("descricao_iArmo");
+                int quantidade = rs.getInt("quantidade_iArmo");
+                Object[] armor = {id, quantidade, icon, nome, defesa, atibutos, descricao};
+                model.addRow(armor);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void listarArmadurasNPC() {
         final String sql = ("SELECT * FROM itemArmor WHERE fk_personagem = (?)");
         try {
@@ -250,6 +353,29 @@ public class DAO {
         }
     }
 
+    public void listarItensMon() {
+        final String sql = ("SELECT * FROM item WHERE fk_personagem = (?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+            ResultSet rs = stmt.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaMonstro.tabela.getModel();
+            while (rs.next()) {
+                int id = rs.getInt("pk_item");
+                String nomeIcon = rs.getString("icone_ite");
+                ImageIcon icon = (new ImageIcon(getClass().getResource("/ItemIcons/" + nomeIcon)));
+                String nome = rs.getString("nome_ite");
+                String atibutos = rs.getString("atributos_ite");
+                String descricao = rs.getString("descricao_ite");
+                int quantidade = rs.getInt("quantidade_ite");
+                Object[] item = {id, quantidade, icon, nome, null, atibutos, descricao};
+                model.addRow(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void listarItensNPC() {
         final String sql = ("SELECT * FROM item WHERE fk_personagem = (?)");
         try {
@@ -257,6 +383,30 @@ public class DAO {
             stmt.setInt(1, pegarPk_personagem(nomePersonagem));
             ResultSet rs = stmt.executeQuery();
             DefaultTableModel model = (DefaultTableModel) TelaNPC.tabela.getModel();
+            while (rs.next()) {
+                int id = rs.getInt("pk_item");
+                String nomeIcon = rs.getString("icone_ite");
+                ImageIcon icon = (new ImageIcon(getClass().getResource("/ItemIcons/" + nomeIcon)));
+                String nome = rs.getString("nome_ite");
+                String atibutos = rs.getString("atributos_ite");
+                String descricao = rs.getString("descricao_ite");
+                int quantidade = rs.getInt("quantidade_ite");
+                Object[] item = {id, quantidade, icon, nome, null, atibutos, descricao};
+                model.addRow(item);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarItens() {
+        final String sql = ("SELECT * FROM item WHERE fk_personagem = (?)");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
+            ResultSet rs = stmt.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaEquipamentos.tabela.getModel();
             while (rs.next()) {
                 int id = rs.getInt("pk_item");
                 String nomeIcon = rs.getString("icone_ite");
@@ -416,30 +566,6 @@ public class DAO {
                 break;
 
             }
-        }
-    }
-
-    public void listarItens() {
-        final String sql = ("SELECT * FROM item WHERE fk_personagem = (?)");
-        try {
-            PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, pegarPk_personagem(nomePersonagem));
-            ResultSet rs = stmt.executeQuery();
-            DefaultTableModel model = (DefaultTableModel) TelaEquipamentos.tabela.getModel();
-            while (rs.next()) {
-                int id = rs.getInt("pk_item");
-                String nomeIcon = rs.getString("icone_ite");
-                ImageIcon icon = (new ImageIcon(getClass().getResource("/ItemIcons/" + nomeIcon)));
-                String nome = rs.getString("nome_ite");
-                String atibutos = rs.getString("atributos_ite");
-                String descricao = rs.getString("descricao_ite");
-                int quantidade = rs.getInt("quantidade_ite");
-                Object[] item = {id, quantidade, icon, nome, null, atibutos, descricao};
-                model.addRow(item);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -618,6 +744,22 @@ public class DAO {
 
     }
 
+    public boolean verificarImagemMonExiste() {
+        String sqlExists = ("SELECT pk_imagemMon FROM imagemMon WHERE  fk_personagem = ?");
+        int pkPersonagem = this.pegarPk_personagem(nomePersonagem);
+        try {
+            PreparedStatement stmtE = c.prepareStatement(sqlExists);
+            stmtE.setInt(1, pkPersonagem);
+            ResultSet rs = stmtE.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean verificarImagemNPCExiste() {
         String sqlExists = ("SELECT pk_imagemNPC FROM imagemNPC WHERE  fk_personagem = ?");
         int pkPersonagem = this.pegarPk_personagem(nomePersonagem);
@@ -632,6 +774,54 @@ public class DAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void pegarDadosMon(String nomeMon) {
+        DAO.nomePersonagem = nomeMon;
+        final String sql = ("SELECT * FROM personagem WHERE nomePersonagem_fic = ?");
+        try {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, nomeMon);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                TelaMonstro telaMonstro = new TelaMonstro(null, true);
+                if (verificarImagemMonExiste()) {
+                    try {
+                        BufferedImage imagem = ImageIO.read(this.downloadImagemMon().getBinaryStream());
+                        imagemIcone = new ImageIcon(imagem);
+                        telaMonstro.labelImagem.setIcon(imagemIcone);
+                    } catch (SQLException | IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                telaMonstro.campoDano.setText(rs.getString("pontosMana_fic"));
+                telaMonstro.campoDefesa.setText(rs.getString("pontosDefesa_fic"));
+                telaMonstro.campoVida.setText(rs.getString("pontosVida_fic"));
+                telaMonstro.campoTipo.setText(rs.getString("classe_fic"));
+                telaMonstro.campoNome.setText(rs.getString("nomePersonagem_fic"));
+                telaMonstro.campoLore.setText(rs.getString("lore_fic"));
+                this.listarItensMon();
+                this.listarArmasMon();
+                this.listarArmadurasMon();
+                if (verificarDono()) {
+                    telaMonstro.botaAdicionarImagem.setEnabled(true);
+                    telaMonstro.botaoExcluir.setEnabled(true);
+                    telaMonstro.botaoSalvar.setVisible(false);
+                    telaMonstro.botaoSalvarEdicao.setEnabled(true);
+                    telaMonstro.setVisible(true);
+                } else {
+                    telaMonstro.campoDano.setEditable(false);
+                    telaMonstro.campoDefesa.setEditable(false);
+                    telaMonstro.campoTipo.setEditable(false);
+                    telaMonstro.campoLore.setEditable(false);
+                    telaMonstro.campoNome.setEditable(false);
+                    telaMonstro.campoVida.setEditable(false);
+                    telaMonstro.setVisible(true);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void pegarDadosNPC(String nomeNPC) {
@@ -666,7 +856,6 @@ public class DAO {
                     telaNPC.botaoExcluir.setEnabled(true);
                     telaNPC.botaoSalvar.setVisible(false);
                     telaNPC.botaoSalvarEdicao.setEnabled(true);
-                    telaNPC.botaoMatarNPC.setEnabled(true);
                     telaNPC.setVisible(true);
                 } else {
                     telaNPC.campoDano.setEditable(false);
@@ -937,7 +1126,9 @@ public class DAO {
             stmt.setString(1, salaAtual.getNome_sala());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                TelaVisualizarObjeto.caixaPersonagem.addItem(rs.getString("nomePersonagem_fic"));
+                if (!nomePersonagem.equals(rs.getString("nomePersonagem_fic"))) {
+                    TelaVisualizarObjeto.caixaPersonagem.addItem(rs.getString("nomePersonagem_fic"));
+                }
             }
             stmt.close();
             rs.close();
