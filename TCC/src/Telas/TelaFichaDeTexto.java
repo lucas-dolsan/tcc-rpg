@@ -29,6 +29,7 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
         nomeExiste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(715, 560));
         setMinimumSize(new java.awt.Dimension(715, 560));
         setPreferredSize(new java.awt.Dimension(715, 560));
@@ -93,9 +94,9 @@ public class TelaFichaDeTexto extends javax.swing.JDialog {
 
         nomeExiste.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nomeExiste.setForeground(new java.awt.Color(204, 0, 0));
-        nomeExiste.setText("Nome já existe!");
+        nomeExiste.setText("Ficha com o mesmo nome já existente!");
         getContentPane().add(nomeExiste);
-        nomeExiste.setBounds(410, 10, 200, 30);
+        nomeExiste.setBounds(400, 10, 250, 30);
 
         pack();
         setLocationRelativeTo(null);

@@ -28,9 +28,10 @@ public class TelaConfigurarConta extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Configurar conta");
-        setMaximumSize(new java.awt.Dimension(460, 320));
-        setMinimumSize(new java.awt.Dimension(460, 320));
-        setPreferredSize(new java.awt.Dimension(460, 320));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(470, 320));
+        setMinimumSize(new java.awt.Dimension(470, 320));
+        setPreferredSize(new java.awt.Dimension(470, 320));
         getContentPane().setLayout(null);
 
         campoSenha.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N

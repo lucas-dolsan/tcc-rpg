@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 
 public class TelaJogo extends javax.swing.JFrame {
-
+    
     static DAO dao = new DAO();
     public static PainelDeControle painel = null;
     public static ImageIcon imagemIcone = null;
-
+    
     public TelaJogo() {
         initComponents();
         botaoFecharSala.setVisible(true);
@@ -29,8 +29,9 @@ public class TelaJogo extends javax.swing.JFrame {
         dao.associarJogadorASala();
         campoAnotacao.setVisible(false);
         textoAnotacao.setVisible(false);
+        dao.pegarAnotacoesBanco();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -65,7 +66,7 @@ public class TelaJogo extends javax.swing.JFrame {
         botaoVisualizarMonstro = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         mapaLabel = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        botaoManuais = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         campoAnotacao = new javax.swing.JTextArea();
         textoAnotacao = new javax.swing.JLabel();
@@ -74,6 +75,7 @@ public class TelaJogo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Double Damage - Sala: "+ TelaConfigurarSala.nomeSala
         );
+        setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1320, 680));
         setResizable(false);
@@ -313,7 +315,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(caixaFichasTexto);
-        caixaFichasTexto.setBounds(10, 30, 240, 30);
+        caixaFichasTexto.setBounds(10, 30, 240, 40);
 
         botaoVisualizarFicha.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botaoVisualizarFicha.setText("VISUALIZAR FICHA");
@@ -348,7 +350,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(caixaFichaPersonagem);
-        caixaFichaPersonagem.setBounds(10, 160, 240, 30);
+        caixaFichaPersonagem.setBounds(10, 160, 240, 40);
 
         botaoVisualizarPersonagem.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botaoVisualizarPersonagem.setText("VISUALIZAR PERSONAGEM");
@@ -382,7 +384,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(caixaNPC);
-        caixaNPC.setBounds(10, 290, 240, 30);
+        caixaNPC.setBounds(10, 290, 240, 40);
 
         botaoVisualizarNPC.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botaoVisualizarNPC.setText("VISUALIZAR NPC");
@@ -406,7 +408,7 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(caixaMonstros);
-        caixaMonstros.setBounds(10, 390, 240, 30);
+        caixaMonstros.setBounds(10, 390, 240, 40);
 
         botaoVisualizarMonstro.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         botaoVisualizarMonstro.setText("VISUALIZAR MONSTRO");
@@ -434,19 +436,24 @@ public class TelaJogo extends javax.swing.JFrame {
         getContentPane().add(mapaLabel);
         mapaLabel.setBounds(990, 30, 320, 230);
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jButton4.setText("MANUAIS DE JOGO");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botaoManuais.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        botaoManuais.setText("MANUAIS DE JOGO");
+        botaoManuais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botaoManuaisActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(990, 310, 320, 30);
+        getContentPane().add(botaoManuais);
+        botaoManuais.setBounds(990, 310, 320, 30);
 
         campoAnotacao.setColumns(20);
-        campoAnotacao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        campoAnotacao.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         campoAnotacao.setRows(5);
+        campoAnotacao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoAnotacaoFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(campoAnotacao);
         campoAnotacao.setLineWrap(true);
         campoAnotacao.setWrapStyleWord(true);
@@ -482,7 +489,7 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.mensagemSairDaSala();
         }
     }
-
+    
     private void popupFecharSala() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja fechar a sala?", "Fechar sala", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
@@ -511,7 +518,7 @@ public class TelaJogo extends javax.swing.JFrame {
             dao.enviarChatBanco(texto);
             campoEnviarTexto.setText("");
         }
-
+        
     }
     private void botaoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarActionPerformed
         new Thread() {
@@ -614,7 +621,7 @@ public class TelaJogo extends javax.swing.JFrame {
                     popupSairSala();
                 }
             }
-
+            
         }.start();
 
     }//GEN-LAST:event_campoEnviarTextoKeyPressed
@@ -629,7 +636,7 @@ public class TelaJogo extends javax.swing.JFrame {
                     popupSairSala();
                 }
             }
-
+            
         }.start();
 
     }//GEN-LAST:event_areaDeChatKeyPressed
@@ -827,16 +834,16 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoVisualizarMonstroActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void botaoManuaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoManuaisActionPerformed
         if (dao.isBanido(DAO.player.getPk_jogador(), DAO.salaAtual.getPk_sala())) {
             JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             TelaInicial.Start();
         } else {
-            // TODO add your handling code here:
-            System.out.println("em construção");
+            TelaManuais telaManuais = new TelaManuais(this, true);
+            telaManuais.setVisible(true);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_botaoManuaisActionPerformed
 
     private void caixaNPCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaNPCFocusGained
         new Thread() {
@@ -845,7 +852,7 @@ public class TelaJogo extends javax.swing.JFrame {
                 caixaNPC.removeAllItems();
                 dao.listarNPC();
             }
-
+            
         }.start();
     }//GEN-LAST:event_caixaNPCFocusGained
 
@@ -856,16 +863,25 @@ public class TelaJogo extends javax.swing.JFrame {
                 caixaMonstros.removeAllItems();
                 dao.listarMonstros();
             }
-
+            
         }.start();
     }//GEN-LAST:event_caixaMonstrosFocusGained
 
+    private void campoAnotacaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoAnotacaoFocusLost
+        new Thread() {
+            @Override
+            public void run() {
+                dao.atualizarAnotacoes(campoAnotacao.getText());
+            }            
+        }.start();
+    }//GEN-LAST:event_campoAnotacaoFocusLost
+    
     public static void Start(boolean dono) {
         if (dono) {
             DAO.donoDaSala = true;
         }
         painel = new PainelDeControle();
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaJogo().setVisible(true);
@@ -894,7 +910,7 @@ public class TelaJogo extends javax.swing.JFrame {
                                 ex.printStackTrace();
                             }
                         }
-
+                        
                     }
                 }.start();
                 new Thread() {
@@ -914,7 +930,7 @@ public class TelaJogo extends javax.swing.JFrame {
                                     botaoConectarVOIP.setEnabled(false);
                                 }
                             }
-
+                            
                         }
                     }
                 }.start();
@@ -931,6 +947,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JButton botaoDadoPersonalizado;
     private javax.swing.JButton botaoEnviar;
     public static javax.swing.JButton botaoFecharSala;
+    private javax.swing.JButton botaoManuais;
     private javax.swing.JButton botaoSairDaSala;
     private javax.swing.JButton botaoVisualizarFicha;
     private javax.swing.JButton botaoVisualizarMonstro;
@@ -940,7 +957,7 @@ public class TelaJogo extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> caixaFichasTexto;
     public static javax.swing.JComboBox<String> caixaMonstros;
     public static javax.swing.JComboBox<String> caixaNPC;
-    private static javax.swing.JTextArea campoAnotacao;
+    public static javax.swing.JTextArea campoAnotacao;
     private javax.swing.JTextField campoEnviarTexto;
     private javax.swing.JButton dadoD10;
     private javax.swing.JButton dadoD100;
@@ -948,7 +965,6 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JButton dadoD4;
     private javax.swing.JButton dadoD6;
     private javax.swing.JButton dadoD8;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

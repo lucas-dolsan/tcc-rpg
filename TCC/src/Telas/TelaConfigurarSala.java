@@ -32,6 +32,7 @@ public class TelaConfigurarSala extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Configurar sala");
+        setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(400, 355, 355, 355));
         setMaximumSize(new java.awt.Dimension(400, 275));
         setMinimumSize(new java.awt.Dimension(400, 275));

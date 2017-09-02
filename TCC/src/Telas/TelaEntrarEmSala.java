@@ -49,9 +49,11 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Entrar em Sala");
+        setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setMaximumSize(new java.awt.Dimension(400, 355));
-        setMinimumSize(new java.awt.Dimension(400, 355));
+        setMaximumSize(new java.awt.Dimension(400, 260));
+        setMinimumSize(new java.awt.Dimension(400, 260));
+        setPreferredSize(new java.awt.Dimension(400, 260));
         setResizable(false);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -73,7 +75,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(caixaDeSalas);
-        caixaDeSalas.setBounds(30, 80, 340, 40);
+        caixaDeSalas.setBounds(30, 40, 340, 40);
 
         campoSenhaSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         campoSenhaSala.setForeground(new java.awt.Color(51, 51, 51));
@@ -84,11 +86,10 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoSenhaSala);
-        campoSenhaSala.setBounds(30, 180, 340, 40);
+        campoSenhaSala.setBounds(30, 110, 340, 40);
 
-        botaoEntrarEmSala.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        botaoEntrarEmSala.setForeground(new java.awt.Color(51, 51, 51));
-        botaoEntrarEmSala.setText("Entrar");
+        botaoEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        botaoEntrarEmSala.setText("ENTRAR");
         botaoEntrarEmSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEntrarEmSalaActionPerformed(evt);
@@ -100,11 +101,10 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoEntrarEmSala);
-        botaoEntrarEmSala.setBounds(30, 260, 140, 40);
+        botaoEntrarEmSala.setBounds(30, 170, 140, 40);
 
-        botaoCancelar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        botaoCancelar.setForeground(new java.awt.Color(51, 51, 51));
-        botaoCancelar.setText("Cancelar");
+        botaoCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        botaoCancelar.setText("CANCELAR");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCancelarActionPerformed(evt);
@@ -116,25 +116,23 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoCancelar);
-        botaoCancelar.setBounds(230, 260, 140, 40);
+        botaoCancelar.setBounds(230, 170, 140, 40);
 
         erroEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroEntrarEmSala.setForeground(new java.awt.Color(204, 0, 0));
         erroEntrarEmSala.setText("Erro: senha da sala incorreta!");
         getContentPane().add(erroEntrarEmSala);
-        erroEntrarEmSala.setBounds(30, 230, 270, 17);
+        erroEntrarEmSala.setBounds(30, 150, 270, 17);
 
-        jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Nome da Sala:");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel3.setText("NOME DA SALA:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 50, 340, 30);
+        jLabel3.setBounds(30, 10, 340, 30);
 
-        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Senha:");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel2.setText("SENHA:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 150, 340, 30);
+        jLabel2.setBounds(30, 76, 340, 40);
 
         pack();
         setLocationRelativeTo(null);

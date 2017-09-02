@@ -28,13 +28,16 @@ public class TelaRolarCustomizado extends javax.swing.JDialog {
         campoValorCustumizado = new javax.swing.JTextField();
 
         setTitle("Double Damage - Rolar dado");
-        setMinimumSize(new java.awt.Dimension(300, 200));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(290, 200));
+        setMinimumSize(new java.awt.Dimension(290, 200));
+        setPreferredSize(new java.awt.Dimension(290, 200));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        botaoRolar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        botaoRolar.setForeground(new java.awt.Color(51, 51, 51));
-        botaoRolar.setText("Rolar!");
+        botaoRolar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        botaoRolar.setText("ROLAR!");
         botaoRolar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoRolarActionPerformed(evt);
@@ -46,25 +49,24 @@ public class TelaRolarCustomizado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoRolar);
-        botaoRolar.setBounds(180, 110, 100, 30);
+        botaoRolar.setBounds(170, 120, 100, 30);
 
-        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Modificadores:");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("MODIFICADORES:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 10, 130, 20);
+        jLabel2.setBounds(30, 10, 140, 20);
 
         jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("+");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 30, 20, 30);
+        jLabel3.setBounds(20, 30, 20, 30);
 
         jLabel4.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("-");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 60, 20, 30);
+        jLabel4.setBounds(20, 70, 20, 30);
 
         campoRolarMenos.setText("0");
         campoRolarMenos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -73,7 +75,7 @@ public class TelaRolarCustomizado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoRolarMenos);
-        campoRolarMenos.setBounds(50, 60, 120, 30);
+        campoRolarMenos.setBounds(40, 70, 120, 30);
 
         campoRolarMais.setText("0");
         campoRolarMais.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -82,16 +84,16 @@ public class TelaRolarCustomizado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoRolarMais);
-        campoRolarMais.setBounds(50, 30, 120, 30);
+        campoRolarMais.setBounds(40, 30, 120, 30);
 
-        jLabel5.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("VALOR DADO:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(50, 90, 120, 20);
+        jLabel5.setBounds(40, 100, 120, 20);
 
         campoValorCustumizado.setText("0");
         getContentPane().add(campoValorCustumizado);
-        campoValorCustumizado.setBounds(50, 110, 120, 30);
+        campoValorCustumizado.setBounds(40, 120, 120, 30);
 
         pack();
         setLocationRelativeTo(null);

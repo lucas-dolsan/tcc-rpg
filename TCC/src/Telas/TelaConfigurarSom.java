@@ -80,6 +80,7 @@ public class TelaConfigurarSom extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configurar Microfone");
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(373, 200));
         setMinimumSize(new java.awt.Dimension(373, 200));
         setPreferredSize(new java.awt.Dimension(373, 200));
