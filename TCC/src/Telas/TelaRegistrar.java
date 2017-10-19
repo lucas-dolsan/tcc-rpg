@@ -1,9 +1,13 @@
 package Telas;
+
 import Objetos.*;
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
+import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 
 public class TelaRegistrar extends javax.swing.JDialog {
+
+    DAO dao = new DAO();
 
     public TelaRegistrar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -27,17 +31,18 @@ public class TelaRegistrar extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         erroSenhas = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        labelRegistrado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Registrar");
         setAlwaysOnTop(true);
-        setMinimumSize(new java.awt.Dimension(600, 650));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(460, 480));
+        setMinimumSize(new java.awt.Dimension(460, 480));
         setResizable(false);
-        setSize(new java.awt.Dimension(600, 650));
+        setSize(new java.awt.Dimension(460, 480));
         getContentPane().setLayout(null);
 
-        botaoCancelar.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        botaoCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoCancelar.png"))); // NOI18N
         botaoCancelar.setText("CANCELAR");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -51,9 +56,9 @@ public class TelaRegistrar extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoCancelar);
-        botaoCancelar.setBounds(115, 470, 180, 40);
+        botaoCancelar.setBounds(40, 390, 180, 40);
 
-        botaoEntrar.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        botaoEntrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botaoEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoEntrar.png"))); // NOI18N
         botaoEntrar.setText("REGISTRAR-SE");
         botaoEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +72,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoEntrar);
-        botaoEntrar.setBounds(315, 470, 180, 40);
+        botaoEntrar.setBounds(240, 390, 180, 40);
 
         campoConfirmarSenha.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         campoConfirmarSenha.setForeground(new java.awt.Color(51, 51, 51));
@@ -80,7 +85,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoConfirmarSenha);
-        campoConfirmarSenha.setBounds(115, 390, 380, 40);
+        campoConfirmarSenha.setBounds(40, 310, 380, 40);
 
         campoSenha.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         campoSenha.setForeground(new java.awt.Color(51, 51, 51));
@@ -93,7 +98,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoSenha);
-        campoSenha.setBounds(115, 300, 380, 40);
+        campoSenha.setBounds(40, 220, 380, 40);
 
         campoEmail.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         campoEmail.setForeground(new java.awt.Color(51, 51, 51));
@@ -106,7 +111,7 @@ public class TelaRegistrar extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoEmail);
-        campoEmail.setBounds(115, 180, 380, 40);
+        campoEmail.setBounds(40, 130, 380, 40);
 
         campoUsername.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         campoUsername.setForeground(new java.awt.Color(51, 51, 51));
@@ -119,62 +124,51 @@ public class TelaRegistrar extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoUsername);
-        campoUsername.setBounds(115, 70, 380, 40);
+        campoUsername.setBounds(40, 40, 380, 40);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("NOME DE USUÁRIO:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(115, 50, 380, 20);
+        jLabel2.setBounds(40, 20, 380, 20);
 
-        erroNome.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        erroNome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroNome.setForeground(new java.awt.Color(255, 0, 0));
         erroNome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         erroNome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/erroSenhas.png"))); // NOI18N
         erroNome.setText("Nome de usuário em uso.");
         getContentPane().add(erroNome);
-        erroNome.setBounds(115, 110, 380, 24);
+        erroNome.setBounds(40, 80, 380, 24);
 
-        erroEmail.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        erroEmail.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroEmail.setForeground(new java.awt.Color(255, 0, 0));
         erroEmail.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         erroEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/erroSenhas.png"))); // NOI18N
-        erroEmail.setText("Email em uso.");
+        erroEmail.setText("Email não disponível.");
         getContentPane().add(erroEmail);
-        erroEmail.setBounds(115, 220, 380, 30);
+        erroEmail.setBounds(40, 170, 380, 30);
 
-        jLabel5.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("SENHA:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(115, 280, 380, 20);
+        jLabel5.setBounds(40, 200, 380, 20);
 
-        jLabel6.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("CONFIRMAR SENHA:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(115, 370, 380, 20);
+        jLabel6.setBounds(40, 290, 380, 20);
 
-        erroSenhas.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
+        erroSenhas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroSenhas.setForeground(new java.awt.Color(255, 0, 0));
         erroSenhas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/erroSenhas.png"))); // NOI18N
         erroSenhas.setText("Senha inválida.");
         getContentPane().add(erroSenhas);
-        erroSenhas.setBounds(115, 430, 380, 30);
+        erroSenhas.setBounds(40, 350, 380, 30);
 
-        jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("EMAIL:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(115, 160, 380, 20);
-
-        labelRegistrado.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        labelRegistrado.setForeground(new java.awt.Color(0, 204, 0));
-        labelRegistrado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelRegistrado.setText("registrado com sucesso.");
-        getContentPane().add(labelRegistrado);
-        labelRegistrado.setBounds(120, 500, 370, 50);
+        jLabel1.setBounds(40, 110, 380, 20);
 
         pack();
         setLocationRelativeTo(null);
@@ -185,31 +179,42 @@ public class TelaRegistrar extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     public void entrarComEnter() {
-        String userName = campoUsername.getText();
-        String email = campoEmail.getText();
-        char[] senha = campoSenha.getPassword();
-        char[] confirmarSenha = campoConfirmarSenha.getPassword();
-        String senhaAuxiliar = String.valueOf(senha);
-        String confirmaSenha = String.valueOf(confirmarSenha);
-        boolean verificarEmail = JogadorDAO.verificarEmail(email);
-        boolean verificarNome = JogadorDAO.verificarNomeDeUsuario(userName);
-        boolean erro = false;
-        if (!senhaAuxiliar.equals(confirmaSenha) || senhaAuxiliar.isEmpty() || confirmaSenha.isEmpty()) {
-            erroSenhas.setVisible(true);
-            erro = true;
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+            String userName = campoUsername.getText();
+            String email = campoEmail.getText();
+            char[] senha = campoSenha.getPassword();
+            char[] confirmarSenha = campoConfirmarSenha.getPassword();
+            String senhaAuxiliar = String.valueOf(senha);
+            String confirmaSenha = String.valueOf(confirmarSenha);
+            boolean verificarEmail = dao.verificarEmail(email);
+            boolean verificarNome = dao.verificarNomeDeUsuario(userName);
+            boolean erro = false;
+            if (!senhaAuxiliar.equals(confirmaSenha) || senhaAuxiliar.isEmpty() || confirmaSenha.isEmpty()) {
+                erroSenhas.setVisible(true);
+                erro = true;
+            }
+            if (verificarEmail) {
+                erroEmail.setVisible(true);
+                erro = true;
+            }
+            if (verificarNome) {
+                erroNome.setVisible(true);
+                erro = true;
+            }
+            if (!email.contains("@")) {
+                erroEmail.setVisible(true);
+                erro = true;
+            }
+            if (!erro) {
+                Jogador jogador = new Jogador(userName, email, senhaAuxiliar);
+                dao.criarJogador(jogador, this);
+            }
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
         }
-        if (verificarEmail) {
-            erroEmail.setVisible(true);
-            erro = true;
-        }
-        if (verificarNome) {
-            erroNome.setVisible(true);
-            erro = true;
-        }
-        if (!erro) {
-            Jogador jogador = new Jogador(userName, email, senhaAuxiliar);
-            JogadorDAO.criarJogador(jogador, this);
-        }
+
     }
     private void botaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarActionPerformed
         entrarComEnter();
@@ -265,7 +270,6 @@ public class TelaRegistrar extends javax.swing.JDialog {
         erroNome.setVisible(false);
         erroEmail.setVisible(false);
         erroSenhas.setVisible(false);
-        labelRegistrado.setVisible(false);
     }
 
     public static void main(String args[]) {
@@ -318,6 +322,5 @@ public class TelaRegistrar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    public static javax.swing.JLabel labelRegistrado;
     // End of variables declaration//GEN-END:variables
 }

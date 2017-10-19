@@ -5,12 +5,13 @@
  */
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class TelaRolarDado extends javax.swing.JDialog {
 
+    DAO dao = new DAO();
     private int dado;
 
     public TelaRolarDado(java.awt.Frame parent, boolean modal, int dado) {
@@ -33,15 +34,15 @@ public class TelaRolarDado extends javax.swing.JDialog {
         campoRolarMais = new javax.swing.JTextField();
 
         setTitle("Double Damage - Rolar dado");
-        setMaximumSize(new java.awt.Dimension(280, 200));
-        setMinimumSize(new java.awt.Dimension(280, 200));
-        setPreferredSize(new java.awt.Dimension(280, 200));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(300, 170));
+        setMinimumSize(new java.awt.Dimension(300, 170));
+        setPreferredSize(new java.awt.Dimension(300, 170));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        botaoRolar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        botaoRolar.setForeground(new java.awt.Color(51, 51, 51));
-        botaoRolar.setText("Rolar!");
+        botaoRolar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        botaoRolar.setText("ROLAR!");
         botaoRolar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoRolarActionPerformed(evt);
@@ -53,32 +54,30 @@ public class TelaRolarDado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botaoRolar);
-        botaoRolar.setBounds(150, 140, 110, 30);
+        botaoRolar.setBounds(170, 100, 110, 30);
 
-        jLabel1.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Rolar dado D"+dado);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 260, 20);
+        jLabel1.setBounds(20, 10, 260, 20);
 
-        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Modificadores:");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("MODIFICADORES:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 40, 130, 20);
+        jLabel2.setBounds(20, 40, 140, 20);
 
         jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("+");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 60, 20, 30);
+        jLabel3.setBounds(20, 60, 20, 30);
 
         jLabel4.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("-");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 100, 20, 30);
+        jLabel4.setBounds(20, 100, 20, 30);
 
         campoRolarMenos.setText("0");
         campoRolarMenos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -87,7 +86,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoRolarMenos);
-        campoRolarMenos.setBounds(50, 100, 120, 30);
+        campoRolarMenos.setBounds(40, 100, 120, 30);
 
         campoRolarMais.setText("0");
         campoRolarMais.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -96,7 +95,7 @@ public class TelaRolarDado extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoRolarMais);
-        campoRolarMais.setBounds(50, 60, 120, 30);
+        campoRolarMais.setBounds(40, 60, 120, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -136,17 +135,17 @@ public class TelaRolarDado extends javax.swing.JDialog {
         if (modificadorMais > 0) {
             int numero = rodar();
             int numeroModificado = numero + modificadorMais;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 1);
+            dao.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 1);
             this.dispose();
         } else if (modificadorMenos > 0) {
             int numero = rodar();
             int numeroModificado = numero - modificadorMenos;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 2);
+            dao.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 2);
             this.dispose();
         } else {
             int numero = rodar();
             int numeroModificado = 0;
-            JogadorDAO.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 3);
+            dao.enviarDadoBanco(dado, numeroModificado, numero, modificadorMais, modificadorMenos, 3);
             this.dispose();
         }
     }

@@ -1,11 +1,46 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ServidorVoIP.Log;
 import java.awt.event.KeyEvent;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class TelaInicial extends javax.swing.JFrame {
+
+    public static String ipAddress = null;
+
+    private static String getFirstNonLoopbackAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException {
+        Enumeration en = NetworkInterface.getNetworkInterfaces();
+        while (en.hasMoreElements()) {
+            NetworkInterface i = (NetworkInterface) en.nextElement();
+            for (Enumeration en2 = i.getInetAddresses(); en2.hasMoreElements();) {
+                InetAddress addr = (InetAddress) en2.nextElement();
+                if (!addr.isLoopbackAddress()) {
+                    if (addr instanceof Inet4Address) {
+                        if (preferIPv6) {
+                            continue;
+                        }
+                        return addr.getHostAddress();
+                    }
+                    if (addr instanceof Inet6Address) {
+                        if (preferIpv4) {
+                            continue;
+                        }
+                        return addr.getHostAddress();
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     public TelaInicial() {
         initComponents();
@@ -19,28 +54,37 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoCriarSala = new javax.swing.JButton();
         botaoEntrarEmSala = new javax.swing.JButton();
         botaoDeslogar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         planoFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Double Damage");
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
-        botaoConfigurarConta.setBackground(new java.awt.Color(255, 255, 255));
-        botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoConfigurarConta.setText("Configurar Conta");
+        botaoConfigurarConta.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        botaoConfigurarConta.setText("CONFIGURAR CONTA");
+        botaoConfigurarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoConfigurarContaActionPerformed(evt);
+            }
+        });
         botaoConfigurarConta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 botaoConfigurarContaKeyPressed(evt);
             }
         });
         getContentPane().add(botaoConfigurarConta);
-        botaoConfigurarConta.setBounds(430, 540, 450, 60);
+        botaoConfigurarConta.setBounds(460, 510, 450, 60);
 
-        botaoCriarSala.setBackground(new java.awt.Color(255, 255, 255));
-        botaoCriarSala.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoCriarSala.setText("Criar nova Sala");
+        botaoCriarSala.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        botaoCriarSala.setText("CRIAR NOVA SALA");
         botaoCriarSala.setName(""); // NOI18N
         botaoCriarSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,11 +97,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoCriarSala);
-        botaoCriarSala.setBounds(430, 400, 450, 60);
+        botaoCriarSala.setBounds(460, 350, 450, 60);
 
-        botaoEntrarEmSala.setBackground(new java.awt.Color(255, 255, 255));
-        botaoEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        botaoEntrarEmSala.setText("Entrar em uma Sala");
+        botaoEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
+        botaoEntrarEmSala.setText("ENTRAR EM UMA SALA");
         botaoEntrarEmSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEntrarEmSalaActionPerformed(evt);
@@ -69,9 +112,11 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoEntrarEmSala);
-        botaoEntrarEmSala.setBounds(430, 470, 450, 60);
+        botaoEntrarEmSala.setBounds(460, 430, 450, 60);
 
-        botaoDeslogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/logout.png"))); // NOI18N
+        botaoDeslogar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        botaoDeslogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/botaoLogout.png"))); // NOI18N
+        botaoDeslogar.setText("SAIR!");
         botaoDeslogar.setToolTipText("Desconectar.");
         botaoDeslogar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,12 +129,16 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botaoDeslogar);
-        botaoDeslogar.setBounds(1190, 670, 80, 40);
+        botaoDeslogar.setBounds(1100, 640, 110, 40);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/information-outline (1).png"))); // NOI18N
+        getContentPane().add(jButton1);
+        jButton1.setBounds(1220, 640, 40, 40);
 
         planoFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        planoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/logo.png"))); // NOI18N
+        planoFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/planoDeFundo.png"))); // NOI18N
         getContentPane().add(planoFundo);
-        planoFundo.setBounds(210, 0, 800, 400);
+        planoFundo.setBounds(0, 0, 1280, 720);
 
         pack();
         setLocationRelativeTo(null);
@@ -97,8 +146,7 @@ public class TelaInicial extends javax.swing.JFrame {
 private void deslogar() {
         int sair = JOptionPane.showConfirmDialog(null, "Deseja sair?", "Desconectar.", JOptionPane.YES_NO_OPTION);
         if (sair == JOptionPane.YES_OPTION) {
-            this.dispose();
-            TelaLogin.abrirTela();
+            System.exit(1);
         }
     }
     private void botaoDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDeslogarActionPerformed
@@ -144,9 +192,30 @@ private void deslogar() {
         }
     }//GEN-LAST:event_botaoConfigurarContaKeyPressed
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            deslogar();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void botaoConfigurarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfigurarContaActionPerformed
+        TelaConfigurarConta telaConfigurarConta = new TelaConfigurarConta(this, true);
+        telaConfigurarConta.setVisible(true);
+    }//GEN-LAST:event_botaoConfigurarContaActionPerformed
+
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                if (ipAddress == null) {
+                    System.out.println("Login realizado. @" + TelaLogin.campoLogin.getText());
+                    try {
+                        ipAddress = getFirstNonLoopbackAddress(true, false);
+                        System.out.println(ipAddress);
+                    } catch (SocketException ex) {
+                        Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    System.out.println("--------------------------------------------------------------------------------");
+                }
                 new TelaInicial().setVisible(true);
             }
         }
@@ -158,6 +227,7 @@ private void deslogar() {
     private javax.swing.JButton botaoCriarSala;
     private javax.swing.JButton botaoDeslogar;
     private javax.swing.JButton botaoEntrarEmSala;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel planoFundo;
     // End of variables declaration//GEN-END:variables
 }

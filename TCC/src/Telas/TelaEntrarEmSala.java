@@ -1,16 +1,32 @@
 package Telas;
 
-import ConexaoBanco.JogadorDAO;
+import ConexaoBanco.DAO;
 import com.sun.glass.events.KeyEvent;
+import java.awt.Cursor;
+import javax.swing.JOptionPane;
 
 public class TelaEntrarEmSala extends javax.swing.JDialog {
 
+    DAO dao = new DAO();
     private final TelaInicial tela;
 
     public TelaEntrarEmSala(java.awt.Frame parent, boolean modal, TelaInicial telaInicial) {
         super(parent, modal);
         initComponents();
-        JogadorDAO.listarSalas();
+        new Thread() {
+            public void run() {
+                try {
+                    caixaDeSalas.setEnabled(false);
+                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    caixaDeSalas.removeAllItems();
+                    dao.listarSalas();
+                } finally {
+                    caixaDeSalas.setEnabled(true);
+                    setCursor(Cursor.getDefaultCursor());
+                }
+            }
+        }.start();
+
         erroEntrarEmSala.setVisible(false);
         tela = telaInicial;
     }
@@ -18,6 +34,7 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     TelaEntrarEmSala(TelaInicial aThis) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,15 +49,33 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Double Damage - Entrar em Sala");
-        setMaximumSize(new java.awt.Dimension(400, 490));
-        setMinimumSize(new java.awt.Dimension(400, 490));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setMaximumSize(new java.awt.Dimension(400, 260));
+        setMinimumSize(new java.awt.Dimension(400, 260));
+        setPreferredSize(new java.awt.Dimension(400, 260));
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         caixaDeSalas.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         caixaDeSalas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        caixaDeSalas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                caixaDeSalasFocusGained(evt);
+            }
+        });
+        caixaDeSalas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                caixaDeSalasKeyPressed(evt);
+            }
+        });
         getContentPane().add(caixaDeSalas);
-        caixaDeSalas.setBounds(30, 80, 340, 40);
+        caixaDeSalas.setBounds(30, 40, 340, 40);
 
         campoSenhaSala.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         campoSenhaSala.setForeground(new java.awt.Color(51, 51, 51));
@@ -51,47 +86,53 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             }
         });
         getContentPane().add(campoSenhaSala);
-        campoSenhaSala.setBounds(30, 180, 340, 40);
+        campoSenhaSala.setBounds(30, 110, 340, 40);
 
-        botaoEntrarEmSala.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        botaoEntrarEmSala.setForeground(new java.awt.Color(51, 51, 51));
-        botaoEntrarEmSala.setText("Entrar");
+        botaoEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        botaoEntrarEmSala.setText("ENTRAR");
         botaoEntrarEmSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoEntrarEmSalaActionPerformed(evt);
             }
         });
+        botaoEntrarEmSala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoEntrarEmSalaKeyPressed(evt);
+            }
+        });
         getContentPane().add(botaoEntrarEmSala);
-        botaoEntrarEmSala.setBounds(30, 300, 140, 40);
+        botaoEntrarEmSala.setBounds(30, 170, 140, 40);
 
-        botaoCancelar.setFont(new java.awt.Font("The Bold Font", 1, 18)); // NOI18N
-        botaoCancelar.setForeground(new java.awt.Color(51, 51, 51));
-        botaoCancelar.setText("Cancelar");
+        botaoCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        botaoCancelar.setText("CANCELAR");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCancelarActionPerformed(evt);
             }
         });
+        botaoCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botaoCancelarKeyPressed(evt);
+            }
+        });
         getContentPane().add(botaoCancelar);
-        botaoCancelar.setBounds(230, 300, 140, 40);
+        botaoCancelar.setBounds(230, 170, 140, 40);
 
         erroEntrarEmSala.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         erroEntrarEmSala.setForeground(new java.awt.Color(204, 0, 0));
         erroEntrarEmSala.setText("Erro: senha da sala incorreta!");
         getContentPane().add(erroEntrarEmSala);
-        erroEntrarEmSala.setBounds(30, 230, 270, 17);
+        erroEntrarEmSala.setBounds(30, 150, 270, 17);
 
-        jLabel3.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Nome da Sala:");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel3.setText("NOME DA SALA:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 50, 340, 30);
+        jLabel3.setBounds(30, 10, 340, 30);
 
-        jLabel2.setFont(new java.awt.Font("The Bold Font", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Senha:");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel2.setText("SENHA:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 150, 340, 30);
+        jLabel2.setBounds(30, 76, 340, 40);
 
         pack();
         setLocationRelativeTo(null);
@@ -102,15 +143,28 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     private void entrarEmSala() {
-        String nomeSala = (caixaDeSalas.getSelectedItem().toString());
-        String senhaSala = campoSenhaSala.getText();
-        if (JogadorDAO.entrarEmSala(nomeSala, senhaSala)) {
-            TelaJogo.Start(JogadorDAO.verificarDono());
-            tela.dispose();
-            this.dispose();
-            JogadorDAO.mensagemEntrarNaSala();
+        if (!dao.isBanido(DAO.player.getPk_jogador(), dao.pegarPk_sala(caixaDeSalas.getSelectedItem().toString()))) {
+            try {
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                String nomeSala = (caixaDeSalas.getSelectedItem().toString());
+                String senhaSala = campoSenhaSala.getText();
+                if (dao.entrarEmSala(nomeSala, senhaSala)) {
+                    TelaJogo.Start(dao.verificarDono());
+                    tela.dispose();
+                    this.dispose();
+                    System.out.println("[" + nomeSala + "]");
+                    dao.mensagemEntrarNaSala();
+                    System.out.println(DAO.nickName + " entrou na sala");
+                } else {
+                    System.out.println("Erro ao entrar na sala " + nomeSala);
+                    erroEntrarEmSala.setVisible(true);
+                }
+            } finally {
+                setCursor(Cursor.getDefaultCursor());
+            }
         } else {
-            erroEntrarEmSala.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Você foi banido", "AVISO: ", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Você foi banido da sala");
         }
     }
     private void botaoEntrarEmSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaActionPerformed
@@ -124,6 +178,40 @@ public class TelaEntrarEmSala extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_campoSenhaSalaKeyPressed
+
+    private void caixaDeSalasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_caixaDeSalasKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_caixaDeSalasKeyPressed
+
+    private void botaoEntrarEmSalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEntrarEmSalaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_botaoEntrarEmSalaKeyPressed
+
+    private void botaoCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoCancelarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_botaoCancelarKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            entrarEmSala();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void caixaDeSalasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_caixaDeSalasFocusGained
+
+    }//GEN-LAST:event_caixaDeSalasFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
