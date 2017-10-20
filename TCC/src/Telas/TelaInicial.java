@@ -132,6 +132,11 @@ public class TelaInicial extends javax.swing.JFrame {
         botaoDeslogar.setBounds(1100, 640, 110, 40);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/information-outline (1).png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(1220, 640, 40, 40);
 
@@ -202,6 +207,11 @@ private void deslogar() {
         TelaConfigurarConta telaConfigurarConta = new TelaConfigurarConta(this, true);
         telaConfigurarConta.setVisible(true);
     }//GEN-LAST:event_botaoConfigurarContaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        TelaInformacoes telaInformacoes =  new TelaInformacoes(this, true);
+        telaInformacoes.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void Start() {
         java.awt.EventQueue.invokeLater(new Runnable() {
