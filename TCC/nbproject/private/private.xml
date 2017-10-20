@@ -21,12 +21,12 @@
         </group>
         <group>
             <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/ConexaoBanco/DAO.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaEquipamentos.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaVisualizarObjeto.java</file>
             <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/PainelDeControle.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaLogin.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaFichaDeTexto.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaInformacoes.java</file>
             <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaJogo.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaNPC.java</file>
-            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaPersonagem.java</file>
+            <file>file:/C:/Users/SchorK/Documents/GitHub/tcc-rpg/TCC/src/Telas/TelaInicial.java</file>
         </group>
     </open-files>
 </project-private>

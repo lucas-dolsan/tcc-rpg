@@ -63,6 +63,7 @@ public class TelaLogin extends javax.swing.JFrame {
         campoSenha.setBounds(430, 470, 480, 50);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("EMAIL:");
         getContentPane().add(jLabel1);
@@ -116,7 +117,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/planoDeFundo.png"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 1280, 720);
+        jLabel3.setBounds(0, -90, 1280, 890);
 
         pack();
         setLocationRelativeTo(null);

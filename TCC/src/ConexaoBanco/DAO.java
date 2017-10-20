@@ -1923,7 +1923,7 @@ public class DAO {
         return false;
     }
 
-    public void AlterarEstadoBan(int ban, int fk_jogador, int fk_sala) {
+    public void alterarEstadoBan(int ban, int fk_jogador, int fk_sala) {
         final String sql = ("UPDATE jog_sal SET BAN = ? WHERE fk_jogador = ? AND fk_sala = ?");
         try {
             PreparedStatement stmt = c.prepareStatement(sql);
