@@ -46,16 +46,16 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="180" y="10" width="200" height="29"/>
+          <AbsoluteConstraints x="180" y="10" width="260" height="29"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="The Bold Font" size="18" style="1"/>
+          <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Nome da ficha:"/>
+        <Property name="text" type="java.lang.String" value="NOME DA FICHA:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -93,9 +93,9 @@
     <Component class="javax.swing.JButton" name="botaoSalvar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="The Bold Font" size="14" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Salvar"/>
+        <Property name="text" type="java.lang.String" value="SALVAR"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -113,9 +113,9 @@
     <Component class="javax.swing.JButton" name="botaoCriar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="The Bold Font" size="14" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Criar"/>
+        <Property name="text" type="java.lang.String" value="CRIAR"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -126,7 +126,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="400" y="480" width="90" height="30"/>
+          <AbsoluteConstraints x="390" y="480" width="90" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -149,9 +149,9 @@
     <Component class="javax.swing.JButton" name="botaoExcluirFichaTexto">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="The Bold Font" size="14" style="1"/>
+          <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Excluir"/>
+        <Property name="text" type="java.lang.String" value="EXCLUIR"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -162,7 +162,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="500" y="480" width="90" height="30"/>
+          <AbsoluteConstraints x="493" y="480" width="-1" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -178,7 +178,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="400" y="10" width="250" height="30"/>
+          <AbsoluteConstraints x="440" y="10" width="250" height="30"/>
         </Constraint>
       </Constraints>
     </Component>

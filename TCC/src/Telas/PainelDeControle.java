@@ -239,11 +239,11 @@ public class PainelDeControle extends javax.swing.JFrame {
     }//GEN-LAST:event_caixaJogadoresFocusGained
 
     private void botaoBanirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBanirActionPerformed
-        dao.AlterarEstadoBan(1, dao.pegarPk_jogador(caixaJogadores.getSelectedItem().toString()), DAO.salaAtual.getPk_sala());
+        dao.alterarEstadoBan(1, dao.pegarPk_jogador(caixaJogadores.getSelectedItem().toString()), DAO.salaAtual.getPk_sala());
     }//GEN-LAST:event_botaoBanirActionPerformed
 
     private void botaoDesbanirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDesbanirActionPerformed
-        dao.AlterarEstadoBan(0, dao.pegarPk_jogador(caixaJogadores.getSelectedItem().toString()), DAO.salaAtual.getPk_sala());
+        dao.alterarEstadoBan(0, dao.pegarPk_jogador(caixaJogadores.getSelectedItem().toString()), DAO.salaAtual.getPk_sala());
     }//GEN-LAST:event_botaoDesbanirActionPerformed
 
     private void botaoCriarNPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarNPCActionPerformed
